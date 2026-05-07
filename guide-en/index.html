@@ -1,0 +1,1856 @@
+<!DOCTYPE html>
+<html lang="en" dir="ltr">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Personalized Lunar Mansions Guide — Ethereal Echoes</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Amiri:ital,wght@0,400;0,700;1,400&family=EB+Garamond:ital,wght@0,400;0,600;1,400&family=Cinzel:wght@400;600;700&display=swap" rel="stylesheet">
+  <style>
+  /* ── License Gate ── */
+  #license-gate {
+    position: fixed; inset: 0; z-index: 999999;
+    background: linear-gradient(135deg, #0F0C29, #1A1440, #2D2260);
+    display: flex; align-items: center; justify-content: center; padding: 24px;
+  }
+  .gate-card {
+    background: rgba(255,255,255,0.04); border: 1px solid rgba(201,168,76,0.3);
+    border-radius: 20px; padding: 44px 40px; max-width: 440px; width: 100%;
+    text-align: center; backdrop-filter: blur(10px);
+    box-shadow: 0 30px 80px rgba(0,0,0,0.5), inset 0 1px 0 rgba(201,168,76,0.15);
+  }
+  .gate-moon { font-size: 48px; margin-bottom: 16px; filter: drop-shadow(0 0 20px rgba(201,168,76,0.6)); display: block; }
+  .gate-title { font-size: 22px; font-weight: 700; color: #E8C97A; margin-bottom: 10px; letter-spacing: 1px; }
+  .gate-sub { font-size: 15px; color: rgba(245,233,200,0.65); margin-bottom: 28px; line-height: 1.7; }
+  .gate-divider { width: 80px; height: 1px; background: linear-gradient(90deg, transparent, #C9A84C, transparent); margin: 0 auto 28px; }
+  .gate-input {
+    width: 100%; box-sizing: border-box; background: rgba(255,255,255,0.06);
+    border: 1px solid rgba(201,168,76,0.35); border-radius: 10px;
+    padding: 14px 18px; font-size: 15px; letter-spacing: 2px;
+    color: #E8C97A; text-align: center; outline: none; margin-bottom: 10px;
+    transition: border-color 0.2s;
+  }
+  .gate-input::placeholder { color: rgba(201,168,76,0.35); letter-spacing: 1px; }
+  .gate-input:focus { border-color: rgba(201,168,76,0.7); }
+  .gate-error { color: #e07070; font-size: 13px; min-height: 20px; margin-bottom: 10px; }
+  .gate-btn {
+    width: 100%; padding: 14px; border: none; border-radius: 10px; cursor: pointer;
+    background: linear-gradient(135deg, #A67820, #C9A84C, #D4AB50);
+    color: #0F0C29; font-weight: 700; font-size: 16px; letter-spacing: 1px;
+    transition: opacity 0.2s; margin-bottom: 24px;
+  }
+  .gate-btn:hover { opacity: 0.9; }
+  .gate-buy { font-size: 12px; color: rgba(245,233,200,0.45); }
+  .gate-buy a { color: rgba(201,168,76,0.7); text-decoration: none; }
+  .gate-buy a:hover { color: #C9A84C; }
+
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+    :root {
+      --gold: #C5912A; --gold-light: #D4AB50; --gold-pale: #F5E9C8;
+      --indigo: #0F0C29; --indigo-mid: #1E1650; --indigo-soft: #2D2270;
+      --cream: #FAF6EE; --cream-dark: #F0E8D5;
+      --text: #1A1410; --text-soft: #4A3F30;
+      --accent: #7B4F8E; --green: #2D7A3D; --red: #8B3A3A;
+    }
+    html { font-size: 16px; }
+    body { font-family: 'EB Garamond', 'Amiri', serif; background: var(--cream); color: var(--text); line-height: 1.8; direction: ltr; }
+
+    @page { size: A4; margin: 12mm 16mm; }
+    @media print {
+      body { font-size: 10.5pt; background: white; }
+      .no-print { display: none !important; }
+      .page-break { page-break-after: always; break-after: page; }
+      .no-break { page-break-inside: avoid; break-inside: avoid; }
+      .main-content { display: block !important; }
+    }
+
+    /* ── WELCOME SCREEN ───────────────────────────────────── */
+    #welcome-screen {
+      min-height: 100vh;
+      background: radial-gradient(ellipse at 50% 0%, #1A1060 0%, #0F0C29 55%, #080618 100%);
+      display: flex; align-items: center; justify-content: center;
+      padding: 40px 20px; position: relative; overflow: hidden;
+    }
+
+    /* Starfield */
+    #welcome-screen::before {
+      content: '';
+      position: absolute; inset: 0;
+      background-image:
+        radial-gradient(1px 1px at 10% 15%, rgba(255,255,255,0.8) 0%, transparent 100%),
+        radial-gradient(1px 1px at 25% 40%, rgba(255,255,255,0.6) 0%, transparent 100%),
+        radial-gradient(1.5px 1.5px at 40% 8%, rgba(255,255,255,0.9) 0%, transparent 100%),
+        radial-gradient(1px 1px at 60% 20%, rgba(255,255,255,0.7) 0%, transparent 100%),
+        radial-gradient(1px 1px at 75% 5%, rgba(255,255,255,0.5) 0%, transparent 100%),
+        radial-gradient(1.5px 1.5px at 85% 35%, rgba(255,255,255,0.8) 0%, transparent 100%),
+        radial-gradient(1px 1px at 92% 12%, rgba(255,255,255,0.6) 0%, transparent 100%),
+        radial-gradient(1px 1px at 15% 70%, rgba(255,255,255,0.5) 0%, transparent 100%),
+        radial-gradient(1px 1px at 50% 60%, rgba(255,255,255,0.4) 0%, transparent 100%),
+        radial-gradient(1px 1px at 70% 80%, rgba(255,255,255,0.6) 0%, transparent 100%),
+        radial-gradient(1.5px 1.5px at 30% 90%, rgba(255,255,255,0.7) 0%, transparent 100%),
+        radial-gradient(1px 1px at 88% 70%, rgba(255,255,255,0.5) 0%, transparent 100%),
+        radial-gradient(1px 1px at 5% 50%, rgba(255,255,255,0.6) 0%, transparent 100%),
+        radial-gradient(1px 1px at 95% 55%, rgba(255,255,255,0.4) 0%, transparent 100%);
+      pointer-events: none;
+    }
+
+    /* ── SVG Moon ─────────────────────────────────────────── */
+    .moon-svg-wrap {
+      position: relative; width: 110px; height: 110px;
+      margin: 0 auto 24px; flex-shrink: 0;
+    }
+    @keyframes moonPulse {
+      0%,100% { opacity: 0.45; transform: scale(1); }
+      50%      { opacity: 0.75; transform: scale(1.05); }
+    }
+    .moon-glow-outer {
+      position: absolute; inset: -22px; border-radius: 50%;
+      background: radial-gradient(circle, rgba(210,225,255,0.12) 0%, transparent 70%);
+      animation: moonPulse 5s ease-in-out infinite;
+    }
+    .moon-glow-mid {
+      position: absolute; inset: -10px; border-radius: 50%;
+      background: radial-gradient(circle, rgba(230,238,255,0.16) 0%, transparent 70%);
+      animation: moonPulse 5s ease-in-out infinite 0.8s;
+    }
+
+    /* ── Welcome Card ─────────────────────────────────────── */
+    .welcome-card {
+      background: rgba(15,12,41,0.85);
+      border: 1px solid rgba(197,145,42,0.5);
+      border-radius: 4px;
+      padding: 44px 44px 36px;
+      max-width: 520px; width: 100%;
+      text-align: center;
+      backdrop-filter: blur(16px);
+      position: relative;
+      box-shadow: 0 0 60px rgba(197,145,42,0.08), inset 0 0 40px rgba(197,145,42,0.03);
+    }
+
+
+    .welcome-title { font-family: 'Cinzel', serif; font-size: 28px; letter-spacing: 3px; font-weight: 700; color: var(--gold-light); margin-bottom: 4px; }
+    .welcome-sub { font-family: 'Cinzel', serif; font-size: 10px; letter-spacing: 4px; color: var(--gold); text-transform: uppercase; margin-bottom: 18px; direction: ltr; }
+    .welcome-divider { width: 140px; height: 1px; background: linear-gradient(90deg, transparent, var(--gold), transparent); margin: 0 auto 20px; }
+    .welcome-desc { font-family: 'EB Garamond', serif; font-size: 16px; color: rgba(245,233,200,0.75); line-height: 2.1; margin-bottom: 28px; }
+
+    .form-group { margin-bottom: 18px; text-align: left; }
+    .form-label { display: block; font-family: 'Cinzel', serif; font-size: 11px; letter-spacing: 2px; color: var(--gold-pale); margin-bottom: 8px; text-transform: uppercase; }
+    .form-input {
+      width: 100%; padding: 13px 16px; background: rgba(255,255,255,0.06);
+      border: 1px solid rgba(197,145,42,0.35); border-radius: 6px;
+      color: white; font-size: 15px; font-family: 'EB Garamond', serif;
+      outline: none; transition: border-color 0.2s; direction: ltr; text-align: left;
+    }
+    .form-input:focus { border-color: var(--gold); background: rgba(255,255,255,0.1); }
+    .form-input::placeholder { color: rgba(255,255,255,0.25); }
+
+    /* ── Date Roller ──────────────────────────────────────── */
+    .roller-wrap {
+      display: flex; direction: ltr; gap: 0;
+      border: 1px solid rgba(197,145,42,0.35); border-radius: 6px;
+      overflow: hidden; background: rgba(255,255,255,0.06);
+      position: relative;
+    }
+    .roller-wrap::before, .roller-wrap::after {
+      content: ''; position: absolute; left: 0; right: 0; height: 44px;
+      pointer-events: none; z-index: 2;
+    }
+    .roller-wrap::before {
+      top: 0;
+      background: linear-gradient(to bottom, rgba(15,12,41,0.92) 0%, transparent 100%);
+    }
+    .roller-wrap::after {
+      bottom: 0;
+      background: linear-gradient(to top, rgba(15,12,41,0.92) 0%, transparent 100%);
+    }
+    /* Selection bar */
+    .roller-selector {
+      position: absolute; top: 50%; left: 0; right: 0;
+      transform: translateY(-50%); height: 40px;
+      border-top: 1px solid rgba(197,145,42,0.6);
+      border-bottom: 1px solid rgba(197,145,42,0.6);
+      background: rgba(197,145,42,0.07);
+      pointer-events: none; z-index: 3;
+    }
+    .roller-col {
+      flex: 1; height: 160px;
+      overflow-y: scroll; scroll-snap-type: y mandatory;
+      -webkit-overflow-scrolling: touch;
+      scrollbar-width: none;
+      padding-top: 60px; padding-bottom: 60px;
+    }
+    .roller-col::-webkit-scrollbar { display: none; }
+    .roller-item {
+      height: 40px; display: flex; align-items: center; justify-content: center;
+      scroll-snap-align: center; font-family: 'Amiri', serif;
+      font-size: 16px; color: rgba(255,255,255,0.4);
+      transition: color 0.15s, font-size 0.15s;
+      cursor: pointer; user-select: none;
+    }
+    .roller-item.selected { color: var(--gold-light); font-size: 18px; font-weight: 700; }
+    .roller-divider { width: 1px; background: rgba(197,145,42,0.2); flex-shrink: 0; }
+    .roller-col-label {
+      font-family: 'Cinzel', serif; font-size: 9px; letter-spacing: 1px;
+      color: rgba(197,145,42,0.5); text-align: center; padding: 4px 0 0;
+    }
+
+    .generate-btn {
+      width: 100%; padding: 15px;
+      background: linear-gradient(135deg, #A67820, var(--gold), #D4AB50);
+      border: none; border-radius: 6px; color: #0F0C29;
+      font-family: 'Amiri', serif; font-size: 19px; font-weight: 700;
+      cursor: pointer; transition: all 0.25s; margin-top: 10px;
+      letter-spacing: 1px; box-shadow: 0 4px 20px rgba(197,145,42,0.3);
+    }
+    .generate-btn:hover { transform: translateY(-2px); box-shadow: 0 8px 32px rgba(197,145,42,0.5); }
+    .generate-btn:active { transform: translateY(0); }
+
+    .form-error { color: #FF9090; font-size: 13px; margin-top: 6px; display: none; }
+
+    /* ── PRINT BAR ────────────────────────────────────────── */
+    #print-bar {
+      display: none;
+      background: var(--indigo);
+      padding: 12px 24px;
+      text-align: center;
+      direction: ltr;
+      align-items: center;
+      justify-content: center;
+      gap: 16px;
+      flex-wrap: wrap;
+    }
+    #print-bar.visible { display: flex; }
+    .print-btn-bar {
+      background: var(--gold); color: var(--indigo); border: none;
+      padding: 8px 22px; font-family: 'Cinzel', serif; font-size: 12px;
+      font-weight: 700; cursor: pointer; border-radius: 4px; letter-spacing: 1px;
+    }
+    .reset-btn {
+      background: transparent; color: rgba(201,168,76,0.7); border: 1px solid rgba(201,168,76,0.3);
+      padding: 8px 18px; font-family: 'Cinzel', serif; font-size: 11px;
+      cursor: pointer; border-radius: 4px; letter-spacing: 1px;
+    }
+    #print-bar span { color: rgba(245,233,200,0.7); font-size: 13px; font-family: 'Cinzel', serif; }
+
+    /* ── MAIN CONTENT ─────────────────────────────────────── */
+    .main-content { display: none; }
+
+    /* ── COVER ────────────────────────────────────────────── */
+    .cover {
+      min-height: 100vh; background: var(--indigo);
+      display: flex; flex-direction: column;
+      align-items: center; justify-content: center;
+      text-align: center; padding: 60px 40px;
+      position: relative;
+    }
+    .cover::before {
+      content: ''; position: absolute; inset: 0;
+      background: radial-gradient(ellipse at 50% 30%, rgba(201,168,76,0.15) 0%, transparent 70%);
+    }
+    .cover-moon { font-size: 60px; margin-bottom: 16px; filter: drop-shadow(0 0 24px rgba(201,168,76,0.6)); position: relative; }
+    .cover-greeting { font-family: 'Cinzel', serif; font-size: 11px; letter-spacing: 4px; color: rgba(201,168,76,0.6); text-transform: uppercase; margin-bottom: 12px; direction: ltr; position: relative; }
+    .cover-name { font-family: 'Cinzel', serif; font-size: 34px; font-weight: 700; letter-spacing: 2px; color: var(--gold-light); margin-bottom: 8px; position: relative; }
+    .cover-title { font-family: 'Cinzel', serif; font-size: 30px; font-weight: 700; letter-spacing: 3px; color: white; line-height: 1.3; position: relative; }
+    .cover-title-en { font-family: 'Amiri', serif; font-size: 18px; font-style: italic; color: rgba(201,168,76,0.6); margin-top: 6px; position: relative; }
+    .cover-divider { width: 180px; height: 1px; background: linear-gradient(90deg, transparent, var(--gold), transparent); margin: 28px auto; position: relative; }
+    .cover-mansion-reveal {
+      background: rgba(201,168,76,0.1); border: 1px solid rgba(201,168,76,0.4);
+      border-radius: 12px; padding: 24px 36px; max-width: 440px;
+      position: relative;
+    }
+    .cover-mansion-label { font-family: 'Cinzel', serif; font-size: 10px; letter-spacing: 3px; color: var(--gold); margin-bottom: 8px; direction: ltr; }
+    .cover-mansion-name { font-family: 'Amiri', serif; font-size: 14px; font-style: italic; color: rgba(201,168,76,0.55); margin-top: 6px; }
+    .cover-mansion-en { font-family: 'Cinzel', serif; font-size: 26px; font-weight: 700; letter-spacing: 2px; color: var(--gold-light); direction: ltr; }
+    .cover-brand { position: relative; margin-top: 40px; font-family: 'Cinzel', serif; font-size: 12px; letter-spacing: 4px; color: var(--gold); text-transform: uppercase; }
+
+    /* ── BIRTH MANSION HERO ───────────────────────────────── */
+    .birth-hero {
+      background: linear-gradient(135deg, var(--indigo-mid), #3D1A6E);
+      color: var(--gold-pale); padding: 60px 40px; text-align: center;
+      border-bottom: 2px solid var(--gold);
+    }
+    .birth-hero-label { font-family: 'Cinzel', serif; font-size: 10px; letter-spacing: 4px; color: var(--gold); margin-bottom: 12px; direction: ltr; }
+    .birth-hero-name { font-family: 'Amiri', serif; font-size: 22px; font-style: italic; color: rgba(201,168,76,0.75); margin-bottom: 20px; }
+    .birth-hero-en { font-family: 'Cinzel', serif; font-size: 36px; font-weight: 700; letter-spacing: 2px; color: var(--gold-light); direction: ltr; margin-bottom: 6px; }
+    .birth-hero-meta { display: flex; justify-content: center; gap: 16px; flex-wrap: wrap; margin-bottom: 28px; }
+    .birth-meta-pill {
+      background: rgba(201,168,76,0.15); border: 1px solid rgba(201,168,76,0.4);
+      border-radius: 24px; padding: 6px 18px; font-size: 14px; color: var(--gold-pale);
+    }
+    .birth-hero-desc {
+      font-family: 'Amiri', serif; font-size: 20px; line-height: 2.1;
+      max-width: 560px; margin: 0 auto 24px; color: rgba(245,233,200,0.9);
+    }
+    .birth-hero-guidance {
+      background: rgba(201,168,76,0.1); border-radius: 10px; padding: 20px 28px;
+      max-width: 500px; margin: 0 auto; font-size: 15px; line-height: 1.9;
+      color: rgba(245,233,200,0.75);
+    }
+
+    /* ── TODAY BANNER ─────────────────────────────────────── */
+    .today-banner {
+      background: var(--cream-dark); border-bottom: 2px solid var(--gold);
+      padding: 24px 40px; text-align: center;
+    }
+    .today-label { font-family: 'Cinzel', serif; font-size: 10px; letter-spacing: 3px; color: var(--gold); margin-bottom: 8px; direction: ltr; }
+    .today-content { display: flex; align-items: center; justify-content: center; gap: 20px; flex-wrap: wrap; }
+    .today-phase { font-size: 36px; }
+    .today-info { text-align: left; }
+    .today-mansion-name { font-family: 'Cinzel', serif; font-size: 20px; font-weight: 700; letter-spacing: 1px; color: var(--indigo); }
+    .today-desc { font-size: 14px; color: var(--text-soft); }
+    .today-compat {
+      background: var(--indigo); color: var(--gold-pale);
+      border-radius: 8px; padding: 10px 20px; font-size: 14px; font-family: 'Amiri', serif;
+    }
+
+    /* ── SECTION ──────────────────────────────────────────── */
+    .section { max-width: 820px; margin: 0 auto; padding: 50px 40px; }
+    .section-title { font-family: 'Cinzel', serif; font-size: 26px; font-weight: 700; color: var(--indigo); text-align: center; letter-spacing: 2px; margin-bottom: 6px; }
+    .section-title-en { font-family: 'Amiri', serif; font-size: 16px; color: rgba(201,168,76,0.65); text-align: center; font-style: italic; margin-bottom: 16px; }
+    .section-rule { width: 120px; height: 2px; background: linear-gradient(90deg, transparent, var(--gold), transparent); margin: 0 auto 36px; }
+
+    /* ── MANSION CARDS ────────────────────────────────────── */
+    .mansions-grid { display: flex; flex-direction: column; gap: 20px; }
+    .mansion-card {
+      background: white; border-radius: 10px;
+      border: 1px solid var(--cream-dark); overflow: hidden;
+      box-shadow: 0 2px 12px rgba(0,0,0,0.05);
+      transition: box-shadow 0.2s;
+    }
+    .mansion-card.is-birth {
+      border: 2px solid var(--gold);
+      box-shadow: 0 4px 24px rgba(201,168,76,0.25);
+    }
+    .mansion-card.is-today { border: 2px solid #4A90D9; }
+
+    .mansion-header {
+      background: var(--indigo); padding: 16px 22px;
+      display: flex; align-items: center; justify-content: space-between; flex-direction: row-reverse;
+    }
+    .mansion-card.is-birth .mansion-header { background: linear-gradient(135deg, var(--indigo-mid), #3D1A6E); }
+    .mansion-card.is-today .mansion-header { background: linear-gradient(135deg, #1A2C5A, #2A4080); }
+
+    .mansion-number { font-family: 'Cinzel', serif; font-size: 28px; font-weight: 700; color: rgba(201,168,76,0.75); direction: ltr; }
+    .mansion-name-block { text-align: left; }
+    .mansion-name-ar { font-family: 'Amiri', serif; font-size: 17px; font-style: italic; color: rgba(201,168,76,0.85); margin-top: 4px; }
+    .mansion-name-en { font-family: 'Cinzel', serif; font-size: 19px; font-weight: 700; letter-spacing: 1px; color: var(--gold-light); text-transform: uppercase; }
+    .mansion-badges { display: flex; gap: 6px; align-items: center; flex-direction: row-reverse; }
+    .badge {
+      font-size: 11px; padding: 2px 10px; border-radius: 12px;
+      font-family: 'Cinzel', serif; letter-spacing: 1px;
+    }
+    .badge-birth { background: var(--gold); color: var(--indigo); font-weight: 700; }
+    .badge-today { background: #4A90D9; color: white; }
+    .mansion-emoji { font-size: 28px; }
+
+    .mansion-body { padding: 18px 22px; }
+    .mansion-meta { display: flex; flex-wrap: wrap; gap: 8px; margin-bottom: 14px; flex-direction: row-reverse; }
+    .meta-tag { background: var(--cream-dark); border-radius: 18px; padding: 3px 12px; font-size: 13px; color: var(--text-soft); }
+    .meta-tag.fire   { background: #FFF0E0; color: #B85C00; }
+    .meta-tag.water  { background: #E0F0FF; color: #0055A0; }
+    .meta-tag.air    { background: #F0F8E8; color: #2D6A00; }
+    .meta-tag.earth  { background: #F5F0E5; color: #6B4C1A; }
+    .meta-tag.saad   { background: #E8F5E8; color: #1E6E1E; }
+    .meta-tag.nahs   { background: #FDEAEA; color: #8B0000; }
+
+    .mansion-meaning { font-family: 'Amiri', serif; font-size: 14px; color: var(--text-soft); margin-bottom: 12px; font-style: italic; }
+    .mansion-desc-ar { display: none; }
+    .mansion-desc-en { font-family: 'EB Garamond', serif; font-size: 16px; line-height: 2; color: var(--text); direction: ltr; text-align: left; margin-bottom: 10px; }
+
+    .mansion-guidance { background: var(--cream-dark); border-radius: 6px; padding: 12px 16px; margin-top: 14px; border-right: 3px solid var(--gold); }
+    .mansion-guidance h5 { font-family: 'Amiri', serif; font-size: 14px; font-weight: 700; color: var(--indigo); margin-bottom: 5px; }
+    .mansion-guidance p { font-size: 13.5px; color: var(--text-soft); line-height: 1.9; }
+
+    .birth-expanded {
+      background: linear-gradient(135deg, rgba(201,168,76,0.06), rgba(123,79,142,0.06));
+      border-top: 1px solid rgba(201,168,76,0.2); padding: 18px 22px;
+    }
+    .birth-expanded h4 { font-family: 'Amiri', serif; font-size: 16px; font-weight: 700; color: var(--indigo-mid); margin-bottom: 10px; }
+    .birth-expanded p { font-size: 14px; line-height: 2; color: var(--text-soft); }
+    .compat-score {
+      display: inline-block; background: var(--indigo); color: var(--gold);
+      border-radius: 6px; padding: 4px 12px;
+      font-family: 'Cinzel', serif; font-size: 12px; margin-top: 8px;
+    }
+
+    /* ── COMPATIBILITY WHEEL ─────────────────────────────── */
+    .compat-grid { display: grid; grid-template-columns: repeat(4, 1fr); gap: 10px; margin-top: 20px; }
+    .compat-item {
+      background: white; border-radius: 8px; padding: 12px 10px;
+      text-align: center; border: 1px solid var(--cream-dark);
+      font-size: 12px;
+    }
+    .compat-item.high { border-color: #80C880; background: #F0FFF0; }
+    .compat-item.med  { border-color: #C8C880; background: #FFFFF0; }
+    .compat-item.low  { border-color: #C88080; background: #FFF0F0; }
+    .compat-name-ar { font-family: 'Cinzel', serif; font-size: 13px; font-weight: 700; letter-spacing: 0.5px; color: var(--indigo); }
+    .compat-score-small { font-family: 'Cinzel', serif; font-size: 13px; margin-top: 4px; }
+    .compat-score-small.high { color: #2D7A3D; }
+    .compat-score-small.med  { color: #7A7A2D; }
+    .compat-score-small.low  { color: #7A2D2D; }
+
+    /* ── CALENDAR ────────────────────────────────────────── */
+    .calendar-section { max-width: 900px; margin: 0 auto; padding: 50px 30px; }
+
+    .cal-controls {
+      display: flex; align-items: center; justify-content: space-between;
+      margin-bottom: 20px; direction: ltr; flex-wrap: wrap; gap: 12px;
+    }
+    .cal-nav-btn {
+      background: var(--indigo); color: var(--gold); border: none;
+      padding: 8px 18px; border-radius: 6px; cursor: pointer;
+      font-family: 'Cinzel', serif; font-size: 13px; font-weight: 700;
+      transition: background 0.15s;
+    }
+    .cal-nav-btn:hover { background: var(--indigo-mid); }
+    .cal-month-title {
+      font-family: 'Cinzel', serif; font-size: 18px; color: var(--indigo);
+      font-weight: 700; letter-spacing: 2px; text-align: center; flex: 1;
+    }
+    .cal-view-toggle { display: flex; gap: 8px; }
+    .cal-toggle-btn {
+      background: var(--cream-dark); color: var(--text-soft); border: 1px solid #ddd;
+      padding: 7px 16px; border-radius: 6px; cursor: pointer;
+      font-family: 'Cinzel', serif; font-size: 11px; letter-spacing: 1px;
+      transition: all 0.15s;
+    }
+    .cal-toggle-btn.active { background: var(--indigo); color: var(--gold); border-color: var(--indigo); }
+
+    .cal-legend {
+      display: flex; gap: 14px; flex-wrap: wrap; margin-bottom: 16px;
+      direction: ltr; font-size: 11px; font-family: 'Cinzel', serif;
+      color: var(--text-soft); letter-spacing: 0.5px;
+    }
+    .cal-legend-item { display: flex; align-items: center; gap: 5px; }
+    .cal-legend-dot { width: 12px; height: 12px; border-radius: 3px; flex-shrink: 0; }
+
+    /* Month grid */
+    .cal-grid { border-radius: 10px; overflow: hidden; border: 1px solid var(--cream-dark); }
+    .cal-weekdays {
+      display: grid; grid-template-columns: repeat(7, 1fr);
+      background: var(--indigo);
+    }
+    .cal-weekday {
+      padding: 10px 4px; text-align: center;
+      font-family: 'Cinzel', serif; font-size: 10px; letter-spacing: 1px;
+      color: var(--gold); font-weight: 700; direction: ltr;
+    }
+    .cal-days { display: grid; grid-template-columns: repeat(7, 1fr); background: white; }
+    .cal-day {
+      min-height: 150px; padding: 10px 8px; border-bottom: 1px solid #f0ece3;
+      border-left: 1px solid #f0ece3; position: relative; cursor: default;
+      transition: opacity 0.15s;
+    }
+    .cal-day.empty { background: #fafafa; }
+    .cal-day.today { outline: 2px solid var(--gold); outline-offset: -2px; }
+    .cal-day.is-birth-mansion { background: rgba(201,168,76,0.1); }
+    .cal-day.is-birth-mansion::after {
+      content: '⭐'; position: absolute; top: 3px; left: 4px; font-size: 10px;
+    }
+    .cal-day-num {
+      font-family: 'Cinzel', serif; font-size: 14px; font-weight: 700;
+      color: var(--text-soft); margin-bottom: 5px; direction: ltr;
+    }
+    .cal-day.today .cal-day-num { color: var(--gold); }
+    .cal-mansion-chip {
+      border-radius: 4px; padding: 4px 6px;
+      display: block; width: 100%; text-align: center;
+      line-height: 1.3;
+    }
+    .chip-en {
+      font-family: 'Cinzel', serif; font-size: 12px; font-weight: 700;
+      display: block; letter-spacing: 0.3px; margin-bottom: 3px;
+    }
+    .chip-ar {
+      font-family: 'Amiri', serif; font-size: 15px;
+      display: block; opacity: 0.85;
+    }
+    .cal-mansion-chip.fire  { background: #FFF0E0; color: #B85C00; }
+    .cal-mansion-chip.water { background: #E0F0FF; color: #0055A0; }
+    .cal-mansion-chip.air   { background: #EFFFEB; color: #2D6A00; }
+    .cal-mansion-chip.earth { background: #F5F0E5; color: #6B4C1A; }
+    .cal-mansion-chip.saad-border { border-right: 2px solid #2D7A3D; }
+    .cal-mansion-chip.nahs-border { border-right: 2px solid #8B3A3A; }
+    .cal-moon-phase { font-size: 12px; margin-top: 2px; text-align: center; }
+    /* Calendar events */
+    .cal-day:not(.empty) { cursor: pointer; transition: background 0.15s; }
+    .cal-day:not(.empty):hover { background: rgba(201,168,76,0.07); }
+    .cal-evt-row { display: flex; align-items: center; gap: 3px; padding: 2px 6px 4px; flex-wrap: wrap; min-height: 13px; }
+    .cal-evt-dot { width: 7px; height: 7px; border-radius: 50%; display: inline-block; flex-shrink: 0; }
+    .cal-evt-more { font-family: 'Cinzel', serif; font-size: 8px; color: var(--text-soft); }
+    /* Event modal overlay */
+    .cal-modal-overlay {
+      position: fixed; inset: 0; background: rgba(10,6,40,0.55);
+      display: flex; align-items: center; justify-content: center;
+      z-index: 9999; padding: 20px; backdrop-filter: blur(2px);
+    }
+    .cal-modal {
+      background: white; border-radius: 16px; width: 100%; max-width: 420px;
+      box-shadow: 0 20px 60px rgba(0,0,0,0.25); overflow: hidden;
+      animation: modalIn 0.18s ease;
+    }
+    @keyframes modalIn { from { opacity:0; transform:translateY(10px) scale(0.97); } to { opacity:1; transform:none; } }
+    .cal-modal-header {
+      background: linear-gradient(135deg, var(--indigo), var(--indigo-mid));
+      padding: 20px 24px; display: flex; align-items: flex-start; justify-content: space-between;
+    }
+    .cal-modal-date { font-family:'Cinzel',serif; font-size:10px; letter-spacing:3px; color:var(--gold); text-transform:uppercase; margin-bottom:5px; }
+    .cal-modal-mansion { font-family:'EB Garamond',serif; font-size:18px; color:var(--cream); font-style:italic; }
+    .cal-modal-close { background:none; border:none; color:rgba(245,233,200,0.6); font-size:22px; cursor:pointer; line-height:1; padding:0; transition:color 0.15s; }
+    .cal-modal-close:hover { color:var(--gold); }
+    .cal-modal-body { padding:18px 24px 24px; max-height:58vh; overflow-y:auto; }
+    .cal-modal-empty { font-family:'EB Garamond',serif; font-size:16px; color:var(--text-soft); font-style:italic; text-align:center; padding:12px 0 6px; }
+    .cal-evt-item { display:flex; align-items:flex-start; gap:10px; padding:10px 0; border-bottom:1px solid #f0ebe0; }
+    .cal-evt-item:last-of-type { border-bottom:none; }
+    .cal-evt-badge { font-family:'Cinzel',serif; font-size:8px; letter-spacing:1.5px; text-transform:uppercase; padding:2px 7px; border-radius:10px; flex-shrink:0; margin-top:3px; white-space:nowrap; }
+    .cal-evt-badge.note     { background:rgba(201,168,76,0.15); color:#8B6A10; }
+    .cal-evt-badge.task     { background:rgba(26,20,64,0.1);   color:var(--indigo); }
+    .cal-evt-badge.reminder { background:rgba(45,122,61,0.12); color:#1F5C2D; }
+    .cal-evt-text { font-family:'EB Garamond',serif; font-size:17px; color:var(--text); flex:1; line-height:1.4; }
+    .cal-evt-del { background:none; border:none; color:rgba(180,60,60,0.3); font-size:16px; cursor:pointer; padding:0 2px; line-height:1; flex-shrink:0; transition:color 0.15s; }
+    .cal-evt-del:hover { color:#c0392b; }
+    .cal-add-form { display:flex; gap:8px; margin-top:16px; flex-wrap:wrap; border-top:1px solid #f0ebe0; padding-top:16px; }
+    .cal-add-select { font-family:'Cinzel',serif; font-size:9px; letter-spacing:1px; text-transform:uppercase; border:1px solid #ddd; border-radius:8px; padding:8px 10px; background:white; color:var(--indigo); cursor:pointer; flex-shrink:0; }
+    .cal-add-input { flex:1; min-width:0; border:1px solid #ddd; border-radius:8px; padding:8px 12px; font-family:'EB Garamond',serif; font-size:16px; color:var(--text); outline:none; }
+    .cal-add-input:focus { border-color:var(--gold); }
+    .cal-add-btn { font-family:'Cinzel',serif; font-size:9px; letter-spacing:2px; text-transform:uppercase; background:var(--indigo); color:var(--gold); border:none; border-radius:8px; padding:8px 16px; cursor:pointer; flex-shrink:0; transition:opacity 0.15s; }
+    .cal-add-btn:hover { opacity:0.85; }
+    @media print { .cal-modal-overlay { display:none !important; } }
+
+    /* Year view */
+    .cal-year-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 20px; }
+    @media (max-width: 700px) { .cal-year-grid { grid-template-columns: 1fr 1fr; } }
+
+    .cal-mini-month { background: white; border-radius: 8px; border: 1px solid var(--cream-dark); overflow: hidden; }
+    .cal-mini-header {
+      background: var(--indigo); color: var(--gold);
+      font-family: 'Cinzel', serif; font-size: 11px; font-weight: 700;
+      letter-spacing: 1px; text-align: center; padding: 7px 4px; direction: ltr;
+    }
+    .cal-mini-grid { display: grid; grid-template-columns: repeat(7,1fr); }
+    .cal-mini-day {
+      aspect-ratio: 1; display: flex; align-items: center; justify-content: center;
+      font-size: 9px; font-family: 'Cinzel', serif; color: var(--text-soft);
+      position: relative; cursor: default;
+    }
+    .cal-mini-day.empty { background: transparent; }
+    .cal-mini-day.today { background: var(--gold); color: var(--indigo); border-radius: 50%; font-weight: 700; }
+    .cal-mini-day.is-birth { background: rgba(201,168,76,0.3); border-radius: 3px; }
+    .cal-mini-day.fire-bg  { background: rgba(255,160,60,0.18); }
+    .cal-mini-day.water-bg { background: rgba(60,140,255,0.15); }
+    .cal-mini-day.air-bg   { background: rgba(80,200,80,0.15);  }
+    .cal-mini-day.earth-bg { background: rgba(180,130,60,0.15); }
+    .cal-mini-day.new-moon::after, .cal-mini-day.full-moon::after {
+      content: ''; position: absolute; bottom: 1px; left: 50%; transform: translateX(-50%);
+      width: 4px; height: 4px; border-radius: 50%;
+    }
+    .cal-mini-day.new-moon::after  { background: #333; }
+    .cal-mini-day.full-moon::after { background: var(--gold); }
+
+    /* Key dates panel */
+    .key-dates-panel {
+      background: white; border-radius: 10px; border: 1px solid var(--cream-dark);
+      margin-top: 24px; overflow: hidden;
+    }
+    .key-dates-header {
+      background: var(--indigo); color: var(--gold);
+      font-family: 'Cinzel', serif; font-size: 12px; font-weight: 700;
+      letter-spacing: 2px; padding: 12px 20px; direction: ltr;
+    }
+    .key-dates-list { display: grid; grid-template-columns: 1fr 1fr; }
+    @media (max-width: 600px) { .key-dates-list { grid-template-columns: 1fr; } }
+    .key-date-item {
+      padding: 12px 18px; border-bottom: 1px solid var(--cream-dark);
+      border-left: 1px solid var(--cream-dark); display: flex;
+      align-items: center; gap: 12px; direction: ltr;
+    }
+    .key-date-icon { font-size: 20px; flex-shrink: 0; }
+    .key-date-info { flex: 1; }
+    .key-date-label { font-family: 'Cinzel', serif; font-size: 10px; letter-spacing: 1px; color: var(--gold); }
+    .key-date-val { font-family: 'Amiri', serif; font-size: 15px; color: var(--indigo); font-weight: 700; }
+    .key-date-sub { font-size: 11px; color: var(--text-soft); }
+
+    /* ── MOON PHASES ─────────────────────────────────────── */
+    .phases-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 16px; }
+    .phase-card { background: white; border-radius: 10px; border: 1px solid var(--cream-dark); padding: 20px; text-align: center; }
+    .phase-emoji { font-size: 38px; margin-bottom: 8px; }
+    .phase-name-ar { font-family: 'Amiri', serif; font-size: 18px; font-weight: 700; color: var(--indigo); margin-bottom: 4px; }
+    .phase-energy { font-size: 10px; color: var(--gold); font-family: 'Cinzel', serif; letter-spacing: 1px; margin-bottom: 10px; direction: ltr; }
+    .phase-theme { font-family: 'Amiri', serif; font-size: 14px; line-height: 2; color: var(--text-soft); }
+
+    /* ── BACK COVER ──────────────────────────────────────── */
+    .back-cover {
+      background: var(--indigo); color: var(--gold-pale);
+      text-align: center; padding: 80px 40px; min-height: 50vh;
+      display: flex; flex-direction: column; align-items: center; justify-content: center;
+    }
+    .back-cover .ornament { font-size: 48px; margin-bottom: 20px; }
+    .back-cover h2 { font-family: 'Cinzel', serif; font-size: 28px; color: var(--gold-light); margin-bottom: 14px; }
+    .back-cover p { font-size: 15px; color: rgba(245,233,200,0.75); line-height: 2; max-width: 420px; }
+    .back-cover .brand { font-family: 'Cinzel', serif; font-size: 14px; letter-spacing: 4px; color: var(--gold); margin-top: 28px; text-transform: uppercase; }
+    .back-cover .site { font-size: 12px; color: rgba(201,168,76,0.5); margin-top: 6px; direction: ltr; }
+    /* ── Tab Nav & Section Switching (screen only) ─────── */
+    @media screen {
+      .tab-nav {
+        position: sticky;
+        top: 0;
+        z-index: 200;
+        background: var(--indigo);
+        display: flex;
+        justify-content: center;
+        flex-wrap: wrap;
+        gap: 6px;
+        padding: 10px 20px;
+        border-bottom: 2px solid var(--gold);
+        box-shadow: 0 4px 24px rgba(0,0,0,0.35);
+      }
+      .tab-btn {
+        background: transparent;
+        border: 1px solid rgba(201,168,76,0.3);
+        color: rgba(245,233,200,0.72);
+        padding: 7px 14px;
+        border-radius: 22px;
+        cursor: pointer;
+        display: flex;
+        align-items: center;
+        gap: 6px;
+        font-family: 'Cinzel', serif;
+        font-size: 13px;
+        transition: all 0.18s;
+        white-space: nowrap;
+      }
+      .tab-btn:hover {
+        background: rgba(201,168,76,0.14);
+        color: var(--gold-light);
+        border-color: rgba(201,168,76,0.7);
+      }
+      .tab-btn.active {
+        background: var(--gold);
+        color: var(--indigo);
+        border-color: var(--gold);
+        font-weight: 700;
+      }
+      .cover, .back-cover { display: none !important; }
+      .birth-hero { display: none; }
+      .today-banner { display: none; }
+      .section { display: none; }
+      .calendar-section { display: none; }
+      .birth-hero.tab-active { display: block !important; }
+      .today-banner.tab-active { display: block !important; }
+      .section.tab-active { display: block !important; }
+      .calendar-section.tab-active { display: block !important; }
+    }
+    @media print {
+      .birth-hero, .today-banner, .section, .calendar-section { display: block !important; }
+      .cover, .back-cover { display: flex !important; }
+    }
+
+    /* ── JOURNAL TAB ──────────────────────────────────────── */
+    .journal-hero {
+      background: linear-gradient(135deg, var(--indigo-mid), #3D1A6E);
+      padding: 60px 40px; text-align: center;
+      border-bottom: 2px solid var(--gold); position: relative; overflow: hidden;
+    }
+    .journal-hero::before {
+      content: ''; position: absolute; inset: 0;
+      background: radial-gradient(ellipse at 50% 30%, rgba(201,168,76,0.13) 0%, transparent 70%);
+      pointer-events: none;
+    }
+    .journal-hero-moon { font-size: 52px; margin-bottom: 16px; filter: drop-shadow(0 0 20px rgba(201,168,76,0.5)); position: relative; }
+    .journal-hero-label { font-family: 'Cinzel', serif; font-size: 10px; letter-spacing: 4px; color: rgba(201,168,76,0.7); text-transform: uppercase; margin-bottom: 14px; position: relative; }
+    .journal-hero-title { font-family: 'Cinzel', serif; font-size: 36px; font-weight: 700; letter-spacing: 3px; color: var(--gold-light); margin-bottom: 14px; position: relative; }
+    .journal-hero-divider { width: 160px; height: 1px; background: linear-gradient(90deg, transparent, var(--gold), transparent); margin: 0 auto 16px; position: relative; }
+    .journal-hero-sub { font-family: 'Cinzel', serif; font-size: 11px; letter-spacing: 4px; color: rgba(245,233,200,0.7); text-transform: uppercase; position: relative; }
+    .journal-body { max-width: 760px; margin: 0 auto; padding: 40px 30px; }
+    .journal-card {
+      background: white; border-radius: 14px; border: 1px solid var(--cream-dark);
+      padding: 30px 34px; margin-bottom: 28px;
+      box-shadow: 0 2px 16px rgba(0,0,0,0.04);
+    }
+    .journal-card-label {
+      font-family: 'Cinzel', serif; font-size: 10px; letter-spacing: 3px;
+      color: var(--gold); text-transform: uppercase; margin-bottom: 10px;
+    }
+    .journal-mansion-name { font-family: 'Cinzel', serif; font-size: 18px; font-weight: 700; color: var(--indigo); margin-bottom: 4px; }
+    .journal-mansion-ar { font-family: 'Amiri', serif; font-size: 15px; font-style: italic; color: rgba(26,20,64,0.45); margin-bottom: 16px; }
+    .journal-prompt {
+      font-family: 'EB Garamond', serif; font-size: 19px; line-height: 1.9;
+      color: var(--text); font-style: italic; border-left: 3px solid var(--gold);
+      padding-left: 18px; margin-bottom: 0;
+    }
+    .journal-phase-name { font-family: 'Cinzel', serif; font-size: 16px; font-weight: 700; color: var(--indigo); margin-bottom: 12px; }
+    .journal-textarea {
+      width: 100%; box-sizing: border-box; margin-top: 20px; min-height: 175px;
+      border: none; border-top: 1px solid #e8e0d0; padding: 14px 4px 0;
+      font-family: 'EB Garamond', serif; font-size: 17px; line-height: 2.4;
+      color: var(--text); background: transparent; resize: vertical; outline: none;
+      background-image: repeating-linear-gradient(transparent, transparent calc(2.4em - 1px), #e8e0d0 calc(2.4em - 1px), #e8e0d0 calc(2.4em));
+    }
+    .journal-entry-footer { display: flex; justify-content: flex-end; margin-top: 8px; }
+    .journal-delete-btn {
+      font-family: 'Cinzel', serif; font-size: 9px; letter-spacing: 2px; text-transform: uppercase;
+      color: rgba(26,20,64,0.3); background: none; border: 1px solid rgba(26,20,64,0.12);
+      padding: 5px 14px; border-radius: 20px; cursor: pointer; transition: all 0.2s;
+    }
+    .journal-delete-btn:hover { color: #c0392b; border-color: rgba(192,57,43,0.4); background: rgba(192,57,43,0.04); }
+    .journal-print-note { font-family: 'Cinzel', serif; font-size: 10px; letter-spacing: 2px; color: var(--gold); text-align: center; margin-top: 8px; opacity: 0.6; }
+    @media print {
+      .journal-card { box-shadow: none; border: 1px solid #ddd; break-inside: avoid; }
+      .journal-textarea { resize: none; min-height: 180px; }
+    }
+
+  </style>
+</head>
+<body>
+<!-- ── LICENSE GATE ─────────────────────────────────────── -->
+<div id="license-gate">
+  <div class="gate-card" style="direction:ltr;font-family:'Cinzel', serif;">
+    <span class="gate-moon">🌙</span>
+    <div class="gate-title">Your Personal Lunar Mansion Guide</div>
+    <div class="gate-divider"></div>
+    <div class="gate-sub">Enter the license key you received after purchase to unlock your guide.</div>
+    <input id="gate-key-input" class="gate-input" type="text" placeholder="MPE-XXXXX-XXXXX-XXXXX" autocomplete="off" spellcheck="false">
+    <div id="gate-key-error" class="gate-error"></div>
+    <button id="gate-submit-btn" class="gate-btn" style="font-family:'Cinzel', serif;">Unlock Your Guide ✦</button>
+    <div class="gate-buy">Don't have a key? <a href="https://etherealechoes.com" target="_blank">Purchase at EtherealEchoes.com →</a></div>
+  </div>
+</div>
+
+
+<!-- ══════════════════════════════════════════════════════════ -->
+<!-- WELCOME / INPUT SCREEN                                     -->
+<!-- ══════════════════════════════════════════════════════════ -->
+<div id="welcome-screen">
+  <div class="welcome-card">
+
+    <!-- Crescent Moon -->
+    <div class="moon-svg-wrap">
+      <div class="moon-glow-outer"></div>
+      <div class="moon-glow-mid"></div>
+      <svg viewBox="0 0 110 110" xmlns="http://www.w3.org/2000/svg" style="width:110px;height:110px;position:relative;z-index:1;">
+        <defs>
+          <radialGradient id="silverGrad" cx="28%" cy="22%" r="72%">
+            <stop offset="0%"   stop-color="#FFFFFF"/>
+            <stop offset="30%"  stop-color="#EEF2FA"/>
+            <stop offset="65%"  stop-color="#C4CEDF"/>
+            <stop offset="100%" stop-color="#8898B4"/>
+          </radialGradient>
+          <filter id="crescentGlow" x="-40%" y="-40%" width="180%" height="180%">
+            <feGaussianBlur stdDeviation="4" result="blur"/>
+            <feMerge><feMergeNode in="blur"/><feMergeNode in="SourceGraphic"/></feMerge>
+          </filter>
+          <mask id="cMask">
+            <circle cx="55" cy="55" r="42" fill="white"/>
+            <circle cx="74" cy="43" r="37" fill="black"/>
+          </mask>
+        </defs>
+
+        <!-- Crescent body -->
+        <g transform="rotate(-18, 55, 55)">
+          <circle cx="55" cy="55" r="42" fill="url(#silverGrad)" mask="url(#cMask)" filter="url(#crescentGlow)"/>
+          <!-- Bright inner edge highlight -->
+          <circle cx="55" cy="55" r="42" fill="none" stroke="rgba(255,255,255,0.55)" stroke-width="0.8" mask="url(#cMask)"/>
+          <!-- Subtle outer rim -->
+          <circle cx="55" cy="55" r="42" fill="none" stroke="rgba(200,215,240,0.22)" stroke-width="1.5"/>
+        </g>
+
+        <!-- Two small stars flanking the crescent -->
+        <circle cx="80" cy="26" r="1.8" fill="rgba(255,255,255,0.85)"/>
+        <circle cx="90" cy="42" r="1.2" fill="rgba(255,255,255,0.65)"/>
+        <circle cx="74" cy="18" r="1.0" fill="rgba(255,255,255,0.55)"/>
+      </svg>
+    </div>
+
+    <div class="welcome-title">Lunar Mansions Guide</div>
+    <div class="welcome-sub">Personalized Lunar Mansion Guide</div>
+    <div class="welcome-divider"></div>
+    <p class="welcome-desc">
+      Enter your name and date of birth to discover your personal Lunar Mansion — the celestial gateway you were born under.
+    </p>
+
+    <div class="form-group">
+      <label class="form-label">🌟 Your Full Name</label>
+      <input type="text" id="input-name" class="form-input" placeholder="Enter your name" />
+    </div>
+
+    <div class="form-group">
+      <label class="form-label">🗓 Date of Birth</label>
+      <div style="display:flex;flex-direction:column;gap:4px;">
+        <div class="roller-col-label" style="display:grid;grid-template-columns:1fr 1fr 1fr;gap:0;text-align:center;padding:4px 0;color:rgba(197,145,42,0.6);font-family:'Cinzel',serif;font-size:9px;letter-spacing:1px;">
+          <span>DAY</span><span>MONTH</span><span>YEAR</span>
+        </div>
+        <div class="roller-wrap" id="roller-wrap">
+          <div class="roller-selector"></div>
+          <div class="roller-col" id="roller-day"></div>
+          <div class="roller-divider"></div>
+          <div class="roller-col" id="roller-month"></div>
+          <div class="roller-divider"></div>
+          <div class="roller-col" id="roller-year"></div>
+        </div>
+      </div>
+      <div class="form-error" id="dob-error">Please check your date of birth</div>
+    </div>
+
+    <button class="generate-btn" onclick="generateGuide()">
+      ✨ Discover Your Lunar Mansion
+    </button>
+
+    <div id="clear-data-row" style="display:none;text-align:center;margin-top:14px;">
+      <button onclick="clearSavedData()" style="background:none;border:none;color:rgba(245,233,200,0.35);font-family:'Cinzel',serif;font-size:10px;letter-spacing:1px;cursor:pointer;text-decoration:underline;text-underline-offset:3px;">
+        Clear saved data
+      </button>
+    </div>
+  </div>
+</div>
+
+<!-- ══════════════════════════════════════════════════════════ -->
+<!-- PRINT BAR                                                  -->
+<!-- ══════════════════════════════════════════════════════════ -->
+<div id="print-bar" class="no-print">
+  <span id="print-greeting"></span>
+  <button class="print-btn-bar" onclick="window.print()">⬇ Save as PDF</button>
+  <button class="reset-btn" onclick="resetApp()">← Start Over</button>
+</div>
+
+<!-- ══════════════════════════════════════════════════════════ -->
+<!-- MAIN CONTENT (generated)                                   -->
+<!-- ══════════════════════════════════════════════════════════ -->
+<nav class="tab-nav no-print" id="tab-nav" style="display:none;">
+  <button class="tab-btn active" onclick="showTab('birth-hero',this)">
+    <span>🌙</span><span class="tab-label">Birth Mansion</span>
+  </button>
+  <button class="tab-btn" onclick="showTab('sec-compat',this)">
+    <span>☯</span><span class="tab-label">Compatibility</span>
+  </button>
+  <button class="tab-btn" onclick="showTab('sec-mansions',this)">
+    <span>✨</span><span class="tab-label">All 28</span>
+  </button>
+  <button class="tab-btn" onclick="showTab('calendar-section',this)">
+    <span>📅</span><span class="tab-label">Calendar</span>
+  </button>
+  <button class="tab-btn" onclick="showTab('sec-phases',this)">
+    <span>🌕</span><span class="tab-label">Phases</span>
+  </button>
+  <button class="tab-btn" onclick="showTab('sec-journal',this)">
+    <span>✍</span><span class="tab-label">Journal</span>
+  </button>
+</nav>
+
+<div class="main-content" id="main-content">
+
+  <!-- COVER -->
+  <div class="cover page-break" id="cover-page">
+    <div class="cover-moon">🌙</div>
+    <div class="cover-greeting">YOUR PERSONAL GUIDE · دليلك الشخصي القمري</div>
+    <div class="cover-name" id="cover-name"></div>
+    <div class="cover-title">Lunar Mansions Guide</div>
+    <div class="cover-title-en">دليل منازل القمر</div>
+    <div class="cover-divider"></div>
+    <div class="cover-mansion-reveal">
+      <div class="cover-mansion-label">YOUR BIRTH MANSION · منزلك القمري عند الولادة</div>
+      <div class="cover-mansion-en" id="cover-mansion-en"></div>
+      <div class="cover-mansion-name" id="cover-mansion-ar"></div>
+    </div>
+    <div class="cover-brand">Ethereal Echoes · etherealechoes.com</div>
+  </div>
+
+  <!-- BIRTH MANSION HERO -->
+  <div class="birth-hero page-break" id="birth-hero">
+    <div class="birth-hero-label">YOUR COSMIC BIRTH MANSION</div>
+    <div class="birth-hero-en" id="hero-name-en"></div>
+    <div class="birth-hero-name" id="hero-name-ar"></div>
+    <div class="birth-hero-meta" id="hero-meta"></div>
+    <div class="birth-hero-desc" id="hero-desc"></div>
+    <div class="birth-hero-guidance" id="hero-guidance"></div>
+  </div>
+
+  <!-- TODAY'S MANSION BANNER -->
+  <div class="today-banner no-break" id="today-banner">
+    <div class="today-label">TODAY'S ACTIVE MANSION</div>
+    <div class="today-content">
+      <div class="today-phase" id="today-phase-emoji"></div>
+      <div class="today-info">
+        <div class="today-mansion-name" id="today-mansion-name"></div>
+        <div class="today-desc" id="today-mansion-desc"></div>
+      </div>
+      <div class="today-compat" id="today-compat-text"></div>
+    </div>
+  </div>
+
+  <!-- COMPATIBILITY SECTION -->
+  <div class="section page-break" id="sec-compat">
+    <div class="section-title">Your Mansion Compatibility</div>
+    <div class="section-title-en">توافق منزلك مع المنازل الأخرى</div>
+    <div class="section-rule"></div>
+    <p style="text-align:center;font-family:'Amiri',serif;font-size:15px;color:var(--text-soft);margin-bottom:24px;">
+      This grid shows your birth mansion's harmony with each of the 28 mansions.
+      Green indicates flow and alignment, yellow moderate harmony, and red times of growth and challenge.
+    </p>
+    <div class="compat-grid" id="compat-grid"></div>
+  </div>
+
+  <!-- ALL 28 MANSIONS -->
+  <div class="section" id="sec-mansions">
+    <div class="section-title">All 28 Lunar Mansions</div>
+    <div class="section-title-en">المنازل الثمانية والعشرون</div>
+    <div class="section-rule"></div>
+    <div class="mansions-grid" id="mansions-grid"></div>
+  </div>
+
+  <!-- LUNAR CALENDAR -->
+  <div class="calendar-section page-break" id="calendar-section">
+    <div class="section-title">Lunar Mansion Calendar</div>
+    <div class="section-title-en">التقويم القمري</div>
+    <div class="section-rule"></div>
+    <p style="text-align:center;font-family:'Amiri',serif;font-size:15px;color:var(--text-soft);margin-bottom:24px;">
+      Every day is colored by its Lunar Mansion energy. Your mansion days (⭐) are your most powerful personal days of the month.
+    </p>
+
+    <div class="cal-controls no-print">
+      <button class="cal-nav-btn" onclick="calPrev()">&#8592; Prev</button>
+      <div class="cal-month-title" id="cal-month-title"></div>
+      <button class="cal-nav-btn" onclick="calNext()">Next &#8594;</button>
+      <div class="cal-view-toggle">
+        <button class="cal-toggle-btn active" id="btn-month" onclick="setCalView('month')">Month</button>
+        <button class="cal-toggle-btn" id="btn-year" onclick="setCalView('year')">Year</button>
+      </div>
+    </div>
+
+    <div class="cal-legend no-print">
+      <span class="cal-legend-item"><span class="cal-legend-dot" style="background:#FFF0E0;border:1px solid #B85C00;"></span>Fire</span>
+      <span class="cal-legend-item"><span class="cal-legend-dot" style="background:#E0F0FF;border:1px solid #0055A0;"></span>Water</span>
+      <span class="cal-legend-item"><span class="cal-legend-dot" style="background:#EFFFEB;border:1px solid #2D6A00;"></span>Air</span>
+      <span class="cal-legend-item"><span class="cal-legend-dot" style="background:#F5F0E5;border:1px solid #6B4C1A;"></span>Earth</span>
+      <span class="cal-legend-item"><span class="cal-legend-dot" style="background:rgba(201,168,76,0.25);border:1px solid var(--gold);"></span>Your Mansion</span>
+      <span class="cal-legend-item">🌑 new &nbsp; 🌕 full</span>
+    </div>
+
+    <div id="cal-container"></div>
+
+    <div class="key-dates-panel no-break" id="key-dates-panel" style="margin-top:24px;"></div>
+  </div>
+
+  <!-- Calendar Event Modal -->
+  <div id="cal-event-modal" class="cal-modal-overlay" style="display:none" onclick="if(event.target===this)closeCalModal()">
+    <div class="cal-modal">
+      <div class="cal-modal-header">
+        <div>
+          <div class="cal-modal-date" id="cal-modal-date-lbl"></div>
+          <div class="cal-modal-mansion" id="cal-modal-mansion-lbl"></div>
+        </div>
+        <button class="cal-modal-close" onclick="closeCalModal()">✕</button>
+      </div>
+      <div class="cal-modal-body">
+        <div id="cal-evt-list"></div>
+        <div class="cal-add-form">
+          <select class="cal-add-select" id="cal-add-select">
+            <option value="note">Note</option>
+            <option value="task">Task</option>
+            <option value="reminder">Reminder</option>
+          </select>
+          <input class="cal-add-input" id="cal-add-input" type="text" placeholder="Add an entry…"
+            onkeydown="if(event.key==='Enter')addCalEvent(_calModalDate)">
+          <button class="cal-add-btn" onclick="addCalEvent(_calModalDate)">Add</button>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- MOON PHASES -->
+  <div class="section page-break" id="sec-phases">
+    <div class="section-title">The Eight Moon Phases</div>
+    <div class="section-title-en">أطوار القمر الثمانية</div>
+    <div class="section-rule"></div>
+    <div class="phases-grid">
+      <div class="phase-card no-break"><div class="phase-emoji">🌑</div><div class="phase-name-ar">New Moon</div><div class="phase-energy">INTROSPECTIVE</div><div class="phase-theme">New beginnings and fresh intentions. A powerful time to plant seeds and clarify what you wish to call in.</div></div>
+      <div class="phase-card no-break"><div class="phase-emoji">🌒</div><div class="phase-name-ar">Waxing Crescent</div><div class="phase-energy">BUILDING</div><div class="phase-theme">Take first steps and build momentum. Act on the intentions you set at the New Moon.</div></div>
+      <div class="phase-card no-break"><div class="phase-emoji">🌓</div><div class="phase-name-ar">First Quarter</div><div class="phase-energy">DECISIVE</div><div class="phase-theme">Overcome obstacles and commit. Face challenges with courage and stay the course.</div></div>
+      <div class="phase-card no-break"><div class="phase-emoji">🌔</div><div class="phase-name-ar">Waxing Gibbous</div><div class="phase-energy">REFINING</div><div class="phase-theme">Refine and trust the process. You are close — make small adjustments and have faith.</div></div>
+      <div class="phase-card no-break"><div class="phase-emoji">🌕</div><div class="phase-name-ar">Full Moon</div><div class="phase-energy">ILLUMINATED</div><div class="phase-theme">Illumination and fulfillment. The Moon reveals what was hidden — receive and celebrate.</div></div>
+      <div class="phase-card no-break"><div class="phase-emoji">🌖</div><div class="phase-name-ar">Waning Gibbous</div><div class="phase-energy">GRATEFUL</div><div class="phase-theme">Share wisdom and practice gratitude. Give back and honor the lessons of this cycle.</div></div>
+      <div class="phase-card no-break"><div class="phase-emoji">🌗</div><div class="phase-name-ar">Last Quarter</div><div class="phase-energy">RELEASING</div><div class="phase-theme">Let go and forgive. Release what no longer serves to make space for what is coming.</div></div>
+      <div class="phase-card no-break"><div class="phase-emoji">🌘</div><div class="phase-name-ar">Waning Crescent</div><div class="phase-energy">RESTING</div><div class="phase-theme">Rest and surrender. Replenish your energy as the cycle completes and prepares to begin again.</div></div>
+    </div>
+  </div>
+
+  <!-- BACK COVER -->
+  <div class="back-cover">
+    <div class="ornament">🌙</div>
+    <h2 id="back-cover-name">Your Journey with the Moon Never Ends</h2>
+    <p>Your Lunar Mansion is your personal gateway to the cosmos. The more you explore it and track the mansions daily, the more you will see patterns and understand the rhythm of your own life.</p>
+    <div class="cover-divider" style="margin:24px auto;"></div>
+    <p style="font-size:14px;">Discover more spiritual tools at our website</p>
+    <div class="brand">Ethereal Echoes</div>
+    <div class="site">etherealechoes.com</div>
+  </div>
+
+  <!-- JOURNAL TAB -->
+  <div class="section" id="sec-journal">
+    <div class="journal-hero">
+      <div class="journal-hero-moon">✍</div>
+      <div class="journal-hero-label">Personal Reflection</div>
+      <div class="journal-hero-title">Your Lunar Journal</div>
+      <div class="journal-hero-divider"></div>
+      <div class="journal-hero-sub">Reflect · Inquire · Align</div>
+    </div>
+    <div class="journal-body">
+
+      <!-- Today's mansion prompt -->
+      <div class="journal-card">
+        <div class="journal-card-label">✦ Today's Mansion Prompt</div>
+        <div class="journal-mansion-name" id="j-today-name"></div>
+        <div class="journal-mansion-ar" id="j-today-ar"></div>
+        <div class="journal-prompt" id="j-today-prompt"></div>
+        <textarea class="journal-textarea" id="j-today-entry" placeholder="Write your reflection here…"></textarea>
+        <div class="journal-entry-footer">
+          <button class="journal-delete-btn" id="j-today-delete">✕ Clear Entry</button>
+        </div>
+      </div>
+
+      <!-- Birth mansion prompt -->
+      <div class="journal-card">
+        <div class="journal-card-label">⭐ Your Birth Mansion Reflection</div>
+        <div class="journal-mansion-name" id="j-birth-name"></div>
+        <div class="journal-mansion-ar" id="j-birth-ar"></div>
+        <div class="journal-prompt" id="j-birth-prompt"></div>
+        <textarea class="journal-textarea" id="j-birth-entry" placeholder="Write your reflection here…"></textarea>
+        <div class="journal-entry-footer">
+          <button class="journal-delete-btn" id="j-birth-delete">✕ Clear Entry</button>
+        </div>
+      </div>
+
+      <!-- Moon phase prompt -->
+      <div class="journal-card">
+        <div class="journal-card-label">🌙 Current Moon Phase</div>
+        <div class="journal-phase-name" id="j-phase-name"></div>
+        <div class="journal-prompt" id="j-phase-prompt"></div>
+        <textarea class="journal-textarea" id="j-phase-entry" placeholder="Write your reflection here…"></textarea>
+        <div class="journal-entry-footer">
+          <button class="journal-delete-btn" id="j-phase-delete">✕ Clear Entry</button>
+        </div>
+      </div>
+
+      <div class="journal-print-note">PRINT THIS PAGE · USE AS YOUR DAILY LUNAR JOURNAL</div>
+    </div>
+  </div>
+
+</div><!-- end main-content -->
+
+<!-- ══════════════════════════════════════════════════════════ -->
+<!-- CELESTIAL ENGINE (from your Arabic Tarot Oracle app)       -->
+<!-- ══════════════════════════════════════════════════════════ -->
+<script>
+// ── The 28 Lunar Mansions ─────────────────────────────────────
+const lunarMansions = [
+  { index:0,  id:'sharatain',       nameAr:'الشَّرَطين',          nameEn:'Al-Sharatain',           meaning:'العلامتان', meaningEn:'The Two Signs',               element:'fire',  nature:"sa'd", ruler:'mars',    emoji:'🔥' },
+  { index:1,  id:'butain',          nameAr:'البُطَين',            nameEn:'Al-Butain',               meaning:'البطن الصغير', meaningEn:'The Little Belly',             element:'fire',  nature:"sa'd", ruler:'venus',   emoji:'💰' },
+  { index:2,  id:'thurayya',        nameAr:'الثُّرَيّا',           nameEn:'Al-Thurayya',             meaning:'الثريا (النجوم)', meaningEn:'The Pleiades',           element:'fire',  nature:"sa'd", ruler:'mercury', emoji:'✨' },
+  { index:3,  id:'dabaran',         nameAr:'الدَّبَران',           nameEn:'Al-Dabaran',              meaning:'التابع', meaningEn:'The Follower',                   element:'earth', nature:'nahs', ruler:'moon',    emoji:'🌑' },
+  { index:4,  id:'haqah',           nameAr:'الهَقعة',             nameEn:"Al-Haq'ah",               meaning:'العلامة البيضاء', meaningEn:'The White Spot',           element:'earth', nature:'nahs', ruler:'mars',    emoji:'🔄' },
+  { index:5,  id:'hanah',           nameAr:'الهَنعة',             nameEn:"Al-Han'ah",               meaning:'الوَسم', meaningEn:'The Brand',                   element:'air',   nature:"sa'd", ruler:'sun',     emoji:'💬' },
+  { index:6,  id:'dhira',           nameAr:'الذِّراع',            nameEn:"Al-Dhira'",               meaning:'الذراع', meaningEn:'The Forearm',                   element:'air',   nature:"sa'd", ruler:'venus',   emoji:'💖' },
+  { index:7,  id:'nathrah',         nameAr:'النَّثرة',            nameEn:'Al-Nathrah',              meaning:'الفجوة', meaningEn:'The Gap',                   element:'water', nature:"sa'd", ruler:'mercury', emoji:'🔮' },
+  { index:8,  id:'tarf',            nameAr:'الطَّرف',             nameEn:'Al-Tarf',                 meaning:'النظرة', meaningEn:'The Glance',                   element:'water', nature:'nahs', ruler:'moon',    emoji:'⚠️' },
+  { index:9,  id:'jabhah',          nameAr:'الجَبهة',             nameEn:'Al-Jabhah',               meaning:'الجبهة', meaningEn:'The Forehead',                   element:'fire',  nature:"sa'd", ruler:'sun',     emoji:'👑' },
+  { index:10, id:'zubrah',          nameAr:'الزُّبرة',            nameEn:'Al-Zubrah',               meaning:'العُرف', meaningEn:'The Mane',                   element:'fire',  nature:'nahs', ruler:'jupiter', emoji:'🛡️' },
+  { index:11, id:'sarfah',          nameAr:'الصَّرفة',            nameEn:'Al-Sarfah',               meaning:'المُغيِّر', meaningEn:'The Changer',                 element:'earth', nature:"sa'd", ruler:'sun',     emoji:'🔄' },
+  { index:12, id:'awwa',            nameAr:'العَوّاء',            nameEn:"Al-Awwa'",                meaning:'النابح', meaningEn:'The Barker',                   element:'earth', nature:'nahs', ruler:'venus',   emoji:'🔍' },
+  { index:13, id:'simak',           nameAr:'السِّماك',            nameEn:'Al-Simak',                meaning:'الأعزل', meaningEn:'The Unarmed One',                   element:'air',   nature:"sa'd", ruler:'mars',    emoji:'⚖️' },
+  { index:14, id:'ghafr',           nameAr:'الغَفر',              nameEn:'Al-Ghafr',                meaning:'الغطاء', meaningEn:'The Cover',                   element:'air',   nature:"sa'd", ruler:'jupiter', emoji:'🕊️' },
+  { index:15, id:'zubana',          nameAr:'الزُّبانى',           nameEn:'Al-Zubana',               meaning:'المخالب', meaningEn:'The Claws',                  element:'water', nature:'nahs', ruler:'saturn',  emoji:'⚔️' },
+  { index:16, id:'iklil',           nameAr:'الإكليل',             nameEn:'Al-Iklil',                meaning:'التاج', meaningEn:'The Crown',                    element:'water', nature:"sa'd", ruler:'mars',    emoji:'🏆' },
+  { index:17, id:'qalb',            nameAr:'القَلب',              nameEn:'Al-Qalb',                 meaning:'القلب', meaningEn:'The Heart',                    element:'water', nature:'nahs', ruler:'mars',    emoji:'❤️' },
+  { index:18, id:'shaulah',         nameAr:'الشَّولة',            nameEn:'Al-Shaulah',              meaning:'الذيل المرفوع', meaningEn:'The Raised Tail',             element:'fire',  nature:'nahs', ruler:'jupiter', emoji:'🚀' },
+  { index:19, id:'naaim',           nameAr:'النَّعائم',           nameEn:"Al-Na'aim",               meaning:'النعام', meaningEn:'The Ostriches',                   element:'fire',  nature:"sa'd", ruler:'sun',     emoji:'🌟' },
+  { index:20, id:'baldah',          nameAr:'البَلدة',             nameEn:'Al-Baldah',               meaning:'المدينة', meaningEn:'The Empty Place',                  element:'earth', nature:'nahs', ruler:'saturn',  emoji:'🌌' },
+  { index:21, id:'saad_dhabih',     nameAr:'سعد الذابح',          nameEn:"Sa'd al-Dhabih",          meaning:'نجم الذابح السعيد', meaningEn:'The Lucky Slaughterer',         element:'earth', nature:"sa'd", ruler:'saturn',  emoji:'💪' },
+  { index:22, id:'saad_bula',       nameAr:'سعد بُلَع',           nameEn:"Sa'd Bula'",              meaning:'نجم البالع السعيد', meaningEn:'The Lucky Swallower',         element:'air',   nature:"sa'd", ruler:'saturn',  emoji:'🌊' },
+  { index:23, id:'saad_suud',       nameAr:'سعد السُّعود',        nameEn:"Sa'd al-Su'ud",           meaning:'أسعد السعود', meaningEn:'The Luckiest of the Lucky',               element:'air',   nature:"sa'd", ruler:'jupiter', emoji:'⭐' },
+  { index:24, id:'saad_akhbiyah',   nameAr:'سعد الأخبية',         nameEn:"Sa'd al-Akhbiyah",        meaning:'نجم الخيام السعيد', meaningEn:'The Lucky Tents',         element:'air',   nature:"sa'd", ruler:'venus',   emoji:'🏕️' },
+  { index:25, id:'fargh_muqaddam',  nameAr:'الفَرغ المُقدَّم',    nameEn:'Al-Fargh al-Muqaddam',    meaning:'الدلو الأعلى', meaningEn:'The Upper Spout',             element:'water', nature:"sa'd", ruler:'mars',    emoji:'🦋' },
+  { index:26, id:'fargh_muakhkhar', nameAr:'الفَرغ المُؤخَّر',    nameEn:"Al-Fargh al-Mu'akhkhar",  meaning:'الدلو الأسفل', meaningEn:'The Lower Spout',             element:'water', nature:"sa'd", ruler:'mercury', emoji:'✅' },
+  { index:27, id:'batn_hut',        nameAr:'بطن الحوت',           nameEn:'Batn al-Hut',             meaning:'بطن السمكة', meaningEn:'The Belly of the Fish',               element:'water', nature:"sa'd", ruler:'jupiter', emoji:'🐟' }
+];
+
+const mansionDescriptions = {
+  sharatain:      { ar:'طاقة المبادرة والشجاعة. وقت مناسب للبدايات الجريئة والقيادة.', en:'Energy of initiative and courage. A time for bold beginnings and leadership.', guidance:'ابدأ المشاريع الجديدة، اتخذ القرارات الجريئة، وقد بصرك نحو الهدف.', guidance_en:'Launch new projects and make bold decisions. Mars energy fuels you to move forward with confidence.', journal_en:'Where in your life are you holding back from bold, decisive action? What fear stands between you and your next bold move?' },
+  butain:         { ar:'طاقة الثروة والوفرة. وقت مناسب لجمع الموارد والتأسيس.', en:'Energy of wealth and abundance. A time for gathering resources and building foundations.', guidance:'وقت مثالي للتخطيط المالي والعناية بما تملك. الزهرة تفتح أبواب الوفرة.', guidance_en:'Focus on financial planning and tending what you already have. Venus opens the doors of abundance.', journal_en:'What resources — material or emotional — need your attention today? Where can you open the door wider to abundance?' },
+  thurayya:       { ar:'طاقة النور والعلم. وقت مناسب للتعلم والاكتشاف والسفر.', en:'Energy of light and knowledge. A time for learning, discovery, and travel.', guidance:'اقرأ، تعلّم، تواصل مع الآخرين وشارك المعرفة.', guidance_en:'Read, study, and share knowledge. Mercury opens channels of understanding and clear expression.', journal_en:'What have you been meaning to learn or explore but keep postponing? What knowledge is quietly calling your name?' },
+  dabaran:        { ar:'طاقة الصبر والمتابعة. وقت للتأني والمثابرة رغم العقبات.', en:'Energy of patience and persistence. A time for steadfastness despite obstacles.', guidance:'تجنب البدايات الجديدة. ثابر على ما بدأته واصبر. وقت للصمود لا للتقدم السريع.', guidance_en:'Avoid new beginnings. Persist with what you have started and practice patience — this is a time for endurance.', journal_en:'Where does patience feel hardest for you right now? What would steady perseverance, without forcing, look like today?' },
+  haqah:          { ar:'طاقة التحول والتطهير. وقت لإزالة ما لا يخدمك والتجديد.', en:'Energy of transformation and purification. A time to release what no longer serves you.', guidance:'نظّف محيطك وفكرك. تخلّص من العادات التي لا تضيف لحياتك.', guidance_en:'Clear your environment and mind. Release habits that no longer add value. A time for purification and renewal.', journal_en:'What old habit or pattern has overstayed its welcome in your life? What would feel lighter the moment you released it?' },
+  hanah:          { ar:'طاقة التواصل والحكمة. وقت مناسب للحوار والتعبير عن الذات.', en:'Energy of communication and wisdom. A time for dialogue and self-expression.', guidance:'اكتب، تحدّث، اعقد الاجتماعات المهمة. الشمس تضيء طريق التعبير الصادق.', guidance_en:'Write, speak, and hold important conversations. The Sun illuminates the path of honest self-expression.', journal_en:'What truth have you been holding back from saying? What conversation, if finally had, would change everything?' },
+  dhira:          { ar:'طاقة الحب والانسجام. وقت مناسب للعلاقات والشراكات والمصالحة.', en:'Energy of love and harmony. A time for relationships, partnerships, and reconciliation.', guidance:'قوّي علاقاتك، أصلح ما بينك وبين الآخرين. وقت مبارك للشراكات.', guidance_en:'Strengthen your relationships and mend what needs healing. A blessed time for partnerships of all kinds.', journal_en:'Which relationship in your life is asking for more care? What would genuine harmony look like between you and that person?' },
+  nathrah:        { ar:'طاقة الحدس والرؤية الداخلية. وقت للتأمل والاستماع للقلب.', en:'Energy of intuition and inner vision. A time for meditation and listening to the heart.', guidance:'توقف عن الصخب الخارجي وانصت لصوتك الداخلي. التأمل والكتابة سيكشفان لك الحقيقة.', guidance_en:'Step away from outer noise and listen to your inner voice. Journaling will reveal what you need to know.', journal_en:'What is your intuition whispering right now that your mind keeps overriding? What does your heart already know?' },
+  tarf:           { ar:'طاقة الحذر واليقظة. وقت للتروي قبل اتخاذ القرارات المهمة.', en:'Energy of caution and vigilance. A time to pause before making important decisions.', guidance:'أجّل القرارات المهمة إن أمكن. راقب المواقف بعين ناقدة وثق بحدسك.', guidance_en:'Postpone important decisions if possible. Trust your intuition if something feels off.', journal_en:'Where are you rushing toward a decision that deserves more space? What would careful observation reveal if you slowed down?' },
+  jabhah:         { ar:'طاقة الكرامة والنصر. وقت مناسب للمواجهة والدفاع عن الحق.', en:'Energy of dignity and victory. A time for standing up and defending what is right.', guidance:'قف بثقة وكرامة. وقت مناسب للمفاوضات التي تتطلب الشجاعة والحضور القوي.', guidance_en:'Stand with confidence and dignity. A favorable time for negotiations that demand courage and presence.', journal_en:'Where do you need to stand firm in your values or your worth? What does taking dignified, confident action look like today?' },
+  zubrah:         { ar:'طاقة القوة الخفية والحماية. وقت للتحصين الروحي والقوة الداخلية.', en:'Energy of hidden power and protection. A time for spiritual fortification.', guidance:'حصّن نفسك روحياً. ادعُ، تأمّل، واستحضر الحماية الداخلية.', guidance_en:'Strengthen yourself spiritually. Invoke your inner protection — Jupiter guards you from the unseen.', journal_en:'What spiritual practice or inner ritual is calling you to deepen it? What truly fortifies your inner world when life feels heavy?' },
+  sarfah:         { ar:'طاقة التغيير والتحول. وقت مناسب لتبديل المسار والتجديد.', en:'Energy of change and transformation. A time to shift direction and renew.', guidance:'أحدث التغييرات التي طالما أجّلتها. وقت مبارك للتحولات الإيجابية.', guidance_en:'Make the changes you have long postponed. A blessed time for positive transformations in your life path.', journal_en:'What change have you been resisting longer than you should? If you fully embraced it, what new world would open up?' },
+  awwa:           { ar:'طاقة التحليل والتمييز. وقت للتفكير العميق وفرز الأمور.', en:'Energy of analysis and discernment. A time for deep thinking and sorting matters.', guidance:'لا تتسرع في القرارات. اجمع المعلومات وحلّل الأمور بعمق.', guidance_en:'Do not rush decisions. Gather information and analyze deeply before moving forward.', journal_en:'What important decision is asking for more information before you move? What are you missing that patience would reveal?' },
+  simak:          { ar:'طاقة العدالة والتوازن. وقت مناسب لإحقاق الحق والإنصاف.', en:'Energy of justice and balance. A time for fairness and equity.', guidance:'اسعَ لتحقيق العدل في علاقاتك. وقت مثالي لحل النزاعات بطريقة متوازنة.', guidance_en:'Seek fairness in your relationships. An ideal time to resolve disputes in a balanced, equitable way.', journal_en:'Where in your relationships or your life do you feel an imbalance of fairness? What would true equity restore?' },
+  ghafr:          { ar:'طاقة السلام والستر. وقت للهدوء والتعافي والغفران.', en:'Energy of peace and concealment. A time for calm, healing, and forgiveness.', guidance:'سامح واقبل المسامحة. المشتري يبارك قلوب المتسامحين ويفتح أبواب الشفاء.', guidance_en:'Forgive and allow yourself to be forgiven. Jupiter opens the doors of healing and inner peace.', journal_en:'Who or what is quietly asking for your forgiveness today — including yourself? What would genuine inner peace feel like?' },
+  zubana:         { ar:'طاقة المواجهة والحسم. وقت للتعامل مع التحديات بشكل مباشر.', en:'Energy of confrontation and resolution. A time to deal with challenges directly.', guidance:'تجنب الصراعات غير الضرورية. إن كانت المواجهة حتمية، فادخل إليها بحكمة.', guidance_en:'Avoid unnecessary conflict. If confrontation is unavoidable, approach it with wisdom and calm.', journal_en:'What conflict or tension are you navigating right now? How can wisdom and calm lead where reaction never could?' },
+  iklil:          { ar:'طاقة التتويج والشرف. وقت مناسب للاحتفال بالإنجازات.', en:'Energy of crowning and honor. A time to celebrate achievements.', guidance:'احتفل بإنجازاتك ولو كانت صغيرة. اعترف بمسيرتك وامتن لكل خطوة.', guidance_en:'Celebrate your achievements, even the small ones. Acknowledge your journey and give thanks for every step.', journal_en:'What achievement — however small — deserves to be truly honoured today? What are you genuinely proud of in your journey?' },
+  qalb:           { ar:'طاقة العاطفة العميقة والكشف. وقت لمواجهة الحقائق الخفية.', en:'Energy of deep emotion and revelation. A time to face hidden truths.', guidance:'لا تهرب من مشاعرك العميقة. ما يكشفه القمر هنا يحررك.', guidance_en:'Do not run from deep feelings. Honest self-confrontation here will set you free.', journal_en:'What deep feeling have you been avoiding or suppressing? What would it mean to let yourself fully feel it and pass through?' },
+  shaulah:        { ar:'طاقة الطموح والمغامرة. وقت للخروج من منطقة الراحة.', en:'Energy of ambition and adventure. A time to step out of the comfort zone.', guidance:'تحدَّ نفسك، لكن بحكمة. الطموح مرحّب به هنا، لكن تجنب التهور.', guidance_en:'Challenge yourself wisely. Ambition is welcome here — yet avoid recklessness and hasty decisions.', journal_en:'Where are you playing it safe when a deeper part of you is calling for boldness? What would courage actually look like today?' },
+  naaim:          { ar:'طاقة التفاؤل والسعادة. وقت مناسب للسفر والاستكشاف والفرح.', en:'Energy of optimism and joy. A time for travel, exploration, and happiness.', guidance:'استمتع بالحياة واحتضن الفرح. وقت مثالي للسفر واللقاءات الاجتماعية.', guidance_en:'Enjoy life and embrace joy. An ideal time for travel, social gatherings, and celebrating being alive.', journal_en:'What brings you genuine, uncomplicated joy right now? How can you invite more of that living energy into this very day?' },
+  baldah:         { ar:'طاقة العزلة والتأمل. وقت للخلوة والتفكر في مسار الحياة.', en:'Energy of solitude and contemplation. A time for retreat and reflecting on life.', guidance:'اختلِ بنفسك. وقت التأمل العميق في أين أنت وإلى أين تسير.', guidance_en:'Seek solitude. Deep contemplation about where you are and where you are headed is the gift of this mansion.', journal_en:'What does your soul need to be still with today — no noise, no doing? What clarity rises when you stop filling the silence?' },
+  saad_dhabih:    { ar:'طاقة التضحية من أجل النجاح. وقت للعمل الجاد والإصرار.', en:'Energy of sacrifice for success. A time for hard work and determination.', guidance:'اعمل بجد واثبت على مسارك. زحل يكافئ الصابرين.', guidance_en:'Work hard and stay the course. Success is earned through perseverance. Saturn rewards those who endure.', journal_en:'What are you truly willing to sacrifice for what matters most? Where does your commitment need to grow deeper roots?' },
+  saad_bula:      { ar:'طاقة الاستيعاب والتقبل. وقت لقبول التغيير والتكيف.', en:'Energy of absorption and acceptance. A time to embrace change and adapt.', guidance:'اقبل الواقع كما هو. التكيف مع التغيير مفتاح التدفق السلس.', guidance_en:'Accept reality as it is. Adapting to change rather than resisting it is the key to flowing smoothly here.', journal_en:'What change is asking you to adapt right now instead of resist? Where can you flow with life rather than push against it?' },
+  saad_suud:      { ar:'طاقة الحظ الأعظم والبركة. أسعد المنازل — وقت مبارك لكل شيء.', en:'Energy of supreme fortune and blessing. The luckiest mansion — a blessed time for everything.', guidance:'ابدأ كل ما تريد في هذا المنزل المبارك. المشتري يبارك كل شيء يُبدأ هنا.', guidance_en:'Begin everything you desire. Declare intentions, sign contracts, start projects. Jupiter blesses all initiated here.', journal_en:'If this is your most blessed moment to begin — what would you start? What one intention are you ready to plant into the world?' },
+  saad_akhbiyah:  { ar:'طاقة الأمان والحماية. وقت للاحتماء والتخطيط بحكمة.', en:'Energy of safety and shelter. A time for seeking refuge and planning wisely.', guidance:'خطّط من مكان الأمان. راجع خططك وتأكد من أن أساسك متين.', guidance_en:'Plan from a place of security. Ensure your foundations are solid before you launch forward.', journal_en:'What foundations in your life need reinforcing before you build higher? What are you truly standing on?' },
+  fargh_muqaddam: { ar:'طاقة الانطلاق والتحرر. وقت لكسر القيود والمضي قدماً.', en:'Energy of liberation and forward movement. A time to break free and move ahead.', guidance:'اكسر القيود القديمة. تحرر مما يعيقك وانطلق بجرأة.', guidance_en:'Break free from old limitations. Release what holds you back — Mars lends you the courage to liberate yourself.', journal_en:'What old limitation or story about yourself is ready to be broken? What would real freedom — in your own life — look like?' },
+  fargh_muakhkhar:{ ar:'طاقة الاكتمال والإنجاز. وقت لإتمام المشاريع وجني الثمار.', en:'Energy of completion and accomplishment. A time to finish projects and reap rewards.', guidance:'أكمل ما بدأته. وقت مثالي لإنهاء المشاريع والاحتفال بالإنجازات.', guidance_en:'Complete what you have started. Finish projects, harvest the fruits of your labor, and celebrate.', journal_en:'What project, intention, or chapter is calling for completion? What final, honest step would let you harvest what you planted?' },
+  batn_hut:       { ar:'طاقة الرحمة والتسليم. وقت للتواضع والاستسلام للقدر.', en:'Energy of mercy and surrender. A time for humility and accepting destiny.', guidance:'سلّم أمرك. هذا أكثر المنازل روحانية — وقت للتواضع والامتنان والتسليم الكامل.', guidance_en:'Surrender. This is the most spiritual of all mansions — a time for humility, gratitude, and full surrender.', journal_en:'What are you being asked to surrender that you are still holding onto? What would full trust in the flow of life feel like?' }
+};
+
+const planetNames = { sun:'Sun', moon:'Moon', mars:'Mars', mercury:'Mercury', jupiter:'Jupiter', venus:'Venus', saturn:'Saturn' };
+const elementNames = { fire:'Fire 🔥', water:'Water 💧', air:'Air 💨', earth:'Earth 🌍' };
+
+// ── Moon Longitude Calculator (from your app's celestial.js) ──
+function getMoonLongitude(date) {
+  const y = date.getFullYear(), m = date.getMonth()+1, d = date.getDate()+0.5;
+  let jy = y, jm = m;
+  if (m <= 2) { jy--; jm += 12; }
+  const A = Math.floor(jy/100), B = 2 - A + Math.floor(A/4);
+  const JD = Math.floor(365.25*(jy+4716)) + Math.floor(30.6001*(jm+1)) + d + B - 1524.5;
+  const T = (JD - 2451545.0) / 36525.0;
+  const Lp = 218.3164477 + 481267.88123421*T - 0.0015786*T*T + T*T*T/538841.0;
+  const Mp = 134.9633964 + 477198.8675055*T + 0.0087414*T*T + T*T*T/69699.0;
+  const D  = 297.8501921 + 445267.1114034*T - 0.0018819*T*T + T*T*T/545868.0;
+  const Ms = 357.5291092 + 35999.0502909*T - 0.0001536*T*T;
+  const F  = 93.2720950  + 483202.0175233*T - 0.0036539*T*T;
+  const rad = Math.PI/180;
+  const MpR=Mp*rad, DR=D*rad, MsR=Ms*rad, FR=F*rad;
+  let lon = Lp
+    + 6.289*Math.sin(MpR) + 1.274*Math.sin(2*DR-MpR)
+    + 0.658*Math.sin(2*DR) + 0.214*Math.sin(2*MpR)
+    - 0.186*Math.sin(MsR) - 0.114*Math.sin(2*FR)
+    + 0.059*Math.sin(2*DR-2*MpR) + 0.057*Math.sin(2*DR-MsR-MpR)
+    + 0.053*Math.sin(2*DR+MpR)   + 0.046*Math.sin(2*DR-MsR)
+    - 0.041*Math.sin(MsR-MpR)    - 0.035*Math.sin(DR)
+    - 0.030*Math.sin(MsR+MpR);
+  return ((lon % 360) + 360) % 360;
+}
+
+function getMansion(date) {
+  const lon = getMoonLongitude(date);
+  return lunarMansions[Math.floor(lon / (360/28)) % 28];
+}
+
+function getMoonPhase(date) {
+  const knownNew = new Date(2000,0,6,18,14);
+  const age = (((date-knownNew)/(1000*60*60*24)) % 29.53058770576 + 29.53058770576) % 29.53058770576;
+  if (age < 1.85) return {name:'New Moon', emoji:'🌑'};
+  if (age < 5.54) return {name:'Waxing Crescent', emoji:'🌒'};
+  if (age < 9.23) return {name:'First Quarter', emoji:'🌓'};
+  if (age < 12.92) return {name:'Waxing Gibbous', emoji:'🌔'};
+  if (age < 16.61) return {name:'Full Moon', emoji:'🌕'};
+  if (age < 20.30) return {name:'Waning Gibbous', emoji:'🌖'};
+  if (age < 23.99) return {name:'Last Quarter', emoji:'🌗'};
+  if (age < 27.68) return {name:'Waning Crescent', emoji:'🌘'};
+  return {name:'New Moon', emoji:'🌑'};
+}
+
+// ── Compatibility Score ────────────────────────────────────────
+function compatScore(m1, m2) {
+  const harmonies = {
+    'fire-fire':'amp','fire-air':'har','fire-water':'cha','fire-earth':'gro',
+    'water-water':'amp','water-earth':'har','water-fire':'cha','water-air':'sti',
+    'air-air':'amp','air-fire':'har','air-earth':'cha','air-water':'sti',
+    'earth-earth':'amp','earth-water':'har','earth-fire':'gro','earth-air':'cha'
+  };
+  let score = 50;
+  const el = harmonies[`${m1.element}-${m2.element}`] || 'neu';
+  if (el==='amp') score+=15; else if (el==='har') score+=10; else if (el==='cha') score-=10;
+  if (m1.nature===m2.nature && m1.nature==="sa'd") score+=12;
+  else if (m1.nature!==m2.nature) score-=3;
+  if (m1.ruler===m2.ruler) score+=10;
+  const dist = Math.min(Math.abs(m1.index-m2.index), 28-Math.abs(m1.index-m2.index));
+  if (dist<=2) score+=5; else if (dist===14) score+=5;
+  return Math.max(20, Math.min(95, score));
+}
+
+// ── Generate the Guide ─────────────────────────────────────────
+function generateGuide() {
+  const name = document.getElementById('input-name').value.trim();
+
+  // Read from roller
+  const { day: d, month: mo, year: y } = getRollerDate();
+
+  // Save to localStorage
+  try {
+    localStorage.setItem('ee_name', name);
+    localStorage.setItem('ee_dob_d', d);
+    localStorage.setItem('ee_dob_m', mo);
+    localStorage.setItem('ee_dob_y', y);
+  } catch(e) {}
+
+  // Basic validation
+  const dob = new Date(y, mo - 1, d);
+  if (isNaN(dob.getTime()) || d < 1 || d > 31 || mo < 1 || mo > 12) {
+    document.getElementById('dob-error').style.display = 'block';
+    return;
+  }
+  document.getElementById('dob-error').style.display = 'none';
+  const birthMansion = getMansion(dob);
+  const todayMansion = getMansion(new Date());
+  const todayPhase = getMoonPhase(new Date());
+
+  const displayName = name || 'Seeker';
+
+  // ── Cover ──────────────────────────────────────────────────
+  document.getElementById('cover-name').textContent = displayName;
+  document.getElementById('cover-mansion-ar').textContent = birthMansion.nameAr;
+  document.getElementById('cover-mansion-en').textContent = birthMansion.nameEn;
+
+  // ── Birth Hero ─────────────────────────────────────────────
+  const desc = mansionDescriptions[birthMansion.id];
+  document.getElementById('hero-name-ar').textContent = birthMansion.nameAr;
+  document.getElementById('hero-name-en').textContent = birthMansion.nameEn;
+  document.getElementById('hero-meta').innerHTML = `
+    <span class="birth-meta-pill">${elementNames[birthMansion.element]}</span>
+    <span class="birth-meta-pill">${birthMansion.nature==="sa'd"?'✨ Auspicious':'⚠ Inauspicious'}</span>
+    <span class="birth-meta-pill">🪐 ${planetNames[birthMansion.ruler]}</span>
+    <span class="birth-meta-pill" style="direction:ltr">${birthMansion.emoji} ${birthMansion.nameEn}</span>
+  `;
+  document.getElementById('hero-desc').textContent = desc.en;
+  document.getElementById('hero-guidance').innerHTML = `<strong>Your Mansion's Guidance:</strong><br>${desc.guidance_en}`;
+
+  // ── Today Banner ───────────────────────────────────────────
+  document.getElementById('today-phase-emoji').textContent = todayPhase.emoji;
+  document.getElementById('today-mansion-name').textContent = `${todayMansion.nameEn} · ${todayPhase.name}`;
+  const todayDesc = mansionDescriptions[todayMansion.id];
+  document.getElementById('today-mansion-desc').textContent = todayDesc.en;
+  const score = compatScore(birthMansion, todayMansion);
+  const compatLabel = score >= 65 ? `✨ High Harmony ${score}%` : score >= 45 ? `🌓 Moderate Harmony ${score}%` : `🌘 Time for Reflection ${score}%`;
+  document.getElementById('today-compat-text').textContent = `With your birth mansion: ${compatLabel}`;
+
+  // ── Compatibility Grid ─────────────────────────────────────
+  const compatGrid = document.getElementById('compat-grid');
+  compatGrid.innerHTML = lunarMansions.map(m => {
+    const s = compatScore(birthMansion, m);
+    const cls = s>=65?'high':s>=45?'med':'low';
+    return `<div class="compat-item ${cls}">
+      <div class="compat-name-ar">${m.nameEn}</div>
+      <div class="compat-score-small ${cls}">${s}%</div>
+    </div>`;
+  }).join('');
+
+  // ── All 28 Mansion Cards ───────────────────────────────────
+  const grid = document.getElementById('mansions-grid');
+  grid.innerHTML = lunarMansions.map((m, i) => {
+    const d2 = mansionDescriptions[m.id];
+    const isBirth = m.id === birthMansion.id;
+    const isToday = m.id === todayMansion.id;
+    const sc = compatScore(birthMansion, m);
+    const birthExpandedHtml = isBirth ? `
+      <div class="birth-expanded">
+        <h4>⭐ This is Your Mansion — ${displayName}</h4>
+        <p>You were born under the energy of <strong>${m.nameEn}</strong>. This is your core cosmic fabric — the pattern woven into you at the moment of birth. Wherever you go, you carry the energy of ${planetNames[m.ruler]} and the ${elementNames[m.element]} element within you.</p>
+        <p style="margin-top:10px;">Every lunar cycle, when the Moon returns to your mansion, these are your most powerful days — days of clarity, strength, and important decisions.</p>
+        <span class="compat-score">Birth mansion · #${m.index+1} of 28</span>
+      </div>` : '';
+    const todayBadge = isToday ? '<span class="badge badge-today">Today</span>' : '';
+    const birthBadge = isBirth ? '<span class="badge badge-birth">Your Mansion ⭐</span>' : '';
+    const cardClass = `mansion-card no-break${isBirth?' is-birth':''}${isToday?' is-today':''}`;
+    return `
+      <div class="${cardClass}">
+        <div class="mansion-header">
+          <div class="mansion-number">${String(i+1).padStart(2,'0')}</div>
+          <div class="mansion-name-block">
+            <div class="mansion-name-en">${m.nameEn}</div>
+            <div class="mansion-name-ar">${m.nameAr}</div>
+          </div>
+          <div class="mansion-badges">${m.emoji !== '⚠️' ? `<div class="mansion-emoji">${m.emoji}</div>` : `<div class="mansion-emoji">⚠️</div>`}${birthBadge}${todayBadge}</div>
+        </div>
+        <div class="mansion-body">
+          <div class="mansion-meta">
+            <span class="meta-tag ${m.element}">${elementNames[m.element]}</span>
+            <span class="meta-tag ${m.nature==="sa'd"?'saad':'nahs'}">${m.nature==="sa'd"?'✨ Auspicious':'⚠ Inauspicious'}</span>
+            <span class="meta-tag">🪐 ${planetNames[m.ruler]}</span>
+            <span class="meta-tag" style="direction:ltr">Harmony: ${sc}%</span>
+          </div>
+          <div class="mansion-meaning">Meaning: ${m.meaningEn || m.meaning}</div>
+          <div class="mansion-desc-ar">${d2.ar}</div>
+          <div class="mansion-desc-en">${d2.en}</div>
+          <div class="mansion-guidance">
+            <h5>🌙 Today's Guidance</h5>
+            <p>${d2.guidance_en}</p>
+          </div>
+        </div>
+        ${birthExpandedHtml}
+      </div>`;
+  }).join('');
+
+  // ── Back Cover ─────────────────────────────────────────────
+  document.getElementById('back-cover-name').textContent = `${displayName} — Your Journey with the Moon Never Ends`;
+
+
+  // ── Journal Tab ─────────────────────────────────────────────
+  const todayDescJ = mansionDescriptions[todayMansion.id];
+  const birthDescJ = mansionDescriptions[birthMansion.id];
+  document.getElementById('j-today-name').textContent = todayMansion.nameEn;
+  document.getElementById('j-today-ar').textContent = todayMansion.nameAr;
+  document.getElementById('j-today-prompt').textContent = todayDescJ.journal_en || '';
+  document.getElementById('j-birth-name').textContent = birthMansion.nameEn + ' · Your Birth Mansion';
+  document.getElementById('j-birth-ar').textContent = birthMansion.nameAr;
+  document.getElementById('j-birth-prompt').textContent = birthDescJ.journal_en || '';
+  const phasePrompts = {
+    'New Moon':         ['🌑 New Moon',        "What seed are you planting in this new cycle? What intention are you breathing into being right now?"],
+    'Waxing Crescent':  ['🌒 Waxing Crescent', "What first step have you been delaying? What momentum can you build today that your future self will thank you for?"],
+    'First Quarter':    ['🌓 First Quarter',   "What obstacle stands before you? What would moving through it with courage — not around it — look like?"],
+    'Waxing Gibbous':   ['🌔 Waxing Gibbous',  "What refinement does your current path need? Where do you need to trust the unfolding instead of forcing the outcome?"],
+    'Full Moon':        ['🌕 Full Moon',        "What has been illuminated for you this cycle? What truth is the Moon holding up like a mirror for you to finally see?"],
+    'Waning Gibbous':   ['🌖 Waning Gibbous',  "What wisdom did this cycle give you? Who in your life could truly benefit from what you have learned?"],
+    'Last Quarter':     ['🌗 Last Quarter',     "What is no longer serving your highest good? What are you ready — truly ready — to release and not carry forward?"],
+    'Waning Crescent':  ['🌘 Waning Crescent',  "What does your soul need to rest inside right now? What would genuine surrender and trust in the next cycle feel like?"],
+  };
+  const phaseData = phasePrompts[todayPhase.name] || phasePrompts['New Moon'];
+  document.getElementById('j-phase-name').textContent = phaseData[0];
+  document.getElementById('j-phase-prompt').textContent = phaseData[1];
+  initJournal(birthMansion.id, todayMansion.id, todayPhase.name);
+
+  // ── Calendar ───────────────────────────────────────────────
+  initCalendar(birthMansion.id);
+
+  // ── Print bar ──────────────────────────────────────────────
+  document.getElementById('print-greeting').textContent =
+    `${displayName}'s Personal Guide · ${birthMansion.nameEn}`;
+  document.getElementById('print-bar').classList.add('visible');
+
+  // ── Show / Hide ────────────────────────────────────────────
+  document.getElementById('welcome-screen').style.display = 'none';
+  document.getElementById('main-content').style.display = 'block';
+  document.getElementById('tab-nav').style.display = 'flex';
+  showTab('birth-hero', document.querySelector('.tab-btn'));
+  window.scrollTo(0,0);
+}
+
+function initJournal(birthId, todayId, phaseName) {
+  const today = new Date().toISOString().slice(0,10);
+  const cards = [
+    { taKey: `ee_j_today_${today}_${todayId}`, taId: 'j-today-entry', delId: 'j-today-delete' },
+    { taKey: `ee_j_birth_${birthId}`,          taId: 'j-birth-entry', delId: 'j-birth-delete' },
+    { taKey: `ee_j_phase_${phaseName}`,        taId: 'j-phase-entry', delId: 'j-phase-delete' },
+  ];
+  cards.forEach(({ taKey, taId, delId }) => {
+    const ta  = document.getElementById(taId);
+    const btn = document.getElementById(delId);
+    if (!ta || !btn) return;
+    // Restore saved content
+    ta.value = localStorage.getItem(taKey) || '';
+    // Auto-save on input
+    ta.addEventListener('input', () => localStorage.setItem(taKey, ta.value));
+    // Delete entry
+    btn.addEventListener('click', () => {
+      if (ta.value && !confirm('Clear this entry? This cannot be undone.')) return;
+      ta.value = '';
+      localStorage.removeItem(taKey);
+    });
+  });
+}
+
+function resetApp() {
+  document.getElementById('welcome-screen').style.display = 'flex';
+  document.getElementById('main-content').style.display = 'none';
+  document.getElementById('print-bar').classList.remove('visible');
+  // Keep name and DOB pre-filled from saved data
+  restoreSavedData();
+  window.scrollTo(0,0);
+}
+
+function restoreSavedData() {
+  try {
+    const name = localStorage.getItem('ee_name');
+    const d    = parseInt(localStorage.getItem('ee_dob_d'));
+    const mo   = parseInt(localStorage.getItem('ee_dob_m'));
+    const y    = parseInt(localStorage.getItem('ee_dob_y'));
+
+    if (name) document.getElementById('input-name').value = name;
+
+    if (d && mo && y) {
+      setTimeout(() => {
+        document.getElementById('roller-day').scrollTop   = (d - 1) * 40;
+        document.getElementById('roller-month').scrollTop = (mo - 1) * 40;
+        document.getElementById('roller-year').scrollTop  = (y - ROLLER_YEAR_START) * 40;
+        ['roller-day','roller-month','roller-year'].forEach(id => {
+          rollerUpdateSelected(document.getElementById(id));
+        });
+      }, 50);
+    }
+
+    // Show clear button only if saved data exists
+    if (name || (d && mo && y)) {
+      document.getElementById('clear-data-row').style.display = 'block';
+    }
+  } catch(e) {}
+}
+
+function clearSavedData() {
+  try {
+    localStorage.removeItem('ee_name');
+    localStorage.removeItem('ee_dob_d');
+    localStorage.removeItem('ee_dob_m');
+    localStorage.removeItem('ee_dob_y');
+  } catch(e) {}
+  // Reset fields to blank defaults
+  document.getElementById('input-name').value = '';
+  document.getElementById('roller-day').scrollTop   = 0;
+  document.getElementById('roller-month').scrollTop = 0;
+  document.getElementById('roller-year').scrollTop  = (1990 - ROLLER_YEAR_START) * 40;
+  ['roller-day','roller-month','roller-year'].forEach(id => {
+    rollerUpdateSelected(document.getElementById(id));
+  });
+  document.getElementById('clear-data-row').style.display = 'none';
+}
+
+// Allow Enter key to submit
+document.addEventListener('keydown', e => {
+  if (e.key === 'Enter' && document.getElementById('welcome-screen').style.display !== 'none') {
+    generateGuide();
+  }
+});
+
+// ── CALENDAR ENGINE ────────────────────────────────────────────
+let calYear  = new Date().getFullYear();
+let calMonth = new Date().getMonth(); // 0-based
+let calView  = 'month';
+let _birthMansionId = null;
+
+const WEEKDAYS_EN = ['Sun','Mon','Tue','Wed','Thu','Fri','Sat'];
+const MONTH_NAMES = ['January','February','March','April','May','June',
+                     'July','August','September','October','November','December'];
+const MONTH_NAMES_AR = ['January','February','March','April','May','June',
+                        'July','August','September','October','November','December'];
+
+function getMoonPhaseKey(date) {
+  const knownNew = new Date(2000,0,6,18,14);
+  const age = (((date-knownNew)/(1000*60*60*24)) % 29.53058770576 + 29.53058770576) % 29.53058770576;
+  if (age < 1.85)  return 'new';
+  if (age < 16.61) return 'waxing';
+  if (age < 17.5)  return 'full';
+  return 'waning';
+}
+
+function isNewMoon(date) {
+  const knownNew = new Date(2000,0,6,18,14);
+  const age = (((date-knownNew)/(1000*60*60*24)) % 29.53058770576 + 29.53058770576) % 29.53058770576;
+  return age < 1.85;
+}
+
+function isFullMoon(date) {
+  const knownNew = new Date(2000,0,6,18,14);
+  const age = (((date-knownNew)/(1000*60*60*24)) % 29.53058770576 + 29.53058770576) % 29.53058770576;
+  return age >= 13.9 && age < 16.61;
+}
+
+function renderMonthGrid(year, month) {
+  const today = new Date();
+  const firstDay = new Date(year, month, 1).getDay();
+  const daysInMonth = new Date(year, month+1, 0).getDate();
+  const eventsData = getCalEvents();
+  let html = `<div class="cal-grid">
+    <div class="cal-weekdays">${WEEKDAYS_EN.map(d=>`<div class="cal-weekday">${d}</div>`).join('')}</div>
+    <div class="cal-days">`;
+
+  // Empty cells before first day
+  for (let i=0; i<firstDay; i++) html += `<div class="cal-day empty"></div>`;
+
+  for (let d=1; d<=daysInMonth; d++) {
+    const date = new Date(year, month, d);
+    const mansion = getMansion(date);
+    const isToday2 = (d===today.getDate() && month===today.getMonth() && year===today.getFullYear());
+    const isBirth = mansion.id === _birthMansionId;
+    const newMoon = isNewMoon(date);
+    const fullMoon = isFullMoon(date);
+    const natureClass = mansion.nature === "sa'd" ? 'saad-border' : 'nahs-border';
+    const moonEmoji = newMoon ? '🌑' : fullMoon ? '🌕' : '';
+
+    const dateStr = `${year}-${String(month+1).padStart(2,'0')}-${String(d).padStart(2,'0')}`;
+    const dayEvts = eventsData[dateStr] || [];
+    html += `<div class="cal-day${isToday2?' today':''}${isBirth?' is-birth-mansion':''}" onclick="calDayClick('${dateStr}')">
+      <div class="cal-day-num">${d}</div>
+      <div class="cal-mansion-chip ${mansion.element} ${natureClass}"><span class="chip-en">${mansion.nameEn}</span><span class="chip-ar">${mansion.nameAr}</span></div>
+      ${moonEmoji ? `<div class="cal-moon-phase">${moonEmoji}</div>` : ''}
+      ${renderEventDots(dayEvts)}
+    </div>`;
+  }
+
+  // Fill remaining cells
+  const totalCells = firstDay + daysInMonth;
+  const remainder = totalCells % 7;
+  if (remainder > 0) for (let i=0; i<7-remainder; i++) html += `<div class="cal-day empty"></div>`;
+
+  html += `</div></div>`;
+  return html;
+}
+
+function renderKeyDates(year, month) {
+  const daysInMonth = new Date(year, month+1, 0).getDate();
+  const keyDates = [];
+
+  for (let d=1; d<=daysInMonth; d++) {
+    const date = new Date(year, month, d);
+    const mansion = getMansion(date);
+    if (isNewMoon(date))  keyDates.push({ type:'new',   date:d, mansion });
+    if (isFullMoon(date)) keyDates.push({ type:'full',  date:d, mansion });
+    if (mansion.id === _birthMansionId) keyDates.push({ type:'birth', date:d, mansion });
+  }
+  if (!keyDates.length) return '';
+
+  const items = keyDates.slice(0,8).map(k => {
+    const icon = k.type==='new'?'🌑':k.type==='full'?'🌕':'⭐';
+    const label = k.type==='new'?'New Moon':k.type==='full'?'Full Moon':'Your Birth Mansion Day';
+    return `<div class="key-date-item">
+      <div class="key-date-icon">${icon}</div>
+      <div class="key-date-info">
+        <div class="key-date-label">${label}</div>
+        <div class="key-date-val">${MONTH_NAMES[month]} ${k.date}</div>
+        <div class="key-date-sub">${k.mansion.nameAr} · ${k.mansion.nameEn}</div>
+      </div>
+    </div>`;
+  }).join('');
+
+  return `<div class="key-dates-panel no-break">
+    <div class="key-dates-header">✦ KEY DATES — ${MONTH_NAMES[month].toUpperCase()} ${year}</div>
+    <div class="key-dates-list">${items}</div>
+  </div>`;
+}
+
+function renderYearView(year) {
+  let html = `<div class="cal-year-grid">`;
+  for (let m=0; m<12; m++) {
+    const firstDay = new Date(year, m, 1).getDay();
+    const daysInMonth = new Date(year, m+1, 0).getDate();
+    const today = new Date();
+
+    html += `<div class="cal-mini-month">
+      <div class="cal-mini-header">${MONTH_NAMES[m]} ${year}</div>
+      <div class="cal-mini-grid">
+        ${WEEKDAYS_EN.map(d=>`<div class="cal-mini-day" style="font-size:8px;color:var(--gold);background:transparent;">${d[0]}</div>`).join('')}
+        ${Array(firstDay).fill('<div class="cal-mini-day empty"></div>').join('')}
+        ${Array.from({length:daysInMonth},(_,i)=>{
+          const d = i+1;
+          const date = new Date(year, m, d);
+          const mansion = getMansion(date);
+          const isToday2 = (d===today.getDate()&&m===today.getMonth()&&year===today.getFullYear());
+          const isBirth = mansion.id === _birthMansionId;
+          const newM = isNewMoon(date), fullM = isFullMoon(date);
+          const elClass = `${mansion.element}-bg`;
+          const birthClass = isBirth ? ' is-birth' : '';
+          const newClass = newM ? ' new-moon' : (fullM ? ' full-moon' : '');
+          const todayClass = isToday2 ? ' today' : '';
+          return `<div class="cal-mini-day${elClass?(' '+elClass):''}${birthClass}${newClass}${todayClass}" title="${mansion.nameAr}">${d}</div>`;
+        }).join('')}
+      </div>
+    </div>`;
+  }
+  html += `</div>`;
+
+  // Year key dates
+  const keyMoons = [];
+  for (let m=0; m<12; m++) {
+    const daysInMonth = new Date(year, m+1, 0).getDate();
+    for (let d=1; d<=daysInMonth; d++) {
+      const date = new Date(year, m, d);
+      if (isNewMoon(date))  keyMoons.push({type:'new',  month:m, day:d, mansion:getMansion(date)});
+      if (isFullMoon(date)) keyMoons.push({type:'full', month:m, day:d, mansion:getMansion(date)});
+    }
+  }
+
+  html += `<div class="key-dates-panel" style="margin-top:24px;">
+    <div class="key-dates-header">🌑 NEW MOONS & 🌕 FULL MOONS — ${year}</div>
+    <div class="key-dates-list">
+      ${keyMoons.slice(0,24).map(k=>`<div class="key-date-item">
+        <div class="key-date-icon">${k.type==='new'?'🌑':'🌕'}</div>
+        <div class="key-date-info">
+          <div class="key-date-label">${k.type==='new'?'New Moon':'Full Moon'}</div>
+          <div class="key-date-val">${MONTH_NAMES[k.month]} ${k.day}, ${year}</div>
+          <div class="key-date-sub">${k.mansion.nameAr} · ${k.mansion.nameEn}</div>
+        </div>
+      </div>`).join('')}
+    </div>
+  </div>`;
+
+  return html;
+}
+
+function renderCalendar() {
+  const titleEl = document.getElementById('cal-month-title');
+  const container = document.getElementById('cal-container');
+  const keyPanel = document.getElementById('key-dates-panel');
+  if (!container) return;
+
+  if (calView === 'month') {
+    titleEl.textContent = `${MONTH_NAMES[calMonth]} ${calYear}  ·  ${MONTH_NAMES_AR[calMonth]}`;
+    container.innerHTML = renderMonthGrid(calYear, calMonth);
+    keyPanel.innerHTML = renderKeyDates(calYear, calMonth);
+    keyPanel.style.display = '';
+  } else {
+    titleEl.textContent = `${calYear} — Full Year View`;
+    container.innerHTML = renderYearView(calYear);
+    keyPanel.style.display = 'none';
+  }
+}
+
+function calPrev() {
+  if (calView==='month') { calMonth--; if(calMonth<0){calMonth=11;calYear--;} }
+  else { calYear--; }
+  renderCalendar();
+}
+function calNext() {
+  if (calView==='month') { calMonth++; if(calMonth>11){calMonth=0;calYear++;} }
+  else { calYear++; }
+  renderCalendar();
+}
+function setCalView(v) {
+  calView = v;
+  document.getElementById('btn-month').classList.toggle('active', v==='month');
+  document.getElementById('btn-year').classList.toggle('active', v==='year');
+  renderCalendar();
+}
+
+function initCalendar(birthMansionId) {
+  _birthMansionId = birthMansionId;
+  calYear  = new Date().getFullYear();
+  calMonth = new Date().getMonth();
+  calView  = 'month';
+  document.getElementById('btn-month').classList.add('active');
+  document.getElementById('btn-year').classList.remove('active');
+  renderCalendar();
+}
+
+// ── Calendar Event Functions ──────────────────────────────────
+let _calModalDate = '';
+
+function getCalEvents() { return JSON.parse(localStorage.getItem('ee_cal_events') || '{}'); }
+function saveCalEvents(data) { localStorage.setItem('ee_cal_events', JSON.stringify(data)); }
+
+function renderEventDots(evts) {
+  if (!evts || !evts.length) return '';
+  const colors = { note:'#C9A84C', task:'#1A1440', reminder:'#2D7A3D' };
+  const dots = evts.slice(0,3).map(e => `<span class="cal-evt-dot" style="background:${colors[e.type]||colors.note}"></span>`).join('');
+  const more = evts.length > 3 ? `<span class="cal-evt-more">+${evts.length-3}</span>` : '';
+  return `<div class="cal-evt-row">${dots}${more}</div>`;
+}
+
+function calDayClick(dateStr) {
+  _calModalDate = dateStr;
+  renderCalModal();
+  document.getElementById('cal-event-modal').style.display = 'flex';
+  setTimeout(() => { const i = document.getElementById('cal-add-input'); if(i) i.focus(); }, 80);
+}
+
+function closeCalModal() { document.getElementById('cal-event-modal').style.display = 'none'; }
+
+function renderCalModal() {
+  const ds = _calModalDate;
+  const [y,m,d] = ds.split('-').map(Number);
+  const date = new Date(y, m-1, d);
+  const mansion = getMansion(date);
+  const evts = (getCalEvents()[ds] || []);
+  const MN = ['January','February','March','April','May','June','July','August','September','October','November','December'];
+  const DN = ['Sunday','Monday','Tuesday','Wednesday','Thursday','Friday','Saturday'];
+  document.getElementById('cal-modal-date-lbl').textContent = `${DN[date.getDay()]}, ${MN[m-1]} ${d}, ${y}`;
+  document.getElementById('cal-modal-mansion-lbl').textContent = `${mansion.nameEn} · ${mansion.nameAr}`;
+  document.getElementById('cal-evt-list').innerHTML = evts.length
+    ? evts.map(e => `<div class="cal-evt-item">
+        <span class="cal-evt-badge ${e.type}">${e.type}</span>
+        <span class="cal-evt-text">${e.text}</span>
+        <button class="cal-evt-del" onclick="deleteCalEvent('${ds}','${e.id}')" title="Remove">✕</button>
+      </div>`).join('')
+    : `<div class="cal-modal-empty">No entries yet — add one below.</div>`;
+}
+
+function addCalEvent(dateStr) {
+  const input = document.getElementById('cal-add-input');
+  const type  = document.getElementById('cal-add-select').value;
+  const text  = input.value.trim();
+  if (!text) return;
+  const data = getCalEvents();
+  if (!data[dateStr]) data[dateStr] = [];
+  data[dateStr].push({ id: Date.now().toString(36), text, type });
+  saveCalEvents(data);
+  input.value = '';
+  renderCalModal();
+  renderCalendar();
+}
+
+function deleteCalEvent(dateStr, id) {
+  const data = getCalEvents();
+  if (data[dateStr]) { data[dateStr] = data[dateStr].filter(e => e.id !== id); if (!data[dateStr].length) delete data[dateStr]; }
+  saveCalEvents(data);
+  renderCalModal();
+  renderCalendar();
+}
+
+document.addEventListener('keydown', e => { if (e.key === 'Escape') closeCalModal(); });
+
+// ── DATE ROLLER ────────────────────────────────────────────────
+const MONTHS_AR_ROLLER = [
+  'January','February','March',
+  'April','May','June','July',
+  'August','September','October','November','December'
+];
+const ROLLER_YEAR_START = 1940;
+const ROLLER_YEAR_END   = 2010;
+
+function rollerGetIndex(col) {
+  return Math.round(col.scrollTop / 40);
+}
+
+function rollerUpdateSelected(col) {
+  const idx = rollerGetIndex(col);
+  col.querySelectorAll('.roller-item').forEach((el, i) => {
+    el.classList.toggle('selected', i === idx);
+  });
+}
+
+function getRollerDate() {
+  const dayCol   = document.getElementById('roller-day');
+  const monthCol = document.getElementById('roller-month');
+  const yearCol  = document.getElementById('roller-year');
+  return {
+    day:   rollerGetIndex(dayCol)   + 1,
+    month: rollerGetIndex(monthCol) + 1,
+    year:  ROLLER_YEAR_START + rollerGetIndex(yearCol)
+  };
+}
+
+function makeRollerItem(text, col, scrollTarget, extraStyle) {
+  const el = document.createElement('div');
+  el.className = 'roller-item';
+  el.textContent = text;
+  if (extraStyle) Object.assign(el.style, extraStyle);
+  el.addEventListener('click', () => {
+    col.scrollTo({ top: scrollTarget, behavior: 'smooth' });
+  });
+  return el;
+}
+
+function initRoller() {
+  const dayCol   = document.getElementById('roller-day');
+  const monthCol = document.getElementById('roller-month');
+  const yearCol  = document.getElementById('roller-year');
+  if (!dayCol || !monthCol || !yearCol) return;
+
+  // Days 1-31
+  dayCol.innerHTML = '';
+  for (let d = 1; d <= 31; d++) {
+    dayCol.appendChild(makeRollerItem(
+      String(d).padStart(2, '0'), dayCol, (d - 1) * 40, { direction: 'ltr' }
+    ));
+  }
+
+  // Months (Arabic)
+  monthCol.innerHTML = '';
+  MONTHS_AR_ROLLER.forEach((name, i) => {
+    monthCol.appendChild(makeRollerItem(name, monthCol, i * 40, { fontSize: '11px' }));
+  });
+
+  // Years 1940-2010
+  yearCol.innerHTML = '';
+  for (let y = ROLLER_YEAR_START; y <= ROLLER_YEAR_END; y++) {
+    yearCol.appendChild(makeRollerItem(
+      String(y), yearCol, (y - ROLLER_YEAR_START) * 40, { direction: 'ltr' }
+    ));
+  }
+
+  // Set default: 1 January 1990
+  dayCol.scrollTop   = 0;          // day 1
+  monthCol.scrollTop = 0;          // January
+  yearCol.scrollTop  = (1990 - ROLLER_YEAR_START) * 40; // 1990
+
+  // Sync selected highlight on every scroll
+  [dayCol, monthCol, yearCol].forEach(col => {
+    rollerUpdateSelected(col);
+    col.addEventListener('scroll', () => rollerUpdateSelected(col), { passive: true });
+    // Also update after snap settles
+    col.addEventListener('scrollend', () => rollerUpdateSelected(col), { passive: true });
+  });
+}
+
+document.addEventListener('DOMContentLoaded', () => {
+  initRoller();
+  restoreSavedData();
+});
+  const TAB_SECTION_IDS = ['birth-hero','today-banner','sec-compat','sec-mansions','calendar-section','sec-phases','sec-journal'];
+
+  window.showTab = function(id, btn) {
+    TAB_SECTION_IDS.forEach(function(sid) {
+      const el = document.getElementById(sid);
+      if (el) el.classList.remove('tab-active');
+    });
+    const target = document.getElementById(id);
+    if (target) {
+      target.classList.add('tab-active');
+      window.scrollTo({ top: 0, behavior: 'smooth' });
+    }
+    // Today banner always shows alongside Birth Mansion tab
+    const todayBanner = document.querySelector('.today-banner');
+    if (todayBanner) {
+      if (id === 'birth-hero') {
+        todayBanner.classList.add('tab-active');
+      } else {
+        todayBanner.classList.remove('tab-active');
+      }
+    }
+    document.querySelectorAll('.tab-btn').forEach(function(b) { b.classList.remove('active'); });
+    if (btn) btn.classList.add('active');
+  };
+
+</script>
+<script>
+(function() {
+  const PREFIX = 'MPE';
+  const LIC_SECRET = 'mansions_personal_english_ee';
+  const STORE_KEY = 'ee_lic_mpe';
+  const valid32 = 'ABCDEFGHJKLMNPQRSTUVWXYZ23456789';
+
+  function imul32(a, b) {
+    const ah=(a>>>16)&0xffff,al=a&0xffff,bh=(b>>>16)&0xffff,bl=b&0xffff;
+    return ((al*bl)+(((ah*bl+al*bh)<<16)>>>0)|0);
+  }
+  function validateKey(key) {
+    const clean=key.trim().toUpperCase().replace(/\s/g,'');
+    const parts=clean.split('-');
+    if(parts.length!==4||parts[0]!==PREFIX)return false;
+    for(let p=1;p<=2;p++){if(parts[p].length!==5)return false;for(const c of parts[p])if(!valid32.includes(c))return false;}
+    if(parts[3].length!==5)return false;
+    const payload=parts[1]+parts[2];
+    let hash=5381;
+    const combined=payload+LIC_SECRET;
+    for(let i=0;i<combined.length;i++)hash=imul32(hash,33)^combined.charCodeAt(i);
+    const h=(hash>>>0).toString(16).toUpperCase();
+    return parts[3]===(h.slice(-5).padStart(5,'0'));
+  }
+  function unlock(){
+    const g=document.getElementById('license-gate');
+    if(g)g.style.display='none';
+  }
+  function tryKey(){
+    const val=document.getElementById('gate-key-input').value;
+    const err=document.getElementById('gate-key-error');
+    if(!val.trim()){err.textContent='Please enter your license key.';return;}
+    if(!validateKey(val)){err.textContent='Invalid license key. Please check your key and try again.';return;}
+    localStorage.setItem(STORE_KEY,val.trim().toUpperCase());
+    unlock();
+  }
+  // Check stored key on load
+  const stored=localStorage.getItem(STORE_KEY);
+  if(stored&&validateKey(stored))unlock();
+
+  document.addEventListener('DOMContentLoaded',function(){
+    const btn=document.getElementById('gate-submit-btn');
+    const inp=document.getElementById('gate-key-input');
+    if(btn)btn.addEventListener('click',tryKey);
+    if(inp){
+      inp.addEventListener('keydown',function(e){if(e.key==='Enter')tryKey();});
+      inp.addEventListener('input',function(){document.getElementById('gate-key-error').textContent='';});
+    }
+  });
+})();
+</script>
+</body>
+</html>

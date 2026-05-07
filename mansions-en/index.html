@@ -1,0 +1,2285 @@
+<!DOCTYPE html>
+<html lang="en" dir="ltr">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Guide to the Lunar Mansions — Ethereal Echoes</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Amiri:ital,wght@0,400;0,700;1,400&family=EB+Garamond:ital,wght@0,400;0,600;1,400&family=Cinzel:wght@400;600;700&display=swap" rel="stylesheet">
+  <style>
+  /* ── License Gate ── */
+  #license-gate {
+    position: fixed; inset: 0; z-index: 999999;
+    background: linear-gradient(135deg, #0F0C29, #1A1440, #2D2260);
+    display: flex; align-items: center; justify-content: center; padding: 24px;
+  }
+  .gate-card {
+    background: rgba(255,255,255,0.04); border: 1px solid rgba(201,168,76,0.3);
+    border-radius: 20px; padding: 44px 40px; max-width: 440px; width: 100%;
+    text-align: center; backdrop-filter: blur(10px);
+    box-shadow: 0 30px 80px rgba(0,0,0,0.5), inset 0 1px 0 rgba(201,168,76,0.15);
+  }
+  .gate-moon { font-size: 48px; margin-bottom: 16px; filter: drop-shadow(0 0 20px rgba(201,168,76,0.6)); display: block; }
+  .gate-title { font-size: 22px; font-weight: 700; color: #E8C97A; margin-bottom: 10px; letter-spacing: 1px; }
+  .gate-sub { font-size: 15px; color: rgba(245,233,200,0.65); margin-bottom: 28px; line-height: 1.7; }
+  .gate-divider { width: 80px; height: 1px; background: linear-gradient(90deg, transparent, #C9A84C, transparent); margin: 0 auto 28px; }
+  .gate-input {
+    width: 100%; box-sizing: border-box; background: rgba(255,255,255,0.06);
+    border: 1px solid rgba(201,168,76,0.35); border-radius: 10px;
+    padding: 14px 18px; font-size: 15px; letter-spacing: 2px;
+    color: #E8C97A; text-align: center; outline: none; margin-bottom: 10px;
+    transition: border-color 0.2s;
+  }
+  .gate-input::placeholder { color: rgba(201,168,76,0.35); letter-spacing: 1px; }
+  .gate-input:focus { border-color: rgba(201,168,76,0.7); }
+  .gate-error { color: #e07070; font-size: 13px; min-height: 20px; margin-bottom: 10px; }
+  .gate-btn {
+    width: 100%; padding: 14px; border: none; border-radius: 10px; cursor: pointer;
+    background: linear-gradient(135deg, #A67820, #C9A84C, #D4AB50);
+    color: #0F0C29; font-weight: 700; font-size: 16px; letter-spacing: 1px;
+    transition: opacity 0.2s; margin-bottom: 24px;
+  }
+  .gate-btn:hover { opacity: 0.9; }
+  .gate-buy { font-size: 12px; color: rgba(245,233,200,0.45); }
+  .gate-buy a { color: rgba(201,168,76,0.7); text-decoration: none; }
+  .gate-buy a:hover { color: #C9A84C; }
+
+    /* ── Reset & Base ─────────────────────────────────────── */
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    :root {
+      --gold:        #C9A84C;
+      --gold-light:  #E8C97A;
+      --gold-pale:   #F5E9C8;
+      --indigo:      #1A1440;
+      --indigo-mid:  #2D2260;
+      --indigo-soft: #3D3080;
+      --cream:       #FAF6EE;
+      --cream-dark:  #F0E8D5;
+      --text:        #1A1410;
+      --text-soft:   #4A3F30;
+      --accent:      #7B4F8E;
+    }
+
+    html { font-size: 16px; }
+
+    body {
+      font-family: 'EB Garamond', 'Amiri', serif;
+      background: var(--cream);
+      color: var(--text);
+      line-height: 1.8;
+      direction: ltr;
+    }
+
+    /* ── Print Setup ──────────────────────────────────────── */
+    @page {
+      size: A4;
+      margin: 15mm 18mm 15mm 18mm;
+    }
+
+
+    /* ── Tab Nav + Section Switching (screen only) ───────── */
+    @media screen {
+      /* Hide cover/back-cover on screen */
+      .cover, .back-cover { display: none !important; }
+
+      /* Hide all sections by default */
+      .section { display: none !important; }
+
+      /* Show active section */
+      .section.tab-active { display: block !important; }
+
+      /* Sticky tab nav */
+      .tab-nav {
+        position: sticky;
+        top: 0;
+        z-index: 200;
+        background: var(--indigo);
+        display: flex;
+        justify-content: center;
+        flex-wrap: wrap;
+        gap: 6px;
+        padding: 10px 20px;
+        border-bottom: 2px solid var(--gold);
+        box-shadow: 0 4px 24px rgba(0,0,0,0.35);
+      }
+      .tab-btn {
+        background: transparent;
+        border: 1px solid rgba(201,168,76,0.3);
+        color: rgba(245,233,200,0.72);
+        padding: 7px 14px;
+        border-radius: 22px;
+        cursor: pointer;
+        display: flex;
+        align-items: center;
+        gap: 6px;
+        font-family: 'Amiri', serif;
+        font-size: 14px;
+        transition: all 0.18s;
+        white-space: nowrap;
+      }
+      .tab-btn:hover {
+        background: rgba(201,168,76,0.14);
+        color: var(--gold-light);
+        border-color: rgba(201,168,76,0.7);
+      }
+      .tab-btn.active {
+        background: var(--gold);
+        color: var(--indigo);
+        border-color: var(--gold);
+        font-weight: 700;
+      }
+      .tab-label { font-family: 'Amiri', serif; }
+
+      /* Mansion accordion */
+      .mansion-body { display: none; }
+      .mansion-card.open .mansion-body { display: block; }
+      .mansion-header {
+        cursor: pointer;
+        user-select: none;
+        position: relative;
+      }
+      .mansion-header:hover { background: #231968; }
+      .mansion-header::before {
+        content: '▸';
+        position: absolute;
+        left: 18px;
+        top: 50%;
+        transform: translateY(-50%);
+        font-size: 16px;
+        color: rgba(201,168,76,0.45);
+        transition: transform 0.22s;
+        font-style: normal;
+      }
+      .mansion-card.open .mansion-header::before {
+        transform: translateY(-50%) rotate(90deg);
+        color: var(--gold);
+      }
+
+      /* 2-column mansion grid on wider screens */
+      .mansions-grid {
+        display: grid;
+        grid-template-columns: 1fr;
+        gap: 14px;
+      }
+    }
+    @media screen and (min-width: 680px) {
+      .mansions-grid { grid-template-columns: 1fr 1fr; }
+    }
+
+    @media print {
+      body { background: white; font-size: 11pt; }
+
+      /* show all sections and mansion bodies in print */
+      .section { display: block !important; }
+      .mansion-body { display: block !important; }
+      .cover, .back-cover { display: flex !important; }
+      .mansions-grid { display: block !important; }
+
+      .no-print { display: none !important; }
+      .page-break { page-break-after: always; break-after: page; }
+      .no-break { page-break-inside: avoid; break-inside: avoid; }
+      .cover { page-break-after: always; }
+      .mansion-card { page-break-inside: avoid; }
+      header.site-header { display: none; }
+    }
+
+    /* ── Print Button (screen only) ──────────────────────── */
+    .print-banner {
+      background: var(--indigo);
+      color: white;
+      text-align: center;
+      padding: 14px 20px;
+      font-family: 'Cinzel', serif;
+      font-size: 14px;
+      letter-spacing: 1px;
+      direction: ltr;
+    }
+    .print-btn {
+      background: var(--gold);
+      color: var(--indigo);
+      border: none;
+      padding: 8px 24px;
+      font-family: 'Cinzel', serif;
+      font-size: 13px;
+      font-weight: 700;
+      cursor: pointer;
+      border-radius: 3px;
+      margin-right: 16px;
+      letter-spacing: 1px;
+    }
+    .print-btn:hover { background: var(--gold-light); }
+
+    /* ── Cover Page ───────────────────────────────────────── */
+    .cover {
+      width: 100%;
+      min-height: 100vh;
+      background: var(--indigo);
+      color: var(--gold-pale);
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      text-align: center;
+      padding: 60px 40px;
+      position: relative;
+      overflow: hidden;
+    }
+
+    .cover::before {
+      content: '';
+      position: absolute;
+      inset: 0;
+      background: radial-gradient(ellipse at 50% 30%, rgba(201,168,76,0.15) 0%, transparent 70%);
+      pointer-events: none;
+    }
+
+    .cover-ornament {
+      font-size: 56px;
+      margin-bottom: 20px;
+      filter: drop-shadow(0 0 20px rgba(201,168,76,0.6));
+    }
+
+    .cover-title-en {
+      font-family: 'Cinzel', serif;
+      font-size: 40px;
+      font-weight: 700;
+      color: var(--gold-light);
+      letter-spacing: 4px;
+      text-transform: uppercase;
+      line-height: 1.3;
+      margin-bottom: 10px;
+      text-shadow: 0 2px 20px rgba(201,168,76,0.4);
+    }
+
+    .cover-title-ar {
+      font-family: 'Amiri', serif;
+      font-size: 22px;
+      color: rgba(201,168,76,0.6);
+      font-style: italic;
+      margin-bottom: 40px;
+    }
+
+    .cover-divider {
+      width: 200px;
+      height: 1px;
+      background: linear-gradient(90deg, transparent, var(--gold), transparent);
+      margin: 20px auto;
+    }
+
+    .cover-subtitle {
+      font-family: 'Amiri', serif;
+      font-size: 22px;
+      color: rgba(245,233,200,0.85);
+      margin-bottom: 8px;
+      font-style: italic;
+    }
+
+    .cover-desc {
+      font-size: 15px;
+      color: rgba(245,233,200,0.65);
+      max-width: 420px;
+      line-height: 2;
+      margin-top: 20px;
+    }
+
+    .cover-brand {
+      position: absolute;
+      bottom: 40px;
+      font-family: 'Cinzel', serif;
+      font-size: 13px;
+      letter-spacing: 4px;
+      color: var(--gold);
+      text-transform: uppercase;
+    }
+
+    .cover-stars {
+      position: absolute;
+      top: 0; left: 0; right: 0; bottom: 0;
+      pointer-events: none;
+      overflow: hidden;
+    }
+
+    /* ── Section Wrapper ──────────────────────────────────── */
+    .section {
+      max-width: 800px;
+      margin: 0 auto;
+      padding: 50px 40px;
+    }
+
+    /* ── Section Title ────────────────────────────────────── */
+    .section-title {
+      font-family: 'Cinzel', serif;
+      font-size: 30px;
+      font-weight: 700;
+      color: var(--indigo);
+      text-align: center;
+      letter-spacing: 2px;
+      margin-bottom: 8px;
+    }
+
+    .section-title-en {
+      font-family: 'Amiri', serif;
+      font-size: 18px;
+      letter-spacing: 1px;
+      color: rgba(201,168,76,0.65);
+      text-align: center;
+      font-style: italic;
+      margin-bottom: 30px;
+    }
+
+    .section-rule {
+      width: 120px;
+      height: 2px;
+      background: linear-gradient(90deg, transparent, var(--gold), transparent);
+      margin: 0 auto 40px;
+    }
+
+    /* ── Intro Box ────────────────────────────────────────── */
+    .intro-box {
+      background: var(--indigo);
+      color: var(--gold-pale);
+      border-radius: 8px;
+      padding: 36px 40px;
+      margin-bottom: 40px;
+      border: 1px solid rgba(201,168,76,0.3);
+    }
+
+    .intro-box p {
+      font-family: 'Amiri', serif;
+      font-size: 17px;
+      line-height: 2.1;
+      margin-bottom: 16px;
+    }
+    .intro-box p:last-child { margin-bottom: 0; }
+
+    /* ── How to Use ───────────────────────────────────────── */
+    .how-to-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 20px;
+      margin-top: 30px;
+    }
+
+    .how-to-item {
+      background: var(--cream-dark);
+      border-left: 3px solid var(--gold);
+      border-radius: 0 6px 6px 0;
+      padding: 20px;
+    }
+
+    .how-to-item h4 {
+      font-family: 'Amiri', serif;
+      font-size: 16px;
+      font-weight: 700;
+      color: var(--indigo);
+      margin-bottom: 8px;
+    }
+
+    .how-to-item p {
+      font-size: 14px;
+      color: var(--text-soft);
+      line-height: 1.9;
+    }
+
+    /* ── Mansion Index Table ──────────────────────────────── */
+    .index-table {
+      width: 100%;
+      border-collapse: collapse;
+      margin-top: 20px;
+      font-size: 14px;
+    }
+
+    .index-table th {
+      background: var(--indigo);
+      color: var(--gold);
+      padding: 10px 14px;
+      font-family: 'Amiri', serif;
+      font-weight: 700;
+      font-size: 15px;
+      text-align: right;
+    }
+
+    .index-table td {
+      padding: 9px 14px;
+      border-bottom: 1px solid var(--cream-dark);
+      vertical-align: middle;
+    }
+
+    .index-table tr:nth-child(even) td { background: rgba(201,168,76,0.06); }
+
+    .nature-saad { color: #2D7A3D; font-weight: 600; }
+    .nature-nahs { color: #8B3A3A; font-weight: 600; }
+
+    /* ── Mansion Cards ────────────────────────────────────── */
+    .mansions-grid {
+      display: flex;
+      flex-direction: column;
+      gap: 28px;
+    }
+
+    .mansion-card {
+      background: white;
+      border-radius: 10px;
+      border: 1px solid var(--cream-dark);
+      overflow: hidden;
+      box-shadow: 0 2px 12px rgba(0,0,0,0.06);
+    }
+
+    .mansion-header {
+      background: var(--indigo);
+      padding: 18px 24px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      flex-direction: row-reverse;
+    }
+
+    .mansion-number {
+      font-family: 'Cinzel', serif;
+      font-size: 28px;
+      font-weight: 700;
+      color: rgba(201,168,76,0.4);
+      direction: ltr;
+    }
+
+    .mansion-name-block { text-align: left; }
+
+    .mansion-name-ar {
+      font-family: 'Amiri', serif;
+      font-size: 14px;
+      font-weight: 400;
+      color: rgba(201,168,76,0.55);
+      font-style: italic;
+      line-height: 1.4;
+      margin-top: 3px;
+    }
+
+    .mansion-name-en {
+      font-family: 'Cinzel', serif;
+      font-size: 18px;
+      font-weight: 700;
+      letter-spacing: 1px;
+      color: var(--gold-light);
+      text-transform: uppercase;
+    }
+
+    .mansion-emoji {
+      font-size: 32px;
+    }
+
+    .mansion-body {
+      padding: 22px 24px;
+    }
+
+    .mansion-meta {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 10px;
+      margin-bottom: 18px;
+      flex-direction: row;
+    }
+
+    .meta-tag {
+      background: var(--cream-dark);
+      border-radius: 20px;
+      padding: 4px 14px;
+      font-size: 13px;
+      color: var(--text-soft);
+      display: flex;
+      align-items: center;
+      gap: 5px;
+    }
+
+    .meta-tag.fire   { background: #FFF0E0; color: #B85C00; }
+    .meta-tag.water  { background: #E0F0FF; color: #0055A0; }
+    .meta-tag.air    { background: #F0F8E8; color: #2D6A00; }
+    .meta-tag.earth  { background: #F5F0E5; color: #6B4C1A; }
+    .meta-tag.saad   { background: #E8F5E8; color: #1E6E1E; }
+    .meta-tag.nahs   { background: #FDEAEA; color: #8B0000; }
+
+    .mansion-meaning {
+      font-family: 'Amiri', serif;
+      font-size: 15px;
+      color: var(--text-soft);
+      margin-bottom: 14px;
+      font-style: italic;
+    }
+
+    .mansion-desc-ar {
+      display: none;
+    }
+
+    .mansion-desc-en {
+      font-family: 'EB Garamond', serif;
+      font-size: 15px;
+      line-height: 1.85;
+      color: var(--text);
+      direction: ltr;
+      text-align: left;
+    }
+
+    .mansion-guidance {
+      background: var(--cream-dark);
+      border-radius: 6px;
+      padding: 14px 18px;
+      margin-top: 16px;
+      border-left: 3px solid var(--gold);
+    }
+
+    .mansion-guidance h5 {
+      font-family: 'Amiri', serif;
+      font-size: 14px;
+      font-weight: 700;
+      color: var(--indigo);
+      margin-bottom: 6px;
+    }
+
+    .mansion-guidance p {
+      font-size: 13.5px;
+      color: var(--text-soft);
+      line-height: 1.9;
+    }
+
+    /* ── Moon Phases Section ──────────────────────────────── */
+    .phases-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 20px;
+    }
+
+    .phase-card {
+      background: white;
+      border-radius: 10px;
+      border: 1px solid var(--cream-dark);
+      padding: 22px;
+      text-align: center;
+    }
+
+    .phase-emoji { font-size: 42px; margin-bottom: 10px; }
+
+    .phase-name-ar {
+      font-family: 'Amiri', serif;
+      font-size: 20px;
+      font-weight: 700;
+      color: var(--indigo);
+      margin-bottom: 4px;
+    }
+
+    .phase-energy {
+      font-size: 12px;
+      color: var(--gold);
+      font-family: 'Cinzel', serif;
+      letter-spacing: 1px;
+      margin-bottom: 12px;
+      direction: ltr;
+    }
+
+    .phase-theme {
+      font-family: 'Amiri', serif;
+      font-size: 15px;
+      line-height: 2;
+      color: var(--text-soft);
+    }
+
+    /* ── Element Reference ────────────────────────────────── */
+    .elements-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 16px;
+      margin-top: 20px;
+    }
+
+    .element-card {
+      border-radius: 8px;
+      padding: 20px;
+      text-align: center;
+    }
+    .element-card.fire  { background: #FFF5EB; border: 1px solid #F0C080; }
+    .element-card.water { background: #EBF5FF; border: 1px solid #80B0E0; }
+    .element-card.air   { background: #EFFFEB; border: 1px solid #80C880; }
+    .element-card.earth { background: #FFF8EB; border: 1px solid #C8A060; }
+
+    .element-icon { font-size: 32px; margin-bottom: 8px; }
+    .element-name { font-family: 'Amiri', serif; font-size: 18px; font-weight: 700; color: var(--indigo); }
+    .element-quality { font-size: 13px; color: var(--text-soft); margin-top: 4px; }
+
+    /* ── Planets Reference ────────────────────────────────── */
+    .planets-table { width: 100%; border-collapse: collapse; margin-top: 20px; }
+    .planets-table th {
+      background: var(--indigo); color: var(--gold);
+      padding: 10px 16px; font-family: 'Amiri', serif; font-size: 15px; text-align: right;
+    }
+    .planets-table td { padding: 11px 16px; border-bottom: 1px solid var(--cream-dark); font-size: 14px; }
+    .planets-table tr:nth-child(even) td { background: rgba(201,168,76,0.05); }
+
+    /* ── Daily Practice Guide ─────────────────────────────── */
+    .practice-steps {
+      display: flex;
+      flex-direction: column;
+      gap: 16px;
+      margin-top: 24px;
+    }
+
+    .step {
+      display: flex;
+      align-items: flex-start;
+      gap: 16px;
+      flex-direction: row-reverse;
+    }
+
+    .step-number {
+      width: 36px;
+      height: 36px;
+      background: var(--indigo);
+      color: var(--gold);
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-family: 'Cinzel', serif;
+      font-weight: 700;
+      font-size: 15px;
+      flex-shrink: 0;
+    }
+
+    .step-content h4 {
+      font-family: 'Amiri', serif;
+      font-size: 16px;
+      font-weight: 700;
+      color: var(--indigo);
+      margin-bottom: 4px;
+    }
+
+    .step-content p {
+      font-size: 14px;
+      color: var(--text-soft);
+      line-height: 1.9;
+    }
+
+    /* ── Back Cover ───────────────────────────────────────── */
+    .back-cover {
+      background: var(--indigo);
+      color: var(--gold-pale);
+      text-align: center;
+      padding: 80px 40px;
+      min-height: 60vh;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+    }
+
+    .back-cover .ornament { font-size: 48px; margin-bottom: 24px; }
+    .back-cover h2 { font-family: 'Amiri', serif; font-size: 30px; color: var(--gold-light); margin-bottom: 16px; }
+    .back-cover p { font-size: 15px; color: rgba(245,233,200,0.75); line-height: 2; max-width: 420px; }
+    .back-cover .brand { font-family: 'Cinzel', serif; font-size: 16px; letter-spacing: 4px; color: var(--gold); margin-top: 32px; text-transform: uppercase; }
+    .back-cover .site { font-size: 13px; color: rgba(201,168,76,0.6); margin-top: 6px; letter-spacing: 2px; direction: ltr; }
+
+    /* ── Utility ──────────────────────────────────────────── */
+    .text-center { text-align: center; }
+    .mt-20 { margin-top: 20px; }
+    .mb-20 { margin-bottom: 20px; }
+  </style>
+</head>
+<body>
+<!-- ── LICENSE GATE ─────────────────────────────────────── -->
+<div id="license-gate">
+  <div class="gate-card" style="direction:ltr;font-family:'Cinzel', serif;">
+    <span class="gate-moon">🌙</span>
+    <div class="gate-title">Lunar Mansion Guide</div>
+    <div class="gate-divider"></div>
+    <div class="gate-sub">Enter the license key you received after purchase to unlock your guide.</div>
+    <input id="gate-key-input" class="gate-input" type="text" placeholder="LME-XXXXX-XXXXX-XXXXX" autocomplete="off" spellcheck="false">
+    <div id="gate-key-error" class="gate-error"></div>
+    <button id="gate-submit-btn" class="gate-btn" style="font-family:'Cinzel', serif;">Unlock Guide ✦</button>
+    <div class="gate-buy">Don't have a key? <a href="https://etherealechoes.com" target="_blank">Purchase at EtherealEchoes.com →</a></div>
+  </div>
+</div>
+
+
+<!-- Print Banner (screen only) -->
+<div class="print-banner no-print">
+  <button class="print-btn" onclick="window.print()">⬇ Save as PDF</button>
+  Open in Chrome → click this button → "Save as PDF" for best results
+</div>
+
+<nav class="tab-nav no-print" id="tab-nav">
+  <button class="tab-btn active" onclick="showSection('sec-intro',this)">
+    <span>📖</span><span class="tab-label">Intro</span>
+  </button>
+  <button class="tab-btn" onclick="showSection('sec-index',this)">
+    <span>📑</span><span class="tab-label">Index</span>
+  </button>
+  <button class="tab-btn" onclick="showSection('sec-mansions',this)">
+    <span>🌙</span><span class="tab-label">Mansions</span>
+  </button>
+  <button class="tab-btn" onclick="showSection('sec-phases',this)">
+    <span>🌕</span><span class="tab-label">Phases</span>
+  </button>
+  <button class="tab-btn" onclick="showSection('sec-elements',this)">
+    <span>✨</span><span class="tab-label">Elements</span>
+  </button>
+  <button class="tab-btn" onclick="showSection('sec-practice',this)">
+    <span>🌿</span><span class="tab-label">Practice</span>
+  </button>
+  <button class="tab-btn" onclick="showSection('calendar-section',this)">
+    <span>📅</span><span class="tab-label">Calendar</span>
+  </button>
+  <button class="tab-btn" onclick="showSection('sec-journal',this)">
+    <span>✍</span><span class="tab-label">Journal</span>
+  </button>
+</nav>
+
+<!-- ══════════════════════════════════════════════════════════ -->
+<!-- COVER PAGE                                                 -->
+<!-- ══════════════════════════════════════════════════════════ -->
+<div class="cover page-break">
+  <div class="cover-ornament">🌙</div>
+  <div class="cover-title-en">Guide to the Lunar Mansions</div>
+  <div class="cover-title-ar">دليل منازل القمر</div>
+  <div class="cover-divider"></div>
+  <div class="cover-subtitle" style="font-family:'Cinzel',serif; font-size:15px; letter-spacing:2px;">Classical Arabic Astronomy</div>
+  <p class="cover-desc">
+    The 28 Lunar Mansions — your daily spiritual guide through<br>
+    the wisdom of classical Arabic celestial science
+  </p>
+  <div class="cover-divider" style="margin-top:32px;"></div>
+  <p style="font-family:'Cinzel',serif;font-size:11px;letter-spacing:2px;color:rgba(201,168,76,0.5);margin-top:16px;direction:ltr;">
+    THE 28 MOON MANSIONS
+  </p>
+  <div class="cover-brand">Ethereal Echoes</div>
+</div>
+
+<!-- ══════════════════════════════════════════════════════════ -->
+<!-- INTRODUCTION                                               -->
+<!-- ══════════════════════════════════════════════════════════ -->
+<div class="section page-break" id="sec-intro">
+  <div class="section-title">What Are the Lunar Mansions?</div>
+  <div class="section-title-en">ما هي منازل القمر؟</div>
+  <div class="section-rule"></div>
+
+  <div class="intro-box no-break">
+    <p>
+      The Lunar Mansions are an ancient Arabic astronomical system that divides the full zodiac circle (360°) into 28 equal stations. The Moon passes through each mansion over the course of one to three days on its monthly journey through the sky.
+    </p>
+    <p>
+      Arab astronomers of the Golden Age used these mansions to understand the prevailing energy of each day and to choose optimal timing for all manner of activities — from agriculture and travel to marriage and commerce.
+    </p>
+    <p>
+      Each mansion carries a stellar or planetary name, a distinct energy, a nature (auspicious or inauspicious), and a planetary ruler. This guide takes you through all 28 mansions so you can understand how the Moon's daily energy influences your life and decisions.
+    </p>
+  </div>
+
+  <div class="how-to-grid">
+    <div class="how-to-item no-break">
+      <h4>🌙 How to Use This Guide</h4>
+      <p>Find the Moon's current mansion (use our app or a lunar calendar), then read that mansion's description and let its guidance shape your day.</p>
+    </div>
+    <div class="how-to-item no-break">
+      <h4>⭐ Auspicious & Inauspicious</h4>
+      <p>Auspicious mansions (Saad) are blessed times for starting and planning. Inauspicious mansions (Nahs) are not evil — they are simply times for reflection, caution, and inner awareness.</p>
+    </div>
+    <div class="how-to-item no-break">
+      <h4>🔥 The Four Elements</h4>
+      <p>Each mansion belongs to one of four elements: Fire (enthusiasm and initiative), Water (emotion and intuition), Air (thought and communication), or Earth (work and material matters).</p>
+    </div>
+    <div class="how-to-item no-break">
+      <h4>🪐 Planetary Rulers</h4>
+      <p>Each mansion has a ruling planet that colors its character. Mars lends courage, Venus brings beauty, Mercury grants eloquence — each ruler adds its own signature quality.</p>
+    </div>
+  </div>
+</div>
+
+<!-- ══════════════════════════════════════════════════════════ -->
+<!-- INDEX TABLE                                                -->
+<!-- ══════════════════════════════════════════════════════════ -->
+<div class="section page-break" id="sec-index">
+  <div class="section-title">Index of the 28 Mansions</div>
+  <div class="section-title-en">فهرس المنازل</div>
+  <div class="section-rule"></div>
+
+  <table class="index-table">
+    <thead>
+      <tr>
+        <th>#</th>
+        <th>Arabic Name</th>
+        <th>Transliteration</th>
+        <th>Element</th>
+        <th>Nature</th>
+        <th>Ruler</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr><td>1</td><td>الشَّرَطين</td><td>Al-Sharatain</td><td>🔥 Fire</td><td class="nature-saad">Auspicious</td><td>Mars</td></tr>
+      <tr><td>2</td><td>البُطَين</td><td>Al-Butain</td><td>🔥 Fire</td><td class="nature-saad">Auspicious</td><td>Venus</td></tr>
+      <tr><td>3</td><td>الثُّرَيّا</td><td>Al-Thurayya</td><td>🔥 Fire</td><td class="nature-saad">Auspicious</td><td>Mercury</td></tr>
+      <tr><td>4</td><td>الدَّبَران</td><td>Al-Dabaran</td><td>🌍 Earth</td><td class="nature-nahs">Inauspicious</td><td>Moon</td></tr>
+      <tr><td>5</td><td>الهَقعة</td><td>Al-Haq'ah</td><td>🌍 Earth</td><td class="nature-nahs">Inauspicious</td><td>Mars</td></tr>
+      <tr><td>6</td><td>الهَنعة</td><td>Al-Han'ah</td><td>💨 Air</td><td class="nature-saad">Auspicious</td><td>Sun</td></tr>
+      <tr><td>7</td><td>الذِّراع</td><td>Al-Dhira'</td><td>💨 Air</td><td class="nature-saad">Auspicious</td><td>Venus</td></tr>
+      <tr><td>8</td><td>النَّثرة</td><td>Al-Nathrah</td><td>💧 Water</td><td class="nature-saad">Auspicious</td><td>Mercury</td></tr>
+      <tr><td>9</td><td>الطَّرف</td><td>Al-Tarf</td><td>💧 Water</td><td class="nature-nahs">Inauspicious</td><td>Moon</td></tr>
+      <tr><td>10</td><td>الجَبهة</td><td>Al-Jabhah</td><td>🔥 Fire</td><td class="nature-saad">Auspicious</td><td>Sun</td></tr>
+      <tr><td>11</td><td>الزُّبرة</td><td>Al-Zubrah</td><td>🔥 Fire</td><td class="nature-nahs">Inauspicious</td><td>Jupiter</td></tr>
+      <tr><td>12</td><td>الصَّرفة</td><td>Al-Sarfah</td><td>🌍 Earth</td><td class="nature-saad">Auspicious</td><td>Sun</td></tr>
+      <tr><td>13</td><td>العَوّاء</td><td>Al-Awwa'</td><td>🌍 Earth</td><td class="nature-nahs">Inauspicious</td><td>Venus</td></tr>
+      <tr><td>14</td><td>السِّماك</td><td>Al-Simak</td><td>💨 Air</td><td class="nature-saad">Auspicious</td><td>Mars</td></tr>
+      <tr><td>15</td><td>الغَفر</td><td>Al-Ghafr</td><td>💨 Air</td><td class="nature-saad">Auspicious</td><td>Jupiter</td></tr>
+      <tr><td>16</td><td>الزُّبانى</td><td>Al-Zubana</td><td>💧 Water</td><td class="nature-nahs">Inauspicious</td><td>Saturn</td></tr>
+      <tr><td>17</td><td>الإكليل</td><td>Al-Iklil</td><td>💧 Water</td><td class="nature-saad">Auspicious</td><td>Mars</td></tr>
+      <tr><td>18</td><td>القَلب</td><td>Al-Qalb</td><td>💧 Water</td><td class="nature-nahs">Inauspicious</td><td>Mars</td></tr>
+      <tr><td>19</td><td>الشَّولة</td><td>Al-Shaulah</td><td>🔥 Fire</td><td class="nature-nahs">Inauspicious</td><td>Jupiter</td></tr>
+      <tr><td>20</td><td>النَّعائم</td><td>Al-Na'aim</td><td>🔥 Fire</td><td class="nature-saad">Auspicious</td><td>Sun</td></tr>
+      <tr><td>21</td><td>البَلدة</td><td>Al-Baldah</td><td>🌍 Earth</td><td class="nature-nahs">Inauspicious</td><td>Saturn</td></tr>
+      <tr><td>22</td><td>سعد الذابح</td><td>Sa'd al-Dhabih</td><td>🌍 Earth</td><td class="nature-saad">Auspicious</td><td>Saturn</td></tr>
+      <tr><td>23</td><td>سعد بُلَع</td><td>Sa'd Bula'</td><td>💨 Air</td><td class="nature-saad">Auspicious</td><td>Saturn</td></tr>
+      <tr><td>24</td><td>سعد السُّعود</td><td>Sa'd al-Su'ud</td><td>💨 Air</td><td class="nature-saad">Most Auspicious ⭐</td><td>Jupiter</td></tr>
+      <tr><td>25</td><td>سعد الأخبية</td><td>Sa'd al-Akhbiyah</td><td>💨 Air</td><td class="nature-saad">Auspicious</td><td>Venus</td></tr>
+      <tr><td>26</td><td>الفَرغ المُقدَّم</td><td>Al-Fargh al-Muqaddam</td><td>💧 Water</td><td class="nature-saad">Auspicious</td><td>Mars</td></tr>
+      <tr><td>27</td><td>الفَرغ المُؤخَّر</td><td>Al-Fargh al-Mu'akhkhar</td><td>💧 Water</td><td class="nature-saad">Auspicious</td><td>Mercury</td></tr>
+      <tr><td>28</td><td>بطن الحوت</td><td>Batn al-Hut</td><td>💧 Water</td><td class="nature-saad">Auspicious</td><td>Jupiter</td></tr>
+    </tbody>
+  </table>
+</div>
+
+<!-- ══════════════════════════════════════════════════════════ -->
+<!-- THE 28 MANSIONS                                            -->
+<!-- ══════════════════════════════════════════════════════════ -->
+<div class="section" id="sec-mansions">
+  <div class="section-title">The 28 Lunar Mansions</div>
+  <div class="section-title-en">المنازل الثمانية والعشرون</div>
+  <div class="section-rule"></div>
+
+  <div class="mansions-grid">
+
+    <!-- Mansion 1 -->
+    <div class="mansion-card no-break open">
+      <div class="mansion-header" onclick="toggleCard(this)">
+        <div class="mansion-number">01</div>
+        <div class="mansion-name-block">
+          <div class="mansion-name-en">Al-Sharatain · ♈</div>
+          <div class="mansion-name-ar">الشَّرَطين</div>
+        </div>
+        <div class="mansion-emoji">🔥</div>
+      </div>
+      <div class="mansion-body">
+        <div class="mansion-meta">
+          <span class="meta-tag fire">🔥 Fire</span>
+          <span class="meta-tag saad">✨ Auspicious</span>
+          <span class="meta-tag">🪐 Mars</span>
+          <span class="meta-tag" style="direction:ltr">♈ Aries</span>
+        </div>
+        <div class="mansion-meaning">Meaning: The Two Signs</div>
+        <div class="mansion-desc-ar">طاقة المبادرة والشجاعة. وقت مناسب للبدايات الجريئة والقيادة.</div>
+        <div class="mansion-desc-en">Energy of initiative and courage. A time for bold beginnings and leadership. The two marks signal that action is favored — step forward with confidence.</div>
+        <div class="mansion-guidance">
+          <h5>🌙 Today's Guidance</h5>
+          <p>Launch new projects, make bold decisions, and set your sights on the goal. Mars energy fuels you to move forward with confidence.</p>
+        </div>
+      </div>
+    </div>
+
+    <!-- Mansion 2 -->
+    <div class="mansion-card no-break">
+      <div class="mansion-header" onclick="toggleCard(this)">
+        <div class="mansion-number">02</div>
+        <div class="mansion-name-block">
+          <div class="mansion-name-en">Al-Butain · ♈</div>
+          <div class="mansion-name-ar">البُطَين</div>
+        </div>
+        <div class="mansion-emoji">💰</div>
+      </div>
+      <div class="mansion-body">
+        <div class="mansion-meta">
+          <span class="meta-tag fire">🔥 Fire</span>
+          <span class="meta-tag saad">✨ Auspicious</span>
+          <span class="meta-tag">🪐 Venus</span>
+        </div>
+        <div class="mansion-meaning">Meaning: The Little Belly</div>
+        <div class="mansion-desc-ar">طاقة الثروة والوفرة. وقت مناسب لجمع الموارد والتأسيس.</div>
+        <div class="mansion-desc-en">Energy of wealth and abundance. A time for gathering resources and building foundations. Venus rules here, blessing material endeavors with grace.</div>
+        <div class="mansion-guidance">
+          <h5>🌙 Today's Guidance</h5>
+          <p>An ideal time for financial planning, investing in foundations, and tending what you already have. Venus opens the doors of abundance.</p>
+        </div>
+      </div>
+    </div>
+
+    <!-- Mansion 3 -->
+    <div class="mansion-card no-break">
+      <div class="mansion-header" onclick="toggleCard(this)">
+        <div class="mansion-number">03</div>
+        <div class="mansion-name-block">
+          <div class="mansion-name-en">Al-Thurayya · ♈</div>
+          <div class="mansion-name-ar">الثُّرَيّا</div>
+        </div>
+        <div class="mansion-emoji">✨</div>
+      </div>
+      <div class="mansion-body">
+        <div class="mansion-meta">
+          <span class="meta-tag fire">🔥 Fire</span>
+          <span class="meta-tag saad">✨ Auspicious</span>
+          <span class="meta-tag">🪐 Mercury</span>
+        </div>
+        <div class="mansion-meaning">Meaning: The Pleiades</div>
+        <div class="mansion-desc-ar">طاقة النور والعلم. وقت مناسب للتعلم والاكتشاف والسفر.</div>
+        <div class="mansion-desc-en">Energy of light and knowledge. A time for learning, discovery, and travel. The Pleiades illuminate the mind — perfect for study and communication.</div>
+        <div class="mansion-guidance">
+          <h5>🌙 Today's Guidance</h5>
+          <p>Read, study, connect with others, and share knowledge. Mercury opens channels of understanding and clear expression.</p>
+        </div>
+      </div>
+    </div>
+
+    <!-- Mansion 4 -->
+    <div class="mansion-card no-break">
+      <div class="mansion-header" onclick="toggleCard(this)">
+        <div class="mansion-number">04</div>
+        <div class="mansion-name-block">
+          <div class="mansion-name-en">Al-Dabaran · ♉</div>
+          <div class="mansion-name-ar">الدَّبَران</div>
+        </div>
+        <div class="mansion-emoji">🌑</div>
+      </div>
+      <div class="mansion-body">
+        <div class="mansion-meta">
+          <span class="meta-tag earth">🌍 Earth</span>
+          <span class="meta-tag nahs">⚠ Inauspicious</span>
+          <span class="meta-tag">🪐 Moon</span>
+        </div>
+        <div class="mansion-meaning">Meaning: The Follower</div>
+        <div class="mansion-desc-ar">طاقة الصبر والمتابعة. وقت للتأني والمثابرة رغم العقبات.</div>
+        <div class="mansion-desc-en">Energy of patience and persistence. A time for steadfastness despite obstacles. The follower star teaches that endurance is its own victory.</div>
+        <div class="mansion-guidance">
+          <h5>🌙 Today's Guidance</h5>
+          <p>Avoid new beginnings. Instead, persist with what you have already started and practice patience. This is a time for endurance, not rapid advancement.</p>
+        </div>
+      </div>
+    </div>
+
+    <!-- Mansion 5 -->
+    <div class="mansion-card no-break">
+      <div class="mansion-header" onclick="toggleCard(this)">
+        <div class="mansion-number">05</div>
+        <div class="mansion-name-block">
+          <div class="mansion-name-en">Al-Haq'ah · ♉</div>
+          <div class="mansion-name-ar">الهَقعة</div>
+        </div>
+        <div class="mansion-emoji">🔄</div>
+      </div>
+      <div class="mansion-body">
+        <div class="mansion-meta">
+          <span class="meta-tag earth">🌍 Earth</span>
+          <span class="meta-tag nahs">⚠ Inauspicious</span>
+          <span class="meta-tag">🪐 Mars</span>
+        </div>
+        <div class="mansion-meaning">Meaning: The White Spot</div>
+        <div class="mansion-desc-ar">طاقة التحول والتطهير. وقت لإزالة ما لا يخدمك والتجديد.</div>
+        <div class="mansion-desc-en">Energy of transformation and purification. A time to release what no longer serves you and make space for renewal.</div>
+        <div class="mansion-guidance">
+          <h5>🌙 Today's Guidance</h5>
+          <p>Clear your environment and your mind. Release habits and things that no longer add value to your life. This is a time for purification and spiritual renewal.</p>
+        </div>
+      </div>
+    </div>
+
+    <!-- Mansion 6 -->
+    <div class="mansion-card no-break">
+      <div class="mansion-header" onclick="toggleCard(this)">
+        <div class="mansion-number">06</div>
+        <div class="mansion-name-block">
+          <div class="mansion-name-en">Al-Han'ah · ♊</div>
+          <div class="mansion-name-ar">الهَنعة</div>
+        </div>
+        <div class="mansion-emoji">💬</div>
+      </div>
+      <div class="mansion-body">
+        <div class="mansion-meta">
+          <span class="meta-tag air">💨 Air</span>
+          <span class="meta-tag saad">✨ Auspicious</span>
+          <span class="meta-tag">🪐 Sun</span>
+        </div>
+        <div class="mansion-meaning">Meaning: The Brand Mark</div>
+        <div class="mansion-desc-ar">طاقة التواصل والحكمة. وقت مناسب للحوار والتعبير عن الذات.</div>
+        <div class="mansion-desc-en">Energy of communication and wisdom. A time for dialogue, self-expression, and sharing your truth with clarity and light.</div>
+        <div class="mansion-guidance">
+          <h5>🌙 Today's Guidance</h5>
+          <p>Write, speak, and hold the important meetings and conversations. The Sun illuminates the path of honest self-expression.</p>
+        </div>
+      </div>
+    </div>
+
+    <!-- Mansion 7 -->
+    <div class="mansion-card no-break">
+      <div class="mansion-header" onclick="toggleCard(this)">
+        <div class="mansion-number">07</div>
+        <div class="mansion-name-block">
+          <div class="mansion-name-en">Al-Dhira' · ♊</div>
+          <div class="mansion-name-ar">الذِّراع</div>
+        </div>
+        <div class="mansion-emoji">💖</div>
+      </div>
+      <div class="mansion-body">
+        <div class="mansion-meta">
+          <span class="meta-tag air">💨 Air</span>
+          <span class="meta-tag saad">✨ Auspicious</span>
+          <span class="meta-tag">🪐 Venus</span>
+        </div>
+        <div class="mansion-meaning">Meaning: The Forearm</div>
+        <div class="mansion-desc-ar">طاقة الحب والانسجام. وقت مناسب للعلاقات والشراكات والمصالحة.</div>
+        <div class="mansion-desc-en">Energy of love and harmony. A time for deepening relationships, forming partnerships, and reconciling differences. Venus brings beauty to all connections.</div>
+        <div class="mansion-guidance">
+          <h5>🌙 Today's Guidance</h5>
+          <p>Strengthen your relationships, mend what needs healing, and celebrate love in all its forms. A blessed time for partnerships of all kinds.</p>
+        </div>
+      </div>
+    </div>
+
+    <!-- Mansion 8 -->
+    <div class="mansion-card no-break">
+      <div class="mansion-header" onclick="toggleCard(this)">
+        <div class="mansion-number">08</div>
+        <div class="mansion-name-block">
+          <div class="mansion-name-en">Al-Nathrah · ♋</div>
+          <div class="mansion-name-ar">النَّثرة</div>
+        </div>
+        <div class="mansion-emoji">🔮</div>
+      </div>
+      <div class="mansion-body">
+        <div class="mansion-meta">
+          <span class="meta-tag water">💧 Water</span>
+          <span class="meta-tag saad">✨ Auspicious</span>
+          <span class="meta-tag">🪐 Mercury</span>
+        </div>
+        <div class="mansion-meaning">Meaning: The Gap</div>
+        <div class="mansion-desc-ar">طاقة الحدس والرؤية الداخلية. وقت للتأمل والاستماع للقلب.</div>
+        <div class="mansion-desc-en">Energy of intuition and inner vision. A time for meditation, deep listening, and trusting your inner knowing above all external noise.</div>
+        <div class="mansion-guidance">
+          <h5>🌙 Today's Guidance</h5>
+          <p>Step away from outer noise and listen to your inner voice. Meditation and journaling will reveal exactly what you need to know.</p>
+        </div>
+      </div>
+    </div>
+
+    <!-- Mansion 9 -->
+    <div class="mansion-card no-break">
+      <div class="mansion-header" onclick="toggleCard(this)">
+        <div class="mansion-number">09</div>
+        <div class="mansion-name-block">
+          <div class="mansion-name-en">Al-Tarf · ♋</div>
+          <div class="mansion-name-ar">الطَّرف</div>
+        </div>
+        <div class="mansion-emoji">⚠️</div>
+      </div>
+      <div class="mansion-body">
+        <div class="mansion-meta">
+          <span class="meta-tag water">💧 Water</span>
+          <span class="meta-tag nahs">⚠ Inauspicious</span>
+          <span class="meta-tag">🪐 Moon</span>
+        </div>
+        <div class="mansion-meaning">Meaning: The Glance</div>
+        <div class="mansion-desc-ar">طاقة الحذر واليقظة. وقت للتروي قبل اتخاذ القرارات المهمة.</div>
+        <div class="mansion-desc-en">Energy of caution and vigilance. A time to pause, observe carefully, and avoid hasty decisions. Look before you leap.</div>
+        <div class="mansion-guidance">
+          <h5>🌙 Today's Guidance</h5>
+          <p>Postpone important decisions if possible. Observe situations with a discerning eye and trust your intuition if something feels off.</p>
+        </div>
+      </div>
+    </div>
+
+    <!-- Mansion 10 -->
+    <div class="mansion-card no-break">
+      <div class="mansion-header" onclick="toggleCard(this)">
+        <div class="mansion-number">10</div>
+        <div class="mansion-name-block">
+          <div class="mansion-name-en">Al-Jabhah · ♌</div>
+          <div class="mansion-name-ar">الجَبهة</div>
+        </div>
+        <div class="mansion-emoji">👑</div>
+      </div>
+      <div class="mansion-body">
+        <div class="mansion-meta">
+          <span class="meta-tag fire">🔥 Fire</span>
+          <span class="meta-tag saad">✨ Auspicious</span>
+          <span class="meta-tag">🪐 Sun</span>
+        </div>
+        <div class="mansion-meaning">Meaning: The Forehead</div>
+        <div class="mansion-desc-ar">طاقة الكرامة والنصر. وقت مناسب للمواجهة والدفاع عن الحق.</div>
+        <div class="mansion-desc-en">Energy of dignity and victory. A time for standing up, facing challenges with nobility, and defending what is right. The lion's forehead shines.</div>
+        <div class="mansion-guidance">
+          <h5>🌙 Today's Guidance</h5>
+          <p>Stand with confidence and dignity. This is a favorable time for negotiations and confrontations that demand courage and a strong, grounded presence.</p>
+        </div>
+      </div>
+    </div>
+
+    <!-- Mansion 11 -->
+    <div class="mansion-card no-break">
+      <div class="mansion-header" onclick="toggleCard(this)">
+        <div class="mansion-number">11</div>
+        <div class="mansion-name-block">
+          <div class="mansion-name-en">Al-Zubrah · ♌</div>
+          <div class="mansion-name-ar">الزُّبرة</div>
+        </div>
+        <div class="mansion-emoji">🛡️</div>
+      </div>
+      <div class="mansion-body">
+        <div class="mansion-meta">
+          <span class="meta-tag fire">🔥 Fire</span>
+          <span class="meta-tag nahs">⚠ Inauspicious</span>
+          <span class="meta-tag">🪐 Jupiter</span>
+        </div>
+        <div class="mansion-meaning">Meaning: The Mane</div>
+        <div class="mansion-desc-ar">طاقة القوة الخفية والحماية. وقت للتحصين الروحي والقوة الداخلية.</div>
+        <div class="mansion-desc-en">Energy of hidden power and protection. A time for spiritual fortification and drawing on your inner reserves of strength.</div>
+        <div class="mansion-guidance">
+          <h5>🌙 Today's Guidance</h5>
+          <p>Strengthen yourself spiritually. Pray, meditate, and invoke your inner protection. Jupiter guards you from the unseen, watch over your energy.</p>
+        </div>
+      </div>
+    </div>
+
+    <!-- Mansion 12 -->
+    <div class="mansion-card no-break">
+      <div class="mansion-header" onclick="toggleCard(this)">
+        <div class="mansion-number">12</div>
+        <div class="mansion-name-block">
+          <div class="mansion-name-en">Al-Sarfah · ♍</div>
+          <div class="mansion-name-ar">الصَّرفة</div>
+        </div>
+        <div class="mansion-emoji">🔄</div>
+      </div>
+      <div class="mansion-body">
+        <div class="mansion-meta">
+          <span class="meta-tag earth">🌍 Earth</span>
+          <span class="meta-tag saad">✨ Auspicious</span>
+          <span class="meta-tag">🪐 Sun</span>
+        </div>
+        <div class="mansion-meaning">Meaning: The Changer</div>
+        <div class="mansion-desc-ar">طاقة التغيير والتحول. وقت مناسب لتبديل المسار والتجديد.</div>
+        <div class="mansion-desc-en">Energy of change and transformation. A time to shift direction, renew commitments, and embrace necessary changes with open arms.</div>
+        <div class="mansion-guidance">
+          <h5>🌙 Today's Guidance</h5>
+          <p>Make the changes you have long postponed. This is a blessed time for positive transformations in the direction of your life.</p>
+        </div>
+      </div>
+    </div>
+
+    <!-- Mansion 13 -->
+    <div class="mansion-card no-break">
+      <div class="mansion-header" onclick="toggleCard(this)">
+        <div class="mansion-number">13</div>
+        <div class="mansion-name-block">
+          <div class="mansion-name-en">Al-Awwa' · ♍</div>
+          <div class="mansion-name-ar">العَوّاء</div>
+        </div>
+        <div class="mansion-emoji">🔍</div>
+      </div>
+      <div class="mansion-body">
+        <div class="mansion-meta">
+          <span class="meta-tag earth">🌍 Earth</span>
+          <span class="meta-tag nahs">⚠ Inauspicious</span>
+          <span class="meta-tag">🪐 Venus</span>
+        </div>
+        <div class="mansion-meaning">Meaning: The Barking One</div>
+        <div class="mansion-desc-ar">طاقة التحليل والتمييز. وقت للتفكير العميق وفرز الأمور.</div>
+        <div class="mansion-desc-en">Energy of analysis and discernment. A time for deep thinking, sorting through details, and separating the essential from the trivial.</div>
+        <div class="mansion-guidance">
+          <h5>🌙 Today's Guidance</h5>
+          <p>Do not rush decisions. Gather information and analyze deeply before moving forward. Patience here leads to clarity.</p>
+        </div>
+      </div>
+    </div>
+
+    <!-- Mansion 14 -->
+    <div class="mansion-card no-break">
+      <div class="mansion-header" onclick="toggleCard(this)">
+        <div class="mansion-number">14</div>
+        <div class="mansion-name-block">
+          <div class="mansion-name-en">Al-Simak · ♎</div>
+          <div class="mansion-name-ar">السِّماك</div>
+        </div>
+        <div class="mansion-emoji">⚖️</div>
+      </div>
+      <div class="mansion-body">
+        <div class="mansion-meta">
+          <span class="meta-tag air">💨 Air</span>
+          <span class="meta-tag saad">✨ Auspicious</span>
+          <span class="meta-tag">🪐 Mars</span>
+        </div>
+        <div class="mansion-meaning">Meaning: The Unarmed One</div>
+        <div class="mansion-desc-ar">طاقة العدالة والتوازن. وقت مناسب لإحقاق الحق والإنصاف.</div>
+        <div class="mansion-desc-en">Energy of justice and balance. A time for fairness, equity, and restoring harmony where imbalance exists.</div>
+        <div class="mansion-guidance">
+          <h5>🌙 Today's Guidance</h5>
+          <p>Seek fairness in your relationships and dealings. This is an ideal time to resolve disputes in a balanced, equitable way.</p>
+        </div>
+      </div>
+    </div>
+
+    <!-- Mansion 15 -->
+    <div class="mansion-card no-break">
+      <div class="mansion-header" onclick="toggleCard(this)">
+        <div class="mansion-number">15</div>
+        <div class="mansion-name-block">
+          <div class="mansion-name-en">Al-Ghafr · ♎</div>
+          <div class="mansion-name-ar">الغَفر</div>
+        </div>
+        <div class="mansion-emoji">🕊️</div>
+      </div>
+      <div class="mansion-body">
+        <div class="mansion-meta">
+          <span class="meta-tag air">💨 Air</span>
+          <span class="meta-tag saad">✨ Auspicious</span>
+          <span class="meta-tag">🪐 Jupiter</span>
+        </div>
+        <div class="mansion-meaning">Meaning: The Veil</div>
+        <div class="mansion-desc-ar">طاقة السلام والستر. وقت للهدوء والتعافي والغفران.</div>
+        <div class="mansion-desc-en">Energy of peace and concealment. A time for inner calm, healing old wounds, and extending forgiveness to yourself and others.</div>
+        <div class="mansion-guidance">
+          <h5>🌙 Today's Guidance</h5>
+          <p>Forgive and allow yourself to be forgiven. Jupiter blesses those who forgive and opens the doors of healing and inner peace.</p>
+        </div>
+      </div>
+    </div>
+
+    <!-- Mansion 16 -->
+    <div class="mansion-card no-break">
+      <div class="mansion-header" onclick="toggleCard(this)">
+        <div class="mansion-number">16</div>
+        <div class="mansion-name-block">
+          <div class="mansion-name-en">Al-Zubana · ♏</div>
+          <div class="mansion-name-ar">الزُّبانى</div>
+        </div>
+        <div class="mansion-emoji">⚔️</div>
+      </div>
+      <div class="mansion-body">
+        <div class="mansion-meta">
+          <span class="meta-tag water">💧 Water</span>
+          <span class="meta-tag nahs">⚠ Inauspicious</span>
+          <span class="meta-tag">🪐 Saturn</span>
+        </div>
+        <div class="mansion-meaning">Meaning: The Claws</div>
+        <div class="mansion-desc-ar">طاقة المواجهة والحسم. وقت للتعامل مع التحديات بشكل مباشر.</div>
+        <div class="mansion-desc-en">Energy of confrontation and resolution. A time to deal with challenges directly, clear the air, and bring difficult situations to decisive conclusions.</div>
+        <div class="mansion-guidance">
+          <h5>🌙 Today's Guidance</h5>
+          <p>Avoid unnecessary conflict. If confrontation is unavoidable, approach it with wisdom and calm rather than force.</p>
+        </div>
+      </div>
+    </div>
+
+    <!-- Mansion 17 -->
+    <div class="mansion-card no-break">
+      <div class="mansion-header" onclick="toggleCard(this)">
+        <div class="mansion-number">17</div>
+        <div class="mansion-name-block">
+          <div class="mansion-name-en">Al-Iklil · ♏</div>
+          <div class="mansion-name-ar">الإكليل</div>
+        </div>
+        <div class="mansion-emoji">🏆</div>
+      </div>
+      <div class="mansion-body">
+        <div class="mansion-meta">
+          <span class="meta-tag water">💧 Water</span>
+          <span class="meta-tag saad">✨ Auspicious</span>
+          <span class="meta-tag">🪐 Mars</span>
+        </div>
+        <div class="mansion-meaning">Meaning: The Crown</div>
+        <div class="mansion-desc-ar">طاقة التتويج والشرف. وقت مناسب للاحتفال بالإنجازات.</div>
+        <div class="mansion-desc-en">Energy of crowning and honor. A time to celebrate achievements, recognize success, and share your victories with those who walked beside you.</div>
+        <div class="mansion-guidance">
+          <h5>🌙 Today's Guidance</h5>
+          <p>Celebrate your achievements, even the small ones. Acknowledge your journey and give thanks for every step that brought you here.</p>
+        </div>
+      </div>
+    </div>
+
+    <!-- Mansion 18 -->
+    <div class="mansion-card no-break">
+      <div class="mansion-header" onclick="toggleCard(this)">
+        <div class="mansion-number">18</div>
+        <div class="mansion-name-block">
+          <div class="mansion-name-en">Al-Qalb · ♏</div>
+          <div class="mansion-name-ar">القَلب</div>
+        </div>
+        <div class="mansion-emoji">❤️</div>
+      </div>
+      <div class="mansion-body">
+        <div class="mansion-meta">
+          <span class="meta-tag water">💧 Water</span>
+          <span class="meta-tag nahs">⚠ Inauspicious</span>
+          <span class="meta-tag">🪐 Mars</span>
+        </div>
+        <div class="mansion-meaning">Meaning: The Heart</div>
+        <div class="mansion-desc-ar">طاقة العاطفة العميقة والكشف. وقت لمواجهة الحقائق الخفية.</div>
+        <div class="mansion-desc-en">Energy of deep emotion and revelation. A time to face hidden truths, dive into the depths of feeling, and allow what is buried to surface.</div>
+        <div class="mansion-guidance">
+          <h5>🌙 Today's Guidance</h5>
+          <p>Do not run from deep feelings. This is a time for honest self-confrontation. What the Moon reveals here will set you free.</p>
+        </div>
+      </div>
+    </div>
+
+    <!-- Mansion 19 -->
+    <div class="mansion-card no-break">
+      <div class="mansion-header" onclick="toggleCard(this)">
+        <div class="mansion-number">19</div>
+        <div class="mansion-name-block">
+          <div class="mansion-name-en">Al-Shaulah · ♐</div>
+          <div class="mansion-name-ar">الشَّولة</div>
+        </div>
+        <div class="mansion-emoji">🚀</div>
+      </div>
+      <div class="mansion-body">
+        <div class="mansion-meta">
+          <span class="meta-tag fire">🔥 Fire</span>
+          <span class="meta-tag nahs">⚠ Inauspicious</span>
+          <span class="meta-tag">🪐 Jupiter</span>
+        </div>
+        <div class="mansion-meaning">Meaning: The Raised Tail</div>
+        <div class="mansion-desc-ar">طاقة الطموح والمغامرة. وقت للخروج من منطقة الراحة.</div>
+        <div class="mansion-desc-en">Energy of ambition and adventure. A time to step out of your comfort zone, but with awareness — the scorpion's raised tail warns of recklessness.</div>
+        <div class="mansion-guidance">
+          <h5>🌙 Today's Guidance</h5>
+          <p>Challenge yourself, but do so wisely. Ambition is welcome here, yet avoid recklessness and hasty decisions you may later regret.</p>
+        </div>
+      </div>
+    </div>
+
+    <!-- Mansion 20 -->
+    <div class="mansion-card no-break">
+      <div class="mansion-header" onclick="toggleCard(this)">
+        <div class="mansion-number">20</div>
+        <div class="mansion-name-block">
+          <div class="mansion-name-en">Al-Na'aim · ♐</div>
+          <div class="mansion-name-ar">النَّعائم</div>
+        </div>
+        <div class="mansion-emoji">🌟</div>
+      </div>
+      <div class="mansion-body">
+        <div class="mansion-meta">
+          <span class="meta-tag fire">🔥 Fire</span>
+          <span class="meta-tag saad">✨ Auspicious</span>
+          <span class="meta-tag">🪐 Sun</span>
+        </div>
+        <div class="mansion-meaning">Meaning: The Ostriches</div>
+        <div class="mansion-desc-ar">طاقة التفاؤل والسعادة. وقت مناسب للسفر والاستكشاف والفرح.</div>
+        <div class="mansion-desc-en">Energy of optimism and joy. A time for travel, exploration, and happiness. The ostriches run free — let yourself embrace lightness and adventure.</div>
+        <div class="mansion-guidance">
+          <h5>🌙 Today's Guidance</h5>
+          <p>Enjoy life and embrace joy. An ideal time for travel, social gatherings, and celebrating the beauty of being alive.</p>
+        </div>
+      </div>
+    </div>
+
+    <!-- Mansion 21 -->
+    <div class="mansion-card no-break">
+      <div class="mansion-header" onclick="toggleCard(this)">
+        <div class="mansion-number">21</div>
+        <div class="mansion-name-block">
+          <div class="mansion-name-en">Al-Baldah · ♑</div>
+          <div class="mansion-name-ar">البَلدة</div>
+        </div>
+        <div class="mansion-emoji">🌌</div>
+      </div>
+      <div class="mansion-body">
+        <div class="mansion-meta">
+          <span class="meta-tag earth">🌍 Earth</span>
+          <span class="meta-tag nahs">⚠ Inauspicious</span>
+          <span class="meta-tag">🪐 Saturn</span>
+        </div>
+        <div class="mansion-meaning">Meaning: The City</div>
+        <div class="mansion-desc-ar">طاقة العزلة والتأمل. وقت للخلوة والتفكر في مسار الحياة.</div>
+        <div class="mansion-desc-en">Energy of solitude and contemplation. A time for retreat, quiet reflection, and reassessing the direction of your life with patience and depth.</div>
+        <div class="mansion-guidance">
+          <h5>🌙 Today's Guidance</h5>
+          <p>Seek solitude. This is not a time for noise and gatherings but for deep contemplation about where you are and where you are headed.</p>
+        </div>
+      </div>
+    </div>
+
+    <!-- Mansion 22 -->
+    <div class="mansion-card no-break">
+      <div class="mansion-header" onclick="toggleCard(this)">
+        <div class="mansion-number">22</div>
+        <div class="mansion-name-block">
+          <div class="mansion-name-en">Sa'd al-Dhabih · ♑</div>
+          <div class="mansion-name-ar">سعد الذابح</div>
+        </div>
+        <div class="mansion-emoji">💪</div>
+      </div>
+      <div class="mansion-body">
+        <div class="mansion-meta">
+          <span class="meta-tag earth">🌍 Earth</span>
+          <span class="meta-tag saad">✨ Auspicious</span>
+          <span class="meta-tag">🪐 Saturn</span>
+        </div>
+        <div class="mansion-meaning">Meaning: Lucky Star of the Slaughterer</div>
+        <div class="mansion-desc-ar">طاقة التضحية من أجل النجاح. وقت للعمل الجاد والإصرار.</div>
+        <div class="mansion-desc-en">Energy of sacrifice for success. A time for hard work, determination, and making the necessary sacrifices that lead to lasting achievement.</div>
+        <div class="mansion-guidance">
+          <h5>🌙 Today's Guidance</h5>
+          <p>Work hard and stay the course. Success here is earned through struggle and perseverance. Saturn rewards those who endure.</p>
+        </div>
+      </div>
+    </div>
+
+    <!-- Mansion 23 -->
+    <div class="mansion-card no-break">
+      <div class="mansion-header" onclick="toggleCard(this)">
+        <div class="mansion-number">23</div>
+        <div class="mansion-name-block">
+          <div class="mansion-name-en">Sa'd Bula' · ♒</div>
+          <div class="mansion-name-ar">سعد بُلَع</div>
+        </div>
+        <div class="mansion-emoji">🌊</div>
+      </div>
+      <div class="mansion-body">
+        <div class="mansion-meta">
+          <span class="meta-tag air">💨 Air</span>
+          <span class="meta-tag saad">✨ Auspicious</span>
+          <span class="meta-tag">🪐 Saturn</span>
+        </div>
+        <div class="mansion-meaning">Meaning: Lucky Star of the Swallower</div>
+        <div class="mansion-desc-ar">طاقة الاستيعاب والتقبل. وقت لقبول التغيير والتكيف.</div>
+        <div class="mansion-desc-en">Energy of absorption and acceptance. A time to embrace change, adapt gracefully, and allow new realities to integrate into your life.</div>
+        <div class="mansion-guidance">
+          <h5>🌙 Today's Guidance</h5>
+          <p>Accept reality as it is. Adapting to change rather than resisting it is the key to flowing smoothly through this mansion.</p>
+        </div>
+      </div>
+    </div>
+
+    <!-- Mansion 24 — The Luckiest -->
+    <div class="mansion-card no-break" style="border:2px solid var(--gold);">
+      <div class="mansion-header" style="background: linear-gradient(135deg, var(--indigo-mid), #3D1A6E);">
+        <div class="mansion-number" style="color:var(--gold);">24</div>
+        <div class="mansion-name-block">
+          <div class="mansion-name-en">Sa'd al-Su'ud · ♒ · THE LUCKIEST MANSION</div>
+          <div class="mansion-name-ar" style="color:rgba(201,168,76,0.55); font-size:14px; font-style:italic;">سعد السُّعود ⭐</div>
+        </div>
+        <div class="mansion-emoji">🌟</div>
+      </div>
+      <div class="mansion-body" style="background:rgba(201,168,76,0.04);">
+        <div class="mansion-meta">
+          <span class="meta-tag air">💨 Air</span>
+          <span class="meta-tag saad" style="background:#FFD700;color:#333;font-weight:700;">⭐ Most Auspicious</span>
+          <span class="meta-tag">🪐 Jupiter</span>
+        </div>
+        <div class="mansion-meaning">Meaning: Luckiest of the Lucky</div>
+        <div class="mansion-desc-ar">طاقة الحظ الأعظم والبركة. أسعد المنازل — وقت مبارك لكل شيء.</div>
+        <div class="mansion-desc-en">Energy of supreme fortune and blessing. The luckiest of all 28 mansions — a blessed time for everything you wish to begin, declare, or celebrate.</div>
+        <div class="mansion-guidance" style="background:rgba(201,168,76,0.12);border-color:var(--gold);">
+          <h5>🌙 Today's Guidance</h5>
+          <p>Begin everything you desire under this most blessed mansion. Declare intentions, sign contracts, start projects. Jupiter blesses all that is initiated here.</p>
+        </div>
+      </div>
+    </div>
+
+    <!-- Mansion 25 -->
+    <div class="mansion-card no-break">
+      <div class="mansion-header" onclick="toggleCard(this)">
+        <div class="mansion-number">25</div>
+        <div class="mansion-name-block">
+          <div class="mansion-name-en">Sa'd al-Akhbiyah · ♒</div>
+          <div class="mansion-name-ar">سعد الأخبية</div>
+        </div>
+        <div class="mansion-emoji">🏕️</div>
+      </div>
+      <div class="mansion-body">
+        <div class="mansion-meta">
+          <span class="meta-tag air">💨 Air</span>
+          <span class="meta-tag saad">✨ Auspicious</span>
+          <span class="meta-tag">🪐 Venus</span>
+        </div>
+        <div class="mansion-meaning">Meaning: Lucky Star of Tents</div>
+        <div class="mansion-desc-ar">طاقة الأمان والحماية. وقت للاحتماء والتخطيط بحكمة.</div>
+        <div class="mansion-desc-en">Energy of safety and shelter. A time for seeking refuge, planning wisely from a secure position, and protecting what you have built.</div>
+        <div class="mansion-guidance">
+          <h5>🌙 Today's Guidance</h5>
+          <p>Plan from a place of security. Review your future plans and ensure your foundations are solid before you launch forward.</p>
+        </div>
+      </div>
+    </div>
+
+    <!-- Mansion 26 -->
+    <div class="mansion-card no-break">
+      <div class="mansion-header" onclick="toggleCard(this)">
+        <div class="mansion-number">26</div>
+        <div class="mansion-name-block">
+          <div class="mansion-name-en">Al-Fargh al-Muqaddam · ♓</div>
+          <div class="mansion-name-ar">الفَرغ المُقدَّم</div>
+        </div>
+        <div class="mansion-emoji">🦋</div>
+      </div>
+      <div class="mansion-body">
+        <div class="mansion-meta">
+          <span class="meta-tag water">💧 Water</span>
+          <span class="meta-tag saad">✨ Auspicious</span>
+          <span class="meta-tag">🪐 Mars</span>
+        </div>
+        <div class="mansion-meaning">Meaning: The Upper Bucket</div>
+        <div class="mansion-desc-ar">طاقة الانطلاق والتحرر. وقت لكسر القيود والمضي قدماً.</div>
+        <div class="mansion-desc-en">Energy of liberation and forward movement. A time to break free from what has held you back and move confidently into new territory.</div>
+        <div class="mansion-guidance">
+          <h5>🌙 Today's Guidance</h5>
+          <p>Break free from old limitations. Release what holds you back and move forward boldly. Mars lends you the courage to liberate yourself.</p>
+        </div>
+      </div>
+    </div>
+
+    <!-- Mansion 27 -->
+    <div class="mansion-card no-break">
+      <div class="mansion-header" onclick="toggleCard(this)">
+        <div class="mansion-number">27</div>
+        <div class="mansion-name-block">
+          <div class="mansion-name-en">Al-Fargh al-Mu'akhkhar · ♓</div>
+          <div class="mansion-name-ar">الفَرغ المُؤخَّر</div>
+        </div>
+        <div class="mansion-emoji">✅</div>
+      </div>
+      <div class="mansion-body">
+        <div class="mansion-meta">
+          <span class="meta-tag water">💧 Water</span>
+          <span class="meta-tag saad">✨ Auspicious</span>
+          <span class="meta-tag">🪐 Mercury</span>
+        </div>
+        <div class="mansion-meaning">Meaning: The Lower Bucket</div>
+        <div class="mansion-desc-ar">طاقة الاكتمال والإنجاز. وقت لإتمام المشاريع وجني الثمار.</div>
+        <div class="mansion-desc-en">Energy of completion and accomplishment. A time to finish what you started, harvest the fruits of your labor, and celebrate what has come full circle.</div>
+        <div class="mansion-guidance">
+          <h5>🌙 Today's Guidance</h5>
+          <p>Complete what you have started. This is the ideal time to finish projects, harvest the fruits of your labor, and celebrate what you have built.</p>
+        </div>
+      </div>
+    </div>
+
+    <!-- Mansion 28 -->
+    <div class="mansion-card no-break">
+      <div class="mansion-header" onclick="toggleCard(this)">
+        <div class="mansion-number">28</div>
+        <div class="mansion-name-block">
+          <div class="mansion-name-en">Batn al-Hut · ♓</div>
+          <div class="mansion-name-ar">بطن الحوت</div>
+        </div>
+        <div class="mansion-emoji">🐟</div>
+      </div>
+      <div class="mansion-body">
+        <div class="mansion-meta">
+          <span class="meta-tag water">💧 Water</span>
+          <span class="meta-tag saad">✨ Auspicious</span>
+          <span class="meta-tag">🪐 Jupiter</span>
+        </div>
+        <div class="mansion-meaning">Meaning: The Belly of the Fish</div>
+        <div class="mansion-desc-ar">طاقة الرحمة والتسليم. وقت للتواضع والاستسلام للقدر.</div>
+        <div class="mansion-desc-en">Energy of mercy and surrender. A time for humility, accepting destiny, and releasing the need to control. Trust that what is meant for you will find you.</div>
+        <div class="mansion-guidance">
+          <h5>🌙 Today's Guidance</h5>
+          <p>Surrender. This is the last and most spiritual of all mansions — a time for humility, gratitude, and full surrender to what is.</p>
+        </div>
+      </div>
+    </div>
+
+  </div><!-- end mansions-grid -->
+</div><!-- end section -->
+
+<!-- ══════════════════════════════════════════════════════════ -->
+<!-- MOON PHASES                                                -->
+<!-- ══════════════════════════════════════════════════════════ -->
+<div class="section page-break" id="sec-phases">
+  <div class="section-title">The Eight Moon Phases</div>
+  <div class="section-title-en">أطوار القمر الثمانية</div>
+  <div class="section-rule"></div>
+
+  <div class="phases-grid">
+    <div class="phase-card no-break">
+      <div class="phase-emoji">🌑</div>
+      <div class="phase-name-ar">New Moon</div>
+      <div class="phase-energy">INTROSPECTIVE</div>
+      <div class="phase-theme">New beginnings and fresh intentions. A powerful time to plant seeds, set goals, and clarify what you wish to call in.</div>
+    </div>
+    <div class="phase-card no-break">
+      <div class="phase-emoji">🌒</div>
+      <div class="phase-name-ar">Waxing Crescent</div>
+      <div class="phase-energy">BUILDING</div>
+      <div class="phase-theme">Take your first steps and build momentum. The energy set at the New Moon begins to move — act on your intentions.</div>
+    </div>
+    <div class="phase-card no-break">
+      <div class="phase-emoji">🌓</div>
+      <div class="phase-name-ar">First Quarter</div>
+      <div class="phase-energy">DECISIVE</div>
+      <div class="phase-theme">Face obstacles with courage. This is a decision point — commit to your path and push through what stands in your way.</div>
+    </div>
+    <div class="phase-card no-break">
+      <div class="phase-emoji">🌔</div>
+      <div class="phase-name-ar">Waxing Gibbous</div>
+      <div class="phase-energy">REFINING</div>
+      <div class="phase-theme">Refine and trust the process. You are close — make small adjustments, stay patient, and have faith in what is unfolding.</div>
+    </div>
+    <div class="phase-card no-break">
+      <div class="phase-emoji">🌕</div>
+      <div class="phase-name-ar">Full Moon</div>
+      <div class="phase-energy">ILLUMINATED</div>
+      <div class="phase-theme">Illumination and fulfillment. The moon reveals what was hidden — celebrate your progress, release what no longer serves, and receive insights.</div>
+    </div>
+    <div class="phase-card no-break">
+      <div class="phase-emoji">🌖</div>
+      <div class="phase-name-ar">Waning Gibbous</div>
+      <div class="phase-energy">GRATEFUL</div>
+      <div class="phase-theme">Share your wisdom and practice gratitude. Give back what you have received and honor the lessons this cycle has brought.</div>
+    </div>
+    <div class="phase-card no-break">
+      <div class="phase-emoji">🌗</div>
+      <div class="phase-name-ar">Last Quarter</div>
+      <div class="phase-energy">RELEASING</div>
+      <div class="phase-theme">Let go and forgive. Release what no longer serves you to make space for what is coming in the new cycle ahead.</div>
+    </div>
+    <div class="phase-card no-break">
+      <div class="phase-emoji">🌘</div>
+      <div class="phase-name-ar">Waning Crescent</div>
+      <div class="phase-energy">RESTING</div>
+      <div class="phase-theme">Rest and surrender. Replenish your energy and reflect deeply. The cycle completes itself, preparing you to begin again.</div>
+    </div>
+  </div>
+</div>
+
+<!-- ══════════════════════════════════════════════════════════ -->
+<!-- ELEMENTS & PLANETS                                         -->
+<!-- ══════════════════════════════════════════════════════════ -->
+<div class="section page-break" id="sec-elements">
+  <div class="section-title">Elements & Planetary Rulers</div>
+  <div class="section-title-en">العناصر والكواكب</div>
+  <div class="section-rule"></div>
+
+  <div class="elements-grid">
+    <div class="element-card fire no-break">
+      <div class="element-icon">🔥</div>
+      <div class="element-name">Fire</div>
+      <div class="element-quality">Enthusiasm · Initiative · Leadership · Active Energy</div>
+    </div>
+    <div class="element-card water no-break">
+      <div class="element-icon">💧</div>
+      <div class="element-name">Water</div>
+      <div class="element-quality">Emotion · Intuition · Dreams · Receptive Energy</div>
+    </div>
+    <div class="element-card air no-break">
+      <div class="element-icon">💨</div>
+      <div class="element-name">Air</div>
+      <div class="element-quality">Intellect · Communication · Travel · Active Energy</div>
+    </div>
+    <div class="element-card earth no-break">
+      <div class="element-icon">🌍</div>
+      <div class="element-name">Earth</div>
+      <div class="element-quality">Matter · Work · Stability · Receptive Energy</div>
+    </div>
+  </div>
+
+  <div class="section-title mt-20" style="font-size:26px;">Planetary Rulers</div>
+  <div class="section-rule"></div>
+
+  <table class="planets-table">
+    <thead>
+      <tr>
+        <th>Planet</th>
+        <th>Energy</th>
+        <th>Themes</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr><td>☉ Sun</td><td>Vitality</td><td>Identity, Success, Visibility, Creativity</td></tr>
+      <tr><td>☽ Moon</td><td>Intuition</td><td>Emotions, Dreams, the Unconscious, Femininity</td></tr>
+      <tr><td>♂ Mars</td><td>Action</td><td>Courage, Conflict, Determination, Energy</td></tr>
+      <tr><td>☿ Mercury</td><td>Communication</td><td>Thought, Messages, Travel, Intelligence</td></tr>
+      <tr><td>♃ Jupiter</td><td>Expansion</td><td>Growth, Luck, Wisdom, Abundance</td></tr>
+      <tr><td>♀ Venus</td><td>Love</td><td>Beauty, Harmony, Relationships, Art</td></tr>
+      <tr><td>♄ Saturn</td><td>Discipline</td><td>Structure, Lessons, Boundaries, Patience</td></tr>
+    </tbody>
+  </table>
+</div>
+
+<!-- ══════════════════════════════════════════════════════════ -->
+<!-- DAILY PRACTICE                                             -->
+<!-- ══════════════════════════════════════════════════════════ -->
+<div class="section page-break" id="sec-practice">
+  <div class="section-title">Your Daily Practice with the Mansions</div>
+  <div class="section-title-en">الممارسة اليومية</div>
+  <div class="section-rule"></div>
+
+  <div class="intro-box no-break" style="margin-bottom:30px;">
+    <p>The simplest way to integrate the Lunar Mansions into your daily life is to spend a few minutes each morning connecting with the energy of the day. This guide becomes your steady teacher on that journey.</p>
+  </div>
+
+  <div class="practice-steps">
+    <div class="step no-break">
+      <div class="step-number">1</div>
+      <div class="step-content">
+        <h4>Find today's Lunar Mansion</h4>
+        <p>Open our app or a lunar calendar to discover which of the 28 mansions the Moon occupies today. Each mansion lasts one to three days.</p>
+      </div>
+    </div>
+    <div class="step no-break">
+      <div class="step-number">2</div>
+      <div class="step-content">
+        <h4>Read the mansion's description</h4>
+        <p>Open this guide and locate the current mansion. Read its description thoughtfully and ask: How does this energy apply to my life today?</p>
+      </div>
+    </div>
+    <div class="step no-break">
+      <div class="step-number">3</div>
+      <div class="step-content">
+        <h4>Notice the nature — Auspicious or Inauspicious</h4>
+        <p>Auspicious mansions call for action and new beginnings. Inauspicious mansions are not bad — they are simply times for reflection, caution, and patience. Work wisely with each.</p>
+      </div>
+    </div>
+    <div class="step no-break">
+      <div class="step-number">4</div>
+      <div class="step-content">
+        <h4>Write your intention in your journal</h4>
+        <p>Set aside a few lines in your journal to record what you want to create, learn from, or release in light of this mansion's energy.</p>
+      </div>
+    </div>
+    <div class="step no-break">
+      <div class="step-number">5</div>
+      <div class="step-content">
+        <h4>Review in the evening</h4>
+        <p>Before sleep, reflect on your day. Was the mansion's energy palpable? What did you notice? These observations deepen your relationship with the Moon over time.</p>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- ══════════════════════════════════════════════════════════ -->
+<!-- LUNAR CALENDAR                                             -->
+<!-- ══════════════════════════════════════════════════════════ -->
+<div class="section page-break" id="calendar-section" style="max-width:900px;">
+  <div class="section-title">Lunar Mansion Calendar</div>
+  <div class="section-title-en">التقويم القمري</div>
+  <div class="section-rule"></div>
+  <p style="text-align:center;font-family:'Amiri',serif;font-size:15px;color:var(--text-soft,#4A3F30);margin-bottom:24px;">
+    Each day is colored by its Lunar Mansion energy — browse the months to discover the energy of any day.
+  </p>
+
+  <!-- Controls (hidden on print) -->
+  <div class="no-print" style="display:flex;align-items:center;justify-content:space-between;margin-bottom:16px;direction:ltr;flex-wrap:wrap;gap:10px;">
+    <button onclick="calPrev()" style="background:var(--indigo);color:var(--gold);border:none;padding:8px 18px;border-radius:6px;cursor:pointer;font-family:'Cinzel',serif;font-size:13px;font-weight:700;">&#8592; Prev</button>
+    <div id="cal-title" style="font-family:'Cinzel',serif;font-size:18px;color:var(--indigo);font-weight:700;letter-spacing:2px;flex:1;text-align:center;"></div>
+    <button onclick="calNext()" style="background:var(--indigo);color:var(--gold);border:none;padding:8px 18px;border-radius:6px;cursor:pointer;font-family:'Cinzel',serif;font-size:13px;font-weight:700;">Next &#8594;</button>
+    <div style="display:flex;gap:8px;">
+      <button id="btn-month" onclick="setCalView('month')" style="background:var(--indigo);color:var(--gold);border:1px solid var(--indigo);padding:7px 16px;border-radius:6px;cursor:pointer;font-family:'Cinzel',serif;font-size:11px;letter-spacing:1px;">Month</button>
+      <button id="btn-year"  onclick="setCalView('year')"  style="background:var(--cream-dark);color:#4A3F30;border:1px solid #ddd;padding:7px 16px;border-radius:6px;cursor:pointer;font-family:'Cinzel',serif;font-size:11px;letter-spacing:1px;">Year</button>
+    </div>
+  </div>
+
+  <!-- Legend -->
+  <div class="no-print" style="display:flex;gap:14px;flex-wrap:wrap;margin-bottom:14px;direction:ltr;font-size:11px;font-family:'Cinzel',serif;color:#4A3F30;letter-spacing:0.5px;">
+    <span style="display:flex;align-items:center;gap:5px;"><span style="width:12px;height:12px;border-radius:3px;background:#FFF0E0;border:1px solid #B85C00;display:inline-block;"></span>Fire</span>
+    <span style="display:flex;align-items:center;gap:5px;"><span style="width:12px;height:12px;border-radius:3px;background:#E0F0FF;border:1px solid #0055A0;display:inline-block;"></span>Water</span>
+    <span style="display:flex;align-items:center;gap:5px;"><span style="width:12px;height:12px;border-radius:3px;background:#EFFFEB;border:1px solid #2D6A00;display:inline-block;"></span>Air</span>
+    <span style="display:flex;align-items:center;gap:5px;"><span style="width:12px;height:12px;border-radius:3px;background:#F5F0E5;border:1px solid #6B4C1A;display:inline-block;"></span>Earth</span>
+    <span>🌑 New &nbsp; 🌕 Full</span>
+  </div>
+
+  <div id="cal-container"></div>
+</div>
+
+<!-- Calendar Event Modal -->
+<div id="cal-event-modal" class="cal-modal-overlay" style="display:none" onclick="if(event.target===this)closeCalModal()">
+  <div class="cal-modal">
+    <div class="cal-modal-header">
+      <div>
+        <div class="cal-modal-date" id="cal-modal-date-lbl"></div>
+        <div class="cal-modal-mansion" id="cal-modal-mansion-lbl"></div>
+      </div>
+      <button class="cal-modal-close" onclick="closeCalModal()">✕</button>
+    </div>
+    <div class="cal-modal-body">
+      <div id="cal-evt-list"></div>
+      <div class="cal-add-form">
+        <select class="cal-add-select" id="cal-add-select">
+          <option value="note">Note</option>
+          <option value="task">Task</option>
+          <option value="reminder">Reminder</option>
+        </select>
+        <input class="cal-add-input" id="cal-add-input" type="text" placeholder="Add an entry…"
+          onkeydown="if(event.key==='Enter')addCalEvent(window._calModalDate)">
+        <button class="cal-add-btn" onclick="addCalEvent(window._calModalDate)">Add</button>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- Journal Section -->
+<div class="section page-break" id="sec-journal">
+  <div class="journal-hero">
+    <div class="journal-hero-moon">✍</div>
+    <div class="journal-hero-label">LUNAR REFLECTIONS</div>
+    <div class="journal-hero-title">Your Journal</div>
+    <div class="journal-hero-divider"></div>
+    <div class="journal-hero-sub">REFLECT · INTEND · RELEASE</div>
+  </div>
+  <div class="journal-body">
+    <div class="journal-card">
+      <div class="journal-card-label">🌙 Today's Mansion Energy</div>
+      <div class="journal-mansion-name" id="j-today-name"></div>
+      <div class="journal-mansion-ar" id="j-today-ar"></div>
+      <div class="journal-prompt" id="j-today-prompt"></div>
+      <textarea class="journal-textarea" id="j-today-entry" placeholder="Write your reflection here…"></textarea>
+      <div class="journal-entry-footer">
+        <button class="journal-delete-btn" id="j-today-delete">✕ Clear Entry</button>
+      </div>
+    </div>
+    <div class="journal-card">
+      <div class="journal-card-label">✦ Monthly Intention</div>
+      <div class="journal-prompt" style="font-family:'EB Garamond',serif;font-size:19px;line-height:1.9;color:var(--text);border-left:3px solid var(--gold);padding-left:18px;">What are you calling in this lunar cycle? Set your intention clearly and trust the moon to guide you.</div>
+      <textarea class="journal-textarea" id="j-intention-entry" placeholder="Write your intention here…"></textarea>
+      <div class="journal-entry-footer">
+        <button class="journal-delete-btn" id="j-intention-delete">✕ Clear Entry</button>
+      </div>
+    </div>
+    <div class="journal-card">
+      <div class="journal-card-label">🌕 Gratitude & Release</div>
+      <div class="journal-prompt" style="font-family:'EB Garamond',serif;font-size:19px;line-height:1.9;color:var(--text);border-left:3px solid var(--gold);padding-left:18px;">What are you grateful for right now? What is ready to be released?</div>
+      <textarea class="journal-textarea" id="j-release-entry" placeholder="Write your reflections here…"></textarea>
+      <div class="journal-entry-footer">
+        <button class="journal-delete-btn" id="j-release-delete">✕ Clear Entry</button>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- Calendar Styles -->
+<style>
+  /* Journal */
+  .journal-hero { background:linear-gradient(135deg,var(--indigo),var(--indigo-mid)); padding:36px 40px; text-align:center; border-bottom:2px solid var(--gold); position:relative; overflow:hidden; }
+  .journal-hero::before { content:''; position:absolute; inset:0; background:radial-gradient(ellipse at 50% 30%,rgba(201,168,76,0.15) 0%,transparent 70%); pointer-events:none; }
+  .journal-hero-moon { font-size:52px; margin-bottom:16px; filter:drop-shadow(0 0 20px rgba(201,168,76,0.5)); position:relative; }
+  .journal-hero-label { font-family:'Cinzel',serif; font-size:10px; letter-spacing:4px; color:rgba(201,168,76,0.7); text-transform:uppercase; margin-bottom:14px; position:relative; }
+  .journal-hero-title { font-family:'Cinzel',serif; font-size:36px; font-weight:700; letter-spacing:3px; color:var(--gold-light); margin-bottom:14px; position:relative; }
+  .journal-hero-divider { width:160px; height:1px; background:linear-gradient(90deg,transparent,var(--gold),transparent); margin:0 auto 16px; position:relative; }
+  .journal-hero-sub { font-family:'Cinzel',serif; font-size:11px; letter-spacing:4px; color:rgba(245,233,200,0.7); text-transform:uppercase; position:relative; }
+  .journal-body { max-width:760px; margin:0 auto; padding:40px 30px; }
+  .journal-card { background:white; border-radius:14px; border:1px solid var(--cream-dark); padding:30px 34px; margin-bottom:28px; box-shadow:0 2px 16px rgba(0,0,0,0.04); }
+  .journal-card-label { font-family:'Cinzel',serif; font-size:10px; letter-spacing:3px; color:var(--gold); text-transform:uppercase; margin-bottom:10px; }
+  .journal-mansion-name { font-family:'Cinzel',serif; font-size:18px; font-weight:700; color:var(--indigo); margin-bottom:4px; }
+  .journal-mansion-ar { font-family:'Amiri',serif; font-size:15px; font-style:italic; color:rgba(26,20,64,0.45); margin-bottom:16px; }
+  .journal-prompt-static { font-family:'EB Garamond',serif; font-size:19px; line-height:1.9; color:var(--text); font-style:italic; border-left:3px solid var(--gold); padding-left:18px; margin-bottom:0; }
+  .journal-textarea { width:100%; box-sizing:border-box; margin-top:20px; min-height:160px; border:none; border-top:1px solid #e8e0d0; padding:14px 4px 0; font-family:'EB Garamond',serif; font-size:17px; line-height:2.4; color:var(--text); background:transparent; resize:vertical; outline:none; background-image:repeating-linear-gradient(transparent,transparent calc(2.4em - 1px),#e8e0d0 calc(2.4em - 1px),#e8e0d0 calc(2.4em)); }
+  .journal-entry-footer { display:flex; justify-content:flex-end; margin-top:8px; }
+  .journal-delete-btn { font-family:'Cinzel',serif; font-size:9px; letter-spacing:2px; text-transform:uppercase; color:rgba(26,20,64,0.3); background:none; border:1px solid rgba(26,20,64,0.12); padding:5px 14px; border-radius:20px; cursor:pointer; transition:all 0.2s; }
+  .journal-delete-btn:hover { color:#c0392b; border-color:rgba(192,57,43,0.4); background:rgba(192,57,43,0.04); }
+  /* Calendar events */
+  .cal-day:not(.empty) { cursor:pointer; transition:background 0.15s; }
+  .cal-day:not(.empty):hover { background:rgba(201,168,76,0.07); }
+  .cal-evt-row { display:flex; align-items:center; gap:3px; padding:2px 4px 4px; flex-wrap:wrap; min-height:13px; }
+  .cal-evt-dot { width:7px; height:7px; border-radius:50%; display:inline-block; flex-shrink:0; }
+  .cal-evt-more { font-family:'Cinzel',serif; font-size:8px; color:#4A3F30; }
+  /* Event modal */
+  .cal-modal-overlay { position:fixed; inset:0; background:rgba(10,6,40,0.55); display:flex; align-items:center; justify-content:center; z-index:9999; padding:20px; backdrop-filter:blur(2px); }
+  .cal-modal { background:white; border-radius:16px; width:100%; max-width:420px; box-shadow:0 20px 60px rgba(0,0,0,0.25); overflow:hidden; animation:modalIn 0.18s ease; }
+  @keyframes modalIn { from{opacity:0;transform:translateY(10px) scale(0.97);}to{opacity:1;transform:none;} }
+  .cal-modal-header { background:linear-gradient(135deg,var(--indigo),var(--indigo-mid)); padding:20px 24px; display:flex; align-items:flex-start; justify-content:space-between; }
+  .cal-modal-date { font-family:'Cinzel',serif; font-size:10px; letter-spacing:3px; color:var(--gold); text-transform:uppercase; margin-bottom:5px; }
+  .cal-modal-mansion { font-family:'EB Garamond',serif; font-size:18px; color:#FAF6EE; font-style:italic; }
+  .cal-modal-close { background:none; border:none; color:rgba(245,233,200,0.6); font-size:22px; cursor:pointer; line-height:1; padding:0; transition:color 0.15s; }
+  .cal-modal-close:hover { color:var(--gold); }
+  .cal-modal-body { padding:18px 24px 24px; max-height:58vh; overflow-y:auto; }
+  .cal-modal-empty { font-family:'EB Garamond',serif; font-size:16px; color:#4A3F30; font-style:italic; text-align:center; padding:12px 0 6px; }
+  .cal-evt-item { display:flex; align-items:flex-start; gap:10px; padding:10px 0; border-bottom:1px solid #f0ebe0; }
+  .cal-evt-item:last-of-type { border-bottom:none; }
+  .cal-evt-badge { font-family:'Cinzel',serif; font-size:8px; letter-spacing:1.5px; text-transform:uppercase; padding:2px 7px; border-radius:10px; flex-shrink:0; margin-top:3px; }
+  .cal-evt-badge.note     { background:rgba(201,168,76,0.15); color:#8B6A10; }
+  .cal-evt-badge.task     { background:rgba(26,20,64,0.1);    color:var(--indigo); }
+  .cal-evt-badge.reminder { background:rgba(45,122,61,0.12);  color:#1F5C2D; }
+  .cal-evt-text { font-family:'EB Garamond',serif; font-size:17px; color:var(--text,#1A1410); flex:1; line-height:1.4; }
+  .cal-evt-del { background:none; border:none; color:rgba(180,60,60,0.3); font-size:16px; cursor:pointer; padding:0 2px; line-height:1; flex-shrink:0; transition:color 0.15s; }
+  .cal-evt-del:hover { color:#c0392b; }
+  .cal-add-form { display:flex; gap:8px; margin-top:16px; flex-wrap:wrap; border-top:1px solid #f0ebe0; padding-top:16px; }
+  .cal-add-select { font-family:'Cinzel',serif; font-size:9px; letter-spacing:1px; text-transform:uppercase; border:1px solid #ddd; border-radius:8px; padding:8px 10px; background:white; color:var(--indigo); cursor:pointer; }
+  .cal-add-input { flex:1; min-width:0; border:1px solid #ddd; border-radius:8px; padding:8px 12px; font-family:'EB Garamond',serif; font-size:16px; color:var(--text,#1A1410); outline:none; }
+  .cal-add-input:focus { border-color:var(--gold); }
+  .cal-add-btn { font-family:'Cinzel',serif; font-size:9px; letter-spacing:2px; text-transform:uppercase; background:var(--indigo); color:var(--gold); border:none; border-radius:8px; padding:8px 16px; cursor:pointer; transition:opacity 0.15s; }
+  .cal-add-btn:hover { opacity:0.85; }
+  @media print { .cal-modal-overlay,.journal-entry-footer{display:none!important;} .journal-textarea{resize:none;min-height:120px;} }
+  .cal-grid { border-radius:10px;overflow:hidden;border:1px solid #F0E8D5; }
+  .cal-weekdays { display:grid;grid-template-columns:repeat(7,1fr);background:var(--indigo); }
+  .cal-weekday  { padding:10px 4px;text-align:center;font-family:'Cinzel',serif;font-size:11px;letter-spacing:1px;color:var(--gold);font-weight:700;direction:ltr; }
+  .cal-days     { display:grid;grid-template-columns:repeat(7,1fr);background:white; }
+  .cal-day      { min-height:110px;padding:7px 6px;border-bottom:1px solid #f0ece3;border-left:1px solid #f0ece3;position:relative; }
+  .cal-day.empty { background:#fafafa; }
+  .cal-day.today { outline:2px solid var(--gold);outline-offset:-2px; }
+  .cal-day-num  { font-family:'Cinzel',serif;font-size:13px;font-weight:700;color:#4A3F30;margin-bottom:4px;direction:ltr; }
+  .cal-day.today .cal-day-num { color:var(--gold); }
+  .cal-chip     { border-radius:4px;padding:4px 5px;display:block;text-align:center;line-height:1.35; }
+  .cal-chip-ar  { font-family:'Amiri',serif;font-size:15px;display:block; }
+  .cal-chip-en  { font-family:'Cinzel',serif;font-size:10px;letter-spacing:0.3px;display:block;margin-top:2px;opacity:0.9; }
+  .cal-chip.fire  { background:#FFF0E0;color:#B85C00; }
+  .cal-chip.water { background:#E0F0FF;color:#0055A0; }
+  .cal-chip.air   { background:#EFFFEB;color:#2D6A00; }
+  .cal-chip.earth { background:#F5F0E5;color:#6B4C1A; }
+  .cal-chip.saad  { border-left:2px solid #2D7A3D; }
+  .cal-chip.nahs  { border-left:2px solid #8B3A3A; }
+  .cal-moon       { font-size:11px;text-align:center;margin-top:2px; }
+  /* Year view */
+  .cal-year-grid { display:grid;grid-template-columns:repeat(3,1fr);gap:18px; }
+  @media(max-width:700px){ .cal-year-grid{ grid-template-columns:1fr 1fr; } }
+  .cal-mini { background:white;border-radius:8px;border:1px solid #F0E8D5;overflow:hidden; }
+  .cal-mini-hdr { background:var(--indigo);color:var(--gold);font-family:'Cinzel',serif;font-size:11px;font-weight:700;letter-spacing:1px;text-align:center;padding:7px 4px;direction:ltr; }
+  .cal-mini-grid { display:grid;grid-template-columns:repeat(7,1fr); }
+  .cal-mini-day  { aspect-ratio:1;display:flex;align-items:center;justify-content:center;font-size:9px;font-family:'Cinzel',serif;color:#4A3F30;position:relative; }
+  .cal-mini-day.today   { background:var(--gold);color:var(--indigo);border-radius:50%;font-weight:700; }
+  .cal-mini-day.fire-bg  { background:rgba(255,160,60,0.18); }
+  .cal-mini-day.water-bg { background:rgba(60,140,255,0.15); }
+  .cal-mini-day.air-bg   { background:rgba(80,200,80,0.15); }
+  .cal-mini-day.earth-bg { background:rgba(180,130,60,0.15); }
+  .cal-mini-day.new-moon::after,.cal-mini-day.full-moon::after { content:'';position:absolute;bottom:1px;left:50%;transform:translateX(-50%);width:4px;height:4px;border-radius:50%; }
+  .cal-mini-day.new-moon::after  { background:#333; }
+  .cal-mini-day.full-moon::after { background:var(--gold); }
+</style>
+
+<!-- Calendar Engine -->
+<script>
+(function(){
+  // ── Lunar Mansion data (element + nature only — needed for calendar colours) ──
+  const CAL_MANSIONS = [
+    {id:'sharatain',element:'fire',nature:"sa'd"},{id:'butain',element:'fire',nature:"sa'd"},
+    {id:'thurayya',element:'fire',nature:"sa'd"},{id:'dabaran',element:'earth',nature:'nahs'},
+    {id:'haqah',element:'earth',nature:'nahs'},{id:'hanah',element:'air',nature:"sa'd"},
+    {id:'dhira',element:'air',nature:"sa'd"},{id:'nathrah',element:'water',nature:"sa'd"},
+    {id:'tarf',element:'water',nature:'nahs'},{id:'jabhah',element:'fire',nature:"sa'd"},
+    {id:'zubrah',element:'fire',nature:'nahs'},{id:'sarfah',element:'earth',nature:"sa'd"},
+    {id:'awwa',element:'earth',nature:'nahs'},{id:'simak',element:'air',nature:"sa'd"},
+    {id:'ghafr',element:'air',nature:"sa'd"},{id:'zubana',element:'water',nature:'nahs'},
+    {id:'iklil',element:'water',nature:"sa'd"},{id:'qalb',element:'water',nature:'nahs'},
+    {id:'shaulah',element:'fire',nature:'nahs'},{id:'naaim',element:'fire',nature:"sa'd"},
+    {id:'baldah',element:'earth',nature:'nahs'},{id:'saad_dhabih',element:'earth',nature:"sa'd"},
+    {id:'saad_bula',element:'air',nature:"sa'd"},{id:'saad_suud',element:'air',nature:"sa'd"},
+    {id:'saad_akhbiyah',element:'air',nature:"sa'd"},{id:'fargh_muqaddam',element:'water',nature:"sa'd"},
+    {id:'fargh_muakhkhar',element:'water',nature:"sa'd"},{id:'batn_hut',element:'water',nature:"sa'd"}
+  ];
+
+  const CAL_NAMES_AR = [
+    'الشرطين','البطين','الثريا','الدبران','الهقعة','الهنعة','الذراع','النثرة',
+    'الطرف','الجبهة','الزبرة','الصرفة','العواء','السماك','الغفر','الزبانى',
+    'الإكليل','القلب','الشولة','النعائم','البلدة','سعد الذابح','سعد بلع',
+    'سعد السعود','سعد الأخبية','الفرغ المقدم','الفرغ المؤخر','بطن الحوت'
+  ];
+
+  const CAL_NAMES_EN = [
+    "Al-Sharatain","Al-Butain","Al-Thurayya","Al-Dabaran","Al-Haq'ah","Al-Han'ah","Al-Dhira'","Al-Nathrah",
+    "Al-Tarf","Al-Jabhah","Al-Zubrah","Al-Sarfah","Al-Awwa'","Al-Simak","Al-Ghafr","Al-Zubana",
+    "Al-Iklil","Al-Qalb","Al-Shaulah","Al-Na'aim","Al-Baldah","Sa'd al-Dhabih","Sa'd Bula'",
+    "Sa'd al-Su'ud","Sa'd al-Akhbiyah","Al-Fargh al-Muqaddam","Al-Fargh al-Mu'akhkhar","Batn al-Hut"
+  ];
+
+  const MONTH_EN = ['January','February','March','April','May','June',
+                    'July','August','September','October','November','December'];
+  const MONTH_NAMES = ['January','February','March','April','May','June',
+                    'July','August','September','October','November','December'];
+  const WD_EN = ['Sun','Mon','Tue','Wed','Thu','Fri','Sat'];
+
+  function moonLon(date) {
+    const y=date.getFullYear(),m=date.getMonth()+1,d=date.getDate()+0.5;
+    let jy=y,jm=m; if(m<=2){jy--;jm+=12;}
+    const A=Math.floor(jy/100),B=2-A+Math.floor(A/4);
+    const JD=Math.floor(365.25*(jy+4716))+Math.floor(30.6001*(jm+1))+d+B-1524.5;
+    const T=(JD-2451545)/36525;
+    const Lp=218.3164477+481267.88123421*T,Mp=134.9633964+477198.8675055*T,
+          D=297.8501921+445267.1114034*T,Ms=357.5291092+35999.0502909*T,
+          F=93.2720950+483202.0175233*T,r=Math.PI/180;
+    let lon=Lp+6.289*Math.sin(Mp*r)+1.274*Math.sin((2*D-Mp)*r)
+      +0.658*Math.sin(2*D*r)+0.214*Math.sin(2*Mp*r)
+      -0.186*Math.sin(Ms*r)-0.114*Math.sin(2*F*r);
+    return ((lon%360)+360)%360;
+  }
+
+  function getMansion(date){ return CAL_MANSIONS[Math.floor(moonLon(date)/(360/28))%28]; }
+  function getMansionIdx(date){ return Math.floor(moonLon(date)/(360/28))%28; }
+
+  function moonAge(date){
+    const k=new Date(2000,0,6,18,14);
+    return(((date-k)/(864e5))%29.53058770576+29.53058770576)%29.53058770576;
+  }
+  function isNewMoon(d){ return moonAge(d)<1.85; }
+  function isFullMoon(d){ const a=moonAge(d); return a>=13.9&&a<16.61; }
+
+  // ── State ──
+  let calYear=new Date().getFullYear(), calMonth=new Date().getMonth(), calView='month';
+
+  function renderMonth(year,month){
+    const today=new Date(), first=new Date(year,month,1).getDay(),
+          days=new Date(year,month+1,0).getDate();
+    let h=`<div class="cal-grid"><div class="cal-weekdays">${WD_EN.map(d=>`<div class="cal-weekday">${d}</div>`).join('')}</div><div class="cal-days">`;
+    for(let i=0;i<first;i++) h+=`<div class="cal-day empty"></div>`;
+    for(let d=1;d<=days;d++){
+      const dt=new Date(year,month,d);
+      const m=getMansion(dt), idx=getMansionIdx(dt);
+      const isT=(d===today.getDate()&&month===today.getMonth()&&year===today.getFullYear());
+      const nm=isNewMoon(dt), fm=isFullMoon(dt);
+      const natureClass=m.nature==="sa'd"?'saad':'nahs';
+      const ds=`${year}-${String(month+1).padStart(2,'0')}-${String(d).padStart(2,'0')}`;
+      const de=(window._getCalEvents()||{})[ds]||[];
+      h+=`<div class="cal-day${isT?' today':''}" onclick="window.calDayClick('${ds}')">
+        <div class="cal-day-num">${d}</div>
+        <span class="cal-chip ${m.element} ${natureClass}"><span class="cal-chip-ar">${CAL_NAMES_AR[idx]}</span><span class="cal-chip-en">${CAL_NAMES_EN[idx]}</span></span>
+        ${nm?'<div class="cal-moon">🌑</div>':fm?'<div class="cal-moon">🌕</div>':''}
+        ${window._renderEvtDots?window._renderEvtDots(de):''}
+      </div>`;
+    }
+    const rem=(first+days)%7; if(rem>0) for(let i=0;i<7-rem;i++) h+=`<div class="cal-day empty"></div>`;
+    h+=`</div></div>`;
+    return h;
+  }
+
+  function renderYear(year){
+    const today=new Date();
+    let h=`<div class="cal-year-grid">`;
+    for(let mo=0;mo<12;mo++){
+      const first=new Date(year,mo,1).getDay(), days=new Date(year,mo+1,0).getDate();
+      h+=`<div class="cal-mini"><div class="cal-mini-hdr">${MONTH_EN[mo]} ${year}</div><div class="cal-mini-grid">`;
+      h+=WD_EN.map(d=>`<div class="cal-mini-day" style="font-size:8px;color:var(--gold);background:transparent;">${d[0]}</div>`).join('');
+      for(let i=0;i<first;i++) h+=`<div class="cal-mini-day"></div>`;
+      for(let d=1;d<=days;d++){
+        const dt=new Date(year,mo,d), m=getMansion(dt);
+        const isT=(d===today.getDate()&&mo===today.getMonth()&&year===today.getFullYear());
+        const nm=isNewMoon(dt),fm=isFullMoon(dt);
+        h+=`<div class="cal-mini-day${isT?' today':' '+m.element+'-bg'}${nm?' new-moon':fm?' full-moon':''}" title="${CAL_NAMES_AR[getMansionIdx(dt)]}">${d}</div>`;
+      }
+      h+=`</div></div>`;
+    }
+    h+=`</div>`;
+    return h;
+  }
+
+  function render(){
+    const title=document.getElementById('cal-title');
+    const container=document.getElementById('cal-container');
+    if(calView==='month'){
+      title.textContent=`${MONTH_EN[calMonth]} ${calYear}  ·  ${MONTH_NAMES[calMonth]}`;
+      container.innerHTML=renderMonth(calYear,calMonth);
+    } else {
+      title.textContent=`${calYear} — Full Year`;
+      container.innerHTML=renderYear(calYear);
+    }
+  }
+
+  // Expose for journal
+  window._getMansionForJournal = getMansion;
+  window._getMansionIdxForJournal = getMansionIdx;
+  window._getCalNamesAR = CAL_NAMES_AR;
+  window._getCalNamesEN = CAL_NAMES_EN;
+
+  // Calendar Events
+  window._calModalDate = '';
+  window._getCalEvents = function(){ return JSON.parse(localStorage.getItem('ee_cal_events')||'{}'); };
+  window._saveCalEvents = function(d){ localStorage.setItem('ee_cal_events',JSON.stringify(d)); };
+  window._renderEvtDots = function(evts){
+    if(!evts||!evts.length) return '';
+    const c={note:'#C9A84C',task:'#1A1440',reminder:'#2D7A3D'};
+    const dots=evts.slice(0,3).map(e=>`<span class="cal-evt-dot" style="background:${c[e.type]||c.note}"></span>`).join('');
+    const more=evts.length>3?`<span class="cal-evt-more">+${evts.length-3}</span>`:'';
+    return `<div class="cal-evt-row">${dots}${more}</div>`;
+  };
+  window.calDayClick = function(dateStr){
+    window._calModalDate=dateStr;
+    window.renderCalModal();
+    document.getElementById('cal-event-modal').style.display='flex';
+    setTimeout(()=>{ const i=document.getElementById('cal-add-input'); if(i)i.focus(); },80);
+  };
+  window.closeCalModal = function(){ document.getElementById('cal-event-modal').style.display='none'; };
+  window.renderCalModal = function(){
+    const ds=window._calModalDate;
+    const [y,m,d]=ds.split('-').map(Number);
+    const date=new Date(y,m-1,d);
+    const mansion=getMansion(date), idx=getMansionIdx(date);
+    const evts=(window._getCalEvents()[ds]||[]);
+    const MN=['January','February','March','April','May','June','July','August','September','October','November','December'];
+    const DN=['Sunday','Monday','Tuesday','Wednesday','Thursday','Friday','Saturday'];
+    document.getElementById('cal-modal-date-lbl').textContent=`${DN[date.getDay()]}, ${MN[m-1]} ${d}, ${y}`;
+    document.getElementById('cal-modal-mansion-lbl').textContent=`${CAL_NAMES_EN[idx]} · ${CAL_NAMES_AR[idx]}`;
+    document.getElementById('cal-evt-list').innerHTML=evts.length
+      ?evts.map(e=>`<div class="cal-evt-item">
+          <span class="cal-evt-badge ${e.type}">${e.type}</span>
+          <span class="cal-evt-text">${e.text}</span>
+          <button class="cal-evt-del" onclick="deleteCalEvent('${ds}','${e.id}')" title="Remove">✕</button>
+        </div>`).join('')
+      :`<div class="cal-modal-empty">No entries yet — add one below.</div>`;
+  };
+  window.addCalEvent = function(dateStr){
+    const input=document.getElementById('cal-add-input');
+    const type=document.getElementById('cal-add-select').value;
+    const text=input.value.trim(); if(!text)return;
+    const data=window._getCalEvents();
+    if(!data[dateStr])data[dateStr]=[];
+    data[dateStr].push({id:Date.now().toString(36),text,type});
+    window._saveCalEvents(data); input.value='';
+    window.renderCalModal(); render();
+  };
+  window.deleteCalEvent = function(dateStr,id){
+    const data=window._getCalEvents();
+    if(data[dateStr]){data[dateStr]=data[dateStr].filter(e=>e.id!==id); if(!data[dateStr].length)delete data[dateStr];}
+    window._saveCalEvents(data); window.renderCalModal(); render();
+  };
+  document.addEventListener('keydown',e=>{ if(e.key==='Escape')window.closeCalModal(); });
+
+  window.calPrev=function(){ if(calView==='month'){calMonth--;if(calMonth<0){calMonth=11;calYear--;}}else{calYear--;} render(); };
+  window.calNext=function(){ if(calView==='month'){calMonth++;if(calMonth>11){calMonth=0;calYear++;}}else{calYear++;} render(); };
+  window.setCalView=function(v){
+    calView=v;
+    document.getElementById('btn-month').style.cssText=v==='month'?'background:var(--indigo);color:var(--gold);border:1px solid var(--indigo);padding:7px 16px;border-radius:6px;cursor:pointer;font-family:Cinzel,serif;font-size:11px;letter-spacing:1px;':'background:var(--cream-dark,#F0E8D5);color:#4A3F30;border:1px solid #ddd;padding:7px 16px;border-radius:6px;cursor:pointer;font-family:Cinzel,serif;font-size:11px;letter-spacing:1px;';
+    document.getElementById('btn-year').style.cssText=v==='year'?'background:var(--indigo);color:var(--gold);border:1px solid var(--indigo);padding:7px 16px;border-radius:6px;cursor:pointer;font-family:Cinzel,serif;font-size:11px;letter-spacing:1px;':'background:var(--cream-dark,#F0E8D5);color:#4A3F30;border:1px solid #ddd;padding:7px 16px;border-radius:6px;cursor:pointer;font-family:Cinzel,serif;font-size:11px;letter-spacing:1px;';
+    render();
+  };
+
+  document.addEventListener('DOMContentLoaded', render);
+})();
+</script>
+
+<!-- ══════════════════════════════════════════════════════════ -->
+<!-- BACK COVER                                                 -->
+<!-- ══════════════════════════════════════════════════════════ -->
+<div class="back-cover page-break">
+  <div class="ornament">🌙</div>
+  <h2>Your Journey with the Moon Never Ends</h2>
+  <p>
+    This guide is the beginning of a deep journey with the rhythms of the cosmos. As you track the Lunar Mansions day by day, you will begin to see patterns and understand how celestial energy flows through your personal life.
+  </p>
+  <div class="cover-divider" style="margin:28px auto;"></div>
+  <p style="font-size:14px;margin-top:0;">
+    Discover more spiritual tools at our website
+  </p>
+  <div class="brand">Ethereal Echoes</div>
+  <div class="site">etherealechoes.com</div>
+</div>
+
+
+<script>
+(function(){
+  const SECTION_IDS = ['sec-intro','sec-index','sec-mansions','sec-phases','sec-elements','sec-practice','calendar-section','sec-journal'];
+
+  window.showSection = function(id, btn) {
+    SECTION_IDS.forEach(function(sid){
+      var el = document.getElementById(sid);
+      if(el) el.classList.remove('tab-active');
+    });
+    var target = document.getElementById(id);
+    if(target) {
+      target.classList.add('tab-active');
+      window.scrollTo({top: 0, behavior: 'smooth'});
+    }
+    document.querySelectorAll('.tab-btn').forEach(function(b){ b.classList.remove('active'); });
+    if(btn) btn.classList.add('active');
+  };
+
+  window.toggleCard = function(header) {
+    var card = header.closest('.mansion-card');
+    var isOpen = card.classList.contains('open');
+    // close all cards
+    document.querySelectorAll('.mansion-card').forEach(function(c){ c.classList.remove('open'); });
+    // open clicked one unless it was already open
+    if(!isOpen) {
+      card.classList.add('open');
+      setTimeout(function(){ card.scrollIntoView({behavior:'smooth', block:'nearest'}); }, 50);
+    }
+  };
+
+  document.addEventListener('DOMContentLoaded', function(){
+    showSection('sec-intro', document.querySelector('.tab-btn'));
+    // Journal: populate today's mansion
+    const today = new Date();
+    const m = window._getMansionForJournal ? window._getMansionForJournal(today) : null;
+    const idx = window._getMansionIdxForJournal ? window._getMansionIdxForJournal(today) : 0;
+    const namesAR = window._getCalNamesAR || [];
+    const namesEN = window._getCalNamesEN || [];
+    if (m && namesEN.length) {
+      document.getElementById('j-today-name').textContent = namesEN[idx] || '';
+      document.getElementById('j-today-ar').textContent = namesAR[idx] || '';
+      const PROMPTS = {
+        'fire-saad':  'The moon blazes with creative fire today. What are you boldly igniting in your life?',
+        'fire-nahs':  'The moon tests your fire. Where does patience serve you better than force today?',
+        'earth-saad': 'The moon grounds you in abundance. What are you building or nurturing with care?',
+        'earth-nahs': 'The moon asks you to slow down. What foundation needs attention before you move forward?',
+        'air-saad':   'The moon lifts your mind with clarity. What idea or message is ready to be expressed today?',
+        'air-nahs':   'The moon stirs mental unrest. What thoughts need releasing rather than feeding?',
+        'water-saad': 'The moon deepens your emotional wisdom. What feeling is asking to be honored today?',
+        'water-nahs': 'The moon intensifies your depths. What emotion are you ready to move through with compassion?',
+      };
+      const key = m.element + '-' + (m.nature === "sa'd" ? 'saad' : 'nahs');
+      document.getElementById('j-today-prompt').textContent = PROMPTS[key] || '';
+    }
+    // Journal localStorage wiring
+    const todayStr = today.toISOString().slice(0,10);
+    const jCards = [
+      { taId:'j-today-entry',     delId:'j-today-delete',     key:`ee_pdf_j_today_${todayStr}` },
+      { taId:'j-intention-entry', delId:'j-intention-delete', key:'ee_pdf_j_intention' },
+      { taId:'j-release-entry',   delId:'j-release-delete',   key:'ee_pdf_j_release'  },
+    ];
+    jCards.forEach(({taId,delId,key}) => {
+      const ta=document.getElementById(taId), btn=document.getElementById(delId);
+      if(!ta||!btn) return;
+      ta.value=localStorage.getItem(key)||'';
+      ta.addEventListener('input',()=>localStorage.setItem(key,ta.value));
+      btn.addEventListener('click',()=>{
+        if(ta.value&&!confirm('Clear this entry? This cannot be undone.')) return;
+        ta.value=''; localStorage.removeItem(key);
+      });
+    });
+  });
+})();
+</script>
+
+<script>
+(function() {
+  const PREFIX = 'LME';
+  const LIC_SECRET = 'lunar_mansions_english_ee';
+  const STORE_KEY = 'ee_lic_lme';
+  const valid32 = 'ABCDEFGHJKLMNPQRSTUVWXYZ23456789';
+
+  function imul32(a, b) {
+    const ah=(a>>>16)&0xffff,al=a&0xffff,bh=(b>>>16)&0xffff,bl=b&0xffff;
+    return ((al*bl)+(((ah*bl+al*bh)<<16)>>>0)|0);
+  }
+  function validateKey(key) {
+    const clean=key.trim().toUpperCase().replace(/\s/g,'');
+    const parts=clean.split('-');
+    if(parts.length!==4||parts[0]!==PREFIX)return false;
+    for(let p=1;p<=2;p++){if(parts[p].length!==5)return false;for(const c of parts[p])if(!valid32.includes(c))return false;}
+    if(parts[3].length!==5)return false;
+    const payload=parts[1]+parts[2];
+    let hash=5381;
+    const combined=payload+LIC_SECRET;
+    for(let i=0;i<combined.length;i++)hash=imul32(hash,33)^combined.charCodeAt(i);
+    const h=(hash>>>0).toString(16).toUpperCase();
+    return parts[3]===(h.slice(-5).padStart(5,'0'));
+  }
+  function unlock(){
+    const g=document.getElementById('license-gate');
+    if(g)g.style.display='none';
+  }
+  function tryKey(){
+    const val=document.getElementById('gate-key-input').value;
+    const err=document.getElementById('gate-key-error');
+    if(!val.trim()){err.textContent='Please enter your license key.';return;}
+    if(!validateKey(val)){err.textContent='Invalid license key. Please check your key and try again.';return;}
+    localStorage.setItem(STORE_KEY,val.trim().toUpperCase());
+    unlock();
+  }
+  // Check stored key on load
+  const stored=localStorage.getItem(STORE_KEY);
+  if(stored&&validateKey(stored))unlock();
+
+  document.addEventListener('DOMContentLoaded',function(){
+    const btn=document.getElementById('gate-submit-btn');
+    const inp=document.getElementById('gate-key-input');
+    if(btn)btn.addEventListener('click',tryKey);
+    if(inp){
+      inp.addEventListener('keydown',function(e){if(e.key==='Enter')tryKey();});
+      inp.addEventListener('input',function(){document.getElementById('gate-key-error').textContent='';});
+    }
+  });
+})();
+</script>
+</body>
+</html>
