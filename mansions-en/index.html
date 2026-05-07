@@ -2159,14 +2159,23 @@
 (function(){
   const SECTION_IDS = ['sec-intro','sec-index','sec-mansions','sec-phases','sec-elements','sec-practice','calendar-section','sec-journal'];
 
-  window.showSection = function(id, btn) {
+  // Force-show/hide sections using inline styles — bypasses all CSS specificity issues
+  function _hideAll() {
     SECTION_IDS.forEach(function(sid){
       var el = document.getElementById(sid);
-      if(el) el.classList.remove('tab-active');
+      if(el) {
+        el.classList.remove('tab-active');
+        el.style.setProperty('display', 'none', 'important');
+      }
     });
+  }
+
+  window.showSection = function(id, btn) {
+    _hideAll();
     var target = document.getElementById(id);
     if(target) {
       target.classList.add('tab-active');
+      target.style.setProperty('display', 'block', 'important');
       window.scrollTo({top: 0, behavior: 'smooth'});
     }
     document.querySelectorAll('.tab-btn').forEach(function(b){ b.classList.remove('active'); });
@@ -2186,6 +2195,7 @@
   };
 
   document.addEventListener('DOMContentLoaded', function(){
+    _hideAll();
     showSection('sec-intro', document.querySelector('.tab-btn'));
     // Journal: populate today's mansion
     const today = new Date();
