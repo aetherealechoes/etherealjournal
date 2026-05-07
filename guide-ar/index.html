@@ -741,7 +741,7 @@
     <div class="welcome-sub">Personalized Lunar Mansion Guide</div>
     <div class="welcome-divider"></div>
     <p class="welcome-desc">
-      أدخل اسمك وتاريخ ميلادك لنكتشف معاً منزلك القمري الشخصي — البوابة الكونية التي وُلدت تحتها.
+      أدخل اسمك وتاريخ ميلادك لنكتشف معاً منزلك القمري الشخصي — البوابة الكونية التي وُلدت فيها.
     </p>
 
     <div class="form-group">
@@ -1153,7 +1153,7 @@ function generateGuide() {
   const todayMansion = getMansion(new Date());
   const todayPhase = getMoonPhase(new Date());
 
-  const displayName = name || 'أيها الباحث';
+  const displayName = name || 'الباحث';
 
   // ── Cover ──────────────────────────────────────────────────
   document.getElementById('cover-name').textContent = displayName;
