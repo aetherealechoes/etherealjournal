@@ -1,0 +1,490 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Ethereal Journal ✦ Ethereal Echoes</title>
+<style>
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+html,body{height:100%}
+body{min-height:100vh;background:linear-gradient(150deg,#07071a 0%,#130a2a 45%,#0b1535 100%);font-family:'Georgia','Times New Roman',serif;color:#e8d5b7;overflow-x:hidden}
+#starfield{position:fixed;top:0;left:0;width:100%;height:100%;pointer-events:none;z-index:0}
+#root{position:relative;z-index:1}
+.wrap{max-width:900px;margin:0 auto;padding:20px 16px}
+.center{max-width:480px;margin:0 auto;padding:20px 16px;min-height:100vh;display:flex;flex-direction:column;justify-content:center}
+.card{background:rgba(255,255,255,.04);backdrop-filter:blur(24px);border-radius:20px;border:1px solid rgba(201,162,39,.18);padding:28px;margin-bottom:20px}
+.logo{text-align:center;margin-bottom:32px}
+.logo-moon{font-size:2.5rem;display:block;margin-bottom:10px}
+.logo-title{font-size:clamp(1.8rem,5vw,2.8rem);background:linear-gradient(135deg,#c9a227,#f0d060,#c9a227);-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text;letter-spacing:4px;text-transform:uppercase;display:block;margin-bottom:6px}
+.logo-sub{color:#7a6fa0;font-size:.78rem;letter-spacing:3px}
+.sec{font-size:1rem;color:#c9a227;margin-bottom:14px;letter-spacing:3px}
+.muted{color:#7a6fa0;font-size:.82rem;line-height:1.6}
+.err{color:#e07070;font-size:.85rem;margin-bottom:12px;font-style:italic}
+.success{color:#5a9a6a;font-size:.85rem;margin-bottom:12px;font-style:italic}
+.inp{width:100%;background:rgba(0,0,0,.3);border:1px solid rgba(201,162,39,.25);border-radius:12px;color:#e8d5b7;padding:13px 16px;font-size:1rem;font-family:Georgia,serif;outline:none;margin-bottom:12px;letter-spacing:1px}
+.inp:focus{border-color:rgba(201,162,39,.6)}
+.ta{width:100%;min-height:180px;background:rgba(0,0,0,.28);border:1px solid rgba(201,162,39,.2);border-radius:14px;color:#e8d5b7;padding:16px;font-size:.98rem;font-family:Georgia,serif;line-height:1.85;resize:vertical;outline:none}
+.ta:focus{border-color:rgba(201,162,39,.5)}
+.btn-gold{background:linear-gradient(135deg,#c9a227,#a07c10);color:#07071a;border:none;border-radius:25px;padding:11px 24px;cursor:pointer;font-size:.88rem;font-weight:bold;letter-spacing:1px;font-family:Georgia,serif}
+.btn-ghost{background:transparent;color:#7a6fa0;border:1px solid rgba(122,111,160,.35);border-radius:25px;padding:9px 18px;cursor:pointer;font-size:.82rem;font-family:Georgia,serif}
+.btn-ghost:hover{color:#c9a227;border-color:rgba(201,162,39,.4)}
+.btn-danger{background:transparent;color:#c0504d;border:1px solid rgba(192,80,77,.4);border-radius:25px;padding:9px 18px;cursor:pointer;font-size:.82rem;font-family:Georgia,serif}
+.btn-sm{padding:6px 14px;font-size:.75rem}
+.row{display:flex;gap:10px;flex-wrap:wrap;align-items:center}
+.nav{display:flex;justify-content:center;gap:8px;margin-bottom:28px;flex-wrap:wrap}
+.nav-btn{padding:9px 18px;border-radius:25px;border:1px solid rgba(201,162,39,.25);background:rgba(255,255,255,.03);color:#7a6fa0;cursor:pointer;font-size:.8rem;letter-spacing:1px;font-family:Georgia,serif;transition:all .2s}
+.nav-btn.active{border-color:#c9a227;background:rgba(201,162,39,.12);color:#c9a227}
+.phrase-box{background:rgba(0,0,0,.35);border:1px solid rgba(201,162,39,.35);border-radius:16px;padding:22px;text-align:center;font-size:1rem;line-height:2.2;color:#e8d5b7;letter-spacing:1px;margin-bottom:18px;word-spacing:8px}
+.prompt-box{background:linear-gradient(135deg,rgba(201,162,39,.08),rgba(130,100,190,.08));border:1px solid rgba(201,162,39,.25);border-radius:14px;padding:18px 22px;margin-bottom:18px;font-size:1.05rem;line-height:1.7;font-style:italic;color:#e0ccaa}
+.entry{border-bottom:1px solid rgba(201,162,39,.12);padding-bottom:18px;margin-bottom:18px}
+.entry-date{color:#c9a227;font-size:.75rem;margin-bottom:5px}
+.entry-prompt{color:#7a6fa0;font-size:.82rem;font-style:italic;margin-bottom:8px}
+.mood-btn{font-size:1.5rem;background:transparent;border:1px solid transparent;border-radius:50%;width:44px;height:44px;cursor:pointer;transition:all .2s}
+.mood-btn.active{background:rgba(201,162,39,.18);border-color:#c9a227}
+.sound-card{padding:14px 16px;border-radius:14px;margin-bottom:10px;background:rgba(255,255,255,.025);border:1px solid rgba(255,255,255,.06);cursor:pointer;display:flex;align-items:center;justify-content:space-between;transition:all .2s}
+.sound-card.active{background:rgba(201,162,39,.1);border-color:rgba(201,162,39,.45)}
+.sound-icon{width:36px;height:36px;border-radius:50%;background:rgba(255,255,255,.04);border:1px solid rgba(255,255,255,.08);display:flex;align-items:center;justify-content:center;font-size:1.1rem;margin-right:14px;flex-shrink:0}
+.sound-card.active .sound-icon{background:rgba(201,162,39,.2);border-color:#c9a227}
+.audio-row{display:flex;align-items:center;justify-content:space-between;padding:13px 16px;border-radius:12px;margin-bottom:8px;background:rgba(255,255,255,.025);border:1px solid rgba(255,255,255,.05);cursor:pointer;transition:all .2s}
+.audio-row.playing{background:rgba(201,162,39,.09);border-color:rgba(201,162,39,.35)}
+.affirmation-card{padding:13px 16px;border-radius:12px;margin-bottom:7px;background:rgba(255,255,255,.02);border:1px solid rgba(255,255,255,.04);cursor:pointer;color:#7a6fa0;font-size:.88rem;font-style:italic;transition:all .2s}
+.affirmation-card.active{background:rgba(201,162,39,.09);border-color:rgba(201,162,39,.35);color:#c9a227}
+.viz-card{padding:20px;border-radius:16px;margin-bottom:14px;background:rgba(255,255,255,.025);border:1px solid rgba(201,162,39,.18);cursor:pointer;transition:all .2s}
+.viz-card:hover{border-color:rgba(201,162,39,.4)}
+.viz-step{display:flex;gap:16px;margin-bottom:20px;align-items:flex-start}
+.viz-num{min-width:32px;height:32px;border-radius:50%;background:rgba(201,162,39,.12);border:1px solid rgba(201,162,39,.3);display:flex;align-items:center;justify-content:center;color:#c9a227;font-size:.85rem;flex-shrink:0}
+.empty-box{border:2px dashed rgba(201,162,39,.25);border-radius:16px;padding:50px 20px;text-align:center;color:#4a4368}
+.feature-list{background:rgba(201,162,39,.07);border:1px solid rgba(201,162,39,.2);border-radius:14px;padding:18px;margin-bottom:24px}
+.feature-list p{color:#c9a227;font-size:.85rem;margin-bottom:9px}
+.feature-list p:last-child{margin-bottom:0}
+.status-bar{display:flex;justify-content:center;gap:12px;margin-top:12px;flex-wrap:wrap;align-items:center}
+.license-key-box{background:rgba(0,0,0,.4);border:1px solid rgba(201,162,39,.3);border-radius:14px;padding:16px 20px;margin-bottom:18px;font-family:monospace;font-size:.9rem;color:#c9a227;letter-spacing:2px;word-break:break-all;text-align:center}
+#board-wrapper{width:100%;position:relative;border-radius:16px;overflow:hidden;border:1px solid rgba(201,162,39,.2)}
+#board-canvas{position:relative;background:linear-gradient(150deg,#07071a 0%,#130a2a 45%,#0b1535 100%);overflow:hidden;transform-origin:top left;user-select:none}
+.board-item{position:absolute;cursor:grab;touch-action:none}
+.board-item:active{cursor:grabbing}
+.board-item.selected{outline:2px solid rgba(201,162,39,.7);outline-offset:2px}
+.board-img{display:block;width:100%;height:100%;object-fit:cover;border-radius:6px;pointer-events:none}
+.board-text{display:block;white-space:nowrap;font-family:Georgia,serif;pointer-events:none;padding:4px 8px}
+.item-delete{position:absolute;top:-10px;right:-10px;width:22px;height:22px;background:rgba(192,80,77,.9);border:none;color:white;border-radius:50%;cursor:pointer;font-size:11px;font-weight:bold;z-index:10}
+.item-resize{position:absolute;bottom:-9px;right:-9px;width:20px;height:20px;background:#c9a227;border:none;border-radius:50%;cursor:se-resize;font-size:10px;color:#07071a;font-weight:bold;z-index:10;touch-action:none}
+.board-hint{position:absolute;top:50%;left:50%;transform:translate(-50%,-50%);text-align:center;color:#3d3560;pointer-events:none}
+.board-toolbar{display:flex;gap:10px;margin-bottom:16px;flex-wrap:wrap;align-items:center}
+.text-form{background:rgba(0,0,0,.3);border:1px solid rgba(201,162,39,.2);border-radius:16px;padding:18px;margin-bottom:18px}
+.color-swatch{width:28px;height:28px;border-radius:50%;cursor:pointer;border:2px solid transparent;transition:all .2s}
+.color-swatch.active{border-color:white;transform:scale(1.15)}
+.size-btn{padding:5px 12px;font-size:.78rem;background:transparent;border:1px solid rgba(122,111,160,.35);border-radius:25px;cursor:pointer;color:#7a6fa0;font-family:Georgia,serif}
+.size-btn.active{border-color:#c9a227;color:#c9a227}
+.timer-ring-wrap{position:relative;display:inline-block;margin-bottom:28px}
+.timer-ring{transform:rotate(-90deg)}
+.timer-display{position:absolute;top:50%;left:50%;transform:translate(-50%,-50%);text-align:center}
+.timer-time{font-size:2.6rem;color:#e8d5b7;font-family:monospace}
+.timer-done-emoji{font-size:2.5rem;display:block}
+.timer-done-txt{color:#c9a227;font-size:.72rem;letter-spacing:2px;margin-top:6px}
+.timer-presets{display:flex;gap:10px;justify-content:center;flex-wrap:wrap;margin-bottom:24px}
+.timer-inputs{display:flex;justify-content:center;align-items:center;gap:16px;margin-bottom:24px}
+.timer-field{text-align:center}
+.timer-field-label{color:#c9a227;font-size:.7rem;letter-spacing:2px;margin-bottom:8px}
+.timer-num{width:76px;background:rgba(0,0,0,.3);border:1px solid rgba(201,162,39,.3);border-radius:12px;color:#e8d5b7;font-size:1.9rem;text-align:center;padding:10px;outline:none;font-family:Georgia,serif}
+.quote-box{margin-top:28px;padding:18px 22px;background:rgba(130,100,190,.07);border-radius:14px;border:1px solid rgba(130,100,190,.18);color:#7a6fa0;font-size:.85rem;font-style:italic;text-align:center;line-height:1.8}
+.affirmation-display{background:linear-gradient(135deg,rgba(201,162,39,.07),rgba(130,100,190,.07));border:1px solid rgba(201,162,39,.25);border-radius:20px;padding:40px 28px;text-align:center;margin-bottom:22px;min-height:150px;display:flex;align-items:center;justify-content:center}
+.affirmation-text{font-size:clamp(1rem,3vw,1.35rem);line-height:1.75;color:#e8d5b7;font-style:italic}
+.footer{text-align:center;padding:28px 0 16px;color:#2d2848;font-size:.7rem;letter-spacing:3px}
+.spinner{display:inline-block;width:18px;height:18px;border:2px solid rgba(201,162,39,.3);border-top-color:#c9a227;border-radius:50%;animation:spin .8s linear infinite;vertical-align:middle;margin-right:8px}
+@keyframes spin{to{transform:rotate(360deg)}}
+@media(max-width:600px){.card{padding:18px}.board-toolbar{gap:7px}}
+</style>
+</head>
+<body>
+<svg id="starfield" xmlns="http://www.w3.org/2000/svg"></svg>
+<div id="root"></div>
+
+<script>// ── CONSTANTS ─────────────────────────────────────────────────────────────────
+const BOARD_W=1200,BOARD_H=800;
+const WORDS=["moon","star","light","dream","soul","heart","flow","peace","love","rise","glow","calm","free","true","pure","wise","grace","bloom","heal","joy","hope","faith","trust","gold","fire","water","earth","sky","wind","stone","seed","root","crown","aura","spirit","divine","sacred","lotus","crystal","sage","amber","cedar","jasmine","rose","violet","azure","silver","coral","ivory","onyx","prism","radiant","infinite","celestial","cosmic","eternal","serene","mystic","oracle","phoenix","aurora","zenith","solstice","equinox"];
+const PROMPTS=["What does your ideal day look like one year from now?","Describe three things you are deeply grateful for today.","What limiting belief are you ready to release?","Write a letter from your future self to your present self.","What would you do if you knew you could not fail?","Describe your dream life in vivid detail — where are you, who are you with, how do you feel?","What is one small action you can take today toward your biggest dream?","What does abundance mean to you personally?","Who do you need to become to live the life you desire?","What are you calling into your life this month?","How does your body feel when you are fully aligned with your purpose?","What are three qualities you love most about yourself?","What would your highest self tell you right now?","Describe a moment when you felt completely aligned and at peace.","What does unconditional love feel like in your body?"];
+const AFFIRMATIONS=["I am a powerful creator of my reality.","Everything I desire is flowing to me now.","I am worthy of all the abundance the universe has to offer.","My dreams are valid and achievable.","I attract love, prosperity, and joy effortlessly.","The universe is always conspiring in my favor.","I release what no longer serves me with love and grace.","I am aligned with my highest purpose.","My intuition guides me toward my greatest good.","I am becoming the best version of myself every day.","I trust the timing of my life completely.","My energy is magnetic and I draw my desires to me."];
+const VISUALIZATIONS=[{title:"Morning Alignment",duration:"5 min",steps:["Close your eyes and take three deep breaths.","Feel your body relax with each exhale.","Visualize a golden light filling your chest, expanding outward.","See yourself waking up in your dream life. What do you see around you?","Feel the emotion of already having everything you desire.","Hold this feeling for the remaining time."]},{title:"Abundance Flow",duration:"10 min",steps:["Sit comfortably and close your eyes.","Breathe in abundance, breathe out limitation.","Imagine a river of golden light flowing toward you.","See money, opportunities, and blessings flowing freely into your life.","Feel deep gratitude for everything already on its way.","Affirm silently: I am open to receive."]},{title:"Future Self Meeting",duration:"15 min",steps:["Take 5 deep breaths to center yourself.","Imagine walking through a beautiful golden door.","On the other side, you meet your future self — radiant and fulfilled.","Look into their eyes. Notice how they carry themselves.","Ask them: What do I need to know right now?","Receive the message. Sit with it. Feel it in your heart.","Thank your future self and slowly return to the present."]}];
+const TIMER_SOUNDS=[{id:"bowl",label:"Tibetan Singing Bowl",icon:"🪘",desc:"432 Hz · warm & resonant"},{id:"crystal",label:"Crystal Singing Bowl",icon:"🔮",desc:"528 Hz · love frequency"},{id:"gong",label:"Temple Gong",icon:"🎐",desc:"110 Hz · deep & powerful"},{id:"tingsha",label:"Tingsha Bell",icon:"🔔",desc:"880 Hz · clear & bright"},{id:"om",label:"Om Tone",icon:"☯️",desc:"136 Hz · earth frequency"}];
+const TEXT_COLORS=[{label:"Gold",value:"#c9a227"},{label:"White",value:"#ffffff"},{label:"Lavender",value:"#c4b0ff"},{label:"Rose",value:"#ffb3c6"},{label:"Mint",value:"#a8f0c6"}];
+const KP="ee_",HP="ethereal_echoes_v1";
+const LIC_SECRET="ethereal_echoes_sacred";
+
+// ── LICENSE KEY VALIDATION ────────────────────────────────────────────────────
+function validateLicenseKey(key){
+  const clean=key.trim().toUpperCase().replace(/\s/g,"");
+  const parts=clean.split("-");
+  if(parts.length!==4||parts[0]!=="EJ")return false;
+  const valid32="ABCDEFGHJKLMNPQRSTUVWXYZ23456789";
+  for(let p=1;p<=2;p++){if(parts[p].length!==5)return false;for(const c of parts[p])if(!valid32.includes(c))return false;}
+  if(parts[3].length!==5)return false;
+  const payload=parts[1]+parts[2];
+  let hash=5381;
+  const combined=payload+LIC_SECRET;
+  for(let i=0;i<combined.length;i++)hash=Math.imul(hash,33)^combined.charCodeAt(i);
+  const h=(hash>>>0).toString(16).toUpperCase();
+  const expected=h.slice(-5).padStart(5,"0");
+  return parts[3]===expected;
+}
+
+// ── CRYPTO ────────────────────────────────────────────────────────────────────
+async function hashStr(s){try{const b=await crypto.subtle.digest("SHA-256",new TextEncoder().encode(s+HP));return Array.from(new Uint8Array(b)).map(x=>x.toString(16).padStart(2,"0")).join("");}catch(e){console.error("hashStr failed:",e);throw e;}}
+async function deriveKey(pw,salt){const km=await crypto.subtle.importKey("raw",new TextEncoder().encode(pw),{name:"PBKDF2"},false,["deriveKey"]);return crypto.subtle.deriveKey({name:"PBKDF2",salt,iterations:100000,hash:"SHA-256"},km,{name:"AES-GCM",length:256},false,["encrypt","decrypt"]);}
+async function encJSON(data,pw){const salt=crypto.getRandomValues(new Uint8Array(16)),iv=crypto.getRandomValues(new Uint8Array(12)),ct=await crypto.subtle.encrypt({name:"AES-GCM",iv},await deriveKey(pw,salt),new TextEncoder().encode(JSON.stringify(data)));const out=new Uint8Array(28+ct.byteLength);out.set(salt);out.set(iv,16);out.set(new Uint8Array(ct),28);return btoa(String.fromCharCode(...out));}
+async function decJSON(b64,pw){try{const r=Uint8Array.from(atob(b64),c=>c.charCodeAt(0)),pt=await crypto.subtle.decrypt({name:"AES-GCM",iv:r.slice(16,28)},await deriveKey(pw,r.slice(0,16)),r.slice(28));return JSON.parse(new TextDecoder().decode(pt));}catch{return null;}}
+const genPhrase=()=>Array.from({length:12},()=>WORDS[Math.floor(Math.random()*WORDS.length)]).join(" ");
+
+// ── SOUNDS ────────────────────────────────────────────────────────────────────
+function getCtx(){const C=window.AudioContext||window.webkitAudioContext;return C?new C():null;}
+function osc(ctx,freq,type,peak,atk,dec,start=0){const o=ctx.createOscillator(),g=ctx.createGain();o.connect(g);g.connect(ctx.destination);o.type=type;o.frequency.setValueAtTime(freq,ctx.currentTime+start);g.gain.setValueAtTime(0.0001,ctx.currentTime+start);g.gain.linearRampToValueAtTime(peak,ctx.currentTime+start+atk);g.gain.exponentialRampToValueAtTime(0.0001,ctx.currentTime+start+atk+dec);o.start(ctx.currentTime+start);o.stop(ctx.currentTime+start+atk+dec+0.1);}
+const SND={bowl:c=>{osc(c,432,"sine",.35,.06,3.8);osc(c,432*2.76,"sine",.12,.06,2.8);osc(c,432*5.4,"sine",.05,.06,1.8);},crystal:c=>{osc(c,528,"sine",.30,.04,3.5);osc(c,528*2,"sine",.10,.04,2.8);osc(c,528*3,"sine",.05,.04,2.0);},gong:c=>{osc(c,110,"sine",.45,.02,5.0);osc(c,110*1.41,"sine",.20,.02,4.0);osc(c,110*2,"sine",.10,.02,3.0);},tingsha:c=>{osc(c,880,"sine",.40,.005,2.0);osc(c,880*2.76,"sine",.15,.005,1.4);osc(c,900,"sine",.25,.005,1.8,.08);},om:c=>{osc(c,136.1,"sine",.28,.5,3.2);osc(c,136.1*2,"sine",.12,.5,3.0);osc(c,136.1*.5,"sine",.10,.8,3.5);}};
+function playSound(id){const c=getCtx();if(c)SND[id]?.(c);}
+
+// ── IMAGE RESIZE ──────────────────────────────────────────────────────────────
+function resizeImg(dataUrl,maxW=900){return new Promise(res=>{const img=new Image();img.onload=()=>{const sc=Math.min(1,maxW/img.width),c=document.createElement("canvas");c.width=img.width*sc;c.height=img.height*sc;c.getContext("2d").drawImage(img,0,0,c.width,c.height);res(c.toDataURL("image/jpeg",.75));};img.src=dataUrl;});}
+
+// ── STATE ─────────────────────────────────────────────────────────────────────
+const S={
+  screen:"loading",pwd:"",
+  // license
+  licIn:"",licErr:"",
+  // setup
+  sStep:1,sPwd:"",sPwd2:"",phrase:"",phraseSaved:false,
+  // lock
+  lockIn:"",
+  // recovery
+  rStep:1,rIn:"",nPwd:"",nPwd2:"",newPhrase:"",
+  // data
+  entries:[],boardItems:[],sound:"bowl",defMin:5,
+  // ui
+  tab:"journal",curEntry:"",pIdx:0,aIdx:0,mood:null,showPast:false,
+  // board ui
+  selItem:null,showTxtForm:false,newText:"",txtColor:"#c9a227",txtSize:52,txtBold:false,
+  // audio
+  audioFiles:[],curAudio:null,playing:false,
+  // timer
+  tMin:5,tSec:0,tRunning:false,tTotal:300,tLeft:300,tStarted:false,tDone:false,
+  // viz
+  selViz:null,
+  // misc
+  authErr:"",busy:false,saveStatus:"",flashMsg:"",showMenu:false
+};
+
+// ── UTILS ─────────────────────────────────────────────────────────────────────
+const esc=s=>String(s).replace(/&/g,"&amp;").replace(/</g,"&lt;").replace(/>/g,"&gt;").replace(/"/g,"&quot;");
+const fmt=s=>`${String(Math.floor(s/60)).padStart(2,"0")}:${String(s%60).padStart(2,"0")}`;
+const today=new Date().toLocaleDateString("en-US",{weekday:"long",year:"numeric",month:"long",day:"numeric"});
+const moods=["😔","😐","🙂","😊","✨"];
+let saveTimeout=null,lastActive=Date.now(),timerInterval=null,flashTimeout=null;
+function flash(msg){S.flashMsg=msg;clearTimeout(flashTimeout);flashTimeout=setTimeout(()=>{S.flashMsg="";renderStatusBar();},2500);renderStatusBar();}
+function renderStatusBar(){const sb=document.getElementById("status-bar");if(sb)sb.innerHTML=statusBarHTML();}
+
+// ── STARFIELD ─────────────────────────────────────────────────────────────────
+(function(){const sf=document.getElementById("starfield");sf.innerHTML=Array.from({length:100},()=>({x:Math.random()*100,y:Math.random()*100,r:Math.random()*1.6+.3,o:Math.random()*.55+.15})).map(s=>`<circle cx="${s.x}%" cy="${s.y}%" r="${s.r}" fill="white" opacity="${s.o}"/>`).join("");})();
+
+// ── AUTO-LOCK ─────────────────────────────────────────────────────────────────
+["mousemove","keydown","click","touchstart"].forEach(e=>window.addEventListener(e,()=>{lastActive=Date.now();}));
+setInterval(()=>{if(S.screen==="app"&&Date.now()-lastActive>600000)lockApp();},30000);
+
+// ── AUTO-SAVE ─────────────────────────────────────────────────────────────────
+function scheduleSave(){if(S.screen!=="app"||!S.pwd)return;clearTimeout(saveTimeout);S.saveStatus="saving";renderStatusBar();saveTimeout=setTimeout(async()=>{const enc=await encJSON({entries:S.entries,boardItems:S.boardItems,sound:S.sound,defMin:S.defMin},S.pwd);localStorage.setItem(`${KP}data`,enc);S.saveStatus="saved";renderStatusBar();setTimeout(()=>{S.saveStatus="";renderStatusBar();},2000);},1500);}
+
+// ── RENDER ────────────────────────────────────────────────────────────────────
+function render(){
+  const root=document.getElementById("root");
+  if(S.screen==="loading"){root.innerHTML=`<div class="center" style="text-align:center"><span style="font-size:3rem">🌙</span><p class="muted" style="margin-top:16px;letter-spacing:3px">LOADING…</p></div>`;return;}
+  if(S.screen==="license"){root.innerHTML=licenseHTML();attachLicenseEvents();return;}
+  if(S.screen==="setup"){root.innerHTML=setupHTML();attachSetupEvents();return;}
+  if(S.screen==="locked"){root.innerHTML=lockedHTML();attachLockedEvents();return;}
+  if(S.screen==="recovery"){root.innerHTML=recoveryHTML();attachRecoveryEvents();return;}
+  if(S.screen==="app"){root.innerHTML=appHTML();attachAppEvents();if(S.tab==="vision")updateBoardScale();return;}
+}
+
+// ── LICENSE HTML ──────────────────────────────────────────────────────────────
+function licenseHTML(){return`<div class="center"><div class="logo"><span class="logo-moon">🌙</span><span class="logo-title">Ethereal Journal</span><span class="logo-sub">✦ SACRED MANIFESTATION SPACE ✦</span></div>
+<div class="card">
+  <h2 class="sec">✦ ENTER YOUR LICENSE KEY</h2>
+  <p class="muted" style="margin-bottom:20px">Enter the license key you received after purchase to unlock your sacred journal.</p>
+  <input class="inp" id="lic-in" type="text" placeholder="EJ-XXXXX-XXXXX-XXXXX" value="${esc(S.licIn)}" autocomplete="off" spellcheck="false" style="letter-spacing:2px;font-size:1rem"/>
+  ${S.licErr?`<p class="err">${esc(S.licErr)}</p>`:""}
+  <button class="btn-gold" id="lic-submit" style="width:100%;margin-top:6px">Unlock My Journal ✦</button>
+  <p class="muted" style="margin-top:20px;font-size:.75rem;text-align:center">Don't have a license? <a href="https://etherealechoes.com" target="_blank" style="color:#c9a227">Purchase at EtherealEchoes.com →</a></p>
+</div></div>`;}
+
+function attachLicenseEvents(){
+  const inp=document.getElementById("lic-in");
+  if(inp){
+    inp.addEventListener("input",e=>{S.licIn=e.target.value;S.licErr="";});
+    inp.addEventListener("keydown",e=>e.key==="Enter"&&submitLicense());
+    inp.focus();
+  }
+  document.getElementById("lic-submit")?.addEventListener("click",submitLicense);
+}
+
+function submitLicense(){
+  const key=S.licIn.trim();
+  if(!key){S.licErr="Please enter your license key.";render();return;}
+  if(!validateLicenseKey(key)){S.licErr="Invalid license key. Please check your key and try again.";render();return;}
+  // Valid — store and proceed
+  localStorage.setItem(`${KP}lic`,key.toUpperCase().replace(/\s/g,""));
+  S.licErr="";
+  S.screen=localStorage.getItem(`${KP}init`)?"locked":"setup";
+  render();
+}
+
+// ── SETUP HTML ────────────────────────────────────────────────────────────────
+function setupHTML(){const step=S.sStep;return`<div class="center"><div class="logo"><span class="logo-moon">🌙</span><span class="logo-title">Ethereal Journal</span><span class="logo-sub">✦ SACRED MANIFESTATION SPACE ✦</span></div>
+<div class="card">
+  ${step===1?`<h2 class="sec">✦ CREATE YOUR PASSWORD</h2><p class="muted" style="margin-bottom:20px">Your journal is private and encrypted with AES-256.</p><input class="inp" id="sp1" type="password" placeholder="Create password (min. 6 characters)" value="${esc(S.sPwd)}"/><input class="inp" id="sp2" type="password" placeholder="Confirm password" value="${esc(S.sPwd2)}"/>${S.authErr?`<p class="err">${esc(S.authErr)}</p>`:""}<button class="btn-gold" id="s-next">Continue ✦</button>`:""}
+  ${step===2?`<h2 class="sec">✦ YOUR RECOVERY PHRASE</h2><p class="muted" style="margin-bottom:16px">Write these 12 words down. This is the <strong style="color:#c9a227">only way</strong> to recover your journal if you forget your password.</p><div class="phrase-box">${esc(S.phrase)}</div><div class="row" style="margin-bottom:20px"><input type="checkbox" id="pcheck" ${S.phraseSaved?"checked":""}><label for="pcheck" class="muted" style="cursor:pointer;margin-left:8px">I have written down my recovery phrase and stored it safely.</label></div><div class="row"><button class="btn-gold" id="s-confirm" ${S.phraseSaved?"":"disabled"} style="opacity:${S.phraseSaved?1:.4}">I've Saved It ✦</button><button class="btn-ghost" id="s-regen">↺ New Phrase</button></div>`:""}
+  ${step===3?`<h2 class="sec">✦ YOUR JOURNAL IS READY</h2><div class="feature-list"><p>🔐 AES-256 encryption</p><p>🔒 Auto-locks after 10 minutes</p><p>💾 Auto-saves as you write</p><p>🖼️ Drag & drop vision board with PNG export</p><p>📤 Export your entries anytime</p><p>🔑 Recovery phrase backup</p></div>${S.busy?`<p class="muted">Creating your sacred space…</p>`:`<button class="btn-gold" id="s-finish">Enter My Journal ✦</button>`}`:""}
+</div></div>`;}
+
+function attachSetupEvents(){
+  const sp1=document.getElementById("sp1"),sp2=document.getElementById("sp2");
+  if(sp1){sp1.addEventListener("input",e=>{S.sPwd=e.target.value;S.authErr="";});sp1.addEventListener("keydown",e=>e.key==="Enter"&&setupStep1());}
+  if(sp2){sp2.addEventListener("input",e=>{S.sPwd2=e.target.value;S.authErr="";});sp2.addEventListener("keydown",e=>e.key==="Enter"&&setupStep1());}
+  document.getElementById("s-next")?.addEventListener("click",setupStep1);
+  document.getElementById("pcheck")?.addEventListener("change",e=>{S.phraseSaved=e.target.checked;const btn=document.getElementById("s-confirm");if(btn){btn.disabled=!S.phraseSaved;btn.style.opacity=S.phraseSaved?1:.4;}});
+  document.getElementById("s-confirm")?.addEventListener("click",()=>{if(S.phraseSaved){S.sStep=3;render();}});
+  document.getElementById("s-regen")?.addEventListener("click",()=>{S.phrase=genPhrase();render();});
+  document.getElementById("s-finish")?.addEventListener("click",finishSetup);
+}
+async function setupStep1(){if(S.sPwd.length<6){S.authErr="Password must be at least 6 characters.";render();return;}if(S.sPwd!==S.sPwd2){S.authErr="Passwords do not match.";render();return;}S.authErr="";S.phrase=genPhrase();S.sStep=2;render();}
+async function finishSetup(){S.busy=true;render();try{const[ph,rh]=await Promise.all([hashStr(S.sPwd),hashStr(S.phrase)]);const enc=await encJSON({entries:[],boardItems:[],sound:"bowl",defMin:5},S.sPwd);localStorage.setItem(`${KP}init`,"true");localStorage.setItem(`${KP}ph`,ph);localStorage.setItem(`${KP}rh`,rh);localStorage.setItem(`${KP}data`,enc);S.pwd=S.sPwd;S.busy=false;S.screen="app";render();}catch(e){S.authErr="Setup failed. Please ensure you are using a modern browser with HTTPS.";S.busy=false;S.sStep=1;render();}}
+
+// ── LOCKED HTML ───────────────────────────────────────────────────────────────
+function lockedHTML(){return`<div class="center"><div class="logo"><span class="logo-moon">🌙</span><span class="logo-title">Ethereal Journal</span><span class="logo-sub">✦ YOUR JOURNAL IS LOCKED ✦</span></div><div class="card"><h2 class="sec">✦ ENTER PASSWORD</h2><input class="inp" id="lock-in" type="password" placeholder="Your password" value="${esc(S.lockIn)}"/>${S.authErr?`<p class="err">${esc(S.authErr)}</p>`:""}<div class="row">${S.busy?`<span><span class="spinner"></span>Unlocking…</span>`:`<button class="btn-gold" id="unlock-btn">Unlock ✦</button>`}<button class="btn-ghost" id="forgot-btn">Forgot Password?</button></div></div><p class="muted" style="text-align:center;font-size:.72rem">🔐 Encrypted and protected</p></div>`;}
+function attachLockedEvents(){const li=document.getElementById("lock-in");if(li){li.addEventListener("input",e=>{S.lockIn=e.target.value;S.authErr="";});li.addEventListener("keydown",e=>e.key==="Enter"&&handleUnlock());li.focus();}document.getElementById("unlock-btn")?.addEventListener("click",handleUnlock);document.getElementById("forgot-btn")?.addEventListener("click",()=>{S.screen="recovery";S.authErr="";S.lockIn="";render();});}
+async function handleUnlock(){if(!S.lockIn)return;S.busy=true;S.authErr="";render();try{const h=await hashStr(S.lockIn);if(h!==localStorage.getItem(`${KP}ph`)){S.authErr="Incorrect password.";S.busy=false;render();return;}const data=await decJSON(localStorage.getItem(`${KP}data`),S.lockIn);if(!data){S.authErr="Could not decrypt data.";S.busy=false;render();return;}S.entries=data.entries||[];S.boardItems=data.boardItems||[];S.sound=data.sound||"bowl";S.defMin=data.defMin||5;S.tMin=data.defMin||5;S.pwd=S.lockIn;S.lockIn="";S.busy=false;lastActive=Date.now();S.screen="app";render();}catch(e){S.authErr="Unlock failed. Please try again.";S.busy=false;render();}}
+function lockApp(){S.pwd="";S.entries=[];S.boardItems=[];S.lockIn="";clearInterval(timerInterval);S.tRunning=false;S.tStarted=false;S.screen="locked";render();}
+
+// ── RECOVERY HTML ─────────────────────────────────────────────────────────────
+function recoveryHTML(){const st=S.rStep;return`<div class="center"><div class="logo"><span class="logo-moon">🌙</span><span class="logo-title">Ethereal Journal</span></div><div class="card">
+  ${st===1?`<h2 class="sec">✦ RECOVERY PHRASE</h2><p class="muted" style="margin-bottom:6px">Enter your 12-word recovery phrase.</p><p style="color:#e07070;font-size:.82rem;margin-bottom:18px">⚠️ This will permanently erase all journal data.</p><textarea class="ta" id="r-in" placeholder="word1 word2 … word12" style="min-height:90px">${esc(S.rIn)}</textarea>${S.authErr?`<p class="err">${esc(S.authErr)}</p>`:""}<div class="row" style="margin-top:12px">${S.busy?`<span><span class="spinner"></span>Verifying…</span>`:`<button class="btn-danger" id="r-verify">Verify Phrase</button>`}<button class="btn-ghost" id="r-back">← Back</button></div>`:""}
+  ${st===2?`<h2 class="sec">✦ CREATE NEW PASSWORD</h2><p style="color:#e07070;font-size:.82rem;margin-bottom:18px">⚠️ All previous journal entries will be deleted.</p><input class="inp" id="r-np1" type="password" placeholder="New password (min. 6 characters)" value="${esc(S.nPwd)}"/><input class="inp" id="r-np2" type="password" placeholder="Confirm new password" value="${esc(S.nPwd2)}"/>${S.authErr?`<p class="err">${esc(S.authErr)}</p>`:""}<div class="row">${S.busy?`<span><span class="spinner"></span>Resetting…</span>`:`<button class="btn-danger" id="r-reset">Reset & Continue</button>`}</div>`:""}
+  ${st===3?`<h2 class="sec">✦ NEW RECOVERY PHRASE</h2><p class="muted" style="margin-bottom:16px">Write down your new recovery phrase before continuing.</p><div class="phrase-box">${esc(S.newPhrase)}</div><button class="btn-gold" id="r-done">I've Saved It — Enter Journal ✦</button>`:""}
+</div></div>`;}
+function attachRecoveryEvents(){
+  document.getElementById("r-in")?.addEventListener("input",e=>{S.rIn=e.target.value;S.authErr="";});
+  document.getElementById("r-verify")?.addEventListener("click",verifyRecovery);
+  document.getElementById("r-back")?.addEventListener("click",()=>{S.screen="locked";S.rStep=1;S.rIn="";S.authErr="";render();});
+  document.getElementById("r-np1")?.addEventListener("input",e=>{S.nPwd=e.target.value;S.authErr="";});
+  document.getElementById("r-np2")?.addEventListener("input",e=>{S.nPwd2=e.target.value;S.authErr="";});
+  document.getElementById("r-reset")?.addEventListener("click",applyReset);
+  document.getElementById("r-done")?.addEventListener("click",()=>{S.rStep=1;S.rIn="";S.nPwd="";S.nPwd2="";S.authErr="";S.screen="app";render();});
+}
+async function verifyRecovery(){S.busy=true;S.authErr="";render();const h=await hashStr(S.rIn.trim().toLowerCase().replace(/\s+/g," "));if(h!==localStorage.getItem(`${KP}rh`)){S.authErr="Recovery phrase incorrect.";S.busy=false;render();return;}S.busy=false;S.rStep=2;render();}
+async function applyReset(){if(S.nPwd.length<6){S.authErr="Min 6 characters.";render();return;}if(S.nPwd!==S.nPwd2){S.authErr="Passwords don't match.";render();return;}S.busy=true;render();const fp=genPhrase(),[ph,rh]=await Promise.all([hashStr(S.nPwd),hashStr(fp)]);const enc=await encJSON({entries:[],boardItems:[],sound:"bowl",defMin:5},S.nPwd);localStorage.setItem(`${KP}ph`,ph);localStorage.setItem(`${KP}rh`,rh);localStorage.setItem(`${KP}data`,enc);S.newPhrase=fp;S.pwd=S.nPwd;S.entries=[];S.boardItems=[];S.busy=false;S.rStep=3;render();}
+
+// ── APP HTML ──────────────────────────────────────────────────────────────────
+function appHTML(){return`<div class="wrap">
+  <div style="text-align:center;padding:28px 0 18px">
+    <div style="font-size:2.5rem;margin-bottom:8px">🌙</div>
+    <span class="logo-title" style="display:block">Ethereal Journal</span>
+    <p class="logo-sub" style="margin-bottom:4px">✦ YOUR SACRED MANIFESTATION SPACE ✦</p>
+    <p style="color:#4a4368;font-size:.72rem;letter-spacing:1px">${today}</p>
+    <div class="status-bar" id="status-bar">${statusBarHTML()}</div>
+    ${S.showMenu?`<div class="row" style="justify-content:center;margin-top:10px"><button class="btn-ghost btn-sm" id="export-btn">⬇ Export (.json)</button><label class="btn-ghost btn-sm" style="cursor:pointer">⬆ Import Backup<input type="file" accept=".json" id="import-input" style="display:none"/></label><button class="btn-ghost btn-sm" id="menu-close">✕</button></div>`:""}
+  </div>
+  <nav class="nav">${["journal","vision","audio","timer","affirmations","visualize"].map((t,i)=>
+    `<button class="nav-btn ${S.tab===t?"active":""}" data-tab="${t}">${["📖","🖼️","🎵","⏱️","✨","🔮"][i]} ${["Journal","Vision","Audio","Timer","Affirm","Visualize"][i]}</button>`).join("")}
+  </nav>
+  ${S.tab==="journal"?journalHTML():""}
+  ${S.tab==="vision"?visionHTML():""}
+  ${S.tab==="audio"?audioHTML():""}
+  ${S.tab==="timer"?timerHTML():""}
+  ${S.tab==="affirmations"?affirmHTML():""}
+  ${S.tab==="visualize"?vizHTML():""}
+  <div class="footer">✦ ETHEREAL ECHOES ✦ YOUR SACRED MANIFESTATION SPACE ✦</div>
+</div>`;}
+
+function statusBarHTML(){return`${S.saveStatus==="saving"?`<span style="color:#7a6fa0;font-size:.72rem;font-style:italic">💾 Saving…</span>`:""}${S.saveStatus==="saved"?`<span style="color:#5a9a6a;font-size:.72rem">✓ Saved</span>`:""}${S.flashMsg?`<span style="color:#c9a227;font-size:.78rem;font-style:italic">${esc(S.flashMsg)}</span>`:""}
+<button class="btn-ghost btn-sm" id="backup-btn">📤 Backup</button>
+<button class="btn-ghost btn-sm" id="lock-btn">🔒 Lock</button>`;}
+
+// ── JOURNAL ───────────────────────────────────────────────────────────────────
+function journalHTML(){return`<div class="card">
+  <h2 class="sec">✦ TODAY'S PROMPT</h2>
+  <div class="prompt-box">"${esc(PROMPTS[S.pIdx])}"</div>
+  <div class="row" style="margin-bottom:22px"><button class="btn-ghost" id="next-prompt">Next Prompt →</button><button class="btn-ghost" id="rnd-prompt">✦ Surprise Me</button></div>
+  <h2 class="sec">✦ YOUR THOUGHTS</h2>
+  <textarea class="ta" id="journal-ta" placeholder="Begin writing your manifestation here… let your thoughts flow freely.">${esc(S.curEntry)}</textarea>
+  <div style="margin-top:16px"><p class="muted" style="margin-bottom:10px;font-size:.75rem;letter-spacing:2px">HOW ARE YOU FEELING?</p>
+  <div class="row" style="margin-bottom:16px">${moods.map((m,i)=>`<button class="mood-btn ${S.mood===i?"active":""}" data-mood="${i}">${m}</button>`).join("")}</div></div>
+  <div class="row"><button class="btn-gold" id="save-entry">Save Entry ✦</button><button class="btn-ghost" id="toggle-past">Past Entries (${S.entries.length})</button></div>
+</div>
+${S.showPast?`<div class="card"><h2 class="sec">✦ PAST ENTRIES</h2>${S.entries.length===0?`<p class="muted" style="font-style:italic">No entries yet.</p>`:[...S.entries].reverse().map(e=>`<div class="entry"><div style="display:flex;justify-content:space-between"><p class="entry-date">${esc(e.date)} ${moods[e.mood]||""}</p><button class="btn-ghost btn-sm" data-del="${e.id}">✕</button></div><p class="entry-prompt">"${esc(e.prompt)}"</p><p style="color:#e8d5b7;line-height:1.75;font-size:.95rem">${esc(e.text)}</p></div>`).join("")}</div>`:""}
+`;}
+
+// ── VISION BOARD ──────────────────────────────────────────────────────────────
+function visionHTML(){return`<div class="card">
+  <h2 class="sec">✦ YOUR VISION BOARD</h2>
+  <div class="board-toolbar">
+    <label class="btn-gold" style="cursor:pointer">+ Add Image<input type="file" accept="image/*" multiple id="img-input" style="display:none"/></label>
+    <button class="btn-ghost" id="add-text-btn">✦ Add Text</button>
+    <button class="btn-ghost" id="save-board-btn">⬇ Save as PNG</button>
+    ${S.boardItems.length>0?`<button class="btn-danger btn-sm" id="clear-board-btn">Clear</button>`:""}
+    ${S.selItem?`<button class="btn-ghost btn-sm" id="del-sel-btn">🗑 Delete</button><button class="btn-ghost btn-sm" id="fwd-sel-btn">↑ Forward</button>`:""}
+  </div>
+  ${S.showTxtForm?textFormHTML():""}
+  <div id="board-wrapper"><div id="board-canvas">${boardItemsHTML()}</div></div>
+  <p class="muted" style="margin-top:12px;font-size:.75rem">💡 Click to select · Drag to move · <strong style="color:#c9a227">↗</strong> to resize · Save as PNG for phone wallpaper</p>
+</div>`;}
+
+function boardItemsHTML(){if(S.boardItems.length===0)return`<div class="board-hint"><span style="font-size:3rem;display:block;margin-bottom:12px">🌟</span><p>Add images and text to build your vision</p></div>`;return[...S.boardItems].sort((a,b)=>(a.zIndex||0)-(b.zIndex||0)).map(item=>{const isSel=S.selItem===item.id;if(item.type==="image")return`<div class="board-item ${isSel?"selected":""}" id="item-${item.id}" data-item="${item.id}" style="left:${item.x}px;top:${item.y}px;width:${item.width}px;height:${item.height}px;z-index:${item.zIndex||1}"><img class="board-img" src="${item.src}" draggable="false"/>${isSel?`<button class="item-delete" data-del-item="${item.id}">✕</button><button class="item-resize" data-resize-item="${item.id}">↗</button>`:""}</div>`;if(item.type==="text")return`<div class="board-item ${isSel?"selected":""}" id="item-${item.id}" data-item="${item.id}" style="left:${item.x}px;top:${item.y}px;z-index:${item.zIndex||1}"><span class="board-text" style="font-size:${item.fontSize}px;color:${item.color};font-weight:${item.bold?"bold":"normal"};text-shadow:0 0 20px ${item.color},0 0 40px ${item.color}88">${esc(item.text)}</span>${isSel?`<button class="item-delete" data-del-item="${item.id}">✕</button><button class="item-resize" data-resize-item="${item.id}">↗</button>`:""}</div>`;return"";}).join("");}
+
+function textFormHTML(){return`<div class="text-form"><h3 class="sec" style="font-size:.85rem">ADD TEXT</h3>
+<input class="inp" id="txt-input" placeholder="Your word or affirmation…" value="${esc(S.newText)}"/>
+<div class="row" style="margin-bottom:14px;gap:18px;align-items:flex-start">
+  <div><p class="muted" style="font-size:.72rem;letter-spacing:2px;margin-bottom:8px">COLOR</p><div class="row">${TEXT_COLORS.map(c=>`<button class="color-swatch ${S.txtColor===c.value?"active":""}" data-color="${c.value}" style="background:${c.value}" title="${c.label}"></button>`).join("")}</div></div>
+  <div><p class="muted" style="font-size:.72rem;letter-spacing:2px;margin-bottom:8px">SIZE</p><div class="row">${[[36,"S"],[52,"M"],[72,"L"],[96,"XL"]].map(([sz,l])=>`<button class="size-btn ${S.txtSize===sz?"active":""}" data-size="${sz}">${l}</button>`).join("")}</div></div>
+  <div style="margin-top:18px"><label class="muted" style="cursor:pointer;font-size:.78rem;letter-spacing:1px"><input type="checkbox" id="txt-bold" ${S.txtBold?"checked":""} style="accent-color:#c9a227;margin-right:6px">BOLD</label></div>
+</div>
+<div class="row"><button class="btn-gold" id="add-txt-btn">Add to Board ✦</button><button class="btn-ghost" id="cancel-txt-btn">Cancel</button></div>
+</div>`;}
+
+// ── AUDIO ─────────────────────────────────────────────────────────────────────
+function audioHTML(){return`<div class="card"><h2 class="sec">✦ SACRED SOUNDS</h2>
+<p class="muted" style="margin-bottom:20px">Import guided meditations, healing frequencies, or ambient music. Audio is session-only.</p>
+<label class="btn-gold" style="cursor:pointer;display:inline-block;margin-bottom:24px">+ Import Audio<input type="file" accept="audio/*" multiple id="aud-input" style="display:none"/></label>
+<audio id="audio-el"></audio>
+${S.curAudio?`<div style="background:rgba(201,162,39,.07);border:1px solid rgba(201,162,39,.25);border-radius:16px;padding:18px 20px;margin-bottom:20px;display:flex;align-items:center;gap:16px"><button class="btn-gold" id="play-btn" style="padding:13px 18px;font-size:1.1rem;min-width:50px">${S.playing?"⏸":"▶"}</button><div><p style="color:#c9a227;font-size:.72rem;letter-spacing:2px;margin-bottom:3px">NOW PLAYING</p><p style="color:#e8d5b7">${esc(S.curAudio.name)}</p></div></div>`:""}
+${S.audioFiles.length===0?`<div class="empty-box"><div style="font-size:3rem;margin-bottom:14px">🎵</div><p>No audio files yet.</p></div>`:S.audioFiles.map(a=>`<div class="audio-row ${S.curAudio?.id===a.id&&S.playing?"playing":""}" data-play="${a.id}"><div style="display:flex;align-items:center;gap:12px"><span style="color:#c9a227">${S.curAudio?.id===a.id&&S.playing?"🔊":"🎵"}</span><span style="color:#e8d5b7;font-size:.9rem">${esc(a.name)}</span></div><button class="btn-ghost btn-sm" data-del-aud="${a.id}">✕</button></div>`).join("")}
+</div>`;}
+
+// ── TIMER ─────────────────────────────────────────────────────────────────────
+function timerHTML(){const circ=2*Math.PI*90,prog=S.tTotal>0?(S.tTotal-S.tLeft)/S.tTotal:0,offset=circ-(prog*circ);return`<div class="card"><h2 class="sec">✦ TIMER SOUND</h2>
+<p class="muted" style="margin-bottom:16px">Plays at the <em style="color:#c9a227">start</em> and <em style="color:#c9a227">end</em> of each session.</p>
+${TIMER_SOUNDS.map(s=>`<div class="sound-card ${S.sound===s.id?"active":""}" data-sound="${s.id}"><div style="display:flex;align-items:center"><div class="sound-icon">${s.icon}</div><div><p style="color:${S.sound===s.id?"#c9a227":"#e8d5b7"};font-size:.9rem;margin-bottom:2px">${s.label}</p><p style="color:#4a4368;font-size:.75rem;font-style:italic">${s.desc}</p></div></div><button class="btn-ghost btn-sm" data-preview="${s.id}">▶ Preview</button></div>`).join("")}
+</div>
+<div class="card"><h2 class="sec">✦ VISUALIZATION TIMER</h2>
+${!S.tStarted?`<p class="muted" style="text-align:center;margin-bottom:18px;font-size:.75rem;letter-spacing:2px">SET DURATION</p>
+<div class="timer-inputs"><div class="timer-field"><p class="timer-field-label">MINUTES</p><input class="timer-num" id="t-min" type="number" min="0" max="60" value="${S.tMin}"/></div>
+<span style="color:#c9a227;font-size:2rem;margin-top:20px">:</span>
+<div class="timer-field"><p class="timer-field-label">SECONDS</p><input class="timer-num" id="t-sec" type="number" min="0" max="59" value="${S.tSec}"/></div></div>
+<div class="timer-presets">${[3,5,10,15,20].map(m=>`<button class="btn-ghost btn-sm" data-preset="${m}">${m} min</button>`).join("")}</div>
+<div style="text-align:center"><button class="btn-gold" id="start-timer">Begin Visualization ✦</button><p style="color:#4a4368;font-size:.72rem;margin-top:12px;font-style:italic">Will play: ${TIMER_SOUNDS.find(x=>x.id===S.sound)?.icon} ${TIMER_SOUNDS.find(x=>x.id===S.sound)?.label}</p></div>`
+:`<div style="text-align:center"><div class="timer-ring-wrap">
+<svg class="timer-ring" width="210" height="210"><circle cx="105" cy="105" r="90" fill="none" stroke="rgba(201,162,39,.1)" stroke-width="7"/><circle id="timer-arc" cx="105" cy="105" r="90" fill="none" stroke="url(#tg)" stroke-width="7" stroke-dasharray="${circ}" stroke-dashoffset="${offset}" stroke-linecap="round" style="transition:stroke-dashoffset 1s linear"/><defs><linearGradient id="tg" x1="0%" y1="0%" x2="100%" y2="0%"><stop offset="0%" stop-color="#c9a227"/><stop offset="100%" stop-color="#f0d060"/></linearGradient></defs></svg>
+<div class="timer-display">${S.tDone?`<span class="timer-done-emoji">✨</span><p class="timer-done-txt">COMPLETE</p>`:`<span class="timer-time" id="timer-txt">${fmt(S.tLeft)}</span>`}</div></div>
+<div class="row" style="justify-content:center">${!S.tDone?`<button class="btn-gold" id="pause-resume">${S.tRunning?"⏸ Pause":"▶ Resume"}</button>`:""}<button class="btn-ghost" id="reset-timer">Reset</button></div></div>`}
+<div class="quote-box">"Close your eyes. See your dream as already real. Feel the emotions, the gratitude, the joy. The universe responds to the vibration you hold."</div>
+</div>`;}
+
+// ── AFFIRMATIONS ──────────────────────────────────────────────────────────────
+function affirmHTML(){return`<div class="card"><h2 class="sec">✦ DAILY AFFIRMATIONS</h2>
+<div class="affirmation-display"><p class="affirmation-text">"${esc(AFFIRMATIONS[S.aIdx])}"</p></div>
+<div class="row" style="justify-content:center;margin-bottom:28px">
+  <button class="btn-ghost" id="aff-prev">← Previous</button><button class="btn-gold" id="aff-rnd">✦ New Affirmation</button><button class="btn-ghost" id="aff-next">Next →</button>
+</div>
+${AFFIRMATIONS.map((a,i)=>`<div class="affirmation-card ${S.aIdx===i?"active":""}" data-aff="${i}">"${esc(a)}"</div>`).join("")}
+</div>`;}
+
+// ── VISUALIZE ─────────────────────────────────────────────────────────────────
+function vizHTML(){if(!S.selViz)return`<div class="card"><h2 class="sec">✦ GUIDED VISUALIZATIONS</h2><p class="muted" style="margin-bottom:22px">Choose an exercise to deepen your manifestation practice.</p>${VISUALIZATIONS.map((v,i)=>`<div class="viz-card" data-viz="${i}"><div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:8px"><h3 style="color:#c9a227;font-size:1rem;letter-spacing:1px">✦ ${esc(v.title)}</h3><span style="color:#4a4368;font-size:.78rem">${v.duration}</span></div><p class="muted" style="font-style:italic">${esc(v.steps[0])}</p></div>`).join("")}</div>`;
+return`<div class="card"><button class="btn-ghost" id="viz-back" style="margin-bottom:20px">← Back</button><h2 class="sec">✦ ${esc(S.selViz.title.toUpperCase())}</h2><p style="color:#4a4368;font-size:.75rem;letter-spacing:2px;margin-bottom:22px">RECOMMENDED: ${S.selViz.duration}</p>${S.selViz.steps.map((step,i)=>`<div class="viz-step"><div class="viz-num">${i+1}</div><p style="color:#e8d5b7;line-height:1.75;font-size:.95rem;padding-top:4px">${esc(step)}</p></div>`).join("")}<div style="text-align:center;margin-top:24px"><button class="btn-gold" id="viz-timer">Open Timer for This ✦</button></div></div>`;}
+
+// ── APP EVENTS ────────────────────────────────────────────────────────────────
+function attachAppEvents(){
+  document.querySelectorAll("[data-tab]").forEach(b=>b.addEventListener("click",e=>{S.tab=e.currentTarget.dataset.tab;S.selViz=null;render();if(S.tab==="vision")updateBoardScale();}));
+  document.getElementById("backup-btn")?.addEventListener("click",()=>{S.showMenu=!S.showMenu;render();});
+  document.getElementById("menu-close")?.addEventListener("click",()=>{S.showMenu=false;render();});
+  document.getElementById("lock-btn")?.addEventListener("click",lockApp);
+  document.getElementById("export-btn")?.addEventListener("click",exportJournal);
+  document.getElementById("import-input")?.addEventListener("change",handleImport);
+  document.getElementById("next-prompt")?.addEventListener("click",()=>{S.pIdx=(S.pIdx+1)%PROMPTS.length;render();});
+  document.getElementById("rnd-prompt")?.addEventListener("click",()=>{S.pIdx=Math.floor(Math.random()*PROMPTS.length);render();});
+  document.getElementById("journal-ta")?.addEventListener("input",e=>{S.curEntry=e.target.value;});
+  document.querySelectorAll("[data-mood]").forEach(b=>b.addEventListener("click",e=>{const i=parseInt(e.currentTarget.dataset.mood);S.mood=S.mood===i?null:i;document.querySelectorAll(".mood-btn").forEach((b,idx)=>b.classList.toggle("active",idx===S.mood));}));
+  document.getElementById("save-entry")?.addEventListener("click",saveEntry);
+  document.getElementById("toggle-past")?.addEventListener("click",()=>{S.showPast=!S.showPast;render();});
+  document.querySelectorAll("[data-del]").forEach(b=>b.addEventListener("click",e=>{S.entries=S.entries.filter(x=>x.id!==parseInt(e.currentTarget.dataset.del));scheduleSave();render();}));
+  document.getElementById("img-input")?.addEventListener("change",handleImgUpload);
+  document.getElementById("add-text-btn")?.addEventListener("click",()=>{S.showTxtForm=!S.showTxtForm;render();updateBoardScale();});
+  document.getElementById("save-board-btn")?.addEventListener("click",saveVisionBoard);
+  document.getElementById("clear-board-btn")?.addEventListener("click",()=>{if(confirm("Clear entire vision board?"))S.boardItems=[];render();scheduleSave();});
+  document.getElementById("del-sel-btn")?.addEventListener("click",()=>{S.boardItems=S.boardItems.filter(i=>i.id!==S.selItem);S.selItem=null;render();updateBoardScale();scheduleSave();});
+  document.getElementById("fwd-sel-btn")?.addEventListener("click",()=>{const maxZ=Math.max(0,...S.boardItems.map(i=>i.zIndex||0));S.boardItems=S.boardItems.map(i=>i.id===S.selItem?{...i,zIndex:maxZ+1}:i);reRenderBoard();});
+  document.querySelectorAll("[data-del-item]").forEach(b=>b.addEventListener("click",e=>{e.stopPropagation();S.boardItems=S.boardItems.filter(i=>i.id!==e.currentTarget.dataset.delItem);S.selItem=null;reRenderBoard();scheduleSave();}));
+  document.querySelectorAll("[data-item]").forEach(el=>{el.addEventListener("mousedown",e=>startDrag(e,el.dataset.item));el.addEventListener("touchstart",e=>startDrag(e,el.dataset.item),{passive:false});});
+  document.querySelectorAll("[data-resize-item]").forEach(b=>{b.addEventListener("mousedown",e=>startResize(e,b.dataset.resizeItem));b.addEventListener("touchstart",e=>startResize(e,b.dataset.resizeItem),{passive:false});});
+  document.getElementById("txt-input")?.addEventListener("input",e=>S.newText=e.target.value);
+  document.querySelectorAll("[data-color]").forEach(b=>b.addEventListener("click",e=>{S.txtColor=e.currentTarget.dataset.color;document.querySelectorAll(".color-swatch").forEach(s=>s.classList.toggle("active",s.dataset.color===S.txtColor));}));
+  document.querySelectorAll("[data-size]").forEach(b=>b.addEventListener("click",e=>{S.txtSize=parseInt(e.currentTarget.dataset.size);document.querySelectorAll(".size-btn").forEach(s=>s.classList.toggle("active",parseInt(s.dataset.size)===S.txtSize));}));
+  document.getElementById("txt-bold")?.addEventListener("change",e=>S.txtBold=e.target.checked);
+  document.getElementById("add-txt-btn")?.addEventListener("click",addTextToBoard);
+  document.getElementById("cancel-txt-btn")?.addEventListener("click",()=>{S.showTxtForm=false;render();updateBoardScale();});
+  document.getElementById("aud-input")?.addEventListener("change",handleAudUpload);
+  document.getElementById("play-btn")?.addEventListener("click",togglePlay);
+  document.querySelectorAll("[data-play]").forEach(row=>row.addEventListener("click",e=>{const a=S.audioFiles.find(x=>x.id===e.currentTarget.dataset.play);if(a){S.curAudio=a;S.playing=true;render();const ae=document.getElementById("audio-el");ae.src=a.url;ae.play();}}));
+  document.querySelectorAll("[data-del-aud]").forEach(b=>b.addEventListener("click",e=>{e.stopPropagation();const id=e.currentTarget.dataset.delAud;if(S.curAudio?.id===id){document.getElementById("audio-el")?.pause();S.curAudio=null;S.playing=false;}S.audioFiles=S.audioFiles.filter(a=>a.id!==id);render();}));
+  const ae=document.getElementById("audio-el");if(ae)ae.onended=()=>{S.playing=false;render();};
+  document.getElementById("t-min")?.addEventListener("input",e=>S.tMin=Math.max(0,Math.min(60,parseInt(e.target.value)||0)));
+  document.getElementById("t-sec")?.addEventListener("input",e=>S.tSec=Math.max(0,Math.min(59,parseInt(e.target.value)||0)));
+  document.querySelectorAll("[data-preset]").forEach(b=>b.addEventListener("click",e=>{S.tMin=parseInt(e.currentTarget.dataset.preset);S.tSec=0;render();}));
+  document.getElementById("start-timer")?.addEventListener("click",startTimer);
+  document.getElementById("pause-resume")?.addEventListener("click",()=>{if(S.tRunning){clearInterval(timerInterval);S.tRunning=false;}else{S.tRunning=true;runTimer();}render();});
+  document.getElementById("reset-timer")?.addEventListener("click",()=>{clearInterval(timerInterval);S.tRunning=false;S.tStarted=false;S.tDone=false;const t=S.tMin*60+S.tSec;S.tTotal=t;S.tLeft=t;render();});
+  document.querySelectorAll("[data-sound]").forEach(b=>b.addEventListener("click",e=>{S.sound=e.currentTarget.dataset.sound;document.querySelectorAll(".sound-card").forEach(c=>c.classList.toggle("active",c.dataset.sound===S.sound));}));
+  document.querySelectorAll("[data-preview]").forEach(b=>b.addEventListener("click",e=>{e.stopPropagation();playSound(e.currentTarget.dataset.preview);}));
+  document.getElementById("aff-prev")?.addEventListener("click",()=>{S.aIdx=(S.aIdx-1+AFFIRMATIONS.length)%AFFIRMATIONS.length;render();});
+  document.getElementById("aff-rnd")?.addEventListener("click",()=>{S.aIdx=Math.floor(Math.random()*AFFIRMATIONS.length);render();});
+  document.getElementById("aff-next")?.addEventListener("click",()=>{S.aIdx=(S.aIdx+1)%AFFIRMATIONS.length;render();});
+  document.querySelectorAll("[data-aff]").forEach(b=>b.addEventListener("click",e=>{S.aIdx=parseInt(e.currentTarget.dataset.aff);render();}));
+  document.querySelectorAll("[data-viz]").forEach(b=>b.addEventListener("click",e=>{S.selViz=VISUALIZATIONS[parseInt(e.currentTarget.dataset.viz)];render();}));
+  document.getElementById("viz-back")?.addEventListener("click",()=>{S.selViz=null;render();});
+  document.getElementById("viz-timer")?.addEventListener("click",()=>{S.tab="timer";S.selViz=null;render();});
+  document.addEventListener("click",e=>{if(S.tab==="vision"&&!e.target.closest("[data-item]")&&!e.target.closest(".board-toolbar")&&!e.target.closest(".text-form")){if(S.selItem){S.selItem=null;reRenderBoard();}}});
+}
+
+// ── JOURNAL ACTIONS ───────────────────────────────────────────────────────────
+function saveEntry(){if(!S.curEntry.trim())return;S.entries.push({id:Date.now(),date:today,text:S.curEntry,mood:S.mood,prompt:PROMPTS[S.pIdx]});S.curEntry="";S.mood=null;scheduleSave();render();flash("✦ Entry saved");}
+
+// ── VISION BOARD ──────────────────────────────────────────────────────────────
+async function handleImgUpload(e){for(const file of Array.from(e.target.files)){const reader=new FileReader();reader.onload=async ev=>{const src=await resizeImg(ev.target.result);const img=new Image();img.onload=()=>{const aspect=img.width/img.height,w=Math.min(380,img.width),h=w/aspect,maxZ=Math.max(0,...S.boardItems.map(i=>i.zIndex||0));S.boardItems.push({id:String(Date.now()+Math.random()),type:"image",src,x:Math.random()*300+50,y:Math.random()*200+50,width:w,height:h,zIndex:maxZ+1});reRenderBoard();scheduleSave();};img.src=src;};reader.readAsDataURL(file);}}
+function addTextToBoard(){if(!S.newText.trim())return;const maxZ=Math.max(0,...S.boardItems.map(i=>i.zIndex||0));S.boardItems.push({id:String(Date.now()),type:"text",text:S.newText,x:BOARD_W/2-150,y:BOARD_H/2-40,fontSize:S.txtSize,color:S.txtColor,bold:S.txtBold,zIndex:maxZ+1});S.newText="";S.showTxtForm=false;render();updateBoardScale();scheduleSave();}
+function reRenderBoard(){const bc=document.getElementById("board-canvas");if(bc)bc.innerHTML=boardItemsHTML();document.querySelectorAll("[data-item]").forEach(el=>{el.addEventListener("mousedown",e=>startDrag(e,el.dataset.item));el.addEventListener("touchstart",e=>startDrag(e,el.dataset.item),{passive:false});});document.querySelectorAll("[data-resize-item]").forEach(b=>{b.addEventListener("mousedown",e=>startResize(e,b.dataset.resizeItem));b.addEventListener("touchstart",e=>startResize(e,b.dataset.resizeItem),{passive:false});});document.querySelectorAll("[data-del-item]").forEach(b=>b.addEventListener("click",e=>{e.stopPropagation();S.boardItems=S.boardItems.filter(i=>i.id!==e.currentTarget.dataset.delItem);S.selItem=null;reRenderBoard();scheduleSave();}));}
+async function saveVisionBoard(){if(S.boardItems.length===0){flash("Add some images or text first!");return;}flash("✦ Preparing…");const canvas=document.createElement("canvas");canvas.width=BOARD_W;canvas.height=BOARD_H;const ctx=canvas.getContext("2d");const grad=ctx.createLinearGradient(0,0,BOARD_W,BOARD_H);grad.addColorStop(0,"#07071a");grad.addColorStop(.45,"#130a2a");grad.addColorStop(1,"#0b1535");ctx.fillStyle=grad;ctx.fillRect(0,0,BOARD_W,BOARD_H);const sorted=[...S.boardItems].sort((a,b)=>(a.zIndex||0)-(b.zIndex||0));for(const item of sorted){if(item.type==="image"){await new Promise(res=>{const img=new Image();img.onload=()=>{ctx.drawImage(img,item.x,item.y,item.width,item.height);res();};img.onerror=res;img.src=item.src;});}else if(item.type==="text"){ctx.font=`${item.bold?"bold ":""}${item.fontSize}px Georgia,serif`;ctx.fillStyle=item.color;ctx.shadowColor=item.color;ctx.shadowBlur=18;ctx.fillText(item.text,item.x+8,item.y+item.fontSize);ctx.shadowBlur=0;}}const a=document.createElement("a");a.download="my-vision-board.png";a.href=canvas.toDataURL("image/png");a.click();flash("✦ Vision board saved!");}
+
+// ── DRAG / RESIZE ─────────────────────────────────────────────────────────────
+let dragState=null,resizeState=null;
+function getBoardXY(cx,cy){const bc=document.getElementById("board-canvas");if(!bc)return{x:0,y:0};const r=bc.getBoundingClientRect();return{x:(cx-r.left)*(BOARD_W/r.width),y:(cy-r.top)*(BOARD_H/r.height)};}
+function startDrag(e,id){e.stopPropagation();const cx=e.clientX??e.touches?.[0]?.clientX,cy=e.clientY??e.touches?.[0]?.clientY;const{x:bx,y:by}=getBoardXY(cx,cy);const item=S.boardItems.find(i=>i.id===id);if(!item)return;const maxZ=Math.max(0,...S.boardItems.map(i=>i.zIndex||0));S.boardItems=S.boardItems.map(i=>i.id===id?{...i,zIndex:maxZ+1}:i);S.selItem=id;const el=document.getElementById(`item-${id}`);if(el)el.style.zIndex=maxZ+1;dragState={id,ox:bx-item.x,oy:by-item.y};}
+function startResize(e,id){e.stopPropagation();const cx=e.clientX??e.touches?.[0]?.clientX,cy=e.clientY??e.touches?.[0]?.clientY;const{x:bx,y:by}=getBoardXY(cx,cy);const item=S.boardItems.find(i=>i.id===id);if(!item)return;resizeState={id,mx:bx,my:by,sw:item.width||200,sh:item.height||60,aspect:item.type==="image"?item.width/item.height:null};}
+window.addEventListener("mousemove",onDragMove);window.addEventListener("mouseup",onDragEnd);
+window.addEventListener("touchmove",e=>{if(dragState||resizeState){e.preventDefault();onDragMove(e);}},{passive:false});
+window.addEventListener("touchend",onDragEnd);
+function onDragMove(e){if(!dragState&&!resizeState)return;const cx=e.clientX??e.touches?.[0]?.clientX,cy=e.clientY??e.touches?.[0]?.clientY;const{x:bx,y:by}=getBoardXY(cx,cy);if(dragState){const item=S.boardItems.find(i=>i.id===dragState.id);if(!item)return;const nx=Math.max(0,Math.min(BOARD_W-(item.width||200),bx-dragState.ox)),ny=Math.max(0,Math.min(BOARD_H-(item.height||60),by-dragState.oy));const el=document.getElementById(`item-${dragState.id}`);if(el){el.style.left=nx+"px";el.style.top=ny+"px";}S.boardItems=S.boardItems.map(i=>i.id===dragState.id?{...i,x:nx,y:ny}:i);}if(resizeState){const dx=bx-resizeState.mx,nw=Math.max(60,resizeState.sw+dx),nh=resizeState.aspect?nw/resizeState.aspect:Math.max(30,resizeState.sh+(by-resizeState.my));const el=document.getElementById(`item-${resizeState.id}`);if(el){el.style.width=nw+"px";el.style.height=nh+"px";}S.boardItems=S.boardItems.map(i=>i.id===resizeState.id?{...i,width:nw,height:nh}:i);}}
+function onDragEnd(){if(dragState||resizeState)scheduleSave();dragState=null;resizeState=null;}
+function updateBoardScale(){const cont=document.getElementById("board-wrapper"),canvas=document.getElementById("board-canvas");if(!cont||!canvas)return;const sc=cont.offsetWidth/BOARD_W;canvas.style.transform=`scale(${sc})`;canvas.style.width=BOARD_W+"px";canvas.style.height=BOARD_H+"px";cont.style.height=(BOARD_H*sc)+"px";}
+window.addEventListener("resize",()=>{if(S.tab==="vision")updateBoardScale();});
+
+// ── AUDIO ─────────────────────────────────────────────────────────────────────
+function handleAudUpload(e){Array.from(e.target.files).forEach(f=>{S.audioFiles.push({id:String(Date.now()+Math.random()),name:f.name.replace(/\.[^/.]+$/,""),url:URL.createObjectURL(f)});});render();}
+function togglePlay(){const ae=document.getElementById("audio-el");if(!ae)return;S.playing?ae.pause():ae.play();S.playing=!S.playing;const pb=document.getElementById("play-btn");if(pb)pb.textContent=S.playing?"⏸":"▶";}
+
+// ── TIMER ─────────────────────────────────────────────────────────────────────
+function startTimer(){const t=S.tMin*60+S.tSec;if(!t)return;S.tTotal=t;S.tLeft=t;S.tStarted=true;S.tDone=false;S.defMin=S.tMin;playSound(S.sound);render();S.tRunning=true;runTimer();}
+function runTimer(){clearInterval(timerInterval);timerInterval=setInterval(()=>{if(!S.tRunning){clearInterval(timerInterval);return;}S.tLeft--;updateTimerDOM();if(S.tLeft<=0){clearInterval(timerInterval);S.tRunning=false;S.tDone=true;playSound(S.sound);scheduleSave();const tw=document.querySelector(".timer-display");if(tw)tw.innerHTML=`<span class="timer-done-emoji">✨</span><p class="timer-done-txt">COMPLETE</p>`;document.getElementById("pause-resume")?.remove();}},1000);}
+function updateTimerDOM(){const arc=document.getElementById("timer-arc"),txt=document.getElementById("timer-txt");const circ=2*Math.PI*90,offset=circ-((S.tTotal-S.tLeft)/S.tTotal)*circ;if(arc)arc.style.strokeDashoffset=offset;if(txt)txt.textContent=fmt(S.tLeft);}
+
+// ── EXPORT / IMPORT ───────────────────────────────────────────────────────────
+function exportJournal(){const a=document.createElement("a");a.href=URL.createObjectURL(new Blob([JSON.stringify({app:"Ethereal Journal",exportDate:new Date().toISOString(),entries:S.entries},null,2)],{type:"application/json"}));a.download=`ethereal-journal-${new Date().toISOString().slice(0,10)}.json`;a.click();S.showMenu=false;render();}
+function handleImport(e){const file=e.target.files[0];if(!file)return;const r=new FileReader();r.onload=ev=>{try{const d=JSON.parse(ev.target.result);if(Array.isArray(d.entries)){const ids=new Set(S.entries.map(x=>x.id));const n=d.entries.filter(x=>!ids.has(x.id));S.entries.push(...n);scheduleSave();render();flash(`✦ Imported ${n.length} entries`);}}catch{flash("Could not read file.");}};r.readAsText(file);S.showMenu=false;}
+
+// ── INIT ──────────────────────────────────────────────────────────────────────
+function init(){
+  // Check for stored license first — if valid, skip to journal; else show license gate
+  const storedLic=localStorage.getItem(`${KP}lic`)||"";
+  if(!validateLicenseKey(storedLic)){
+    S.screen="license";
+  } else {
+    S.screen=localStorage.getItem(`${KP}init`)?"locked":"setup";
+  }
+  render();
+}
+init();
+</script>
+</body>
+</html>
