@@ -2035,6 +2035,8 @@ document.addEventListener('DOMContentLoaded', () => {
 
   // On load: re-validate stored key against server
   (async function() {
+    unlock(); // TEMP: gate disabled for beta testing — delete these 2 lines to re-enable
+    return;
     const stored = localStorage.getItem(STORE_KEY);
     if (!stored) return;
     const devTok = getOrCreateDeviceToken();
