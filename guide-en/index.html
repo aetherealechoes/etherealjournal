@@ -2057,8 +2057,8 @@ document.addEventListener('DOMContentLoaded', () => {
     try {
       const res = await fetch(VALIDATE_URL, {
         method: 'POST',
-        headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({ key: clean, deviceToken: getOrCreateDeviceToken(), productId: PRODUCT_ID })
+        headers: { 'Content-Type': 'application/x-www-form-urlencoded' },
+        body: new URLSearchParams({ key: clean, deviceToken: getOrCreateDeviceToken(), productId: PRODUCT_ID }).toString()
       });
       const data = await res.json();
       if (data.success) {
@@ -2082,8 +2082,8 @@ document.addEventListener('DOMContentLoaded', () => {
     try {
       const res = await fetch(VALIDATE_URL, {
         method: 'POST',
-        headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({ key: stored, deviceToken: devTok, productId: PRODUCT_ID })
+        headers: { 'Content-Type': 'application/x-www-form-urlencoded' },
+        body: new URLSearchParams({ key: stored, deviceToken: devTok, productId: PRODUCT_ID }).toString()
       });
       const data = await res.json();
       if (data.success) { unlock(); }
