@@ -2260,34 +2260,35 @@
     const val = document.getElementById('gate-key-input').value;
     const err = document.getElementById('gate-key-error');
     const btn = document.getElementById('gate-submit-btn');
-    if (!val.trim()) { err.textContent = 'Please enter your license key.'; return; }
+    if (!val.trim()) { err.textContent = 'يرجى إدخال مفتاح الترخيص.'; return; }
     const clean = val.trim().toUpperCase().replace(/\s/g, '');
     if (clean.split('-').length !== 4 || !clean.startsWith(PREFIX + '-')) {
-      err.textContent = 'Invalid key format. Keys look like: LMA-XXXXX-XXXXX-XXXXX';
+      err.textContent = 'صيغة المفتاح غير صحيحة. يبدو المفتاح هكذا: LMA-XXXXX-XXXXX-XXXXX';
       return;
     }
     const origText = btn.textContent;
-    btn.disabled = true; btn.textContent = 'Validating\u2026'; err.textContent = '';
+    btn.disabled = true; btn.textContent = 'جارٍ التحقق…'; err.textContent = '';
     try {
       const res = await fetch(VALIDATE_URL, {
         method: 'POST',
-        headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({ key: clean, deviceToken: getOrCreateDeviceToken(), productId: PRODUCT_ID })
+        headers: { 'Content-Type': 'application/x-www-form-urlencoded' },
+        body: new URLSearchParams({ key: clean, deviceToken: getOrCreateDeviceToken(), productId: PRODUCT_ID }).toString()
       });
       const data = await res.json();
       if (data.success) {
         localStorage.setItem(STORE_KEY, clean);
         unlock();
       } else {
-        err.textContent = data.message || 'Validation failed. Please try again.';
+        err.textContent = data.message || 'فشل التحقق. يرجى المحاولة مرة أخرى.';
         btn.disabled = false; btn.textContent = origText;
       }
     } catch(e) {
-      err.textContent = 'Connection error. Please check your internet and try again.';
+      err.textContent = 'خطأ في الاتصال. يرجى التحقق من اتصالك بالإنترنت.';
       btn.disabled = false; btn.textContent = origText;
     }
   }
 
+  // On load: re-validate stored key against server
   (async function() {
     const stored = localStorage.getItem(STORE_KEY);
     if (!stored) return;
@@ -2295,14 +2296,14 @@
     try {
       const res = await fetch(VALIDATE_URL, {
         method: 'POST',
-        headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({ key: stored, deviceToken: devTok, productId: PRODUCT_ID })
+        headers: { 'Content-Type': 'application/x-www-form-urlencoded' },
+        body: new URLSearchParams({ key: stored, deviceToken: devTok, productId: PRODUCT_ID }).toString()
       });
       const data = await res.json();
       if (data.success) { unlock(); }
       else { localStorage.removeItem(STORE_KEY); }
     } catch(e) {
-      unlock();
+      unlock(); // Offline grace: stored key + network failure = let them in
     }
   })();
 
@@ -2315,7 +2316,6 @@
       inp.addEventListener('input', function() { document.getElementById('gate-key-error').textContent = ''; });
     }
   });
-})();
 </script>
 </body>
 </html>
