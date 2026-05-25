@@ -2002,18 +2002,22 @@ document.addEventListener('DOMContentLoaded', () => {
       tip.style.top  = top  + 'px';
     }
 
-    document.addEventListener('mouseover', function(e) {
-      const day = e.target.closest('.cal-day[data-mi]');
-      if (!day) { tip.style.display = 'none'; return; }
-      buildTip(+day.dataset.mi);
-      positionTip(day);
-    });
+    const isTouchDevice = () => ('ontouchstart' in window) || navigator.maxTouchPoints > 0;
 
-    document.addEventListener('mouseout', function(e) {
-      if (!e.relatedTarget || !e.relatedTarget.closest('.cal-day[data-mi]')) {
-        tip.style.display = 'none';
-      }
-    });
+    if (!isTouchDevice()) {
+      document.addEventListener('mouseover', function(e) {
+        const day = e.target.closest('.cal-day[data-mi]');
+        if (!day) { tip.style.display = 'none'; return; }
+        buildTip(+day.dataset.mi);
+        positionTip(day);
+      });
+
+      document.addEventListener('mouseout', function(e) {
+        if (!e.relatedTarget || !e.relatedTarget.closest('.cal-day[data-mi]')) {
+          tip.style.display = 'none';
+        }
+      });
+    }
   })();
 
 </script>
