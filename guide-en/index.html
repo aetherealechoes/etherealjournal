@@ -2004,7 +2004,27 @@ document.addEventListener('DOMContentLoaded', () => {
 
     const isTouchDevice = () => ('ontouchstart' in window) || navigator.maxTouchPoints > 0;
 
-    if (!isTouchDevice()) {
+    if (isTouchDevice()) {
+      // Mobile: tap to show, tap elsewhere to dismiss
+      document.addEventListener('click', function(e) {
+        const day = e.target.closest('.cal-day[data-mi]');
+        if (day) {
+          e.stopPropagation();
+          if (tip._activeDay === day && tip.style.display === 'block') {
+            tip.style.display = 'none';
+            tip._activeDay = null;
+          } else {
+            buildTip(+day.dataset.mi);
+            positionTipMobile();
+            tip._activeDay = day;
+          }
+        } else {
+          tip.style.display = 'none';
+          tip._activeDay = null;
+        }
+      });
+    } else {
+      // Desktop: hover tooltip
       document.addEventListener('mouseover', function(e) {
         const day = e.target.closest('.cal-day[data-mi]');
         if (!day) { tip.style.display = 'none'; return; }
@@ -2017,6 +2037,15 @@ document.addEventListener('DOMContentLoaded', () => {
           tip.style.display = 'none';
         }
       });
+    }
+
+    function positionTipMobile() {
+      // On mobile: show centered near top of screen, never over the notes box
+      const tw = Math.min(300, window.innerWidth - 20);
+      tip.style.width = tw + 'px';
+      tip.style.left = Math.round((window.innerWidth - tw) / 2) + 'px';
+      tip.style.top = '80px';
+      tip.style.display = 'block';
     }
   })();
 
