@@ -714,6 +714,31 @@
   .ausp-row.avoid .ausp-tag { background:rgba(139,58,58,0.10); color:#7a2020; border:1px solid rgba(139,58,58,0.22); }
   .ausp-special { font-family:'EB Garamond',serif; font-size:13px; color:#A67820; font-style:italic; text-align:center; padding:8px 14px; background:rgba(201,168,76,0.08); border-radius:8px; margin-top:8px; }
 
+  /* ── Calendar Hover Tooltip ─────────────────────────────── */
+  #cal-hover-tip {
+    display: none; position: fixed; z-index: 9999; width: 230px;
+    background: linear-gradient(145deg, #1a1440, #2D2260);
+    border: 1px solid rgba(201,168,76,0.35); border-radius: 14px;
+    padding: 13px 15px; box-shadow: 0 10px 40px rgba(0,0,0,0.55);
+    pointer-events: none; font-family: 'EB Garamond', serif; color: #F5E9C8;
+  }
+  .tip-header { display: flex; align-items: center; gap: 7px; margin-bottom: 2px; }
+  .tip-emoji { font-size: 20px; line-height: 1; }
+  .tip-name { font-family: 'Cinzel', serif; font-size: 11px; font-weight: 700; color: #E8C97A; letter-spacing: 0.5px; line-height: 1.3; }
+  .tip-ar { font-family: 'Amiri', serif; font-size: 13px; color: rgba(232,201,122,0.65); display: block; margin-bottom: 6px; }
+  .tip-meaning { font-size: 12.5px; color: rgba(245,233,200,0.78); font-style: italic; margin-bottom: 8px; padding-bottom: 7px; border-bottom: 1px solid rgba(201,168,76,0.15); line-height: 1.45; }
+  .tip-badges { display: flex; flex-wrap: wrap; gap: 4px; margin-bottom: 6px; }
+  .tip-badge { font-size: 10px; padding: 2px 8px; border-radius: 20px; font-family: 'Cinzel', serif; letter-spacing: 0.4px; font-weight: 600; }
+  .tip-badge.fire  { background: rgba(220,80,30,0.2);  color: #e8845a; border: 1px solid rgba(220,80,30,0.3); }
+  .tip-badge.earth { background: rgba(130,100,40,0.2); color: #c9ab6e; border: 1px solid rgba(130,100,40,0.3); }
+  .tip-badge.air   { background: rgba(80,160,200,0.2); color: #7ecfe3; border: 1px solid rgba(80,160,200,0.3); }
+  .tip-badge.water { background: rgba(50,100,200,0.2); color: #7aabf5; border: 1px solid rgba(50,100,200,0.3); }
+  .tip-badge.saad  { background: rgba(45,122,61,0.22); color: #72d48a; border: 1px solid rgba(45,122,61,0.3); }
+  .tip-badge.nahs  { background: rgba(180,60,60,0.22); color: #e07a7a; border: 1px solid rgba(180,60,60,0.3); }
+  .tip-ruler { font-size: 11.5px; color: rgba(245,233,200,0.55); margin-bottom: 8px; }
+  .tip-good { display: flex; flex-wrap: wrap; gap: 4px; }
+  .tip-good-tag { font-size: 11px; background: rgba(45,122,61,0.12); color: #72d48a; border: 1px solid rgba(45,122,61,0.22); padding: 2px 8px; border-radius: 12px; line-height: 1.5; }
+
   </style>
 </head>
 <body>
@@ -1572,7 +1597,7 @@ function renderMonthGrid(year, month) {
 
     const dateStr = `${year}-${String(month+1).padStart(2,'0')}-${String(d).padStart(2,'0')}`;
     const dayEvts = eventsData[dateStr] || [];
-    html += `<div class="cal-day${isToday2?' today':''}${isBirth?' is-birth-mansion':''}" onclick="calDayClick('${dateStr}')">
+    html += `<div class="cal-day${isToday2?' today':''}${isBirth?' is-birth-mansion':''}" onclick="calDayClick('${dateStr}')" data-mi="${mansion.index}">
       <div class="cal-day-num">${d}</div>
       <div class="cal-mansion-chip ${mansion.element} ${natureClass}"><span class="chip-en">${mansion.nameEn}</span><span class="chip-ar">${mansion.nameAr}</span></div>
       ${moonEmoji ? `<div class="cal-moon-phase">${moonEmoji}</div>` : ''}
@@ -1926,6 +1951,70 @@ document.addEventListener('DOMContentLoaded', () => {
     document.querySelectorAll('.tab-btn').forEach(function(b) { b.classList.remove('active'); });
     if (btn) btn.classList.add('active');
   };
+
+  // ── Calendar Hover Tooltip ────────────────────────────────
+  (function() {
+    const tip = document.createElement('div');
+    tip.id = 'cal-hover-tip';
+    document.body.appendChild(tip);
+
+    function buildTip(idx) {
+      const m = lunarMansions[idx];
+      const d = MANSION_DAYS[idx];
+      const good = (d && d.good) ? d.good.slice(0, 3) : [];
+      const elemLabel = m.element.charAt(0).toUpperCase() + m.element.slice(1);
+      const rulerLabel = m.ruler.charAt(0).toUpperCase() + m.ruler.slice(1);
+      const isAusp = m.nature === "sa'd";
+      const goodHtml = good.map(t => `<span class="tip-good-tag">${t}</span>`).join('');
+      tip.innerHTML = `
+        <div class="tip-header">
+          <span class="tip-emoji">${m.emoji}</span>
+          <span class="tip-name">${m.nameEn}</span>
+        </div>
+        <span class="tip-ar">${m.nameAr}</span>
+        <div class="tip-meaning">${m.meaningEn}</div>
+        <div class="tip-badges">
+          <span class="tip-badge ${m.element}">${elemLabel}</span>
+          <span class="tip-badge ${isAusp ? 'saad' : 'nahs'}">${isAusp ? '✨ Auspicious' : '⚠️ Challenging'}</span>
+        </div>
+        <div class="tip-ruler">🪐 Ruled by ${rulerLabel}</div>
+        ${goodHtml ? '<div class="tip-good">' + goodHtml + '</div>' : ''}
+      `;
+    }
+
+    function positionTip(el) {
+      const rect = el.getBoundingClientRect();
+      const tw = 238;
+      tip.style.width = tw + 'px';
+      tip.style.visibility = 'hidden';
+      tip.style.display = 'block';
+      const th = tip.offsetHeight;
+      tip.style.visibility = '';
+
+      let left = rect.left + rect.width / 2 - tw / 2;
+      let top  = rect.top - th - 10;
+
+      if (left < 6) left = 6;
+      if (left + tw > window.innerWidth - 6) left = window.innerWidth - tw - 6;
+      if (top < 6) top = rect.bottom + 10;
+
+      tip.style.left = left + 'px';
+      tip.style.top  = top  + 'px';
+    }
+
+    document.addEventListener('mouseover', function(e) {
+      const day = e.target.closest('.cal-day[data-mi]');
+      if (!day) { tip.style.display = 'none'; return; }
+      buildTip(+day.dataset.mi);
+      positionTip(day);
+    });
+
+    document.addEventListener('mouseout', function(e) {
+      if (!e.relatedTarget || !e.relatedTarget.closest('.cal-day[data-mi]')) {
+        tip.style.display = 'none';
+      }
+    });
+  })();
 
 </script>
 <script>
