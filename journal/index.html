@@ -475,13 +475,11 @@ function handleImport(e){const file=e.target.files[0];if(!file)return;const r=ne
 
 // ── INIT ──────────────────────────────────────────────────────────────────────
 function init(){
-  // Check for stored license first — if valid, skip to journal; else show license gate
-  const storedLic=localStorage.getItem(`${KP}lic`)||"";
-  if(!validateLicenseKey(storedLic)){
-    S.screen="license";
-  } else {
-    S.screen=localStorage.getItem(`${KP}init`)?"locked":"setup";
-  }
+  // TEMP: beta testing — bypass license gate AND password screen
+  // To re-enable: remove the 3 lines below and restore the original init logic
+  S.screen="app";
+  S.pwd="beta-preview";
+  S.entries=[];S.boardItems=[];
   render();
 }
 init();
