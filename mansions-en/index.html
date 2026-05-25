@@ -3,12 +3,12 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Guide to the Lunar Mansions â Ethereal Echoes</title>
+  <title>Guide to the Lunar Mansions — Ethereal Echoes</title>
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Amiri:ital,wght@0,400;0,700;1,400&family=EB+Garamond:ital,wght@0,400;0,600;1,400&family=Cinzel:wght@400;600;700&display=swap" rel="stylesheet">
   <style>
-  /* ââ License Gate ââ */
+  /* ── License Gate ── */
   #license-gate {
     position: fixed; inset: 0; z-index: 999999;
     background: linear-gradient(135deg, #0F0C29, #1A1440, #2D2260);
@@ -45,7 +45,7 @@
   .gate-buy a { color: rgba(201,168,76,0.7); text-decoration: none; }
   .gate-buy a:hover { color: #C9A84C; }
 
-    /* ââ Reset & Base âââââââââââââââââââââââââââââââââââââââ */
+    /* ── Reset & Base ─────────────────────────────────────── */
     *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
 
     :root {
@@ -72,14 +72,14 @@
       direction: ltr;
     }
 
-    /* ââ Print Setup ââââââââââââââââââââââââââââââââââââââââ */
+    /* ── Print Setup ──────────────────────────────────────── */
     @page {
       size: A4;
       margin: 15mm 18mm 15mm 18mm;
     }
 
 
-    /* ââ Tab Nav + Section Switching (screen only) âââââââââ */
+    /* ── Tab Nav + Section Switching (screen only) ───────── */
     @media screen {
       /* Hide cover/back-cover on screen */
       .cover, .back-cover { display: none !important; }
@@ -142,7 +142,7 @@
       }
       .mansion-header:hover { background: #231968; }
       .mansion-header::before {
-        content: 'â¸';
+        content: '▸';
         position: absolute;
         left: 18px;
         top: 50%;
@@ -185,7 +185,7 @@
       header.site-header { display: none; }
     }
 
-    /* ââ Print Button (screen only) ââââââââââââââââââââââââ */
+    /* ── Print Button (screen only) ──────────────────────── */
     .print-banner {
       background: var(--indigo);
       color: white;
@@ -211,7 +211,7 @@
     }
     .print-btn:hover { background: var(--gold-light); }
 
-    /* ââ Cover Page âââââââââââââââââââââââââââââââââââââââââ */
+    /* ── Cover Page ───────────────────────────────────────── */
     .cover {
       width: 100%;
       min-height: 100vh;
@@ -301,14 +301,14 @@
       overflow: hidden;
     }
 
-    /* ââ Section Wrapper ââââââââââââââââââââââââââââââââââââ */
+    /* ── Section Wrapper ──────────────────────────────────── */
     .section {
       max-width: 800px;
       margin: 0 auto;
       padding: 50px 40px;
     }
 
-    /* ââ Section Title ââââââââââââââââââââââââââââââââââââââ */
+    /* ── Section Title ────────────────────────────────────── */
     .section-title {
       font-family: 'Cinzel', serif;
       font-size: 30px;
@@ -336,7 +336,7 @@
       margin: 0 auto 40px;
     }
 
-    /* ââ Intro Box ââââââââââââââââââââââââââââââââââââââââââ */
+    /* ── Intro Box ────────────────────────────────────────── */
     .intro-box {
       background: var(--indigo);
       color: var(--gold-pale);
@@ -354,7 +354,7 @@
     }
     .intro-box p:last-child { margin-bottom: 0; }
 
-    /* ââ How to Use âââââââââââââââââââââââââââââââââââââââââ */
+    /* ── How to Use ───────────────────────────────────────── */
     .how-to-grid {
       display: grid;
       grid-template-columns: 1fr 1fr;
@@ -383,7 +383,7 @@
       line-height: 1.9;
     }
 
-    /* ââ Mansion Index Table ââââââââââââââââââââââââââââââââ */
+    /* ── Mansion Index Table ──────────────────────────────── */
     .index-table {
       width: 100%;
       border-collapse: collapse;
@@ -412,7 +412,7 @@
     .nature-saad { color: #2D7A3D; font-weight: 600; }
     .nature-nahs { color: #8B3A3A; font-weight: 600; }
 
-    /* ââ Mansion Cards ââââââââââââââââââââââââââââââââââââââ */
+    /* ── Mansion Cards ────────────────────────────────────── */
     .mansions-grid {
       display: flex;
       flex-direction: column;
@@ -542,7 +542,7 @@
       line-height: 1.9;
     }
 
-    /* ââ Moon Phases Section ââââââââââââââââââââââââââââââââ */
+    /* ── Moon Phases Section ──────────────────────────────── */
     .phases-grid {
       display: grid;
       grid-template-columns: 1fr 1fr;
@@ -583,7 +583,7 @@
       color: var(--text-soft);
     }
 
-    /* ââ Element Reference ââââââââââââââââââââââââââââââââââ */
+    /* ── Element Reference ────────────────────────────────── */
     .elements-grid {
       display: grid;
       grid-template-columns: 1fr 1fr;
@@ -605,7 +605,7 @@
     .element-name { font-family: 'Amiri', serif; font-size: 18px; font-weight: 700; color: var(--indigo); }
     .element-quality { font-size: 13px; color: var(--text-soft); margin-top: 4px; }
 
-    /* ââ Planets Reference ââââââââââââââââââââââââââââââââââ */
+    /* ── Planets Reference ────────────────────────────────── */
     .planets-table { width: 100%; border-collapse: collapse; margin-top: 20px; }
     .planets-table th {
       background: var(--indigo); color: var(--gold);
@@ -614,7 +614,7 @@
     .planets-table td { padding: 11px 16px; border-bottom: 1px solid var(--cream-dark); font-size: 14px; }
     .planets-table tr:nth-child(even) td { background: rgba(201,168,76,0.05); }
 
-    /* ââ Daily Practice Guide âââââââââââââââââââââââââââââââ */
+    /* ── Daily Practice Guide ─────────────────────────────── */
     .practice-steps {
       display: flex;
       flex-direction: column;
@@ -658,7 +658,7 @@
       line-height: 1.9;
     }
 
-    /* ââ Back Cover âââââââââââââââââââââââââââââââââââââââââ */
+    /* ── Back Cover ───────────────────────────────────────── */
     .back-cover {
       background: var(--indigo);
       color: var(--gold-pale);
@@ -677,72 +677,72 @@
     .back-cover .brand { font-family: 'Cinzel', serif; font-size: 16px; letter-spacing: 4px; color: var(--gold); margin-top: 32px; text-transform: uppercase; }
     .back-cover .site { font-size: 13px; color: rgba(201,168,76,0.6); margin-top: 6px; letter-spacing: 2px; direction: ltr; }
 
-    /* ââ Utility ââââââââââââââââââââââââââââââââââââââââââââ */
+    /* ── Utility ──────────────────────────────────────────── */
     .text-center { text-align: center; }
     .mt-20 { margin-top: 20px; }
     .mb-20 { margin-bottom: 20px; }
   </style>
 </head>
 <body>
-<!-- ââ LICENSE GATE âââââââââââââââââââââââââââââââââââââââ -->
+<!-- ── LICENSE GATE ─────────────────────────────────────── -->
 <div id="license-gate">
   <div class="gate-card" style="direction:ltr;font-family:'Cinzel', serif;">
-    <span class="gate-moon">ð</span>
+    <span class="gate-moon">🌙</span>
     <div class="gate-title">Lunar Mansion Guide</div>
     <div class="gate-divider"></div>
     <div class="gate-sub">Enter the license key you received after purchase to unlock your guide.</div>
     <input id="gate-key-input" class="gate-input" type="text" placeholder="LME-XXXXX-XXXXX-XXXXX" autocomplete="off" spellcheck="false">
     <div id="gate-key-error" class="gate-error"></div>
-    <button id="gate-submit-btn" class="gate-btn" style="font-family:'Cinzel', serif;">Unlock Guide â¦</button>
-    <div class="gate-buy">Don't have a key? <a href="https://etherealechoes.com" target="_blank">Purchase at EtherealEchoes.com â</a></div>
+    <button id="gate-submit-btn" class="gate-btn" style="font-family:'Cinzel', serif;">Unlock Guide ✦</button>
+    <div class="gate-buy">Don't have a key? <a href="https://etherealechoes.com" target="_blank">Purchase at EtherealEchoes.com →</a></div>
   </div>
 </div>
 
 
 <!-- Print Banner (screen only) -->
 <div class="print-banner no-print">
-  <button class="print-btn" onclick="window.print()">â¬ Save as PDF</button>
-  Open in Chrome â click this button â "Save as PDF" for best results
+  <button class="print-btn" onclick="window.print()">⬇ Save as PDF</button>
+  Open in Chrome → click this button → "Save as PDF" for best results
 </div>
 
 <nav class="tab-nav no-print" id="tab-nav">
   <button class="tab-btn active" onclick="showSection('sec-intro',this)">
-    <span>ð</span><span class="tab-label">Intro</span>
+    <span>📖</span><span class="tab-label">Intro</span>
   </button>
   <button class="tab-btn" onclick="showSection('sec-index',this)">
-    <span>ð</span><span class="tab-label">Index</span>
+    <span>📑</span><span class="tab-label">Index</span>
   </button>
   <button class="tab-btn" onclick="showSection('sec-mansions',this)">
-    <span>ð</span><span class="tab-label">Mansions</span>
+    <span>🌙</span><span class="tab-label">Mansions</span>
   </button>
   <button class="tab-btn" onclick="showSection('sec-phases',this)">
-    <span>ð</span><span class="tab-label">Phases</span>
+    <span>🌕</span><span class="tab-label">Phases</span>
   </button>
   <button class="tab-btn" onclick="showSection('sec-elements',this)">
-    <span>â¨</span><span class="tab-label">Elements</span>
+    <span>✨</span><span class="tab-label">Elements</span>
   </button>
   <button class="tab-btn" onclick="showSection('sec-practice',this)">
-    <span>ð¿</span><span class="tab-label">Practice</span>
+    <span>🌿</span><span class="tab-label">Practice</span>
   </button>
   <button class="tab-btn" onclick="showSection('calendar-section',this)">
-    <span>ð</span><span class="tab-label">Calendar</span>
+    <span>📅</span><span class="tab-label">Calendar</span>
   </button>
   <button class="tab-btn" onclick="showSection('sec-journal',this)">
-    <span>â</span><span class="tab-label">Journal</span>
+    <span>✍</span><span class="tab-label">Journal</span>
   </button>
 </nav>
 
-<!-- ââââââââââââââââââââââââââââââââââââââââââââââââââââââââââ -->
+<!-- ══════════════════════════════════════════════════════════ -->
 <!-- COVER PAGE                                                 -->
-<!-- ââââââââââââââââââââââââââââââââââââââââââââââââââââââââââ -->
+<!-- ══════════════════════════════════════════════════════════ -->
 <div class="cover page-break">
-  <div class="cover-ornament">ð</div>
+  <div class="cover-ornament">🌙</div>
   <div class="cover-title-en">Guide to the Lunar Mansions</div>
-  <div class="cover-title-ar">Ø¯ÙÙÙ ÙÙØ§Ø²Ù Ø§ÙÙÙØ±</div>
+  <div class="cover-title-ar">دليل منازل القمر</div>
   <div class="cover-divider"></div>
   <div class="cover-subtitle" style="font-family:'Cinzel',serif; font-size:15px; letter-spacing:2px;">Classical Arabic Astronomy</div>
   <p class="cover-desc">
-    The 28 Lunar Mansions â your daily spiritual guide through<br>
+    The 28 Lunar Mansions — your daily spiritual guide through<br>
     the wisdom of classical Arabic celestial science
   </p>
   <div class="cover-divider" style="margin-top:32px;"></div>
@@ -752,20 +752,20 @@
   <div class="cover-brand">Ethereal Echoes</div>
 </div>
 
-<!-- ââââââââââââââââââââââââââââââââââââââââââââââââââââââââââ -->
+<!-- ══════════════════════════════════════════════════════════ -->
 <!-- INTRODUCTION                                               -->
-<!-- ââââââââââââââââââââââââââââââââââââââââââââââââââââââââââ -->
+<!-- ══════════════════════════════════════════════════════════ -->
 <div class="section page-break" id="sec-intro">
   <div class="section-title">What Are the Lunar Mansions?</div>
-  <div class="section-title-en">ÙØ§ ÙÙ ÙÙØ§Ø²Ù Ø§ÙÙÙØ±Ø</div>
+  <div class="section-title-en">ما هي منازل القمر؟</div>
   <div class="section-rule"></div>
 
   <div class="intro-box no-break">
     <p>
-      The Lunar Mansions are an ancient Arabic astronomical system that divides the full zodiac circle (360Â°) into 28 equal stations. The Moon passes through each mansion over the course of one to three days on its monthly journey through the sky.
+      The Lunar Mansions are an ancient Arabic astronomical system that divides the full zodiac circle (360°) into 28 equal stations. The Moon passes through each mansion over the course of one to three days on its monthly journey through the sky.
     </p>
     <p>
-      Arab astronomers of the Golden Age used these mansions to understand the prevailing energy of each day and to choose optimal timing for all manner of activities â from agriculture and travel to marriage and commerce.
+      Arab astronomers of the Golden Age used these mansions to understand the prevailing energy of each day and to choose optimal timing for all manner of activities — from agriculture and travel to marriage and commerce.
     </p>
     <p>
       Each mansion carries a stellar or planetary name, a distinct energy, a nature (auspicious or inauspicious), and a planetary ruler. This guide takes you through all 28 mansions so you can understand how the Moon's daily energy influences your life and decisions.
@@ -774,30 +774,30 @@
 
   <div class="how-to-grid">
     <div class="how-to-item no-break">
-      <h4>ð How to Use This Guide</h4>
+      <h4>🌙 How to Use This Guide</h4>
       <p>Find the Moon's current mansion (use our app or a lunar calendar), then read that mansion's description and let its guidance shape your day.</p>
     </div>
     <div class="how-to-item no-break">
-      <h4>â­ Auspicious & Inauspicious</h4>
-      <p>Auspicious mansions (Saad) are blessed times for starting and planning. Inauspicious mansions (Nahs) are not evil â they are simply times for reflection, caution, and inner awareness.</p>
+      <h4>⭐ Auspicious & Inauspicious</h4>
+      <p>Auspicious mansions (Saad) are blessed times for starting and planning. Inauspicious mansions (Nahs) are not evil — they are simply times for reflection, caution, and inner awareness.</p>
     </div>
     <div class="how-to-item no-break">
-      <h4>ð¥ The Four Elements</h4>
+      <h4>🔥 The Four Elements</h4>
       <p>Each mansion belongs to one of four elements: Fire (enthusiasm and initiative), Water (emotion and intuition), Air (thought and communication), or Earth (work and material matters).</p>
     </div>
     <div class="how-to-item no-break">
-      <h4>ðª Planetary Rulers</h4>
-      <p>Each mansion has a ruling planet that colors its character. Mars lends courage, Venus brings beauty, Mercury grants eloquence â each ruler adds its own signature quality.</p>
+      <h4>🪐 Planetary Rulers</h4>
+      <p>Each mansion has a ruling planet that colors its character. Mars lends courage, Venus brings beauty, Mercury grants eloquence — each ruler adds its own signature quality.</p>
     </div>
   </div>
 </div>
 
-<!-- ââââââââââââââââââââââââââââââââââââââââââââââââââââââââââ -->
+<!-- ══════════════════════════════════════════════════════════ -->
 <!-- INDEX TABLE                                                -->
-<!-- ââââââââââââââââââââââââââââââââââââââââââââââââââââââââââ -->
+<!-- ══════════════════════════════════════════════════════════ -->
 <div class="section page-break" id="sec-index">
   <div class="section-title">Index of the 28 Mansions</div>
-  <div class="section-title-en">ÙÙØ±Ø³ Ø§ÙÙÙØ§Ø²Ù</div>
+  <div class="section-title-en">فهرس المنازل</div>
   <div class="section-rule"></div>
 
   <table class="index-table">
@@ -812,44 +812,44 @@
       </tr>
     </thead>
     <tbody>
-      <tr><td>1</td><td>Ø§ÙØ´ÙÙØ±ÙØ·ÙÙ</td><td>Al-Sharatain</td><td>ð¥ Fire</td><td class="nature-saad">Auspicious</td><td>Mars</td></tr>
-      <tr><td>2</td><td>Ø§ÙØ¨ÙØ·ÙÙÙ</td><td>Al-Butain</td><td>ð¥ Fire</td><td class="nature-saad">Auspicious</td><td>Venus</td></tr>
-      <tr><td>3</td><td>Ø§ÙØ«ÙÙØ±ÙÙÙØ§</td><td>Al-Thurayya</td><td>ð¥ Fire</td><td class="nature-saad">Auspicious</td><td>Mercury</td></tr>
-      <tr><td>4</td><td>Ø§ÙØ¯ÙÙØ¨ÙØ±Ø§Ù</td><td>Al-Dabaran</td><td>ð Earth</td><td class="nature-nahs">Inauspicious</td><td>Moon</td></tr>
-      <tr><td>5</td><td>Ø§ÙÙÙÙØ¹Ø©</td><td>Al-Haq'ah</td><td>ð Earth</td><td class="nature-nahs">Inauspicious</td><td>Mars</td></tr>
-      <tr><td>6</td><td>Ø§ÙÙÙÙØ¹Ø©</td><td>Al-Han'ah</td><td>ð¨ Air</td><td class="nature-saad">Auspicious</td><td>Sun</td></tr>
-      <tr><td>7</td><td>Ø§ÙØ°ÙÙØ±Ø§Ø¹</td><td>Al-Dhira'</td><td>ð¨ Air</td><td class="nature-saad">Auspicious</td><td>Venus</td></tr>
-      <tr><td>8</td><td>Ø§ÙÙÙÙØ«Ø±Ø©</td><td>Al-Nathrah</td><td>ð§ Water</td><td class="nature-saad">Auspicious</td><td>Mercury</td></tr>
-      <tr><td>9</td><td>Ø§ÙØ·ÙÙØ±Ù</td><td>Al-Tarf</td><td>ð§ Water</td><td class="nature-nahs">Inauspicious</td><td>Moon</td></tr>
-      <tr><td>10</td><td>Ø§ÙØ¬ÙØ¨ÙØ©</td><td>Al-Jabhah</td><td>ð¥ Fire</td><td class="nature-saad">Auspicious</td><td>Sun</td></tr>
-      <tr><td>11</td><td>Ø§ÙØ²ÙÙØ¨Ø±Ø©</td><td>Al-Zubrah</td><td>ð¥ Fire</td><td class="nature-nahs">Inauspicious</td><td>Jupiter</td></tr>
-      <tr><td>12</td><td>Ø§ÙØµÙÙØ±ÙØ©</td><td>Al-Sarfah</td><td>ð Earth</td><td class="nature-saad">Auspicious</td><td>Sun</td></tr>
-      <tr><td>13</td><td>Ø§ÙØ¹ÙÙÙØ§Ø¡</td><td>Al-Awwa'</td><td>ð Earth</td><td class="nature-nahs">Inauspicious</td><td>Venus</td></tr>
-      <tr><td>14</td><td>Ø§ÙØ³ÙÙÙØ§Ù</td><td>Al-Simak</td><td>ð¨ Air</td><td class="nature-saad">Auspicious</td><td>Mars</td></tr>
-      <tr><td>15</td><td>Ø§ÙØºÙÙØ±</td><td>Al-Ghafr</td><td>ð¨ Air</td><td class="nature-saad">Auspicious</td><td>Jupiter</td></tr>
-      <tr><td>16</td><td>Ø§ÙØ²ÙÙØ¨Ø§ÙÙ</td><td>Al-Zubana</td><td>ð§ Water</td><td class="nature-nahs">Inauspicious</td><td>Saturn</td></tr>
-      <tr><td>17</td><td>Ø§ÙØ¥ÙÙÙÙ</td><td>Al-Iklil</td><td>ð§ Water</td><td class="nature-saad">Auspicious</td><td>Mars</td></tr>
-      <tr><td>18</td><td>Ø§ÙÙÙÙØ¨</td><td>Al-Qalb</td><td>ð§ Water</td><td class="nature-nahs">Inauspicious</td><td>Mars</td></tr>
-      <tr><td>19</td><td>Ø§ÙØ´ÙÙÙÙØ©</td><td>Al-Shaulah</td><td>ð¥ Fire</td><td class="nature-nahs">Inauspicious</td><td>Jupiter</td></tr>
-      <tr><td>20</td><td>Ø§ÙÙÙÙØ¹Ø§Ø¦Ù</td><td>Al-Na'aim</td><td>ð¥ Fire</td><td class="nature-saad">Auspicious</td><td>Sun</td></tr>
-      <tr><td>21</td><td>Ø§ÙØ¨ÙÙØ¯Ø©</td><td>Al-Baldah</td><td>ð Earth</td><td class="nature-nahs">Inauspicious</td><td>Saturn</td></tr>
-      <tr><td>22</td><td>Ø³Ø¹Ø¯ Ø§ÙØ°Ø§Ø¨Ø­</td><td>Sa'd al-Dhabih</td><td>ð Earth</td><td class="nature-saad">Auspicious</td><td>Saturn</td></tr>
-      <tr><td>23</td><td>Ø³Ø¹Ø¯ Ø¨ÙÙÙØ¹</td><td>Sa'd Bula'</td><td>ð¨ Air</td><td class="nature-saad">Auspicious</td><td>Saturn</td></tr>
-      <tr><td>24</td><td>Ø³Ø¹Ø¯ Ø§ÙØ³ÙÙØ¹ÙØ¯</td><td>Sa'd al-Su'ud</td><td>ð¨ Air</td><td class="nature-saad">Most Auspicious â­</td><td>Jupiter</td></tr>
-      <tr><td>25</td><td>Ø³Ø¹Ø¯ Ø§ÙØ£Ø®Ø¨ÙØ©</td><td>Sa'd al-Akhbiyah</td><td>ð¨ Air</td><td class="nature-saad">Auspicious</td><td>Venus</td></tr>
-      <tr><td>26</td><td>Ø§ÙÙÙØ±Øº Ø§ÙÙÙÙØ¯ÙÙÙ</td><td>Al-Fargh al-Muqaddam</td><td>ð§ Water</td><td class="nature-saad">Auspicious</td><td>Mars</td></tr>
-      <tr><td>27</td><td>Ø§ÙÙÙØ±Øº Ø§ÙÙÙØ¤Ø®ÙÙØ±</td><td>Al-Fargh al-Mu'akhkhar</td><td>ð§ Water</td><td class="nature-saad">Auspicious</td><td>Mercury</td></tr>
-      <tr><td>28</td><td>Ø¨Ø·Ù Ø§ÙØ­ÙØª</td><td>Batn al-Hut</td><td>ð§ Water</td><td class="nature-saad">Auspicious</td><td>Jupiter</td></tr>
+      <tr><td>1</td><td>الشَّرَطين</td><td>Al-Sharatain</td><td>🔥 Fire</td><td class="nature-saad">Auspicious</td><td>Mars</td></tr>
+      <tr><td>2</td><td>البُطَين</td><td>Al-Butain</td><td>🔥 Fire</td><td class="nature-saad">Auspicious</td><td>Venus</td></tr>
+      <tr><td>3</td><td>الثُّرَيّا</td><td>Al-Thurayya</td><td>🔥 Fire</td><td class="nature-saad">Auspicious</td><td>Mercury</td></tr>
+      <tr><td>4</td><td>الدَّبَران</td><td>Al-Dabaran</td><td>🌍 Earth</td><td class="nature-nahs">Inauspicious</td><td>Moon</td></tr>
+      <tr><td>5</td><td>الهَقعة</td><td>Al-Haq'ah</td><td>🌍 Earth</td><td class="nature-nahs">Inauspicious</td><td>Mars</td></tr>
+      <tr><td>6</td><td>الهَنعة</td><td>Al-Han'ah</td><td>💨 Air</td><td class="nature-saad">Auspicious</td><td>Sun</td></tr>
+      <tr><td>7</td><td>الذِّراع</td><td>Al-Dhira'</td><td>💨 Air</td><td class="nature-saad">Auspicious</td><td>Venus</td></tr>
+      <tr><td>8</td><td>النَّثرة</td><td>Al-Nathrah</td><td>💧 Water</td><td class="nature-saad">Auspicious</td><td>Mercury</td></tr>
+      <tr><td>9</td><td>الطَّرف</td><td>Al-Tarf</td><td>💧 Water</td><td class="nature-nahs">Inauspicious</td><td>Moon</td></tr>
+      <tr><td>10</td><td>الجَبهة</td><td>Al-Jabhah</td><td>🔥 Fire</td><td class="nature-saad">Auspicious</td><td>Sun</td></tr>
+      <tr><td>11</td><td>الزُّبرة</td><td>Al-Zubrah</td><td>🔥 Fire</td><td class="nature-nahs">Inauspicious</td><td>Jupiter</td></tr>
+      <tr><td>12</td><td>الصَّرفة</td><td>Al-Sarfah</td><td>🌍 Earth</td><td class="nature-saad">Auspicious</td><td>Sun</td></tr>
+      <tr><td>13</td><td>العَوّاء</td><td>Al-Awwa'</td><td>🌍 Earth</td><td class="nature-nahs">Inauspicious</td><td>Venus</td></tr>
+      <tr><td>14</td><td>السِّماك</td><td>Al-Simak</td><td>💨 Air</td><td class="nature-saad">Auspicious</td><td>Mars</td></tr>
+      <tr><td>15</td><td>الغَفر</td><td>Al-Ghafr</td><td>💨 Air</td><td class="nature-saad">Auspicious</td><td>Jupiter</td></tr>
+      <tr><td>16</td><td>الزُّبانى</td><td>Al-Zubana</td><td>💧 Water</td><td class="nature-nahs">Inauspicious</td><td>Saturn</td></tr>
+      <tr><td>17</td><td>الإكليل</td><td>Al-Iklil</td><td>💧 Water</td><td class="nature-saad">Auspicious</td><td>Mars</td></tr>
+      <tr><td>18</td><td>القَلب</td><td>Al-Qalb</td><td>💧 Water</td><td class="nature-nahs">Inauspicious</td><td>Mars</td></tr>
+      <tr><td>19</td><td>الشَّولة</td><td>Al-Shaulah</td><td>🔥 Fire</td><td class="nature-nahs">Inauspicious</td><td>Jupiter</td></tr>
+      <tr><td>20</td><td>النَّعائم</td><td>Al-Na'aim</td><td>🔥 Fire</td><td class="nature-saad">Auspicious</td><td>Sun</td></tr>
+      <tr><td>21</td><td>البَلدة</td><td>Al-Baldah</td><td>🌍 Earth</td><td class="nature-nahs">Inauspicious</td><td>Saturn</td></tr>
+      <tr><td>22</td><td>سعد الذابح</td><td>Sa'd al-Dhabih</td><td>🌍 Earth</td><td class="nature-saad">Auspicious</td><td>Saturn</td></tr>
+      <tr><td>23</td><td>سعد بُلَع</td><td>Sa'd Bula'</td><td>💨 Air</td><td class="nature-saad">Auspicious</td><td>Saturn</td></tr>
+      <tr><td>24</td><td>سعد السُّعود</td><td>Sa'd al-Su'ud</td><td>💨 Air</td><td class="nature-saad">Most Auspicious ⭐</td><td>Jupiter</td></tr>
+      <tr><td>25</td><td>سعد الأخبية</td><td>Sa'd al-Akhbiyah</td><td>💨 Air</td><td class="nature-saad">Auspicious</td><td>Venus</td></tr>
+      <tr><td>26</td><td>الفَرغ المُقدَّم</td><td>Al-Fargh al-Muqaddam</td><td>💧 Water</td><td class="nature-saad">Auspicious</td><td>Mars</td></tr>
+      <tr><td>27</td><td>الفَرغ المُؤخَّر</td><td>Al-Fargh al-Mu'akhkhar</td><td>💧 Water</td><td class="nature-saad">Auspicious</td><td>Mercury</td></tr>
+      <tr><td>28</td><td>بطن الحوت</td><td>Batn al-Hut</td><td>💧 Water</td><td class="nature-saad">Auspicious</td><td>Jupiter</td></tr>
     </tbody>
   </table>
 </div>
 
-<!-- ââââââââââââââââââââââââââââââââââââââââââââââââââââââââââ -->
+<!-- ══════════════════════════════════════════════════════════ -->
 <!-- THE 28 MANSIONS                                            -->
-<!-- ââââââââââââââââââââââââââââââââââââââââââââââââââââââââââ -->
+<!-- ══════════════════════════════════════════════════════════ -->
 <div class="section" id="sec-mansions">
   <div class="section-title">The 28 Lunar Mansions</div>
-  <div class="section-title-en">Ø§ÙÙÙØ§Ø²Ù Ø§ÙØ«ÙØ§ÙÙØ© ÙØ§ÙØ¹Ø´Ø±ÙÙ</div>
+  <div class="section-title-en">المنازل الثمانية والعشرون</div>
   <div class="section-rule"></div>
 
   <div class="mansions-grid">
@@ -859,23 +859,23 @@
       <div class="mansion-header" onclick="toggleCard(this)">
         <div class="mansion-number">01</div>
         <div class="mansion-name-block">
-          <div class="mansion-name-en">Al-Sharatain Â· â</div>
-          <div class="mansion-name-ar">Ø§ÙØ´ÙÙØ±ÙØ·ÙÙ</div>
+          <div class="mansion-name-en">Al-Sharatain · ♈</div>
+          <div class="mansion-name-ar">الشَّرَطين</div>
         </div>
-        <div class="mansion-emoji">ð¥</div>
+        <div class="mansion-emoji">🔥</div>
       </div>
       <div class="mansion-body">
         <div class="mansion-meta">
-          <span class="meta-tag fire">ð¥ Fire</span>
-          <span class="meta-tag saad">â¨ Auspicious</span>
-          <span class="meta-tag">ðª Mars</span>
-          <span class="meta-tag" style="direction:ltr">â Aries</span>
+          <span class="meta-tag fire">🔥 Fire</span>
+          <span class="meta-tag saad">✨ Auspicious</span>
+          <span class="meta-tag">🪐 Mars</span>
+          <span class="meta-tag" style="direction:ltr">♈ Aries</span>
         </div>
         <div class="mansion-meaning">Meaning: The Two Signs</div>
-        <div class="mansion-desc-ar">Ø·Ø§ÙØ© Ø§ÙÙØ¨Ø§Ø¯Ø±Ø© ÙØ§ÙØ´Ø¬Ø§Ø¹Ø©. ÙÙØª ÙÙØ§Ø³Ø¨ ÙÙØ¨Ø¯Ø§ÙØ§Øª Ø§ÙØ¬Ø±ÙØ¦Ø© ÙØ§ÙÙÙØ§Ø¯Ø©.</div>
-        <div class="mansion-desc-en">Energy of initiative and courage. A time for bold beginnings and leadership. The two marks signal that action is favored â step forward with confidence.</div>
+        <div class="mansion-desc-ar">طاقة المبادرة والشجاعة. وقت مناسب للبدايات الجريئة والقيادة.</div>
+        <div class="mansion-desc-en">Energy of initiative and courage. A time for bold beginnings and leadership. The two marks signal that action is favored — step forward with confidence.</div>
         <div class="mansion-guidance">
-          <h5>ð Today's Guidance</h5>
+          <h5>🌙 Today's Guidance</h5>
           <p>Launch new projects, make bold decisions, and set your sights on the goal. Mars energy fuels you to move forward with confidence.</p>
         </div>
       </div>
@@ -886,22 +886,22 @@
       <div class="mansion-header" onclick="toggleCard(this)">
         <div class="mansion-number">02</div>
         <div class="mansion-name-block">
-          <div class="mansion-name-en">Al-Butain Â· â</div>
-          <div class="mansion-name-ar">Ø§ÙØ¨ÙØ·ÙÙÙ</div>
+          <div class="mansion-name-en">Al-Butain · ♈</div>
+          <div class="mansion-name-ar">البُطَين</div>
         </div>
-        <div class="mansion-emoji">ð°</div>
+        <div class="mansion-emoji">💰</div>
       </div>
       <div class="mansion-body">
         <div class="mansion-meta">
-          <span class="meta-tag fire">ð¥ Fire</span>
-          <span class="meta-tag saad">â¨ Auspicious</span>
-          <span class="meta-tag">ðª Venus</span>
+          <span class="meta-tag fire">🔥 Fire</span>
+          <span class="meta-tag saad">✨ Auspicious</span>
+          <span class="meta-tag">🪐 Venus</span>
         </div>
         <div class="mansion-meaning">Meaning: The Little Belly</div>
-        <div class="mansion-desc-ar">Ø·Ø§ÙØ© Ø§ÙØ«Ø±ÙØ© ÙØ§ÙÙÙØ±Ø©. ÙÙØª ÙÙØ§Ø³Ø¨ ÙØ¬ÙØ¹ Ø§ÙÙÙØ§Ø±Ø¯ ÙØ§ÙØªØ£Ø³ÙØ³.</div>
+        <div class="mansion-desc-ar">طاقة الثروة والوفرة. وقت مناسب لجمع الموارد والتأسيس.</div>
         <div class="mansion-desc-en">Energy of wealth and abundance. A time for gathering resources and building foundations. Venus rules here, blessing material endeavors with grace.</div>
         <div class="mansion-guidance">
-          <h5>ð Today's Guidance</h5>
+          <h5>🌙 Today's Guidance</h5>
           <p>An ideal time for financial planning, investing in foundations, and tending what you already have. Venus opens the doors of abundance.</p>
         </div>
       </div>
@@ -912,22 +912,22 @@
       <div class="mansion-header" onclick="toggleCard(this)">
         <div class="mansion-number">03</div>
         <div class="mansion-name-block">
-          <div class="mansion-name-en">Al-Thurayya Â· â</div>
-          <div class="mansion-name-ar">Ø§ÙØ«ÙÙØ±ÙÙÙØ§</div>
+          <div class="mansion-name-en">Al-Thurayya · ♈</div>
+          <div class="mansion-name-ar">الثُّرَيّا</div>
         </div>
-        <div class="mansion-emoji">â¨</div>
+        <div class="mansion-emoji">✨</div>
       </div>
       <div class="mansion-body">
         <div class="mansion-meta">
-          <span class="meta-tag fire">ð¥ Fire</span>
-          <span class="meta-tag saad">â¨ Auspicious</span>
-          <span class="meta-tag">ðª Mercury</span>
+          <span class="meta-tag fire">🔥 Fire</span>
+          <span class="meta-tag saad">✨ Auspicious</span>
+          <span class="meta-tag">🪐 Mercury</span>
         </div>
         <div class="mansion-meaning">Meaning: The Pleiades</div>
-        <div class="mansion-desc-ar">Ø·Ø§ÙØ© Ø§ÙÙÙØ± ÙØ§ÙØ¹ÙÙ. ÙÙØª ÙÙØ§Ø³Ø¨ ÙÙØªØ¹ÙÙ ÙØ§ÙØ§ÙØªØ´Ø§Ù ÙØ§ÙØ³ÙØ±.</div>
-        <div class="mansion-desc-en">Energy of light and knowledge. A time for learning, discovery, and travel. The Pleiades illuminate the mind â perfect for study and communication.</div>
+        <div class="mansion-desc-ar">طاقة النور والعلم. وقت مناسب للتعلم والاكتشاف والسفر.</div>
+        <div class="mansion-desc-en">Energy of light and knowledge. A time for learning, discovery, and travel. The Pleiades illuminate the mind — perfect for study and communication.</div>
         <div class="mansion-guidance">
-          <h5>ð Today's Guidance</h5>
+          <h5>🌙 Today's Guidance</h5>
           <p>Read, study, connect with others, and share knowledge. Mercury opens channels of understanding and clear expression.</p>
         </div>
       </div>
@@ -938,22 +938,22 @@
       <div class="mansion-header" onclick="toggleCard(this)">
         <div class="mansion-number">04</div>
         <div class="mansion-name-block">
-          <div class="mansion-name-en">Al-Dabaran Â· â</div>
-          <div class="mansion-name-ar">Ø§ÙØ¯ÙÙØ¨ÙØ±Ø§Ù</div>
+          <div class="mansion-name-en">Al-Dabaran · ♉</div>
+          <div class="mansion-name-ar">الدَّبَران</div>
         </div>
-        <div class="mansion-emoji">ð</div>
+        <div class="mansion-emoji">🌑</div>
       </div>
       <div class="mansion-body">
         <div class="mansion-meta">
-          <span class="meta-tag earth">ð Earth</span>
-          <span class="meta-tag nahs">â  Inauspicious</span>
-          <span class="meta-tag">ðª Moon</span>
+          <span class="meta-tag earth">🌍 Earth</span>
+          <span class="meta-tag nahs">⚠ Inauspicious</span>
+          <span class="meta-tag">🪐 Moon</span>
         </div>
         <div class="mansion-meaning">Meaning: The Follower</div>
-        <div class="mansion-desc-ar">Ø·Ø§ÙØ© Ø§ÙØµØ¨Ø± ÙØ§ÙÙØªØ§Ø¨Ø¹Ø©. ÙÙØª ÙÙØªØ£ÙÙ ÙØ§ÙÙØ«Ø§Ø¨Ø±Ø© Ø±ØºÙ Ø§ÙØ¹ÙØ¨Ø§Øª.</div>
+        <div class="mansion-desc-ar">طاقة الصبر والمتابعة. وقت للتأني والمثابرة رغم العقبات.</div>
         <div class="mansion-desc-en">Energy of patience and persistence. A time for steadfastness despite obstacles. The follower star teaches that endurance is its own victory.</div>
         <div class="mansion-guidance">
-          <h5>ð Today's Guidance</h5>
+          <h5>🌙 Today's Guidance</h5>
           <p>Avoid new beginnings. Instead, persist with what you have already started and practice patience. This is a time for endurance, not rapid advancement.</p>
         </div>
       </div>
@@ -964,22 +964,22 @@
       <div class="mansion-header" onclick="toggleCard(this)">
         <div class="mansion-number">05</div>
         <div class="mansion-name-block">
-          <div class="mansion-name-en">Al-Haq'ah Â· â</div>
-          <div class="mansion-name-ar">Ø§ÙÙÙÙØ¹Ø©</div>
+          <div class="mansion-name-en">Al-Haq'ah · ♉</div>
+          <div class="mansion-name-ar">الهَقعة</div>
         </div>
-        <div class="mansion-emoji">ð</div>
+        <div class="mansion-emoji">🔄</div>
       </div>
       <div class="mansion-body">
         <div class="mansion-meta">
-          <span class="meta-tag earth">ð Earth</span>
-          <span class="meta-tag nahs">â  Inauspicious</span>
-          <span class="meta-tag">ðª Mars</span>
+          <span class="meta-tag earth">🌍 Earth</span>
+          <span class="meta-tag nahs">⚠ Inauspicious</span>
+          <span class="meta-tag">🪐 Mars</span>
         </div>
         <div class="mansion-meaning">Meaning: The White Spot</div>
-        <div class="mansion-desc-ar">Ø·Ø§ÙØ© Ø§ÙØªØ­ÙÙ ÙØ§ÙØªØ·ÙÙØ±. ÙÙØª ÙØ¥Ø²Ø§ÙØ© ÙØ§ ÙØ§ ÙØ®Ø¯ÙÙ ÙØ§ÙØªØ¬Ø¯ÙØ¯.</div>
+        <div class="mansion-desc-ar">طاقة التحول والتطهير. وقت لإزالة ما لا يخدمك والتجديد.</div>
         <div class="mansion-desc-en">Energy of transformation and purification. A time to release what no longer serves you and make space for renewal.</div>
         <div class="mansion-guidance">
-          <h5>ð Today's Guidance</h5>
+          <h5>🌙 Today's Guidance</h5>
           <p>Clear your environment and your mind. Release habits and things that no longer add value to your life. This is a time for purification and spiritual renewal.</p>
         </div>
       </div>
@@ -990,22 +990,22 @@
       <div class="mansion-header" onclick="toggleCard(this)">
         <div class="mansion-number">06</div>
         <div class="mansion-name-block">
-          <div class="mansion-name-en">Al-Han'ah Â· â</div>
-          <div class="mansion-name-ar">Ø§ÙÙÙÙØ¹Ø©</div>
+          <div class="mansion-name-en">Al-Han'ah · ♊</div>
+          <div class="mansion-name-ar">الهَنعة</div>
         </div>
-        <div class="mansion-emoji">ð¬</div>
+        <div class="mansion-emoji">💬</div>
       </div>
       <div class="mansion-body">
         <div class="mansion-meta">
-          <span class="meta-tag air">ð¨ Air</span>
-          <span class="meta-tag saad">â¨ Auspicious</span>
-          <span class="meta-tag">ðª Sun</span>
+          <span class="meta-tag air">💨 Air</span>
+          <span class="meta-tag saad">✨ Auspicious</span>
+          <span class="meta-tag">🪐 Sun</span>
         </div>
         <div class="mansion-meaning">Meaning: The Brand Mark</div>
-        <div class="mansion-desc-ar">Ø·Ø§ÙØ© Ø§ÙØªÙØ§ØµÙ ÙØ§ÙØ­ÙÙØ©. ÙÙØª ÙÙØ§Ø³Ø¨ ÙÙØ­ÙØ§Ø± ÙØ§ÙØªØ¹Ø¨ÙØ± Ø¹Ù Ø§ÙØ°Ø§Øª.</div>
+        <div class="mansion-desc-ar">طاقة التواصل والحكمة. وقت مناسب للحوار والتعبير عن الذات.</div>
         <div class="mansion-desc-en">Energy of communication and wisdom. A time for dialogue, self-expression, and sharing your truth with clarity and light.</div>
         <div class="mansion-guidance">
-          <h5>ð Today's Guidance</h5>
+          <h5>🌙 Today's Guidance</h5>
           <p>Write, speak, and hold the important meetings and conversations. The Sun illuminates the path of honest self-expression.</p>
         </div>
       </div>
@@ -1016,22 +1016,22 @@
       <div class="mansion-header" onclick="toggleCard(this)">
         <div class="mansion-number">07</div>
         <div class="mansion-name-block">
-          <div class="mansion-name-en">Al-Dhira' Â· â</div>
-          <div class="mansion-name-ar">Ø§ÙØ°ÙÙØ±Ø§Ø¹</div>
+          <div class="mansion-name-en">Al-Dhira' · ♊</div>
+          <div class="mansion-name-ar">الذِّراع</div>
         </div>
-        <div class="mansion-emoji">ð</div>
+        <div class="mansion-emoji">💖</div>
       </div>
       <div class="mansion-body">
         <div class="mansion-meta">
-          <span class="meta-tag air">ð¨ Air</span>
-          <span class="meta-tag saad">â¨ Auspicious</span>
-          <span class="meta-tag">ðª Venus</span>
+          <span class="meta-tag air">💨 Air</span>
+          <span class="meta-tag saad">✨ Auspicious</span>
+          <span class="meta-tag">🪐 Venus</span>
         </div>
         <div class="mansion-meaning">Meaning: The Forearm</div>
-        <div class="mansion-desc-ar">Ø·Ø§ÙØ© Ø§ÙØ­Ø¨ ÙØ§ÙØ§ÙØ³Ø¬Ø§Ù. ÙÙØª ÙÙØ§Ø³Ø¨ ÙÙØ¹ÙØ§ÙØ§Øª ÙØ§ÙØ´Ø±Ø§ÙØ§Øª ÙØ§ÙÙØµØ§ÙØ­Ø©.</div>
+        <div class="mansion-desc-ar">طاقة الحب والانسجام. وقت مناسب للعلاقات والشراكات والمصالحة.</div>
         <div class="mansion-desc-en">Energy of love and harmony. A time for deepening relationships, forming partnerships, and reconciling differences. Venus brings beauty to all connections.</div>
         <div class="mansion-guidance">
-          <h5>ð Today's Guidance</h5>
+          <h5>🌙 Today's Guidance</h5>
           <p>Strengthen your relationships, mend what needs healing, and celebrate love in all its forms. A blessed time for partnerships of all kinds.</p>
         </div>
       </div>
@@ -1042,22 +1042,22 @@
       <div class="mansion-header" onclick="toggleCard(this)">
         <div class="mansion-number">08</div>
         <div class="mansion-name-block">
-          <div class="mansion-name-en">Al-Nathrah Â· â</div>
-          <div class="mansion-name-ar">Ø§ÙÙÙÙØ«Ø±Ø©</div>
+          <div class="mansion-name-en">Al-Nathrah · ♋</div>
+          <div class="mansion-name-ar">النَّثرة</div>
         </div>
-        <div class="mansion-emoji">ð®</div>
+        <div class="mansion-emoji">🔮</div>
       </div>
       <div class="mansion-body">
         <div class="mansion-meta">
-          <span class="meta-tag water">ð§ Water</span>
-          <span class="meta-tag saad">â¨ Auspicious</span>
-          <span class="meta-tag">ðª Mercury</span>
+          <span class="meta-tag water">💧 Water</span>
+          <span class="meta-tag saad">✨ Auspicious</span>
+          <span class="meta-tag">🪐 Mercury</span>
         </div>
         <div class="mansion-meaning">Meaning: The Gap</div>
-        <div class="mansion-desc-ar">Ø·Ø§ÙØ© Ø§ÙØ­Ø¯Ø³ ÙØ§ÙØ±Ø¤ÙØ© Ø§ÙØ¯Ø§Ø®ÙÙØ©. ÙÙØª ÙÙØªØ£ÙÙ ÙØ§ÙØ§Ø³ØªÙØ§Ø¹ ÙÙÙÙØ¨.</div>
+        <div class="mansion-desc-ar">طاقة الحدس والرؤية الداخلية. وقت للتأمل والاستماع للقلب.</div>
         <div class="mansion-desc-en">Energy of intuition and inner vision. A time for meditation, deep listening, and trusting your inner knowing above all external noise.</div>
         <div class="mansion-guidance">
-          <h5>ð Today's Guidance</h5>
+          <h5>🌙 Today's Guidance</h5>
           <p>Step away from outer noise and listen to your inner voice. Meditation and journaling will reveal exactly what you need to know.</p>
         </div>
       </div>
@@ -1068,22 +1068,22 @@
       <div class="mansion-header" onclick="toggleCard(this)">
         <div class="mansion-number">09</div>
         <div class="mansion-name-block">
-          <div class="mansion-name-en">Al-Tarf Â· â</div>
-          <div class="mansion-name-ar">Ø§ÙØ·ÙÙØ±Ù</div>
+          <div class="mansion-name-en">Al-Tarf · ♋</div>
+          <div class="mansion-name-ar">الطَّرف</div>
         </div>
-        <div class="mansion-emoji">â ï¸</div>
+        <div class="mansion-emoji">⚠️</div>
       </div>
       <div class="mansion-body">
         <div class="mansion-meta">
-          <span class="meta-tag water">ð§ Water</span>
-          <span class="meta-tag nahs">â  Inauspicious</span>
-          <span class="meta-tag">ðª Moon</span>
+          <span class="meta-tag water">💧 Water</span>
+          <span class="meta-tag nahs">⚠ Inauspicious</span>
+          <span class="meta-tag">🪐 Moon</span>
         </div>
         <div class="mansion-meaning">Meaning: The Glance</div>
-        <div class="mansion-desc-ar">Ø·Ø§ÙØ© Ø§ÙØ­Ø°Ø± ÙØ§ÙÙÙØ¸Ø©. ÙÙØª ÙÙØªØ±ÙÙ ÙØ¨Ù Ø§ØªØ®Ø§Ø° Ø§ÙÙØ±Ø§Ø±Ø§Øª Ø§ÙÙÙÙØ©.</div>
+        <div class="mansion-desc-ar">طاقة الحذر واليقظة. وقت للتروي قبل اتخاذ القرارات المهمة.</div>
         <div class="mansion-desc-en">Energy of caution and vigilance. A time to pause, observe carefully, and avoid hasty decisions. Look before you leap.</div>
         <div class="mansion-guidance">
-          <h5>ð Today's Guidance</h5>
+          <h5>🌙 Today's Guidance</h5>
           <p>Postpone important decisions if possible. Observe situations with a discerning eye and trust your intuition if something feels off.</p>
         </div>
       </div>
@@ -1094,22 +1094,22 @@
       <div class="mansion-header" onclick="toggleCard(this)">
         <div class="mansion-number">10</div>
         <div class="mansion-name-block">
-          <div class="mansion-name-en">Al-Jabhah Â· â</div>
-          <div class="mansion-name-ar">Ø§ÙØ¬ÙØ¨ÙØ©</div>
+          <div class="mansion-name-en">Al-Jabhah · ♌</div>
+          <div class="mansion-name-ar">الجَبهة</div>
         </div>
-        <div class="mansion-emoji">ð</div>
+        <div class="mansion-emoji">👑</div>
       </div>
       <div class="mansion-body">
         <div class="mansion-meta">
-          <span class="meta-tag fire">ð¥ Fire</span>
-          <span class="meta-tag saad">â¨ Auspicious</span>
-          <span class="meta-tag">ðª Sun</span>
+          <span class="meta-tag fire">🔥 Fire</span>
+          <span class="meta-tag saad">✨ Auspicious</span>
+          <span class="meta-tag">🪐 Sun</span>
         </div>
         <div class="mansion-meaning">Meaning: The Forehead</div>
-        <div class="mansion-desc-ar">Ø·Ø§ÙØ© Ø§ÙÙØ±Ø§ÙØ© ÙØ§ÙÙØµØ±. ÙÙØª ÙÙØ§Ø³Ø¨ ÙÙÙÙØ§Ø¬ÙØ© ÙØ§ÙØ¯ÙØ§Ø¹ Ø¹Ù Ø§ÙØ­Ù.</div>
+        <div class="mansion-desc-ar">طاقة الكرامة والنصر. وقت مناسب للمواجهة والدفاع عن الحق.</div>
         <div class="mansion-desc-en">Energy of dignity and victory. A time for standing up, facing challenges with nobility, and defending what is right. The lion's forehead shines.</div>
         <div class="mansion-guidance">
-          <h5>ð Today's Guidance</h5>
+          <h5>🌙 Today's Guidance</h5>
           <p>Stand with confidence and dignity. This is a favorable time for negotiations and confrontations that demand courage and a strong, grounded presence.</p>
         </div>
       </div>
@@ -1120,22 +1120,22 @@
       <div class="mansion-header" onclick="toggleCard(this)">
         <div class="mansion-number">11</div>
         <div class="mansion-name-block">
-          <div class="mansion-name-en">Al-Zubrah Â· â</div>
-          <div class="mansion-name-ar">Ø§ÙØ²ÙÙØ¨Ø±Ø©</div>
+          <div class="mansion-name-en">Al-Zubrah · ♌</div>
+          <div class="mansion-name-ar">الزُّبرة</div>
         </div>
-        <div class="mansion-emoji">ð¡ï¸</div>
+        <div class="mansion-emoji">🛡️</div>
       </div>
       <div class="mansion-body">
         <div class="mansion-meta">
-          <span class="meta-tag fire">ð¥ Fire</span>
-          <span class="meta-tag nahs">â  Inauspicious</span>
-          <span class="meta-tag">ðª Jupiter</span>
+          <span class="meta-tag fire">🔥 Fire</span>
+          <span class="meta-tag nahs">⚠ Inauspicious</span>
+          <span class="meta-tag">🪐 Jupiter</span>
         </div>
         <div class="mansion-meaning">Meaning: The Mane</div>
-        <div class="mansion-desc-ar">Ø·Ø§ÙØ© Ø§ÙÙÙØ© Ø§ÙØ®ÙÙØ© ÙØ§ÙØ­ÙØ§ÙØ©. ÙÙØª ÙÙØªØ­ØµÙÙ Ø§ÙØ±ÙØ­Ù ÙØ§ÙÙÙØ© Ø§ÙØ¯Ø§Ø®ÙÙØ©.</div>
+        <div class="mansion-desc-ar">طاقة القوة الخفية والحماية. وقت للتحصين الروحي والقوة الداخلية.</div>
         <div class="mansion-desc-en">Energy of hidden power and protection. A time for spiritual fortification and drawing on your inner reserves of strength.</div>
         <div class="mansion-guidance">
-          <h5>ð Today's Guidance</h5>
+          <h5>🌙 Today's Guidance</h5>
           <p>Strengthen yourself spiritually. Pray, meditate, and invoke your inner protection. Jupiter guards you from the unseen, watch over your energy.</p>
         </div>
       </div>
@@ -1146,22 +1146,22 @@
       <div class="mansion-header" onclick="toggleCard(this)">
         <div class="mansion-number">12</div>
         <div class="mansion-name-block">
-          <div class="mansion-name-en">Al-Sarfah Â· â</div>
-          <div class="mansion-name-ar">Ø§ÙØµÙÙØ±ÙØ©</div>
+          <div class="mansion-name-en">Al-Sarfah · ♍</div>
+          <div class="mansion-name-ar">الصَّرفة</div>
         </div>
-        <div class="mansion-emoji">ð</div>
+        <div class="mansion-emoji">🔄</div>
       </div>
       <div class="mansion-body">
         <div class="mansion-meta">
-          <span class="meta-tag earth">ð Earth</span>
-          <span class="meta-tag saad">â¨ Auspicious</span>
-          <span class="meta-tag">ðª Sun</span>
+          <span class="meta-tag earth">🌍 Earth</span>
+          <span class="meta-tag saad">✨ Auspicious</span>
+          <span class="meta-tag">🪐 Sun</span>
         </div>
         <div class="mansion-meaning">Meaning: The Changer</div>
-        <div class="mansion-desc-ar">Ø·Ø§ÙØ© Ø§ÙØªØºÙÙØ± ÙØ§ÙØªØ­ÙÙ. ÙÙØª ÙÙØ§Ø³Ø¨ ÙØªØ¨Ø¯ÙÙ Ø§ÙÙØ³Ø§Ø± ÙØ§ÙØªØ¬Ø¯ÙØ¯.</div>
+        <div class="mansion-desc-ar">طاقة التغيير والتحول. وقت مناسب لتبديل المسار والتجديد.</div>
         <div class="mansion-desc-en">Energy of change and transformation. A time to shift direction, renew commitments, and embrace necessary changes with open arms.</div>
         <div class="mansion-guidance">
-          <h5>ð Today's Guidance</h5>
+          <h5>🌙 Today's Guidance</h5>
           <p>Make the changes you have long postponed. This is a blessed time for positive transformations in the direction of your life.</p>
         </div>
       </div>
@@ -1172,22 +1172,22 @@
       <div class="mansion-header" onclick="toggleCard(this)">
         <div class="mansion-number">13</div>
         <div class="mansion-name-block">
-          <div class="mansion-name-en">Al-Awwa' Â· â</div>
-          <div class="mansion-name-ar">Ø§ÙØ¹ÙÙÙØ§Ø¡</div>
+          <div class="mansion-name-en">Al-Awwa' · ♍</div>
+          <div class="mansion-name-ar">العَوّاء</div>
         </div>
-        <div class="mansion-emoji">ð</div>
+        <div class="mansion-emoji">🔍</div>
       </div>
       <div class="mansion-body">
         <div class="mansion-meta">
-          <span class="meta-tag earth">ð Earth</span>
-          <span class="meta-tag nahs">â  Inauspicious</span>
-          <span class="meta-tag">ðª Venus</span>
+          <span class="meta-tag earth">🌍 Earth</span>
+          <span class="meta-tag nahs">⚠ Inauspicious</span>
+          <span class="meta-tag">🪐 Venus</span>
         </div>
         <div class="mansion-meaning">Meaning: The Barking One</div>
-        <div class="mansion-desc-ar">Ø·Ø§ÙØ© Ø§ÙØªØ­ÙÙÙ ÙØ§ÙØªÙÙÙØ². ÙÙØª ÙÙØªÙÙÙØ± Ø§ÙØ¹ÙÙÙ ÙÙØ±Ø² Ø§ÙØ£ÙÙØ±.</div>
+        <div class="mansion-desc-ar">طاقة التحليل والتمييز. وقت للتفكير العميق وفرز الأمور.</div>
         <div class="mansion-desc-en">Energy of analysis and discernment. A time for deep thinking, sorting through details, and separating the essential from the trivial.</div>
         <div class="mansion-guidance">
-          <h5>ð Today's Guidance</h5>
+          <h5>🌙 Today's Guidance</h5>
           <p>Do not rush decisions. Gather information and analyze deeply before moving forward. Patience here leads to clarity.</p>
         </div>
       </div>
@@ -1198,22 +1198,22 @@
       <div class="mansion-header" onclick="toggleCard(this)">
         <div class="mansion-number">14</div>
         <div class="mansion-name-block">
-          <div class="mansion-name-en">Al-Simak Â· â</div>
-          <div class="mansion-name-ar">Ø§ÙØ³ÙÙÙØ§Ù</div>
+          <div class="mansion-name-en">Al-Simak · ♎</div>
+          <div class="mansion-name-ar">السِّماك</div>
         </div>
-        <div class="mansion-emoji">âï¸</div>
+        <div class="mansion-emoji">⚖️</div>
       </div>
       <div class="mansion-body">
         <div class="mansion-meta">
-          <span class="meta-tag air">ð¨ Air</span>
-          <span class="meta-tag saad">â¨ Auspicious</span>
-          <span class="meta-tag">ðª Mars</span>
+          <span class="meta-tag air">💨 Air</span>
+          <span class="meta-tag saad">✨ Auspicious</span>
+          <span class="meta-tag">🪐 Mars</span>
         </div>
         <div class="mansion-meaning">Meaning: The Unarmed One</div>
-        <div class="mansion-desc-ar">Ø·Ø§ÙØ© Ø§ÙØ¹Ø¯Ø§ÙØ© ÙØ§ÙØªÙØ§Ø²Ù. ÙÙØª ÙÙØ§Ø³Ø¨ ÙØ¥Ø­ÙØ§Ù Ø§ÙØ­Ù ÙØ§ÙØ¥ÙØµØ§Ù.</div>
+        <div class="mansion-desc-ar">طاقة العدالة والتوازن. وقت مناسب لإحقاق الحق والإنصاف.</div>
         <div class="mansion-desc-en">Energy of justice and balance. A time for fairness, equity, and restoring harmony where imbalance exists.</div>
         <div class="mansion-guidance">
-          <h5>ð Today's Guidance</h5>
+          <h5>🌙 Today's Guidance</h5>
           <p>Seek fairness in your relationships and dealings. This is an ideal time to resolve disputes in a balanced, equitable way.</p>
         </div>
       </div>
@@ -1224,22 +1224,22 @@
       <div class="mansion-header" onclick="toggleCard(this)">
         <div class="mansion-number">15</div>
         <div class="mansion-name-block">
-          <div class="mansion-name-en">Al-Ghafr Â· â</div>
-          <div class="mansion-name-ar">Ø§ÙØºÙÙØ±</div>
+          <div class="mansion-name-en">Al-Ghafr · ♎</div>
+          <div class="mansion-name-ar">الغَفر</div>
         </div>
-        <div class="mansion-emoji">ðï¸</div>
+        <div class="mansion-emoji">🕊️</div>
       </div>
       <div class="mansion-body">
         <div class="mansion-meta">
-          <span class="meta-tag air">ð¨ Air</span>
-          <span class="meta-tag saad">â¨ Auspicious</span>
-          <span class="meta-tag">ðª Jupiter</span>
+          <span class="meta-tag air">💨 Air</span>
+          <span class="meta-tag saad">✨ Auspicious</span>
+          <span class="meta-tag">🪐 Jupiter</span>
         </div>
         <div class="mansion-meaning">Meaning: The Veil</div>
-        <div class="mansion-desc-ar">Ø·Ø§ÙØ© Ø§ÙØ³ÙØ§Ù ÙØ§ÙØ³ØªØ±. ÙÙØª ÙÙÙØ¯ÙØ¡ ÙØ§ÙØªØ¹Ø§ÙÙ ÙØ§ÙØºÙØ±Ø§Ù.</div>
+        <div class="mansion-desc-ar">طاقة السلام والستر. وقت للهدوء والتعافي والغفران.</div>
         <div class="mansion-desc-en">Energy of peace and concealment. A time for inner calm, healing old wounds, and extending forgiveness to yourself and others.</div>
         <div class="mansion-guidance">
-          <h5>ð Today's Guidance</h5>
+          <h5>🌙 Today's Guidance</h5>
           <p>Forgive and allow yourself to be forgiven. Jupiter blesses those who forgive and opens the doors of healing and inner peace.</p>
         </div>
       </div>
@@ -1250,22 +1250,22 @@
       <div class="mansion-header" onclick="toggleCard(this)">
         <div class="mansion-number">16</div>
         <div class="mansion-name-block">
-          <div class="mansion-name-en">Al-Zubana Â· â</div>
-          <div class="mansion-name-ar">Ø§ÙØ²ÙÙØ¨Ø§ÙÙ</div>
+          <div class="mansion-name-en">Al-Zubana · ♏</div>
+          <div class="mansion-name-ar">الزُّبانى</div>
         </div>
-        <div class="mansion-emoji">âï¸</div>
+        <div class="mansion-emoji">⚔️</div>
       </div>
       <div class="mansion-body">
         <div class="mansion-meta">
-          <span class="meta-tag water">ð§ Water</span>
-          <span class="meta-tag nahs">â  Inauspicious</span>
-          <span class="meta-tag">ðª Saturn</span>
+          <span class="meta-tag water">💧 Water</span>
+          <span class="meta-tag nahs">⚠ Inauspicious</span>
+          <span class="meta-tag">🪐 Saturn</span>
         </div>
         <div class="mansion-meaning">Meaning: The Claws</div>
-        <div class="mansion-desc-ar">Ø·Ø§ÙØ© Ø§ÙÙÙØ§Ø¬ÙØ© ÙØ§ÙØ­Ø³Ù. ÙÙØª ÙÙØªØ¹Ø§ÙÙ ÙØ¹ Ø§ÙØªØ­Ø¯ÙØ§Øª Ø¨Ø´ÙÙ ÙØ¨Ø§Ø´Ø±.</div>
+        <div class="mansion-desc-ar">طاقة المواجهة والحسم. وقت للتعامل مع التحديات بشكل مباشر.</div>
         <div class="mansion-desc-en">Energy of confrontation and resolution. A time to deal with challenges directly, clear the air, and bring difficult situations to decisive conclusions.</div>
         <div class="mansion-guidance">
-          <h5>ð Today's Guidance</h5>
+          <h5>🌙 Today's Guidance</h5>
           <p>Avoid unnecessary conflict. If confrontation is unavoidable, approach it with wisdom and calm rather than force.</p>
         </div>
       </div>
@@ -1276,22 +1276,22 @@
       <div class="mansion-header" onclick="toggleCard(this)">
         <div class="mansion-number">17</div>
         <div class="mansion-name-block">
-          <div class="mansion-name-en">Al-Iklil Â· â</div>
-          <div class="mansion-name-ar">Ø§ÙØ¥ÙÙÙÙ</div>
+          <div class="mansion-name-en">Al-Iklil · ♏</div>
+          <div class="mansion-name-ar">الإكليل</div>
         </div>
-        <div class="mansion-emoji">ð</div>
+        <div class="mansion-emoji">🏆</div>
       </div>
       <div class="mansion-body">
         <div class="mansion-meta">
-          <span class="meta-tag water">ð§ Water</span>
-          <span class="meta-tag saad">â¨ Auspicious</span>
-          <span class="meta-tag">ðª Mars</span>
+          <span class="meta-tag water">💧 Water</span>
+          <span class="meta-tag saad">✨ Auspicious</span>
+          <span class="meta-tag">🪐 Mars</span>
         </div>
         <div class="mansion-meaning">Meaning: The Crown</div>
-        <div class="mansion-desc-ar">Ø·Ø§ÙØ© Ø§ÙØªØªÙÙØ¬ ÙØ§ÙØ´Ø±Ù. ÙÙØª ÙÙØ§Ø³Ø¨ ÙÙØ§Ø­ØªÙØ§Ù Ø¨Ø§ÙØ¥ÙØ¬Ø§Ø²Ø§Øª.</div>
+        <div class="mansion-desc-ar">طاقة التتويج والشرف. وقت مناسب للاحتفال بالإنجازات.</div>
         <div class="mansion-desc-en">Energy of crowning and honor. A time to celebrate achievements, recognize success, and share your victories with those who walked beside you.</div>
         <div class="mansion-guidance">
-          <h5>ð Today's Guidance</h5>
+          <h5>🌙 Today's Guidance</h5>
           <p>Celebrate your achievements, even the small ones. Acknowledge your journey and give thanks for every step that brought you here.</p>
         </div>
       </div>
@@ -1302,22 +1302,22 @@
       <div class="mansion-header" onclick="toggleCard(this)">
         <div class="mansion-number">18</div>
         <div class="mansion-name-block">
-          <div class="mansion-name-en">Al-Qalb Â· â</div>
-          <div class="mansion-name-ar">Ø§ÙÙÙÙØ¨</div>
+          <div class="mansion-name-en">Al-Qalb · ♏</div>
+          <div class="mansion-name-ar">القَلب</div>
         </div>
-        <div class="mansion-emoji">â¤ï¸</div>
+        <div class="mansion-emoji">❤️</div>
       </div>
       <div class="mansion-body">
         <div class="mansion-meta">
-          <span class="meta-tag water">ð§ Water</span>
-          <span class="meta-tag nahs">â  Inauspicious</span>
-          <span class="meta-tag">ðª Mars</span>
+          <span class="meta-tag water">💧 Water</span>
+          <span class="meta-tag nahs">⚠ Inauspicious</span>
+          <span class="meta-tag">🪐 Mars</span>
         </div>
         <div class="mansion-meaning">Meaning: The Heart</div>
-        <div class="mansion-desc-ar">Ø·Ø§ÙØ© Ø§ÙØ¹Ø§Ø·ÙØ© Ø§ÙØ¹ÙÙÙØ© ÙØ§ÙÙØ´Ù. ÙÙØª ÙÙÙØ§Ø¬ÙØ© Ø§ÙØ­ÙØ§Ø¦Ù Ø§ÙØ®ÙÙØ©.</div>
+        <div class="mansion-desc-ar">طاقة العاطفة العميقة والكشف. وقت لمواجهة الحقائق الخفية.</div>
         <div class="mansion-desc-en">Energy of deep emotion and revelation. A time to face hidden truths, dive into the depths of feeling, and allow what is buried to surface.</div>
         <div class="mansion-guidance">
-          <h5>ð Today's Guidance</h5>
+          <h5>🌙 Today's Guidance</h5>
           <p>Do not run from deep feelings. This is a time for honest self-confrontation. What the Moon reveals here will set you free.</p>
         </div>
       </div>
@@ -1328,22 +1328,22 @@
       <div class="mansion-header" onclick="toggleCard(this)">
         <div class="mansion-number">19</div>
         <div class="mansion-name-block">
-          <div class="mansion-name-en">Al-Shaulah Â· â</div>
-          <div class="mansion-name-ar">Ø§ÙØ´ÙÙÙÙØ©</div>
+          <div class="mansion-name-en">Al-Shaulah · ♐</div>
+          <div class="mansion-name-ar">الشَّولة</div>
         </div>
-        <div class="mansion-emoji">ð</div>
+        <div class="mansion-emoji">🚀</div>
       </div>
       <div class="mansion-body">
         <div class="mansion-meta">
-          <span class="meta-tag fire">ð¥ Fire</span>
-          <span class="meta-tag nahs">â  Inauspicious</span>
-          <span class="meta-tag">ðª Jupiter</span>
+          <span class="meta-tag fire">🔥 Fire</span>
+          <span class="meta-tag nahs">⚠ Inauspicious</span>
+          <span class="meta-tag">🪐 Jupiter</span>
         </div>
         <div class="mansion-meaning">Meaning: The Raised Tail</div>
-        <div class="mansion-desc-ar">Ø·Ø§ÙØ© Ø§ÙØ·ÙÙØ­ ÙØ§ÙÙØºØ§ÙØ±Ø©. ÙÙØª ÙÙØ®Ø±ÙØ¬ ÙÙ ÙÙØ·ÙØ© Ø§ÙØ±Ø§Ø­Ø©.</div>
-        <div class="mansion-desc-en">Energy of ambition and adventure. A time to step out of your comfort zone, but with awareness â the scorpion's raised tail warns of recklessness.</div>
+        <div class="mansion-desc-ar">طاقة الطموح والمغامرة. وقت للخروج من منطقة الراحة.</div>
+        <div class="mansion-desc-en">Energy of ambition and adventure. A time to step out of your comfort zone, but with awareness — the scorpion's raised tail warns of recklessness.</div>
         <div class="mansion-guidance">
-          <h5>ð Today's Guidance</h5>
+          <h5>🌙 Today's Guidance</h5>
           <p>Challenge yourself, but do so wisely. Ambition is welcome here, yet avoid recklessness and hasty decisions you may later regret.</p>
         </div>
       </div>
@@ -1354,22 +1354,22 @@
       <div class="mansion-header" onclick="toggleCard(this)">
         <div class="mansion-number">20</div>
         <div class="mansion-name-block">
-          <div class="mansion-name-en">Al-Na'aim Â· â</div>
-          <div class="mansion-name-ar">Ø§ÙÙÙÙØ¹Ø§Ø¦Ù</div>
+          <div class="mansion-name-en">Al-Na'aim · ♐</div>
+          <div class="mansion-name-ar">النَّعائم</div>
         </div>
-        <div class="mansion-emoji">ð</div>
+        <div class="mansion-emoji">🌟</div>
       </div>
       <div class="mansion-body">
         <div class="mansion-meta">
-          <span class="meta-tag fire">ð¥ Fire</span>
-          <span class="meta-tag saad">â¨ Auspicious</span>
-          <span class="meta-tag">ðª Sun</span>
+          <span class="meta-tag fire">🔥 Fire</span>
+          <span class="meta-tag saad">✨ Auspicious</span>
+          <span class="meta-tag">🪐 Sun</span>
         </div>
         <div class="mansion-meaning">Meaning: The Ostriches</div>
-        <div class="mansion-desc-ar">Ø·Ø§ÙØ© Ø§ÙØªÙØ§Ø¤Ù ÙØ§ÙØ³Ø¹Ø§Ø¯Ø©. ÙÙØª ÙÙØ§Ø³Ø¨ ÙÙØ³ÙØ± ÙØ§ÙØ§Ø³ØªÙØ´Ø§Ù ÙØ§ÙÙØ±Ø­.</div>
-        <div class="mansion-desc-en">Energy of optimism and joy. A time for travel, exploration, and happiness. The ostriches run free â let yourself embrace lightness and adventure.</div>
+        <div class="mansion-desc-ar">طاقة التفاؤل والسعادة. وقت مناسب للسفر والاستكشاف والفرح.</div>
+        <div class="mansion-desc-en">Energy of optimism and joy. A time for travel, exploration, and happiness. The ostriches run free — let yourself embrace lightness and adventure.</div>
         <div class="mansion-guidance">
-          <h5>ð Today's Guidance</h5>
+          <h5>🌙 Today's Guidance</h5>
           <p>Enjoy life and embrace joy. An ideal time for travel, social gatherings, and celebrating the beauty of being alive.</p>
         </div>
       </div>
@@ -1380,22 +1380,22 @@
       <div class="mansion-header" onclick="toggleCard(this)">
         <div class="mansion-number">21</div>
         <div class="mansion-name-block">
-          <div class="mansion-name-en">Al-Baldah Â· â</div>
-          <div class="mansion-name-ar">Ø§ÙØ¨ÙÙØ¯Ø©</div>
+          <div class="mansion-name-en">Al-Baldah · ♑</div>
+          <div class="mansion-name-ar">البَلدة</div>
         </div>
-        <div class="mansion-emoji">ð</div>
+        <div class="mansion-emoji">🌌</div>
       </div>
       <div class="mansion-body">
         <div class="mansion-meta">
-          <span class="meta-tag earth">ð Earth</span>
-          <span class="meta-tag nahs">â  Inauspicious</span>
-          <span class="meta-tag">ðª Saturn</span>
+          <span class="meta-tag earth">🌍 Earth</span>
+          <span class="meta-tag nahs">⚠ Inauspicious</span>
+          <span class="meta-tag">🪐 Saturn</span>
         </div>
         <div class="mansion-meaning">Meaning: The City</div>
-        <div class="mansion-desc-ar">Ø·Ø§ÙØ© Ø§ÙØ¹Ø²ÙØ© ÙØ§ÙØªØ£ÙÙ. ÙÙØª ÙÙØ®ÙÙØ© ÙØ§ÙØªÙÙØ± ÙÙ ÙØ³Ø§Ø± Ø§ÙØ­ÙØ§Ø©.</div>
+        <div class="mansion-desc-ar">طاقة العزلة والتأمل. وقت للخلوة والتفكر في مسار الحياة.</div>
         <div class="mansion-desc-en">Energy of solitude and contemplation. A time for retreat, quiet reflection, and reassessing the direction of your life with patience and depth.</div>
         <div class="mansion-guidance">
-          <h5>ð Today's Guidance</h5>
+          <h5>🌙 Today's Guidance</h5>
           <p>Seek solitude. This is not a time for noise and gatherings but for deep contemplation about where you are and where you are headed.</p>
         </div>
       </div>
@@ -1406,22 +1406,22 @@
       <div class="mansion-header" onclick="toggleCard(this)">
         <div class="mansion-number">22</div>
         <div class="mansion-name-block">
-          <div class="mansion-name-en">Sa'd al-Dhabih Â· â</div>
-          <div class="mansion-name-ar">Ø³Ø¹Ø¯ Ø§ÙØ°Ø§Ø¨Ø­</div>
+          <div class="mansion-name-en">Sa'd al-Dhabih · ♑</div>
+          <div class="mansion-name-ar">سعد الذابح</div>
         </div>
-        <div class="mansion-emoji">ðª</div>
+        <div class="mansion-emoji">💪</div>
       </div>
       <div class="mansion-body">
         <div class="mansion-meta">
-          <span class="meta-tag earth">ð Earth</span>
-          <span class="meta-tag saad">â¨ Auspicious</span>
-          <span class="meta-tag">ðª Saturn</span>
+          <span class="meta-tag earth">🌍 Earth</span>
+          <span class="meta-tag saad">✨ Auspicious</span>
+          <span class="meta-tag">🪐 Saturn</span>
         </div>
         <div class="mansion-meaning">Meaning: Lucky Star of the Slaughterer</div>
-        <div class="mansion-desc-ar">Ø·Ø§ÙØ© Ø§ÙØªØ¶Ø­ÙØ© ÙÙ Ø£Ø¬Ù Ø§ÙÙØ¬Ø§Ø­. ÙÙØª ÙÙØ¹ÙÙ Ø§ÙØ¬Ø§Ø¯ ÙØ§ÙØ¥ØµØ±Ø§Ø±.</div>
+        <div class="mansion-desc-ar">طاقة التضحية من أجل النجاح. وقت للعمل الجاد والإصرار.</div>
         <div class="mansion-desc-en">Energy of sacrifice for success. A time for hard work, determination, and making the necessary sacrifices that lead to lasting achievement.</div>
         <div class="mansion-guidance">
-          <h5>ð Today's Guidance</h5>
+          <h5>🌙 Today's Guidance</h5>
           <p>Work hard and stay the course. Success here is earned through struggle and perseverance. Saturn rewards those who endure.</p>
         </div>
       </div>
@@ -1432,48 +1432,48 @@
       <div class="mansion-header" onclick="toggleCard(this)">
         <div class="mansion-number">23</div>
         <div class="mansion-name-block">
-          <div class="mansion-name-en">Sa'd Bula' Â· â</div>
-          <div class="mansion-name-ar">Ø³Ø¹Ø¯ Ø¨ÙÙÙØ¹</div>
+          <div class="mansion-name-en">Sa'd Bula' · ♒</div>
+          <div class="mansion-name-ar">سعد بُلَع</div>
         </div>
-        <div class="mansion-emoji">ð</div>
+        <div class="mansion-emoji">🌊</div>
       </div>
       <div class="mansion-body">
         <div class="mansion-meta">
-          <span class="meta-tag air">ð¨ Air</span>
-          <span class="meta-tag saad">â¨ Auspicious</span>
-          <span class="meta-tag">ðª Saturn</span>
+          <span class="meta-tag air">💨 Air</span>
+          <span class="meta-tag saad">✨ Auspicious</span>
+          <span class="meta-tag">🪐 Saturn</span>
         </div>
         <div class="mansion-meaning">Meaning: Lucky Star of the Swallower</div>
-        <div class="mansion-desc-ar">Ø·Ø§ÙØ© Ø§ÙØ§Ø³ØªÙØ¹Ø§Ø¨ ÙØ§ÙØªÙØ¨Ù. ÙÙØª ÙÙØ¨ÙÙ Ø§ÙØªØºÙÙØ± ÙØ§ÙØªÙÙÙ.</div>
+        <div class="mansion-desc-ar">طاقة الاستيعاب والتقبل. وقت لقبول التغيير والتكيف.</div>
         <div class="mansion-desc-en">Energy of absorption and acceptance. A time to embrace change, adapt gracefully, and allow new realities to integrate into your life.</div>
         <div class="mansion-guidance">
-          <h5>ð Today's Guidance</h5>
+          <h5>🌙 Today's Guidance</h5>
           <p>Accept reality as it is. Adapting to change rather than resisting it is the key to flowing smoothly through this mansion.</p>
         </div>
       </div>
     </div>
 
-    <!-- Mansion 24 â The Luckiest -->
+    <!-- Mansion 24 — The Luckiest -->
     <div class="mansion-card no-break" style="border:2px solid var(--gold);">
       <div class="mansion-header" style="background: linear-gradient(135deg, var(--indigo-mid), #3D1A6E);">
         <div class="mansion-number" style="color:var(--gold);">24</div>
         <div class="mansion-name-block">
-          <div class="mansion-name-en">Sa'd al-Su'ud Â· â Â· THE LUCKIEST MANSION</div>
-          <div class="mansion-name-ar" style="color:rgba(201,168,76,0.55); font-size:14px; font-style:italic;">Ø³Ø¹Ø¯ Ø§ÙØ³ÙÙØ¹ÙØ¯ â­</div>
+          <div class="mansion-name-en">Sa'd al-Su'ud · ♒ · THE LUCKIEST MANSION</div>
+          <div class="mansion-name-ar" style="color:rgba(201,168,76,0.55); font-size:14px; font-style:italic;">سعد السُّعود ⭐</div>
         </div>
-        <div class="mansion-emoji">ð</div>
+        <div class="mansion-emoji">🌟</div>
       </div>
       <div class="mansion-body" style="background:rgba(201,168,76,0.04);">
         <div class="mansion-meta">
-          <span class="meta-tag air">ð¨ Air</span>
-          <span class="meta-tag saad" style="background:#FFD700;color:#333;font-weight:700;">â­ Most Auspicious</span>
-          <span class="meta-tag">ðª Jupiter</span>
+          <span class="meta-tag air">💨 Air</span>
+          <span class="meta-tag saad" style="background:#FFD700;color:#333;font-weight:700;">⭐ Most Auspicious</span>
+          <span class="meta-tag">🪐 Jupiter</span>
         </div>
         <div class="mansion-meaning">Meaning: Luckiest of the Lucky</div>
-        <div class="mansion-desc-ar">Ø·Ø§ÙØ© Ø§ÙØ­Ø¸ Ø§ÙØ£Ø¹Ø¸Ù ÙØ§ÙØ¨Ø±ÙØ©. Ø£Ø³Ø¹Ø¯ Ø§ÙÙÙØ§Ø²Ù â ÙÙØª ÙØ¨Ø§Ø±Ù ÙÙÙ Ø´ÙØ¡.</div>
-        <div class="mansion-desc-en">Energy of supreme fortune and blessing. The luckiest of all 28 mansions â a blessed time for everything you wish to begin, declare, or celebrate.</div>
+        <div class="mansion-desc-ar">طاقة الحظ الأعظم والبركة. أسعد المنازل — وقت مبارك لكل شيء.</div>
+        <div class="mansion-desc-en">Energy of supreme fortune and blessing. The luckiest of all 28 mansions — a blessed time for everything you wish to begin, declare, or celebrate.</div>
         <div class="mansion-guidance" style="background:rgba(201,168,76,0.12);border-color:var(--gold);">
-          <h5>ð Today's Guidance</h5>
+          <h5>🌙 Today's Guidance</h5>
           <p>Begin everything you desire under this most blessed mansion. Declare intentions, sign contracts, start projects. Jupiter blesses all that is initiated here.</p>
         </div>
       </div>
@@ -1484,22 +1484,22 @@
       <div class="mansion-header" onclick="toggleCard(this)">
         <div class="mansion-number">25</div>
         <div class="mansion-name-block">
-          <div class="mansion-name-en">Sa'd al-Akhbiyah Â· â</div>
-          <div class="mansion-name-ar">Ø³Ø¹Ø¯ Ø§ÙØ£Ø®Ø¨ÙØ©</div>
+          <div class="mansion-name-en">Sa'd al-Akhbiyah · ♒</div>
+          <div class="mansion-name-ar">سعد الأخبية</div>
         </div>
-        <div class="mansion-emoji">ðï¸</div>
+        <div class="mansion-emoji">🏕️</div>
       </div>
       <div class="mansion-body">
         <div class="mansion-meta">
-          <span class="meta-tag air">ð¨ Air</span>
-          <span class="meta-tag saad">â¨ Auspicious</span>
-          <span class="meta-tag">ðª Venus</span>
+          <span class="meta-tag air">💨 Air</span>
+          <span class="meta-tag saad">✨ Auspicious</span>
+          <span class="meta-tag">🪐 Venus</span>
         </div>
         <div class="mansion-meaning">Meaning: Lucky Star of Tents</div>
-        <div class="mansion-desc-ar">Ø·Ø§ÙØ© Ø§ÙØ£ÙØ§Ù ÙØ§ÙØ­ÙØ§ÙØ©. ÙÙØª ÙÙØ§Ø­ØªÙØ§Ø¡ ÙØ§ÙØªØ®Ø·ÙØ· Ø¨Ø­ÙÙØ©.</div>
+        <div class="mansion-desc-ar">طاقة الأمان والحماية. وقت للاحتماء والتخطيط بحكمة.</div>
         <div class="mansion-desc-en">Energy of safety and shelter. A time for seeking refuge, planning wisely from a secure position, and protecting what you have built.</div>
         <div class="mansion-guidance">
-          <h5>ð Today's Guidance</h5>
+          <h5>🌙 Today's Guidance</h5>
           <p>Plan from a place of security. Review your future plans and ensure your foundations are solid before you launch forward.</p>
         </div>
       </div>
@@ -1510,22 +1510,22 @@
       <div class="mansion-header" onclick="toggleCard(this)">
         <div class="mansion-number">26</div>
         <div class="mansion-name-block">
-          <div class="mansion-name-en">Al-Fargh al-Muqaddam Â· â</div>
-          <div class="mansion-name-ar">Ø§ÙÙÙØ±Øº Ø§ÙÙÙÙØ¯ÙÙÙ</div>
+          <div class="mansion-name-en">Al-Fargh al-Muqaddam · ♓</div>
+          <div class="mansion-name-ar">الفَرغ المُقدَّم</div>
         </div>
-        <div class="mansion-emoji">ð¦</div>
+        <div class="mansion-emoji">🦋</div>
       </div>
       <div class="mansion-body">
         <div class="mansion-meta">
-          <span class="meta-tag water">ð§ Water</span>
-          <span class="meta-tag saad">â¨ Auspicious</span>
-          <span class="meta-tag">ðª Mars</span>
+          <span class="meta-tag water">💧 Water</span>
+          <span class="meta-tag saad">✨ Auspicious</span>
+          <span class="meta-tag">🪐 Mars</span>
         </div>
         <div class="mansion-meaning">Meaning: The Upper Bucket</div>
-        <div class="mansion-desc-ar">Ø·Ø§ÙØ© Ø§ÙØ§ÙØ·ÙØ§Ù ÙØ§ÙØªØ­Ø±Ø±. ÙÙØª ÙÙØ³Ø± Ø§ÙÙÙÙØ¯ ÙØ§ÙÙØ¶Ù ÙØ¯ÙØ§Ù.</div>
+        <div class="mansion-desc-ar">طاقة الانطلاق والتحرر. وقت لكسر القيود والمضي قدماً.</div>
         <div class="mansion-desc-en">Energy of liberation and forward movement. A time to break free from what has held you back and move confidently into new territory.</div>
         <div class="mansion-guidance">
-          <h5>ð Today's Guidance</h5>
+          <h5>🌙 Today's Guidance</h5>
           <p>Break free from old limitations. Release what holds you back and move forward boldly. Mars lends you the courage to liberate yourself.</p>
         </div>
       </div>
@@ -1536,22 +1536,22 @@
       <div class="mansion-header" onclick="toggleCard(this)">
         <div class="mansion-number">27</div>
         <div class="mansion-name-block">
-          <div class="mansion-name-en">Al-Fargh al-Mu'akhkhar Â· â</div>
-          <div class="mansion-name-ar">Ø§ÙÙÙØ±Øº Ø§ÙÙÙØ¤Ø®ÙÙØ±</div>
+          <div class="mansion-name-en">Al-Fargh al-Mu'akhkhar · ♓</div>
+          <div class="mansion-name-ar">الفَرغ المُؤخَّر</div>
         </div>
-        <div class="mansion-emoji">â</div>
+        <div class="mansion-emoji">✅</div>
       </div>
       <div class="mansion-body">
         <div class="mansion-meta">
-          <span class="meta-tag water">ð§ Water</span>
-          <span class="meta-tag saad">â¨ Auspicious</span>
-          <span class="meta-tag">ðª Mercury</span>
+          <span class="meta-tag water">💧 Water</span>
+          <span class="meta-tag saad">✨ Auspicious</span>
+          <span class="meta-tag">🪐 Mercury</span>
         </div>
         <div class="mansion-meaning">Meaning: The Lower Bucket</div>
-        <div class="mansion-desc-ar">Ø·Ø§ÙØ© Ø§ÙØ§ÙØªÙØ§Ù ÙØ§ÙØ¥ÙØ¬Ø§Ø². ÙÙØª ÙØ¥ØªÙØ§Ù Ø§ÙÙØ´Ø§Ø±ÙØ¹ ÙØ¬ÙÙ Ø§ÙØ«ÙØ§Ø±.</div>
+        <div class="mansion-desc-ar">طاقة الاكتمال والإنجاز. وقت لإتمام المشاريع وجني الثمار.</div>
         <div class="mansion-desc-en">Energy of completion and accomplishment. A time to finish what you started, harvest the fruits of your labor, and celebrate what has come full circle.</div>
         <div class="mansion-guidance">
-          <h5>ð Today's Guidance</h5>
+          <h5>🌙 Today's Guidance</h5>
           <p>Complete what you have started. This is the ideal time to finish projects, harvest the fruits of your labor, and celebrate what you have built.</p>
         </div>
       </div>
@@ -1562,23 +1562,23 @@
       <div class="mansion-header" onclick="toggleCard(this)">
         <div class="mansion-number">28</div>
         <div class="mansion-name-block">
-          <div class="mansion-name-en">Batn al-Hut Â· â</div>
-          <div class="mansion-name-ar">Ø¨Ø·Ù Ø§ÙØ­ÙØª</div>
+          <div class="mansion-name-en">Batn al-Hut · ♓</div>
+          <div class="mansion-name-ar">بطن الحوت</div>
         </div>
-        <div class="mansion-emoji">ð</div>
+        <div class="mansion-emoji">🐟</div>
       </div>
       <div class="mansion-body">
         <div class="mansion-meta">
-          <span class="meta-tag water">ð§ Water</span>
-          <span class="meta-tag saad">â¨ Auspicious</span>
-          <span class="meta-tag">ðª Jupiter</span>
+          <span class="meta-tag water">💧 Water</span>
+          <span class="meta-tag saad">✨ Auspicious</span>
+          <span class="meta-tag">🪐 Jupiter</span>
         </div>
         <div class="mansion-meaning">Meaning: The Belly of the Fish</div>
-        <div class="mansion-desc-ar">Ø·Ø§ÙØ© Ø§ÙØ±Ø­ÙØ© ÙØ§ÙØªØ³ÙÙÙ. ÙÙØª ÙÙØªÙØ§Ø¶Ø¹ ÙØ§ÙØ§Ø³ØªØ³ÙØ§Ù ÙÙÙØ¯Ø±.</div>
+        <div class="mansion-desc-ar">طاقة الرحمة والتسليم. وقت للتواضع والاستسلام للقدر.</div>
         <div class="mansion-desc-en">Energy of mercy and surrender. A time for humility, accepting destiny, and releasing the need to control. Trust that what is meant for you will find you.</div>
         <div class="mansion-guidance">
-          <h5>ð Today's Guidance</h5>
-          <p>Surrender. This is the last and most spiritual of all mansions â a time for humility, gratitude, and full surrender to what is.</p>
+          <h5>🌙 Today's Guidance</h5>
+          <p>Surrender. This is the last and most spiritual of all mansions — a time for humility, gratitude, and full surrender to what is.</p>
         </div>
       </div>
     </div>
@@ -1586,59 +1586,59 @@
   </div><!-- end mansions-grid -->
 </div><!-- end section -->
 
-<!-- ââââââââââââââââââââââââââââââââââââââââââââââââââââââââââ -->
+<!-- ══════════════════════════════════════════════════════════ -->
 <!-- MOON PHASES                                                -->
-<!-- ââââââââââââââââââââââââââââââââââââââââââââââââââââââââââ -->
+<!-- ══════════════════════════════════════════════════════════ -->
 <div class="section page-break" id="sec-phases">
   <div class="section-title">The Eight Moon Phases</div>
-  <div class="section-title-en">Ø£Ø·ÙØ§Ø± Ø§ÙÙÙØ± Ø§ÙØ«ÙØ§ÙÙØ©</div>
+  <div class="section-title-en">أطوار القمر الثمانية</div>
   <div class="section-rule"></div>
 
   <div class="phases-grid">
     <div class="phase-card no-break">
-      <div class="phase-emoji">ð</div>
+      <div class="phase-emoji">🌑</div>
       <div class="phase-name-ar">New Moon</div>
       <div class="phase-energy">INTROSPECTIVE</div>
       <div class="phase-theme">New beginnings and fresh intentions. A powerful time to plant seeds, set goals, and clarify what you wish to call in.</div>
     </div>
     <div class="phase-card no-break">
-      <div class="phase-emoji">ð</div>
+      <div class="phase-emoji">🌒</div>
       <div class="phase-name-ar">Waxing Crescent</div>
       <div class="phase-energy">BUILDING</div>
-      <div class="phase-theme">Take your first steps and build momentum. The energy set at the New Moon begins to move â act on your intentions.</div>
+      <div class="phase-theme">Take your first steps and build momentum. The energy set at the New Moon begins to move — act on your intentions.</div>
     </div>
     <div class="phase-card no-break">
-      <div class="phase-emoji">ð</div>
+      <div class="phase-emoji">🌓</div>
       <div class="phase-name-ar">First Quarter</div>
       <div class="phase-energy">DECISIVE</div>
-      <div class="phase-theme">Face obstacles with courage. This is a decision point â commit to your path and push through what stands in your way.</div>
+      <div class="phase-theme">Face obstacles with courage. This is a decision point — commit to your path and push through what stands in your way.</div>
     </div>
     <div class="phase-card no-break">
-      <div class="phase-emoji">ð</div>
+      <div class="phase-emoji">🌔</div>
       <div class="phase-name-ar">Waxing Gibbous</div>
       <div class="phase-energy">REFINING</div>
-      <div class="phase-theme">Refine and trust the process. You are close â make small adjustments, stay patient, and have faith in what is unfolding.</div>
+      <div class="phase-theme">Refine and trust the process. You are close — make small adjustments, stay patient, and have faith in what is unfolding.</div>
     </div>
     <div class="phase-card no-break">
-      <div class="phase-emoji">ð</div>
+      <div class="phase-emoji">🌕</div>
       <div class="phase-name-ar">Full Moon</div>
       <div class="phase-energy">ILLUMINATED</div>
-      <div class="phase-theme">Illumination and fulfillment. The moon reveals what was hidden â celebrate your progress, release what no longer serves, and receive insights.</div>
+      <div class="phase-theme">Illumination and fulfillment. The moon reveals what was hidden — celebrate your progress, release what no longer serves, and receive insights.</div>
     </div>
     <div class="phase-card no-break">
-      <div class="phase-emoji">ð</div>
+      <div class="phase-emoji">🌖</div>
       <div class="phase-name-ar">Waning Gibbous</div>
       <div class="phase-energy">GRATEFUL</div>
       <div class="phase-theme">Share your wisdom and practice gratitude. Give back what you have received and honor the lessons this cycle has brought.</div>
     </div>
     <div class="phase-card no-break">
-      <div class="phase-emoji">ð</div>
+      <div class="phase-emoji">🌗</div>
       <div class="phase-name-ar">Last Quarter</div>
       <div class="phase-energy">RELEASING</div>
       <div class="phase-theme">Let go and forgive. Release what no longer serves you to make space for what is coming in the new cycle ahead.</div>
     </div>
     <div class="phase-card no-break">
-      <div class="phase-emoji">ð</div>
+      <div class="phase-emoji">🌘</div>
       <div class="phase-name-ar">Waning Crescent</div>
       <div class="phase-energy">RESTING</div>
       <div class="phase-theme">Rest and surrender. Replenish your energy and reflect deeply. The cycle completes itself, preparing you to begin again.</div>
@@ -1646,34 +1646,34 @@
   </div>
 </div>
 
-<!-- ââââââââââââââââââââââââââââââââââââââââââââââââââââââââââ -->
+<!-- ══════════════════════════════════════════════════════════ -->
 <!-- ELEMENTS & PLANETS                                         -->
-<!-- ââââââââââââââââââââââââââââââââââââââââââââââââââââââââââ -->
+<!-- ══════════════════════════════════════════════════════════ -->
 <div class="section page-break" id="sec-elements">
   <div class="section-title">Elements & Planetary Rulers</div>
-  <div class="section-title-en">Ø§ÙØ¹ÙØ§ØµØ± ÙØ§ÙÙÙØ§ÙØ¨</div>
+  <div class="section-title-en">العناصر والكواكب</div>
   <div class="section-rule"></div>
 
   <div class="elements-grid">
     <div class="element-card fire no-break">
-      <div class="element-icon">ð¥</div>
+      <div class="element-icon">🔥</div>
       <div class="element-name">Fire</div>
-      <div class="element-quality">Enthusiasm Â· Initiative Â· Leadership Â· Active Energy</div>
+      <div class="element-quality">Enthusiasm · Initiative · Leadership · Active Energy</div>
     </div>
     <div class="element-card water no-break">
-      <div class="element-icon">ð§</div>
+      <div class="element-icon">💧</div>
       <div class="element-name">Water</div>
-      <div class="element-quality">Emotion Â· Intuition Â· Dreams Â· Receptive Energy</div>
+      <div class="element-quality">Emotion · Intuition · Dreams · Receptive Energy</div>
     </div>
     <div class="element-card air no-break">
-      <div class="element-icon">ð¨</div>
+      <div class="element-icon">💨</div>
       <div class="element-name">Air</div>
-      <div class="element-quality">Intellect Â· Communication Â· Travel Â· Active Energy</div>
+      <div class="element-quality">Intellect · Communication · Travel · Active Energy</div>
     </div>
     <div class="element-card earth no-break">
-      <div class="element-icon">ð</div>
+      <div class="element-icon">🌍</div>
       <div class="element-name">Earth</div>
-      <div class="element-quality">Matter Â· Work Â· Stability Â· Receptive Energy</div>
+      <div class="element-quality">Matter · Work · Stability · Receptive Energy</div>
     </div>
   </div>
 
@@ -1689,23 +1689,23 @@
       </tr>
     </thead>
     <tbody>
-      <tr><td>â Sun</td><td>Vitality</td><td>Identity, Success, Visibility, Creativity</td></tr>
-      <tr><td>â½ Moon</td><td>Intuition</td><td>Emotions, Dreams, the Unconscious, Femininity</td></tr>
-      <tr><td>â Mars</td><td>Action</td><td>Courage, Conflict, Determination, Energy</td></tr>
-      <tr><td>â¿ Mercury</td><td>Communication</td><td>Thought, Messages, Travel, Intelligence</td></tr>
-      <tr><td>â Jupiter</td><td>Expansion</td><td>Growth, Luck, Wisdom, Abundance</td></tr>
-      <tr><td>â Venus</td><td>Love</td><td>Beauty, Harmony, Relationships, Art</td></tr>
-      <tr><td>â Saturn</td><td>Discipline</td><td>Structure, Lessons, Boundaries, Patience</td></tr>
+      <tr><td>☉ Sun</td><td>Vitality</td><td>Identity, Success, Visibility, Creativity</td></tr>
+      <tr><td>☽ Moon</td><td>Intuition</td><td>Emotions, Dreams, the Unconscious, Femininity</td></tr>
+      <tr><td>♂ Mars</td><td>Action</td><td>Courage, Conflict, Determination, Energy</td></tr>
+      <tr><td>☿ Mercury</td><td>Communication</td><td>Thought, Messages, Travel, Intelligence</td></tr>
+      <tr><td>♃ Jupiter</td><td>Expansion</td><td>Growth, Luck, Wisdom, Abundance</td></tr>
+      <tr><td>♀ Venus</td><td>Love</td><td>Beauty, Harmony, Relationships, Art</td></tr>
+      <tr><td>♄ Saturn</td><td>Discipline</td><td>Structure, Lessons, Boundaries, Patience</td></tr>
     </tbody>
   </table>
 </div>
 
-<!-- ââââââââââââââââââââââââââââââââââââââââââââââââââââââââââ -->
+<!-- ══════════════════════════════════════════════════════════ -->
 <!-- DAILY PRACTICE                                             -->
-<!-- ââââââââââââââââââââââââââââââââââââââââââââââââââââââââââ -->
+<!-- ══════════════════════════════════════════════════════════ -->
 <div class="section page-break" id="sec-practice">
   <div class="section-title">Your Daily Practice with the Mansions</div>
-  <div class="section-title-en">Ø§ÙÙÙØ§Ø±Ø³Ø© Ø§ÙÙÙÙÙØ©</div>
+  <div class="section-title-en">الممارسة اليومية</div>
   <div class="section-rule"></div>
 
   <div class="intro-box no-break" style="margin-bottom:30px;">
@@ -1730,8 +1730,8 @@
     <div class="step no-break">
       <div class="step-number">3</div>
       <div class="step-content">
-        <h4>Notice the nature â Auspicious or Inauspicious</h4>
-        <p>Auspicious mansions call for action and new beginnings. Inauspicious mansions are not bad â they are simply times for reflection, caution, and patience. Work wisely with each.</p>
+        <h4>Notice the nature — Auspicious or Inauspicious</h4>
+        <p>Auspicious mansions call for action and new beginnings. Inauspicious mansions are not bad — they are simply times for reflection, caution, and patience. Work wisely with each.</p>
       </div>
     </div>
     <div class="step no-break">
@@ -1751,15 +1751,15 @@
   </div>
 </div>
 
-<!-- ââââââââââââââââââââââââââââââââââââââââââââââââââââââââââ -->
+<!-- ══════════════════════════════════════════════════════════ -->
 <!-- LUNAR CALENDAR                                             -->
-<!-- ââââââââââââââââââââââââââââââââââââââââââââââââââââââââââ -->
+<!-- ══════════════════════════════════════════════════════════ -->
 <div class="section page-break" id="calendar-section" style="max-width:900px;">
   <div class="section-title">Lunar Mansion Calendar</div>
-  <div class="section-title-en">Ø§ÙØªÙÙÙÙ Ø§ÙÙÙØ±Ù</div>
+  <div class="section-title-en">التقويم القمري</div>
   <div class="section-rule"></div>
   <p style="text-align:center;font-family:'Amiri',serif;font-size:15px;color:var(--text-soft,#4A3F30);margin-bottom:24px;">
-    Each day is colored by its Lunar Mansion energy â browse the months to discover the energy of any day.
+    Each day is colored by its Lunar Mansion energy — browse the months to discover the energy of any day.
   </p>
 
   <!-- Controls (hidden on print) -->
@@ -1779,7 +1779,7 @@
     <span style="display:flex;align-items:center;gap:5px;"><span style="width:12px;height:12px;border-radius:3px;background:#E0F0FF;border:1px solid #0055A0;display:inline-block;"></span>Water</span>
     <span style="display:flex;align-items:center;gap:5px;"><span style="width:12px;height:12px;border-radius:3px;background:#EFFFEB;border:1px solid #2D6A00;display:inline-block;"></span>Air</span>
     <span style="display:flex;align-items:center;gap:5px;"><span style="width:12px;height:12px;border-radius:3px;background:#F5F0E5;border:1px solid #6B4C1A;display:inline-block;"></span>Earth</span>
-    <span>ð New &nbsp; ð Full</span>
+    <span>🌑 New &nbsp; 🌕 Full</span>
   </div>
 
   <div id="cal-container"></div>
@@ -1793,7 +1793,7 @@
         <div class="cal-modal-date" id="cal-modal-date-lbl"></div>
         <div class="cal-modal-mansion" id="cal-modal-mansion-lbl"></div>
       </div>
-      <button class="cal-modal-close" onclick="closeCalModal()">â</button>
+      <button class="cal-modal-close" onclick="closeCalModal()">✕</button>
     </div>
     <div class="cal-modal-body">
       <div id="cal-evt-list"></div>
@@ -1803,7 +1803,7 @@
           <option value="task">Task</option>
           <option value="reminder">Reminder</option>
         </select>
-        <input class="cal-add-input" id="cal-add-input" type="text" placeholder="Add an entryâ¦"
+        <input class="cal-add-input" id="cal-add-input" type="text" placeholder="Add an entry…"
           onkeydown="if(event.key==='Enter')addCalEvent(window._calModalDate)">
         <button class="cal-add-btn" onclick="addCalEvent(window._calModalDate)">Add</button>
       </div>
@@ -1814,37 +1814,37 @@
 <!-- Journal Section -->
 <div class="section page-break" id="sec-journal">
   <div class="journal-hero">
-    <div class="journal-hero-moon">â</div>
+    <div class="journal-hero-moon">✍</div>
     <div class="journal-hero-label">LUNAR REFLECTIONS</div>
     <div class="journal-hero-title">Your Journal</div>
     <div class="journal-hero-divider"></div>
-    <div class="journal-hero-sub">REFLECT Â· INTEND Â· RELEASE</div>
+    <div class="journal-hero-sub">REFLECT · INTEND · RELEASE</div>
   </div>
   <div class="journal-body">
     <div class="journal-card">
-      <div class="journal-card-label">ð Today's Mansion Energy</div>
+      <div class="journal-card-label">🌙 Today's Mansion Energy</div>
       <div class="journal-mansion-name" id="j-today-name"></div>
       <div class="journal-mansion-ar" id="j-today-ar"></div>
       <div class="journal-prompt" id="j-today-prompt"></div>
-      <textarea class="journal-textarea" id="j-today-entry" placeholder="Write your reflection hereâ¦"></textarea>
+      <textarea class="journal-textarea" id="j-today-entry" placeholder="Write your reflection here…"></textarea>
       <div class="journal-entry-footer">
-        <button class="journal-delete-btn" id="j-today-delete">â Clear Entry</button>
+        <button class="journal-delete-btn" id="j-today-delete">✕ Clear Entry</button>
       </div>
     </div>
     <div class="journal-card">
-      <div class="journal-card-label">â¦ Monthly Intention</div>
+      <div class="journal-card-label">✦ Monthly Intention</div>
       <div class="journal-prompt" style="font-family:'EB Garamond',serif;font-size:19px;line-height:1.9;color:var(--text);border-left:3px solid var(--gold);padding-left:18px;">What are you calling in this lunar cycle? Set your intention clearly and trust the moon to guide you.</div>
-      <textarea class="journal-textarea" id="j-intention-entry" placeholder="Write your intention hereâ¦"></textarea>
+      <textarea class="journal-textarea" id="j-intention-entry" placeholder="Write your intention here…"></textarea>
       <div class="journal-entry-footer">
-        <button class="journal-delete-btn" id="j-intention-delete">â Clear Entry</button>
+        <button class="journal-delete-btn" id="j-intention-delete">✕ Clear Entry</button>
       </div>
     </div>
     <div class="journal-card">
-      <div class="journal-card-label">ð Gratitude & Release</div>
+      <div class="journal-card-label">🌕 Gratitude & Release</div>
       <div class="journal-prompt" style="font-family:'EB Garamond',serif;font-size:19px;line-height:1.9;color:var(--text);border-left:3px solid var(--gold);padding-left:18px;">What are you grateful for right now? What is ready to be released?</div>
-      <textarea class="journal-textarea" id="j-release-entry" placeholder="Write your reflections hereâ¦"></textarea>
+      <textarea class="journal-textarea" id="j-release-entry" placeholder="Write your reflections here…"></textarea>
       <div class="journal-entry-footer">
-        <button class="journal-delete-btn" id="j-release-delete">â Clear Entry</button>
+        <button class="journal-delete-btn" id="j-release-delete">✕ Clear Entry</button>
       </div>
     </div>
   </div>
@@ -1942,7 +1942,7 @@
 <!-- Calendar Engine -->
 <script>
 (function(){
-  // ââ Lunar Mansion data (element + nature only â needed for calendar colours) ââ
+  // ── Lunar Mansion data (element + nature only — needed for calendar colours) ──
   const CAL_MANSIONS = [
     {id:'sharatain',element:'fire',nature:"sa'd"},{id:'butain',element:'fire',nature:"sa'd"},
     {id:'thurayya',element:'fire',nature:"sa'd"},{id:'dabaran',element:'earth',nature:'nahs'},
@@ -1961,10 +1961,10 @@
   ];
 
   const CAL_NAMES_AR = [
-    'Ø§ÙØ´Ø±Ø·ÙÙ','Ø§ÙØ¨Ø·ÙÙ','Ø§ÙØ«Ø±ÙØ§','Ø§ÙØ¯Ø¨Ø±Ø§Ù','Ø§ÙÙÙØ¹Ø©','Ø§ÙÙÙØ¹Ø©','Ø§ÙØ°Ø±Ø§Ø¹','Ø§ÙÙØ«Ø±Ø©',
-    'Ø§ÙØ·Ø±Ù','Ø§ÙØ¬Ø¨ÙØ©','Ø§ÙØ²Ø¨Ø±Ø©','Ø§ÙØµØ±ÙØ©','Ø§ÙØ¹ÙØ§Ø¡','Ø§ÙØ³ÙØ§Ù','Ø§ÙØºÙØ±','Ø§ÙØ²Ø¨Ø§ÙÙ',
-    'Ø§ÙØ¥ÙÙÙÙ','Ø§ÙÙÙØ¨','Ø§ÙØ´ÙÙØ©','Ø§ÙÙØ¹Ø§Ø¦Ù','Ø§ÙØ¨ÙØ¯Ø©','Ø³Ø¹Ø¯ Ø§ÙØ°Ø§Ø¨Ø­','Ø³Ø¹Ø¯ Ø¨ÙØ¹',
-    'Ø³Ø¹Ø¯ Ø§ÙØ³Ø¹ÙØ¯','Ø³Ø¹Ø¯ Ø§ÙØ£Ø®Ø¨ÙØ©','Ø§ÙÙØ±Øº Ø§ÙÙÙØ¯Ù','Ø§ÙÙØ±Øº Ø§ÙÙØ¤Ø®Ø±','Ø¨Ø·Ù Ø§ÙØ­ÙØª'
+    'الشرطين','البطين','الثريا','الدبران','الهقعة','الهنعة','الذراع','النثرة',
+    'الطرف','الجبهة','الزبرة','الصرفة','العواء','السماك','الغفر','الزبانى',
+    'الإكليل','القلب','الشولة','النعائم','البلدة','سعد الذابح','سعد بلع',
+    'سعد السعود','سعد الأخبية','الفرغ المقدم','الفرغ المؤخر','بطن الحوت'
   ];
 
   const CAL_NAMES_EN = [
@@ -2005,7 +2005,7 @@
   function isNewMoon(d){ return moonAge(d)<1.85; }
   function isFullMoon(d){ const a=moonAge(d); return a>=13.9&&a<16.61; }
 
-  // ââ State ââ
+  // ── State ──
   let calYear=new Date().getFullYear(), calMonth=new Date().getMonth(), calView='month';
 
   function renderMonth(year,month){
@@ -2024,7 +2024,7 @@
       h+=`<div class="cal-day${isT?' today':''}" onclick="window.calDayClick('${ds}')">
         <div class="cal-day-num">${d}</div>
         <span class="cal-chip ${m.element} ${natureClass}"><span class="cal-chip-ar">${CAL_NAMES_AR[idx]}</span><span class="cal-chip-en">${CAL_NAMES_EN[idx]}</span></span>
-        ${nm?'<div class="cal-moon">ð</div>':fm?'<div class="cal-moon">ð</div>':''}
+        ${nm?'<div class="cal-moon">🌑</div>':fm?'<div class="cal-moon">🌕</div>':''}
         ${window._renderEvtDots?window._renderEvtDots(de):''}
       </div>`;
     }
@@ -2057,10 +2057,10 @@
     const title=document.getElementById('cal-title');
     const container=document.getElementById('cal-container');
     if(calView==='month'){
-      title.textContent=`${MONTH_EN[calMonth]} ${calYear}  Â·  ${MONTH_NAMES[calMonth]}`;
+      title.textContent=`${MONTH_EN[calMonth]} ${calYear}  ·  ${MONTH_NAMES[calMonth]}`;
       container.innerHTML=renderMonth(calYear,calMonth);
     } else {
-      title.textContent=`${calYear} â Full Year`;
+      title.textContent=`${calYear} — Full Year`;
       container.innerHTML=renderYear(calYear);
     }
   }
@@ -2098,14 +2098,14 @@
     const MN=['January','February','March','April','May','June','July','August','September','October','November','December'];
     const DN=['Sunday','Monday','Tuesday','Wednesday','Thursday','Friday','Saturday'];
     document.getElementById('cal-modal-date-lbl').textContent=`${DN[date.getDay()]}, ${MN[m-1]} ${d}, ${y}`;
-    document.getElementById('cal-modal-mansion-lbl').textContent=`${CAL_NAMES_EN[idx]} Â· ${CAL_NAMES_AR[idx]}`;
+    document.getElementById('cal-modal-mansion-lbl').textContent=`${CAL_NAMES_EN[idx]} · ${CAL_NAMES_AR[idx]}`;
     document.getElementById('cal-evt-list').innerHTML=evts.length
       ?evts.map(e=>`<div class="cal-evt-item">
           <span class="cal-evt-badge ${e.type}">${e.type}</span>
           <span class="cal-evt-text">${e.text}</span>
-          <button class="cal-evt-del" onclick="deleteCalEvent('${ds}','${e.id}')" title="Remove">â</button>
+          <button class="cal-evt-del" onclick="deleteCalEvent('${ds}','${e.id}')" title="Remove">✕</button>
         </div>`).join('')
-      :`<div class="cal-modal-empty">No entries yet â add one below.</div>`;
+      :`<div class="cal-modal-empty">No entries yet — add one below.</div>`;
   };
   window.addCalEvent = function(dateStr){
     const input=document.getElementById('cal-add-input');
@@ -2137,11 +2137,11 @@
 })();
 </script>
 
-<!-- ââââââââââââââââââââââââââââââââââââââââââââââââââââââââââ -->
+<!-- ══════════════════════════════════════════════════════════ -->
 <!-- BACK COVER                                                 -->
-<!-- ââââââââââââââââââââââââââââââââââââââââââââââââââââââââââ -->
+<!-- ══════════════════════════════════════════════════════════ -->
 <div class="back-cover page-break">
-  <div class="ornament">ð</div>
+  <div class="ornament">🌙</div>
   <h2>Your Journey with the Moon Never Ends</h2>
   <p>
     This guide is the beginning of a deep journey with the rhythms of the cosmos. As you track the Lunar Mansions day by day, you will begin to see patterns and understand how celestial energy flows through your personal life.
@@ -2159,7 +2159,7 @@
 (function(){
   const SECTION_IDS = ['sec-intro','sec-index','sec-mansions','sec-phases','sec-elements','sec-practice','calendar-section','sec-journal'];
 
-  // Force-show/hide sections using inline styles â bypasses all CSS specificity issues
+  // Force-show/hide sections using inline styles — bypasses all CSS specificity issues
   function _hideAll() {
     SECTION_IDS.forEach(function(sid){
       var el = document.getElementById(sid);
@@ -2280,8 +2280,8 @@
     try {
       const res = await fetch(VALIDATE_URL, {
         method: 'POST',
-        headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({ key: clean, deviceToken: getOrCreateDeviceToken(), productId: PRODUCT_ID })
+        headers: { 'Content-Type': 'application/x-www-form-urlencoded' },
+        body: new URLSearchParams({ key: clean, deviceToken: getOrCreateDeviceToken(), productId: PRODUCT_ID }).toString()
       });
       const data = await res.json();
       if (data.success) {
@@ -2305,8 +2305,8 @@
     try {
       const res = await fetch(VALIDATE_URL, {
         method: 'POST',
-        headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({ key: stored, deviceToken: devTok, productId: PRODUCT_ID })
+        headers: { 'Content-Type': 'application/x-www-form-urlencoded' },
+        body: new URLSearchParams({ key: stored, deviceToken: devTok, productId: PRODUCT_ID }).toString()
       });
       const data = await res.json();
       if (data.success) { unlock(); }
