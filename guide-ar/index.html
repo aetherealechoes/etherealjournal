@@ -1562,6 +1562,19 @@ const ABJAD_PERSONAL_TAGS = {
 };
 let _userAbjad = null;
 
+const ABJAD_PERSONAL_AVOIDS = {
+  1:['🚧 لا تترك القرارات المصيرية للآخرين','❌ لا تُكبّل قيادتك بالتردد'],
+  2:['🚧 تجنّب القرارات المتسرّعة','❌ لا تتجاهل إحساسك الداخلي'],
+  3:['🚧 تجنّب الانتشار في اتجاهات كثيرة','❌ لا تبدّد طاقتك على ما لا يهم'],
+  4:['🚧 تجنّب التمسّك بالرأي على حساب التقدم','❌ لا تقاوم التغيير الضروري'],
+  5:['🚧 تجنّب التشتّت بين خيارات كثيرة','❌ لا تؤجّل القرار بسبب تفكير مفرط'],
+  6:['🚧 تجنّب إرضاء الجميع على حساب نفسك','❌ لا تُهمل احتياجاتك الحقيقية'],
+  7:['🚧 تجنّب العزلة حين تحتاج دعماً','❌ لا تلجأ للهروب بدلاً من المواجهة'],
+  8:['🚧 تجنّب صراعات السيطرة والتحكم','❌ لا تستخدم النفوذ بطريقة تضرّ علاقاتك'],
+  9:['🚧 تجنّب التصرّف من الغضب','❌ لا تحرق الجسور بتهوّر أو عجلة']
+};
+
+
 // ── CALENDAR ENGINE ────────────────────────────────────────────
 let calYear  = new Date().getFullYear();
 let calMonth = new Date().getMonth(); // 0-based
@@ -1920,41 +1933,41 @@ function closeCalModal() { document.getElementById('cal-event-modal').style.disp
 function renderAuspPanel(mansion) {
   const d = MANSION_DAYS[mansion.index];
   if (!d) return '';
-  const goodTags  = d.good.map(t  => `<span class="ausp-tag">${t}</span>`).join('');
-  const avoidTags = d.avoid.length ? d.avoid.map(t => `<span class="ausp-tag">${t}</span>`).join('') : '';
-  const special   = d.special ? `<div class="ausp-special">${d.special}</div>` : '';
+  const isAusp = mansion.nature === "sa'd";
+  const special = d.special ? `<div class="ausp-special">${d.special}</div>` : '';
 
-  // ── Abjad personal insight ─────────────────────────────────
-  let personalHtml = '';
+  // ── Personalised tags ──────────────────────────────────────
+  let personalGoodTags = '';
+  let personalAvoidTags = '';
+  let personalMsgHtml = '';
+
   if (_userAbjad) {
     const ua = _userAbjad;
     const sameRuler = ua.planetKey === mansion.ruler;
     const sameElem  = ua.element   === mansion.element;
     const compat    = _elemCompat(ua.element, mansion.element);
-    const isAusp    = mansion.nature === "sa'd";
 
     let msg = '';
     if (sameRuler && isAusp)
-      msg = `منزل اليوم تحت حكم كوكبك ${ua.planet} ${ua.emoji} — طاقتك في ذروتها. يومٌ نادر لاتخاذ قراراتك الكبرى.`;
+      msg = `كوكبك ${ua.planet} ${ua.emoji} يحكم هذا المنزل — طاقتك في ذروتها اليوم. يومٌ نادر لأهم قراراتك.`;
     else if (sameRuler)
-      msg = `منزل اليوم تحت حكم كوكبك ${ua.planet} ${ua.emoji} لكن طاقته تحمل تحديات — استخدم حكمتك ولا تتسرّع.`;
+      msg = `كوكبك ${ua.planet} ${ua.emoji} يحكم هذا المنزل لكن طاقته صعبة — استخدم حكمتك ولا تتسرّع.`;
     else if (sameElem)
-      msg = `عنصرك (${elemNameAr(ua.element)}) يتطابق مع منزل اليوم — تدفّق طبيعي وانسجام في الطاقة.`;
+      msg = `عنصرك (${elemNameAr(ua.element)}) يتطابق مع منزل اليوم — تدفّق وانسجام طبيعي في طاقتك.`;
     else if (compat)
-      msg = `عنصرك (${elemNameAr(ua.element)}) منسجم مع منزل اليوم — توازن لطيف يدعمك.`;
+      msg = `عنصرك (${elemNameAr(ua.element)}) منسجم مع منزل اليوم — توازن لطيف يدعم خطواتك.`;
     else
-      msg = `طاقة منزل اليوم تختلف عن عنصرك — يوم للتكيّف والصبر لا للإجبار.`;
+      msg = `طاقة المنزل تختلف عن عنصرك اليوم — وقت للتكيّف والصبر لا للإجبار.`;
 
-    const pTags = (ABJAD_PERSONAL_TAGS[ua.number] || [])
-      .map(t => `<span class="ausp-tag personal-tag">${t}</span>`).join('');
-
-    personalHtml = `
+    personalMsgHtml = `
     <div class="ausp-row personal" style="margin-top:4px">
       <div class="ausp-label">🔢 رؤيتك الشخصية — جُمَّل ${ua.number} ${ua.emoji} · ${ua.planet}</div>
       <div class="ausp-personal-msg">${msg}</div>
-      ${pTags ? `<div class="ausp-tags">${pTags}</div>` : ''}
     </div>`;
   }
+
+  const goodTags  = d.good.map(t => `<span class="ausp-tag">${t}</span>`).join('');
+  const avoidTags = d.avoid.map(t => `<span class="ausp-tag">${t}</span>`).join('');
 
   return `<div class="ausp-panel">
     <div class="ausp-row good">
@@ -1966,7 +1979,7 @@ function renderAuspPanel(mansion) {
       <div class="ausp-tags">${avoidTags}</div>
     </div>` : ''}
     ${special}
-    ${personalHtml}
+    ${personalMsgHtml}
   </div>`;
 }
 
