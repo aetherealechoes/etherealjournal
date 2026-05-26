@@ -70,7 +70,7 @@
       min-height: 100vh;
       background: radial-gradient(ellipse at 50% 0%, #1A1060 0%, #0F0C29 55%, #080618 100%);
       display: flex; align-items: center; justify-content: center;
-      padding: 40px 20px; position: relative; overflow: hidden;
+      padding: 40px 20px; position: relative; overflow-y: auto;
     }
 
     /* Starfield */
@@ -126,6 +126,10 @@
       backdrop-filter: blur(16px);
       position: relative;
       box-shadow: 0 0 60px rgba(197,145,42,0.08), inset 0 0 40px rgba(197,145,42,0.03);
+    }
+    @media (max-width: 480px) {
+      .welcome-card { padding: 28px 20px 24px; }
+      #welcome-screen { padding: 20px 12px; align-items: flex-start; padding-top: 30px; }
     }
 
 
