@@ -931,12 +931,12 @@
       <button class="cal-mode-btn" id="btn-mode-hijri" onclick="setCalMode('hijri')">هجري</button>
     </div>
     <div class="cal-controls no-print">
-      <button class="cal-nav-btn" onclick="calPrev()">&#8592; Prev</button>
+      <button class="cal-nav-btn" onclick="calPrev()">&#8594; السابق</button>
       <div class="cal-month-title" id="cal-month-title"></div>
-      <button class="cal-nav-btn" onclick="calNext()">Next &#8594;</button>
+      <button class="cal-nav-btn" onclick="calNext()">التالي &#8592;</button>
       <div class="cal-view-toggle">
-        <button class="cal-toggle-btn active" id="btn-month" onclick="setCalView('month')">Month</button>
-        <button class="cal-toggle-btn" id="btn-year" onclick="setCalView('year')">Year</button>
+        <button class="cal-toggle-btn active" id="btn-month" onclick="setCalView('month')">شهر</button>
+        <button class="cal-toggle-btn" id="btn-year" onclick="setCalView('year')">سنة</button>
       </div>
     </div>
 
@@ -1378,7 +1378,7 @@ function generateGuide() {
           </div>
           <div class="mansion-meaning">المعنى: ${m.meaning}</div>
           <div class="mansion-desc-ar">${d2.ar}</div>
-          <div class="mansion-desc-en">${d2.en}</div>
+
           <div class="mansion-guidance">
             <h5>🌙 توجيه اليوم</h5>
             <p>${d2.guidance}</p>
