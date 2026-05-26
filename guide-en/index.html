@@ -716,6 +716,10 @@
   .ausp-tag { font-family:'EB Garamond',serif; font-size:13px; padding:3px 10px; border-radius:20px; line-height:1.5; }
   .ausp-row.good .ausp-tag { background:rgba(45,122,61,0.12); color:#1a5c2a; border:1px solid rgba(45,122,61,0.25); }
   .ausp-row.avoid .ausp-tag { background:rgba(139,58,58,0.10); color:#7a2020; border:1px solid rgba(139,58,58,0.22); }
+  .ausp-row.personal { background: rgba(99,79,159,0.08); border-left: 3px solid #9b87d4; }
+  .ausp-row.personal .ausp-label { color: #9b87d4; }
+  .ausp-tag.personal-tag { background: rgba(99,79,159,0.13); color: #c4b4f0; border: 1px solid rgba(155,135,212,0.3); }
+  .ausp-personal-msg { font-family:'EB Garamond',serif; font-size:13px; color:rgba(245,233,200,0.72); margin:4px 0 8px; line-height:1.7; }
   .ausp-special { font-family:'EB Garamond',serif; font-size:13px; color:#A67820; font-style:italic; text-align:center; padding:8px 14px; background:rgba(201,168,76,0.08); border-radius:8px; margin-top:8px; }
 
   /* ── Calendar Hover Tooltip ─────────────────────────────── */
@@ -1331,6 +1335,7 @@ function generateGuide() {
   const todayPhase = getMoonPhase(new Date());
 
   const displayName = name || 'Seeker';
+  _userChaldean = calcChaldean(name);
 
   // ── Cover ──────────────────────────────────────────────────
   document.getElementById('cover-name').textContent = displayName;
@@ -1500,7 +1505,7 @@ function restoreSavedData() {
     const mo   = parseInt(localStorage.getItem('ee_dob_m'));
     const y    = parseInt(localStorage.getItem('ee_dob_y'));
 
-    if (name) document.getElementById('input-name').value = name;
+    if (name) { document.getElementById('input-name').value = name; _userChaldean = calcChaldean(name); }
 
     if (d && mo && y) {
       setTimeout(() => {
@@ -1544,6 +1549,57 @@ document.addEventListener('keydown', e => {
     generateGuide();
   }
 });
+
+
+// ══════════════════════════════════════════════════════════════
+// CHALDEAN NUMEROLOGY ENGINE
+// ══════════════════════════════════════════════════════════════
+const CHALDEAN_MAP = {
+  A:1,I:1,J:1,Q:1,Y:1,
+  B:2,K:2,R:2,
+  C:3,G:3,L:3,S:3,
+  D:4,M:4,T:4,
+  E:5,H:5,N:5,X:5,
+  U:6,V:6,W:6,
+  O:7,Z:7,
+  F:8,P:8
+};
+const CHALD_PLANET     = ['','Sun','Moon','Jupiter','Saturn','Mercury','Venus','Moon','Saturn','Mars'];
+const CHALD_PLANET_KEY = ['','sun','moon','jupiter','saturn','mercury','venus','moon','saturn','mars'];
+const CHALD_ELEMENT    = ['','fire','water','fire','earth','air','earth','water','earth','fire'];
+const CHALD_EMOJI      = ['','☀️','🌙','♃','♄','☿','♀','🌙','♄','♂'];
+
+function _digitalRoot(n) {
+  while (n > 9) n = String(n).split('').reduce((s,d)=>s+parseInt(d),0);
+  return n || 9;
+}
+function calcChaldean(name) {
+  const upper = name.toUpperCase().replace(/[^A-Z]/g,'');
+  if (!upper) return null;
+  const sum = upper.split('').reduce((s,ch)=>s+(CHALDEAN_MAP[ch]||0),0);
+  if (!sum) return null;
+  const num = _digitalRoot(sum);
+  return { number:num, sum:sum, planet:CHALD_PLANET[num],
+           planetKey:CHALD_PLANET_KEY[num], element:CHALD_ELEMENT[num], emoji:CHALD_EMOJI[num] };
+}
+function _elemNameEn(e) {
+  return {fire:'Fire',water:'Water',earth:'Earth',air:'Air'}[e]||e;
+}
+function _elemCompat(e1,e2) {
+  return {fire:['fire','air'],water:['water','earth'],air:['air','fire'],earth:['earth','water']}[e1]?.includes(e2);
+}
+const CHALD_PERSONAL_TAGS = {
+  1:['👑 A bold act of leadership','🌅 Begin something that expresses your true self'],
+  2:['🤝 Deepen a close bond','💭 Trust your intuition over logic today'],
+  3:['📖 Learn or teach something new','🌍 Expand your circle or perspective'],
+  4:['📋 Draft a long-term plan','🏗️ Build a routine or system that lasts'],
+  5:['✍️ Write, speak, or share an idea','📞 Have that overdue important conversation'],
+  6:['💕 Express gratitude to someone you love','🎨 Create something beautiful'],
+  7:['🌙 Deep meditation or inner reflection','📔 Journal your dreams and visions'],
+  8:['💼 A strategic financial or career move','🏆 Claim what you have earned'],
+  9:['💪 Take that courageous step you have been delaying','🔥 Face a difficult challenge head-on']
+};
+let _userChaldean = null;
 
 // ── CALENDAR ENGINE ────────────────────────────────────────────
 let calYear  = new Date().getFullYear();
@@ -1780,11 +1836,42 @@ function closeCalModal() { document.getElementById('cal-event-modal').style.disp
 function renderAuspPanel(mansion) {
   const d = MANSION_DAYS[mansion.index];
   if (!d) return '';
-  const goodTags = d.good.map(t => `<span class="ausp-tag">${t}</span>`).join('');
-  const avoidTags = d.avoid.length
-    ? d.avoid.map(t => `<span class="ausp-tag">${t}</span>`).join('')
-    : '';
-  const special = d.special ? `<div class="ausp-special">${d.special}</div>` : '';
+  const goodTags  = d.good.map(t  => `<span class="ausp-tag">${t}</span>`).join('');
+  const avoidTags = d.avoid.length ? d.avoid.map(t => `<span class="ausp-tag">${t}</span>`).join('') : '';
+  const special   = d.special ? `<div class="ausp-special">${d.special}</div>` : '';
+
+  // ── Chaldean personal insight ──────────────────────────────
+  let personalHtml = '';
+  if (_userChaldean) {
+    const uc = _userChaldean;
+    const sameRuler = uc.planetKey === mansion.ruler;
+    const sameElem  = uc.element   === mansion.element;
+    const compat    = _elemCompat(uc.element, mansion.element);
+    const isAusp    = mansion.nature === "sa'd";
+
+    let msg = '';
+    if (sameRuler && isAusp)
+      msg = `Today's mansion is ruled by your planet, ${uc.planet} ${uc.emoji} — your personal energy peaks here. A rare day to make decisions that matter.`;
+    else if (sameRuler)
+      msg = `Today's mansion is ruled by your planet, ${uc.planet} ${uc.emoji}, but its energy carries challenges — use your wisdom, do not rush.`;
+    else if (sameElem)
+      msg = `Your element (${_elemNameEn(uc.element)}) matches today's mansion — natural flow and ease in everything you begin.`;
+    else if (compat)
+      msg = `Your element (${_elemNameEn(uc.element)}) harmonises with today's mansion — a gently supportive day for steady progress.`;
+    else
+      msg = `Today's mansion energy differs from yours — a day for patience and adaptation rather than forcing outcomes.`;
+
+    const pTags = (CHALD_PERSONAL_TAGS[uc.number] || [])
+      .map(t => `<span class="ausp-tag personal-tag">${t}</span>`).join('');
+
+    personalHtml = `
+    <div class="ausp-row personal" style="margin-top:4px">
+      <div class="ausp-label">🔢 Your Personal Reading — Chaldean ${uc.number} ${uc.emoji} · ${uc.planet}</div>
+      <div class="ausp-personal-msg">${msg}</div>
+      ${pTags ? `<div class="ausp-tags">${pTags}</div>` : ''}
+    </div>`;
+  }
+
   return `<div class="ausp-panel">
     <div class="ausp-row good">
       <div class="ausp-label">✅ Auspicious for</div>
@@ -1795,6 +1882,7 @@ function renderAuspPanel(mansion) {
       <div class="ausp-tags">${avoidTags}</div>
     </div>` : ''}
     ${special}
+    ${personalHtml}
   </div>`;
 }
 
