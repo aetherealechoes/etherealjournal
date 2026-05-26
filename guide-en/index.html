@@ -1588,27 +1588,30 @@ function _elemNameEn(e) {
 function _elemCompat(e1,e2) {
   return {fire:['fire','air'],water:['water','earth'],air:['air','fire'],earth:['earth','water']}[e1]?.includes(e2);
 }
+// 4 tags per number — 2 are selected each day based on the mansion's element
+// fire→[0,1]  earth→[1,2]  air→[2,3]  water→[3,0]
+const ELEM_IDX = {fire:[0,1], earth:[1,2], air:[2,3], water:[3,0]};
 const CHALD_PERSONAL_TAGS = {
-  1:['👑 A bold act of leadership','🌅 Begin something that expresses your true self'],
-  2:['🤝 Deepen a close bond','💭 Trust your intuition over logic today'],
-  3:['📖 Learn or teach something new','🌍 Expand your circle or perspective'],
-  4:['📋 Draft a long-term plan','🏗️ Build a routine or system that lasts'],
-  5:['✍️ Write, speak, or share an idea','📞 Have that overdue important conversation'],
-  6:['💕 Express gratitude to someone you love','🎨 Create something beautiful'],
-  7:['🌙 Deep meditation or inner reflection','📔 Journal your dreams and visions'],
-  8:['💼 A strategic financial or career move','🏆 Claim what you have earned'],
-  9:['💪 Take that courageous step you have been delaying','🔥 Face a difficult challenge head-on']
+  1:['👑 Step into a role that calls for your natural authority','🌅 Begin something that expresses who you truly are','🔆 Take visible action — you are seen and supported today','🦁 Trust your instincts and lead without second-guessing'],
+  2:['🤝 Deepen a meaningful bond with patience and care','💭 Trust your intuition over logic today','🌙 Honour a quiet inner need — rest is productive','💌 Reach out to someone you have been thinking about'],
+  3:['📖 Learn or teach something that stretches your mind','🌍 Expand your world — a new connection or idea awaits','🎉 Celebrate progress, even the small milestones','✨ Share your enthusiasm — it opens doors today'],
+  4:['📋 Draft a detailed plan while your focus is sharp','🏗️ Build a system or routine designed to last','🔍 Review and refine something that matters long-term','🌳 Invest in your foundations, not just today\'s comfort'],
+  5:['✍️ Write, speak, or share an idea that has been forming','📞 Have that important conversation you have been postponing','🔄 Pivot quickly if needed — your adaptability is a strength','🗺️ Explore a new path, route, or way of thinking'],
+  6:['💕 Express gratitude or affection to someone you love','🎨 Create something beautiful, even something small','🌸 Seek out beauty and pleasure — you deserve it','🕊️ Restore harmony where there has been tension'],
+  7:['🌙 Deep meditation or inner reflection will reward you','📔 Journal your dreams, symbols, or inner visions','🔮 Research or study something esoteric or hidden','🌊 Surrender to what cannot be controlled — trust the flow'],
+  8:['💼 Make a strategic move in your career or finances','🏆 Claim recognition for what you have already earned','📊 Review your resources and plan how to grow them','🔑 Step into a position of greater responsibility'],
+  9:['💪 Take the courageous step you have been delaying','🔥 Face a difficult challenge with full presence','🌀 Release what has run its course — make space for new','⚡ Channel your passion into something that truly matters']
 };
 const CHALD_PERSONAL_AVOIDS = {
-  1:['Yielding your power to others','Hiding your light — this is not the day for it'],
-  2:['Rushing decisions — honour your slower pace','Conflict for the sake of being right'],
-  3:['Routine tasks that keep you small','Closing doors before exploring what is behind them'],
-  4:['Impulsive changes with no foundation','Skipping steps or cutting corners'],
-  5:['Signing anything without reading it carefully','Spreading yourself too thin across too many ideas'],
-  6:['Harsh words — they land deeper today','Neglecting your own needs to please others'],
-  7:['Loud, busy environments that scatter your focus','Making major decisions before sitting with them'],
-  8:['Playing small or undervaluing your work','Ignoring practical details in pursuit of the big picture'],
-  9:['Backing down from what you know is right','Letting fear disguise itself as caution']
+  1:['Waiting for permission — your power needs none','Dimming yourself to keep others comfortable','Letting doubt silence what you clearly know','Forcing agreement where honest difference exists'],
+  2:['Rushing decisions — honour your slower, deeper pace','Conflict for the sake of being right','Ignoring the emotional signals your body is sending','Over-giving until nothing is left for yourself'],
+  3:['Scattered energy — choose depth over breadth today','Closing doors before exploring what is behind them','Over-promising what you cannot yet deliver','Dismissing an idea before giving it room to breathe'],
+  4:['Impulsive changes built on no foundation','Skipping steps or rushing the process','Over-committing to too many structures at once','Rigidity — today may call for a little flexibility'],
+  5:['Signing anything without reading it very carefully','Spreading yourself too thin across too many ideas','Restlessness — some things need time, not more movement','Speaking before you have fully formed the thought'],
+  6:['Harsh words — they land more deeply than usual today','Neglecting your own needs to keep the peace','Comparing your path to someone else\'s journey','Postponing something that would genuinely bring you joy'],
+  7:['Loud, busy environments that scatter your inner focus','Making major decisions before sitting quietly with them','Sharing what is sacred before it has fully formed','Dismissing your intuition as mere imagination'],
+  8:['Playing small or undervaluing your work and worth','Ignoring practical details in pursuit of the big picture','Power moves that compromise your integrity','Over-extending financially without a clear plan'],
+  9:['Backing down from what you know is right','Letting fear disguise itself as reasonable caution','Holding on to what has already completed its cycle','Burning bridges in the heat of the moment']
 };
 let _userChaldean = null;
 
@@ -1857,12 +1860,6 @@ function renderAuspPanel(mansion) {
     const sameElem  = uc.element   === mansion.element;
     const compat    = _elemCompat(uc.element, mansion.element);
 
-    const pGood = (CHALD_PERSONAL_TAGS[uc.number] || []);
-    personalGoodTags = pGood.map(t => `<span class="ausp-tag personal-tag">⭐ ${t}</span>`).join('');
-
-    const pAvoid = (CHALD_PERSONAL_AVOIDS[uc.number] || []);
-    personalAvoidTags = pAvoid.map(t => `<span class="ausp-tag personal-tag">${t}</span>`).join('');
-
     let msg = '';
     if (sameRuler && isAusp)
       msg = `Today's mansion is ruled by your planet, ${uc.planet} ${uc.emoji} — your personal energy peaks here. A rare day to make decisions that matter.`;
@@ -1881,19 +1878,17 @@ function renderAuspPanel(mansion) {
     </div>`;
   }
 
-  const mansionGoodTags = d.good.map(t => `<span class="ausp-tag">${t}</span>`).join('');
-  const allGoodTags = personalGoodTags + mansionGoodTags;
-  const mansionAvoidTags = d.avoid.map(t => `<span class="ausp-tag">${t}</span>`).join('');
-  const allAvoidTags = personalAvoidTags + mansionAvoidTags;
+  const goodTags  = d.good.map(t => `<span class="ausp-tag">${t}</span>`).join('');
+  const avoidTags = d.avoid.map(t => `<span class="ausp-tag">${t}</span>`).join('');
 
   return `<div class="ausp-panel">
     <div class="ausp-row good">
       <div class="ausp-label">✅ Auspicious for</div>
-      <div class="ausp-tags">${allGoodTags}</div>
+      <div class="ausp-tags">${goodTags}</div>
     </div>
-    ${allAvoidTags ? `<div class="ausp-row avoid" style="margin-top:4px">
+    ${avoidTags ? `<div class="ausp-row avoid" style="margin-top:4px">
       <div class="ausp-label">⛔ Best to avoid</div>
-      <div class="ausp-tags">${allAvoidTags}</div>
+      <div class="ausp-tags">${avoidTags}</div>
     </div>` : ''}
     ${special}
     ${personalMsgHtml}
