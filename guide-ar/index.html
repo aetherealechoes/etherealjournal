@@ -1303,6 +1303,7 @@ function generateGuide() {
   const todayPhase = getMoonPhase(new Date());
 
   const displayName = name || 'الباحث';
+  _userAbjad = calcAbjad(name);
 
   // ── Cover ──────────────────────────────────────────────────
   document.getElementById('cover-name').textContent = displayName;
@@ -1470,7 +1471,7 @@ function restoreSavedData() {
     const mo   = parseInt(localStorage.getItem('ee_dob_m'));
     const y    = parseInt(localStorage.getItem('ee_dob_y'));
 
-    if (name) document.getElementById('input-name').value = name;
+    if (name) { document.getElementById('input-name').value = name; _userAbjad = calcAbjad(name); }
 
     if (d && mo && y) {
       setTimeout(() => {
@@ -1514,6 +1515,52 @@ document.addEventListener('keydown', e => {
     generateGuide();
   }
 });
+
+
+// ══════════════════════════════════════════════════════════════
+// ABJAD NUMEROLOGY ENGINE
+// ══════════════════════════════════════════════════════════════
+const ABJAD_VALUES = {
+  'ا':1,'أ':1,'إ':1,'آ':1,'ء':1,
+  'ب':2,'ج':3,'د':4,'ه':5,'ة':5,'و':6,'ز':7,'ح':8,'ط':9,
+  'ي':10,'ى':10,'ئ':10,'ك':20,'ل':30,'م':40,'ن':50,'س':60,
+  'ع':70,'ف':80,'ص':90,'ق':100,'ر':200,'ش':300,'ت':400,
+  'ث':500,'خ':600,'ذ':700,'ض':800,'ظ':900,'غ':1000
+};
+const ABJAD_PLANET_AR  = ['','الشمس','القمر','المشتري','زحل','عطارد','الزهرة','القمر','زحل','المريخ'];
+const ABJAD_PLANET_KEY = ['','sun','moon','jupiter','saturn','mercury','venus','moon','saturn','mars'];
+const ABJAD_ELEMENT    = ['','fire','water','fire','earth','air','earth','water','earth','fire'];
+const ABJAD_EMOJI      = ['','☀️','🌙','♃','♄','☿','♀','🌙','♄','♂'];
+
+function _digitalRoot(n) {
+  while (n > 9) n = String(n).split('').reduce((s,d)=>s+parseInt(d),0);
+  return n || 9;
+}
+function calcAbjad(name) {
+  const sum = name.split('').reduce((s,ch) => s + (ABJAD_VALUES[ch] || 0), 0);
+  if (!sum) return null;
+  const num = _digitalRoot(sum);
+  return { number:num, sum:sum, planet:ABJAD_PLANET_AR[num],
+           planetKey:ABJAD_PLANET_KEY[num], element:ABJAD_ELEMENT[num], emoji:ABJAD_EMOJI[num] };
+}
+function elemNameAr(e) {
+  return {fire:'النار',water:'الماء',earth:'الأرض',air:'الهواء'}[e]||e;
+}
+function _elemCompat(e1,e2) {
+  return {fire:['fire','air'],water:['water','earth'],air:['air','fire'],earth:['earth','water']}[e1]?.includes(e2);
+}
+const ABJAD_PERSONAL_TAGS = {
+  1:['👑 خطوة قيادية تعكس هويتك الحقيقية','🌅 ابدأ شيئاً جديداً بقرار واعٍ'],
+  2:['🤝 عمّق علاقة قريبة منك','💭 استمع لحدسك الداخلي'],
+  3:['📖 تعلّم أو علّم شيئاً اليوم','🌍 وسّع آفاقك نحو الجديد'],
+  4:['📋 ضع خطة طويلة المدى','🏗️ ابنِ نظاماً أو روتيناً صحياً'],
+  5:['✍️ عبّر عن أفكارك كتابةً أو حواراً','📞 أجرِ محادثة مهمة طال تأجيلها'],
+  6:['💕 أظهر تقديرك لمن تحب','🎨 خصّص وقتاً لعمل إبداعي'],
+  7:['🌙 تأمّل عميق ومراقبة أعماقك','📔 دوّن رؤاك وأحلامك'],
+  8:['💼 قرار مالي أو مهني استراتيجي','🏆 طالب بما تستحق بثقة'],
+  9:['💪 خطوة شجاعة طال انتظارها','🔥 واجه تحدياً صعباً بعزم']
+};
+let _userAbjad = null;
 
 // ── CALENDAR ENGINE ────────────────────────────────────────────
 let calYear  = new Date().getFullYear();
@@ -1873,11 +1920,42 @@ function closeCalModal() { document.getElementById('cal-event-modal').style.disp
 function renderAuspPanel(mansion) {
   const d = MANSION_DAYS[mansion.index];
   if (!d) return '';
-  const goodTags = d.good.map(t => `<span class="ausp-tag">${t}</span>`).join('');
-  const avoidTags = d.avoid.length
-    ? d.avoid.map(t => `<span class="ausp-tag">${t}</span>`).join('')
-    : '';
-  const special = d.special ? `<div class="ausp-special">${d.special}</div>` : '';
+  const goodTags  = d.good.map(t  => `<span class="ausp-tag">${t}</span>`).join('');
+  const avoidTags = d.avoid.length ? d.avoid.map(t => `<span class="ausp-tag">${t}</span>`).join('') : '';
+  const special   = d.special ? `<div class="ausp-special">${d.special}</div>` : '';
+
+  // ── Abjad personal insight ─────────────────────────────────
+  let personalHtml = '';
+  if (_userAbjad) {
+    const ua = _userAbjad;
+    const sameRuler = ua.planetKey === mansion.ruler;
+    const sameElem  = ua.element   === mansion.element;
+    const compat    = _elemCompat(ua.element, mansion.element);
+    const isAusp    = mansion.nature === "sa'd";
+
+    let msg = '';
+    if (sameRuler && isAusp)
+      msg = `منزل اليوم تحت حكم كوكبك ${ua.planet} ${ua.emoji} — طاقتك في ذروتها. يومٌ نادر لاتخاذ قراراتك الكبرى.`;
+    else if (sameRuler)
+      msg = `منزل اليوم تحت حكم كوكبك ${ua.planet} ${ua.emoji} لكن طاقته تحمل تحديات — استخدم حكمتك ولا تتسرّع.`;
+    else if (sameElem)
+      msg = `عنصرك (${elemNameAr(ua.element)}) يتطابق مع منزل اليوم — تدفّق طبيعي وانسجام في الطاقة.`;
+    else if (compat)
+      msg = `عنصرك (${elemNameAr(ua.element)}) منسجم مع منزل اليوم — توازن لطيف يدعمك.`;
+    else
+      msg = `طاقة منزل اليوم تختلف عن عنصرك — يوم للتكيّف والصبر لا للإجبار.`;
+
+    const pTags = (ABJAD_PERSONAL_TAGS[ua.number] || [])
+      .map(t => `<span class="ausp-tag personal-tag">${t}</span>`).join('');
+
+    personalHtml = `
+    <div class="ausp-row personal" style="margin-top:4px">
+      <div class="ausp-label">🔢 رؤيتك الشخصية — جُمَّل ${ua.number} ${ua.emoji} · ${ua.planet}</div>
+      <div class="ausp-personal-msg">${msg}</div>
+      ${pTags ? `<div class="ausp-tags">${pTags}</div>` : ''}
+    </div>`;
+  }
+
   return `<div class="ausp-panel">
     <div class="ausp-row good">
       <div class="ausp-label">✅ يُستحسن في هذا اليوم</div>
@@ -1888,6 +1966,7 @@ function renderAuspPanel(mansion) {
       <div class="ausp-tags">${avoidTags}</div>
     </div>` : ''}
     ${special}
+    ${personalHtml}
   </div>`;
 }
 
