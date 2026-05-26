@@ -1978,8 +1978,6 @@ document.addEventListener('DOMContentLoaded', () => {
 
     const isTouchDevice = () => ('ontouchstart' in window) || navigator.maxTouchPoints > 0;
 
-    const isTouchDevice = () => ('ontouchstart' in window) || navigator.maxTouchPoints > 0;
-
     if (!isTouchDevice()) {
       // Desktop only: hover tooltip
       document.addEventListener('mouseover', function(e) {
