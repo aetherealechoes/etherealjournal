@@ -1599,6 +1599,17 @@ const CHALD_PERSONAL_TAGS = {
   8:['💼 A strategic financial or career move','🏆 Claim what you have earned'],
   9:['💪 Take that courageous step you have been delaying','🔥 Face a difficult challenge head-on']
 };
+const CHALD_PERSONAL_AVOIDS = {
+  1:['Yielding your power to others','Hiding your light — this is not the day for it'],
+  2:['Rushing decisions — honour your slower pace','Conflict for the sake of being right'],
+  3:['Routine tasks that keep you small','Closing doors before exploring what is behind them'],
+  4:['Impulsive changes with no foundation','Skipping steps or cutting corners'],
+  5:['Signing anything without reading it carefully','Spreading yourself too thin across too many ideas'],
+  6:['Harsh words — they land deeper today','Neglecting your own needs to please others'],
+  7:['Loud, busy environments that scatter your focus','Making major decisions before sitting with them'],
+  8:['Playing small or undervaluing your work','Ignoring practical details in pursuit of the big picture'],
+  9:['Backing down from what you know is right','Letting fear disguise itself as caution']
+};
 let _userChaldean = null;
 
 // ── CALENDAR ENGINE ────────────────────────────────────────────
@@ -1836,18 +1847,21 @@ function closeCalModal() { document.getElementById('cal-event-modal').style.disp
 function renderAuspPanel(mansion) {
   const d = MANSION_DAYS[mansion.index];
   if (!d) return '';
-  const goodTags  = d.good.map(t  => `<span class="ausp-tag">${t}</span>`).join('');
-  const avoidTags = d.avoid.length ? d.avoid.map(t => `<span class="ausp-tag">${t}</span>`).join('') : '';
-  const special   = d.special ? `<div class="ausp-special">${d.special}</div>` : '';
+  const isAusp = mansion.nature === "sa'd";
+  const special = d.special ? `<div class="ausp-special">${d.special}</div>` : '';
 
-  // ── Chaldean personal insight ──────────────────────────────
-  let personalHtml = '';
+  let personalGoodTags = '', personalAvoidTags = '', personalMsgHtml = '';
   if (_userChaldean) {
     const uc = _userChaldean;
     const sameRuler = uc.planetKey === mansion.ruler;
     const sameElem  = uc.element   === mansion.element;
     const compat    = _elemCompat(uc.element, mansion.element);
-    const isAusp    = mansion.nature === "sa'd";
+
+    const pGood = (CHALD_PERSONAL_TAGS[uc.number] || []);
+    personalGoodTags = pGood.map(t => `<span class="ausp-tag personal-tag">⭐ ${t}</span>`).join('');
+
+    const pAvoid = (CHALD_PERSONAL_AVOIDS[uc.number] || []);
+    personalAvoidTags = pAvoid.map(t => `<span class="ausp-tag personal-tag">${t}</span>`).join('');
 
     let msg = '';
     if (sameRuler && isAusp)
@@ -1861,28 +1875,28 @@ function renderAuspPanel(mansion) {
     else
       msg = `Today's mansion energy differs from yours — a day for patience and adaptation rather than forcing outcomes.`;
 
-    const pTags = (CHALD_PERSONAL_TAGS[uc.number] || [])
-      .map(t => `<span class="ausp-tag personal-tag">${t}</span>`).join('');
-
-    personalHtml = `
-    <div class="ausp-row personal" style="margin-top:4px">
+    personalMsgHtml = `<div class="ausp-row personal" style="margin-top:4px">
       <div class="ausp-label">🔢 Your Personal Reading — Chaldean ${uc.number} ${uc.emoji} · ${uc.planet}</div>
       <div class="ausp-personal-msg">${msg}</div>
-      ${pTags ? `<div class="ausp-tags">${pTags}</div>` : ''}
     </div>`;
   }
+
+  const mansionGoodTags = d.good.map(t => `<span class="ausp-tag">${t}</span>`).join('');
+  const allGoodTags = personalGoodTags + mansionGoodTags;
+  const mansionAvoidTags = d.avoid.map(t => `<span class="ausp-tag">${t}</span>`).join('');
+  const allAvoidTags = personalAvoidTags + mansionAvoidTags;
 
   return `<div class="ausp-panel">
     <div class="ausp-row good">
       <div class="ausp-label">✅ Auspicious for</div>
-      <div class="ausp-tags">${goodTags}</div>
+      <div class="ausp-tags">${allGoodTags}</div>
     </div>
-    ${avoidTags ? `<div class="ausp-row avoid" style="margin-top:4px">
+    ${allAvoidTags ? `<div class="ausp-row avoid" style="margin-top:4px">
       <div class="ausp-label">⛔ Best to avoid</div>
-      <div class="ausp-tags">${avoidTags}</div>
+      <div class="ausp-tags">${allAvoidTags}</div>
     </div>` : ''}
     ${special}
-    ${personalHtml}
+    ${personalMsgHtml}
   </div>`;
 }
 
