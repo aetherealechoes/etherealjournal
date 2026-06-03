@@ -44,6 +44,16 @@
   .gate-buy { font-size: 12px; color: rgba(245,233,200,0.45); }
   .gate-buy a { color: rgba(201,168,76,0.7); text-decoration: none; }
   .gate-buy a:hover { color: #C9A84C; }
+  #ee-trial-badge {
+    position: fixed; left: 50%; transform: translateX(-50%); bottom: 16px;
+    z-index: 999998; background: rgba(15,12,41,0.92);
+    border: 1px solid rgba(201,168,76,0.4); border-radius: 999px;
+    padding: 8px 16px; font-family: 'Amiri', serif; font-size: 13px;
+    letter-spacing: 0.5px; color: #E8C97A; box-shadow: 0 8px 24px rgba(0,0,0,0.4);
+    display: flex; gap: 10px; align-items: center; backdrop-filter: blur(6px);
+  }
+  #ee-trial-badge a { color: #D4AB50; text-decoration: none; font-weight: 700; }
+  #ee-trial-badge a:hover { color: #F5E9C8; }
 
     *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
     :root {
@@ -733,18 +743,14 @@
   </style>
 </head>
 <body>
+<!-- Netlify Forms: static form so the build picks it up; JS posts to it -->
+<form name="guide-ar-trial" data-netlify="true" netlify-honeypot="bot-field" hidden>
+  <input type="email" name="email" />
+  <input name="bot-field" />
+</form>
 <!-- ── LICENSE GATE ─────────────────────────────────────── -->
 <div id="license-gate">
-  <div class="gate-card" style="direction:rtl;font-family:'Amiri', serif;">
-    <span class="gate-moon">🌙</span>
-    <div class="gate-title">دليلك الشخصي بمنازل القمر</div>
-    <div class="gate-divider"></div>
-    <div class="gate-sub">أدخل مفتاح الترخيص الذي تلقيته بعد الشراء</div>
-    <input id="gate-key-input" class="gate-input" type="text" placeholder="MPA-XXXXX-XXXXX-XXXXX" autocomplete="off" spellcheck="false">
-    <div id="gate-key-error" class="gate-error"></div>
-    <button id="gate-submit-btn" class="gate-btn" style="font-family:'Amiri', serif;">فتح دليلك الشخصي ✦</button>
-    <div class="gate-buy">لا تملك مفتاحاً؟ <a href="https://etherealechoes.com" target="_blank">اشترِ من EtherealEchoes.com ←</a></div>
-  </div>
+  <div class="gate-card" style="direction:rtl;font-family:'Amiri', serif;"></div>
 </div>
 
 
@@ -2231,92 +2237,240 @@ document.addEventListener('DOMContentLoaded', () => {
 
 </script>
 <script>
-(function() {
-  const PREFIX = 'MPA';
-  const PRODUCT_ID = 4137;
-  const STORE_KEY = 'ee_lic_mpa';
-  const DEVICE_TOKEN_KEY = 'ee_dev_tok';
-  const VALIDATE_URL = 'https://etherealechoes.com/wp-json/ee/v1/validate-key';
+/* === Offline License Gate + 7-Day Trial (AR) ================
+   التدفّق: التقاط البريد ← تجربة مجانية ٧ أيام ← بوابة الشراء.
+   مفاتيح المجموعة (MPA-XXXXX-XXXXX-XXXXX) يتم التحقق منها دون اتصال
+   عبر قائمة تجزئة SHA-256 مملّحة — لا خادم، لا CORS، لا إعادة سؤال.
+   لإضافة مفاتيح جديدة لاحقاً: sha256('ee_mpa_2026:' + KEY) ثم أضِف الناتج إلى KEY_HASHES.
+=============================================================== */
+(function(){
+  'use strict';
+  var GATE_LIVE  = true;
+  var TRIAL_DAYS = 7;
+  var DAY_MS     = 86400000;
+  var ARABIC_DIGITS = true;
+  var ARROW      = "←";
+  var PREFIX     = "MPA";
+  var SALT       = "ee_mpa_2026";
+  var BUY_URL    = "https://etherealechoes.com/product/%d9%85%d9%86%d8%b2%d9%84%d9%83-%d8%a7%d9%84%d9%82%d9%85%d8%b1%d9%8a-%d8%a7%d9%84%d8%b4%d8%ae%d8%b5%d9%8a-%d8%a7%d9%84%d8%af%d9%84%d9%8a%d9%84-%d8%a7%d9%84%d8%aa%d9%81%d8%a7%d8%b9%d9%84%d9%8a/";
+  var NETLIFY_FORM = 'guide-ar-trial';
 
-  function getOrCreateDeviceToken() {
-    let tok = localStorage.getItem(DEVICE_TOKEN_KEY);
-    if (!tok) {
-      tok = 'xxxxxxxx-xxxx-4xxx-yxxx-xxxxxxxxxxxx'.replace(/[xy]/g, function(c) {
-        const r = Math.random() * 16 | 0;
-        return (c === 'x' ? r : (r & 0x3 | 0x8)).toString(16);
-      });
-      localStorage.setItem(DEVICE_TOKEN_KEY, tok);
-    }
-    return tok;
+  var K_LIC    = "ee_lic_mpa";
+  var K_EMAIL  = "ee_mpa_email";
+  var K_TRIAL  = "ee_mpa_trial_start";
+  var K_LEGACY = "ee_mpa_legacy";
+  var K_INIT   = "ee_mpa_gate_init";
+
+  var KEY_HASHES = new Set([
+    'a382cf3a5a00332a549ec2948132b8d4e56a7efeb0a6fdcaae0d73f103c8c1f6',
+    '16d4880155f979d810bc8e5d7eb0f74f929f37b79179fd5acf2aacea3a7c04f5',
+    '59d4a8d4281b34596d119264cfa618bf45b5964dfe1f016ed129eca1a5815c10',
+    'f86e2eaefce6eb613c1a4704304334058f408b821f3807ce9648c7295e16caff',
+    '2658d75b9dd4b51b66c62a04678f35569ebe22d0ed55f15413600f5e812e831f',
+    '2f51edbf44a2de76fbfd89a6744a4c350bbcb535c23c50f0d47996f89b86156c',
+    '0351f8244086828d17ca665dabaf39ecff985cf475b6163b9f8157285c69840c',
+    '92ef6560c5f0b5fc65374d2c2941a01367435e01ce3fea04899066bc565913a8',
+    '5e1858ab7717575c06ab5c447bb88a21bf8ddd5d7e75fb2d47d1b53b9765a385',
+    '8f238f7f59596d1d3b3fbc5aaf9152ef2e80152791a3fb59f6fab35b47f05208',
+    '0d8a64837f3e3b5674914a09fc4065cccc511a4464f7825e4a96dbaf9c1610c8',
+    'ac605f4d5d24b98c9aebf496f52609d0023dea717ee8333a843d6323f1829550',
+    '94137d7a10e4498266d70e9ab9e306d3cc852cd300df782fccf5ca342cab1428',
+    '588e43eb0b41279507c1673c4047170de4a8b45c7d503f6359dd6cc2a9bb1149',
+    '37748623fd2cc82b34afd6a18f1a947f0ea8f8d163c3b5ef7dfa28c7a5d8a1b2',
+    'a1e6af390def5758ab6dae2438a4cff395b8b4b8258a478d25df82808efdc03c',
+    '3a9bfcf5645340fc06c5b1548a6e5e380373e29a6591731c9ad04b341812c8eb',
+    '68621ac6e77d25e4e46da898a2063e2b731899762e518a60927d8532482d7b1d',
+    '3e9ea26f5b6672f9ebeb9a4030121a344431772b6a21976c5fcdd2ab911ed725',
+    'b37797e727cbdc3f9e4209b039008d22e706ff42563ea91deafaefd59cb7fcae',
+    '8720b28e130754a9cf544b63673b8093650903f6876bb49bab58cd1a488bcba6',
+    'a6f810eb30f1a48dc933f2a540a3a8c39091cd50c3c3f51e440a01376f1621fc',
+    'd2d40f96e7c826db34b64fb73ea1e378473ea54dff280de4e4d15ad6e0c1cd64',
+    'e3ea951c3b1aa39c9c31cc3189ae65ab8dc520fec6ee8ca31c7a989b5f90c9b1',
+    'aa687d35ca78f3e1c412f4e230fa048b9672029f7e24428ce03c070d4349bd02',
+    '35d43492af98d47939affe87fec674beffaec8cf174b74306494061c6ec4c1d7',
+    '5767439db3d2daa58871aa421749863b30e068e5c7d548d516564263e6d19491',
+    '5d7f25e0d23e97e7feae46d1126f9fa2283c05792da0d1ae3d884a6bbff707fa',
+    '7b801e60eccaf69599fd824fc88f82b413e0f2b6e659a9e4e482f8306b9383bb',
+    'de73fd9b44ed019f1cf62e8057ae05618087de57ad075c761e287c9e10493695',
+    'aaf9342e43f415d2e79b9c248c3a9e932eaee1e986fb7b775279488db11a166f',
+    'df43b8e08d938a5ffd03874be620b0bb055ea6bdf11c4ce3e1588d00c89273e7',
+    'f4c1717a72a9a29d2730d541d8fc25cb07104294d7a9dd9dcf0383f8eabf19f9',
+    'd02b7d790514dbcbab774055f04a8406dfb042c6250a7de50d495dd7f39c3d37',
+    'ad868c6974c4b4ed167867c904411ef782b883963e7869a7bfd9e3c3eb5c1c74',
+    'f17d178ea832436c1380fc0a9a4ab41f33fae68c7e22c2c4af9ec53a1994ed54',
+    '8674a1dbff9b7186629856afd4d239c0f167e309e192c2a1ac37d6cd76e381f1',
+    '4832c5fd87d9b75dc438143ff8aea89773928bdfa8563907742e0f835325d228',
+    '0d4707ed21c5b134248d1c979f345f4d3a3788f03dc3b46650c25f9de45c8935',
+    'd122a45c9f511d92c502d47932de45d3792b0c4be7e8c7194dbc6ab92af632f0',
+    '11a60a2be7e924a726a8bae0032b660d92bb510464a3418eeb978dcbe6f7deba',
+    '24831a3dfe557a023d0a8270ecba8e8dead67bb6f371a5e3aca116be83e9b5cf',
+    '0c4b2f843c0632a34ab7d5328c560b135015ef452a3b39e3b706205e66fcf19f',
+    'fcc8a0f5d0c77ca70f41c3ef37152b29d393aab078b4d99fbc714bf10547ba18',
+    '5352faf57b593d9c8b81da685ca95b7d1b0ab2a7d363bd96627072acf2714615',
+    '058988446168e54c6fec8e88281157bdeff0179142d72dec51a2161a41b04bdb',
+    'ab3d97a1f680db9e1ea4d3a4fd0ab0d2c06309319d99a58a4390fe63b09af3f5',
+    'c438969c01e4cafda893168f0c05ea3c07d91bfc0f76740ce25a764879c96e13',
+    '938eb5aa50a216c8d8f2f5c8856aea1f910bf1855df3a30ecf22734fc0e5f002',
+    '209deaeec329043a3f3f29dc4397f60a44f6f815e76239796048be360d806901'
+  ]);
+
+  var T = {
+    emailTitle: "دليلك الشخصي بمنازل القمر",
+    emailSub: "ابدأ تجربتك المجانية لمدة ٧ أيام. أدخل بريدك الإلكتروني لفتح دليلك الشخصي وقراءات المنازل اليومية.",
+    emailPlaceholder: "بريدك الإلكتروني",
+    emailBtn: "ابدأ التجربة المجانية ✦",
+    emailErrInvalid: "يرجى إدخال بريد إلكتروني صحيح.",
+    haveKey: "سبق أن اشتريت؟ أدخل مفتاحك",
+    brand: "دليلك الشخصي بمنازل القمر",
+    payTitle: "انتهت تجربتك المجانية",
+    paySub: "احصل على وصول دائم إلى دليلك الشخصي بمنازل القمر مقابل ٢٤٫٩٩ دولاراً.",
+    keyPlaceholder: "MPA-XXXXX-XXXXX-XXXXX",
+    keyBtn: "فتح دليلك الشخصي ✦",
+    keyErrEmpty: "يرجى إدخال مفتاح الترخيص.",
+    keyErrFormat: "صيغة المفتاح غير صحيحة. يبدو المفتاح هكذا: MPA-XXXXX-XXXXX-XXXXX",
+    keyErrInvalid: "لم يتم التعرف على هذا المفتاح. يرجى التحقق منه والمحاولة مرة أخرى.",
+    buyLine: "لا تملك مفتاحاً؟ اشترِ مقابل ٢٤٫٩٩ دولار ←",
+    badgeSingular: "✦ تجربة مجانية — يوم واحد متبقٍ",
+    badgeDual: "✦ تجربة مجانية — يومان متبقيان",
+    badgePlural: "✦ تجربة مجانية — {n} أيام متبقية",
+    badgeUnlock: "احصل عليه"
+  };
+
+  var ls = {
+    get: function(k){ try { return localStorage.getItem(k); } catch(e){ return null; } },
+    set: function(k,v){ try { localStorage.setItem(k,v); } catch(e){} },
+    del: function(k){ try { localStorage.removeItem(k); } catch(e){} }
+  };
+  function disp(n){ return ARABIC_DIGITS ? String(n).replace(/[0-9]/g, function(d){ return '٠١٢٣٤٥٦٧٨٩'.charAt(+d); }) : String(n); }
+
+  function sha256hex(str){
+    var enc = new TextEncoder().encode(str);
+    return crypto.subtle.digest('SHA-256', enc).then(function(buf){
+      var a = new Uint8Array(buf), h='', i;
+      for (i=0;i<a.length;i++){ h += a[i].toString(16).padStart(2,'0'); }
+      return h;
+    });
+  }
+  function keyValid(raw){
+    var clean = String(raw||'').trim().toUpperCase().replace(/\s+/g,'');
+    if (clean.split('-').length !== 4 || clean.indexOf(PREFIX+'-') !== 0) return Promise.resolve(false);
+    return sha256hex(SALT+':'+clean).then(function(h){ return KEY_HASHES.has(h); });
   }
 
-  function unlock() {
-    const g = document.getElementById('license-gate');
-    if (g) g.style.display = 'none';
+  function trialStartTs(){ var v=ls.get(K_TRIAL); return v?parseInt(v,10):0; }
+  function trialActive(){ var s=trialStartTs(); return s ? (Date.now()-s) < TRIAL_DAYS*DAY_MS : false; }
+  function daysLeft(){ var s=trialStartTs(); if(!s) return 0; return Math.max(0, Math.ceil(TRIAL_DAYS - (Date.now()-s)/DAY_MS)); }
+  function licensed(){ return !!ls.get(K_LIC); }
+  function legacy(){ return ls.get(K_LEGACY)==='1'; }
+
+  function detectLegacy(){
+    if (legacy()) return true;
+    var hadData = ls.get('ee_name') || ls.get('ee_dob_y');
+    if (hadData && !ls.get(K_INIT)){ ls.set(K_LEGACY,'1'); return true; }
+    return false;
   }
 
-  async function tryKey() {
-    const val = document.getElementById('gate-key-input').value;
-    const err = document.getElementById('gate-key-error');
-    const btn = document.getElementById('gate-submit-btn');
-    if (!val.trim()) { err.textContent = 'يرجى إدخال مفتاح الترخيص.'; return; }
-    const clean = val.trim().toUpperCase().replace(/\s/g, '');
-    if (clean.split('-').length !== 4 || !clean.startsWith(PREFIX + '-')) {
-      err.textContent = 'صيغة المفتاح غير صحيحة. يبدو المفتاح هكذا: MPA-XXXXX-XXXXX-XXXXX';
-      return;
+  var overlay, badgeEl=null;
+  function gateCard(){ return overlay ? overlay.querySelector('.gate-card') : null; }
+  function hideGate(){ if(overlay) overlay.style.display='none'; }
+  function showGate(){ if(overlay) overlay.style.display='flex'; }
+
+  function renderEmail(){
+    var c = gateCard(); if(!c) return;
+    c.innerHTML =
+      '<span class="gate-moon">\uD83C\uDF19</span>' +
+      '<div class="gate-title"></div>' +
+      '<div class="gate-divider"></div>' +
+      '<div class="gate-sub"></div>' +
+      '<input id="gate-email-input" class="gate-input" type="email" autocomplete="email" spellcheck="false">' +
+      '<div id="gate-email-error" class="gate-error"></div>' +
+      '<button id="gate-email-btn" class="gate-btn" style="font-family:\'Amiri\', serif;"></button>' +
+      '<div class="gate-buy"><a href="#" id="gate-have-key"></a></div>';
+    c.querySelector('.gate-title').textContent = T.emailTitle;
+    c.querySelector('.gate-sub').textContent = T.emailSub;
+    var inp=document.getElementById('gate-email-input'); inp.placeholder=T.emailPlaceholder; inp.style.direction='ltr';
+    var err=document.getElementById('gate-email-error');
+    var btn=document.getElementById('gate-email-btn'); btn.textContent=T.emailBtn;
+    document.getElementById('gate-have-key').textContent = T.haveKey + ' ' + ARROW;
+    showGate();
+    function submit(){
+      var v=(inp.value||'').trim();
+      if(!/^[^@\s]+@[^@\s]+\.[^@\s]+$/.test(v)){ err.textContent=T.emailErrInvalid; return; }
+      ls.set(K_EMAIL,v); ls.set(K_TRIAL,String(Date.now())); ls.set(K_INIT,'1');
+      try {
+        fetch('/',{method:'POST',headers:{'Content-Type':'application/x-www-form-urlencoded'},
+          body:'form-name='+encodeURIComponent(NETLIFY_FORM)+'&email='+encodeURIComponent(v)}).catch(function(){});
+      } catch(e){}
+      hideGate(); mountBadge();
     }
-    const origText = btn.textContent;
-    btn.disabled = true; btn.textContent = 'جارٍ التحقق…'; err.textContent = '';
-    try {
-      const res = await fetch(VALIDATE_URL, {
-        method: 'POST',
-        headers: { 'Content-Type': 'application/x-www-form-urlencoded' },
-        body: new URLSearchParams({ key: clean, deviceToken: getOrCreateDeviceToken(), productId: PRODUCT_ID }).toString()
-      });
-      const data = await res.json();
-      if (data.success) {
-        localStorage.setItem(STORE_KEY, clean);
-        unlock();
-      } else {
-        err.textContent = data.message || 'فشل التحقق. يرجى المحاولة مرة أخرى.';
-        btn.disabled = false; btn.textContent = origText;
-      }
-    } catch(e) {
-      err.textContent = 'خطأ في الاتصال. يرجى التحقق من اتصالك بالإنترنت.';
-      btn.disabled = false; btn.textContent = origText;
-    }
+    btn.addEventListener('click',submit);
+    inp.addEventListener('keydown',function(e){ if(e.key==='Enter') submit(); });
+    inp.addEventListener('input',function(){ err.textContent=''; });
+    document.getElementById('gate-have-key').addEventListener('click',function(e){ e.preventDefault(); renderPaywall(true); });
   }
 
-  // On load: re-validate stored key against server
-  (async function() {
-    unlock(); // TEMP: gate disabled for beta testing — delete these 2 lines to re-enable
-    return;
-    const stored = localStorage.getItem(STORE_KEY);
-    if (!stored) return;
-    const devTok = getOrCreateDeviceToken();
-    try {
-      const res = await fetch(VALIDATE_URL, {
-        method: 'POST',
-        headers: { 'Content-Type': 'application/x-www-form-urlencoded' },
-        body: new URLSearchParams({ key: stored, deviceToken: devTok, productId: PRODUCT_ID }).toString()
+  function renderPaywall(fromTrial){
+    var c = gateCard(); if(!c) return;
+    c.innerHTML =
+      '<span class="gate-moon">\uD83C\uDF19</span>' +
+      '<div class="gate-title"></div>' +
+      '<div class="gate-divider"></div>' +
+      '<div class="gate-sub"></div>' +
+      '<input id="gate-key-input" class="gate-input" type="text" autocomplete="off" spellcheck="false">' +
+      '<div id="gate-key-error" class="gate-error"></div>' +
+      '<button id="gate-submit-btn" class="gate-btn" style="font-family:\'Amiri\', serif;"></button>' +
+      '<div class="gate-buy"><a id="gate-buy-link" target="_blank" rel="noopener"></a></div>';
+    c.querySelector('.gate-title').textContent = fromTrial ? T.brand : T.payTitle;
+    c.querySelector('.gate-sub').textContent = T.paySub;
+    var inp=document.getElementById('gate-key-input'); inp.placeholder=T.keyPlaceholder; inp.style.direction='ltr';
+    var err=document.getElementById('gate-key-error');
+    var btn=document.getElementById('gate-submit-btn'); btn.textContent=T.keyBtn;
+    var buy=document.getElementById('gate-buy-link'); buy.href=BUY_URL; buy.textContent=T.buyLine;
+    showGate();
+    function submit(){
+      var v=inp.value;
+      if(!v||!v.trim()){ err.textContent=T.keyErrEmpty; return; }
+      var clean=v.trim().toUpperCase().replace(/\s+/g,'');
+      if(clean.split('-').length!==4 || clean.indexOf(PREFIX+'-')!==0){ err.textContent=T.keyErrFormat; return; }
+      var orig=btn.textContent; btn.disabled=true; btn.textContent='\u2026'; err.textContent='';
+      keyValid(clean).then(function(ok){
+        if(ok){ ls.set(K_LIC,clean); ls.set(K_INIT,'1'); removeBadge(); hideGate(); }
+        else { err.textContent=T.keyErrInvalid; btn.disabled=false; btn.textContent=orig; }
       });
-      const data = await res.json();
-      if (data.success) { unlock(); }
-      else { localStorage.removeItem(STORE_KEY); }
-    } catch(e) {
-      unlock(); // Offline grace: stored key + network failure = let them in
     }
-  })();
+    btn.addEventListener('click',submit);
+    inp.addEventListener('keydown',function(e){ if(e.key==='Enter') submit(); });
+    inp.addEventListener('input',function(){ err.textContent=''; });
+  }
 
-  document.addEventListener('DOMContentLoaded', function() {
-    const btn = document.getElementById('gate-submit-btn');
-    const inp = document.getElementById('gate-key-input');
-    if (btn) btn.addEventListener('click', tryKey);
-    if (inp) {
-      inp.addEventListener('keydown', function(e) { if (e.key === 'Enter') tryKey(); });
-      inp.addEventListener('input', function() { document.getElementById('gate-key-error').textContent = ''; });
-    }
-  });
+  function mountBadge(){
+    if(!trialActive()||licensed()||legacy()) return;
+    removeBadge();
+    var n=daysLeft(), label;
+    if(n===1) label=T.badgeSingular;
+    else if(n===2 && T.badgeDual) label=T.badgeDual;
+    else label=T.badgePlural.replace('{n}', disp(n));
+    badgeEl=document.createElement('div');
+    badgeEl.id='ee-trial-badge'; badgeEl.style.direction='rtl';
+    var span=document.createElement('span'); span.textContent=label;
+    var a=document.createElement('a'); a.href=BUY_URL; a.target='_blank'; a.rel='noopener'; a.textContent=T.badgeUnlock+' '+ARROW;
+    badgeEl.appendChild(span); badgeEl.appendChild(document.createTextNode(' ')); badgeEl.appendChild(a);
+    document.body.appendChild(badgeEl);
+  }
+  function removeBadge(){ if(badgeEl&&badgeEl.parentNode){ badgeEl.parentNode.removeChild(badgeEl); } badgeEl=null; }
+
+  function route(){
+    overlay=document.getElementById('license-gate');
+    if(!GATE_LIVE){ hideGate(); return; }
+    detectLegacy();
+    if(licensed()||legacy()){ ls.set(K_INIT,'1'); hideGate(); return; }
+    if(trialActive()){ ls.set(K_INIT,'1'); hideGate(); mountBadge(); return; }
+    if(!ls.get(K_EMAIL) && !trialStartTs()){ ls.set(K_INIT,'1'); renderEmail(); return; }
+    ls.set(K_INIT,'1'); renderPaywall(false);
+  }
+
+  if(document.readyState==='loading'){ document.addEventListener('DOMContentLoaded',route); }
+  else { route(); }
 })();
 </script>
 </body>
