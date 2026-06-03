@@ -8,8 +8,6 @@
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Amiri:ital,wght@0,400;0,700;1,400&family=Noto+Naskh+Arabic:wght@400;500;600;700&family=Cinzel:wght@400;600;700&display=swap" rel="stylesheet">
   <style>
-  /* TEMP: beta testing — remove next line to re-enable gate */
-  #license-gate { display: none !important; }
   /* ── License Gate ── */
   #license-gate {
     position: fixed; inset: 0; z-index: 999999;
@@ -46,6 +44,19 @@
   .gate-buy { font-size: 12px; color: rgba(245,233,200,0.45); }
   .gate-buy a { color: rgba(201,168,76,0.7); text-decoration: none; }
   .gate-buy a:hover { color: #C9A84C; }
+  /* ── Auspicious / Best-to-avoid panel ── */
+  .ausp-panel { margin: 14px 0 4px; border-radius: 10px; overflow: hidden; }
+  .ausp-row { padding: 10px 14px; }
+  .ausp-row.good { background: rgba(45,122,61,0.08); border-left: 3px solid #2D7A3D; }
+  .ausp-row.avoid { background: rgba(139,58,58,0.08); border-left: 3px solid #8B3A3A; }
+  .ausp-label { font-family:'Amiri',serif; font-size:9px; letter-spacing:2px; text-transform:uppercase; font-weight:700; margin-bottom:7px; }
+  .ausp-row.good .ausp-label { color:#2D7A3D; }
+  .ausp-row.avoid .ausp-label { color:#8B3A3A; }
+  .ausp-tags { display:flex; flex-wrap:wrap; gap:5px; }
+  .ausp-tag { font-family:'Amiri',serif; font-size:13px; padding:3px 10px; border-radius:20px; line-height:1.5; }
+  .ausp-row.good .ausp-tag { background:rgba(45,122,61,0.12); color:#1a5c2a; border:1px solid rgba(45,122,61,0.25); }
+  .ausp-row.avoid .ausp-tag { background:rgba(139,58,58,0.10); color:#7a2020; border:1px solid rgba(139,58,58,0.22); }
+  .ausp-special { font-family:'Amiri',serif; font-size:13px; color:#A67820; font-style:italic; text-align:center; padding:8px 14px; background:rgba(201,168,76,0.08); border-radius:8px; margin-top:8px; direction:rtl; }
 
     /* ── Reset & Base ─────────────────────────────────────── */
     *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
@@ -697,7 +708,7 @@
     <input id="gate-key-input" class="gate-input" type="text" placeholder="LMA-XXXXX-XXXXX-XXXXX" autocomplete="off" spellcheck="false">
     <div id="gate-key-error" class="gate-error"></div>
     <button id="gate-submit-btn" class="gate-btn" style="font-family:'Amiri', serif;">فتح الدليل ✦</button>
-    <div class="gate-buy">لا تملك مفتاحاً؟ <a href="https://etherealechoes.com" target="_blank">اشترِ من EtherealEchoes.com ←</a></div>
+    <div class="gate-buy">لا تملك مفتاحاً؟ <a href="https://etherealechoes.com/?p=4136" target="_blank" rel="noopener">اشترِ مقابل ١٩٫٩٩ دولار ←</a></div>
   </div>
 </div>
 
@@ -2234,92 +2245,200 @@
 </script>
 
 <script>
-(function() {
-  const PREFIX = 'LMA';
-  const PRODUCT_ID = 4136;
-  const STORE_KEY = 'ee_lic_lma';
-  const DEVICE_TOKEN_KEY = 'ee_dev_tok';
-  const VALIDATE_URL = 'https://etherealechoes.com/wp-json/ee/v1/validate-key';
-
-  function getOrCreateDeviceToken() {
-    let tok = localStorage.getItem(DEVICE_TOKEN_KEY);
-    if (!tok) {
-      tok = 'xxxxxxxx-xxxx-4xxx-yxxx-xxxxxxxxxxxx'.replace(/[xy]/g, function(c) {
-        const r = Math.random() * 16 | 0;
-        return (c === 'x' ? r : (r & 0x3 | 0x8)).toString(16);
-      });
-      localStorage.setItem(DEVICE_TOKEN_KEY, tok);
-    }
-    return tok;
+/* General Auspicious / Best-to-avoid per mansion (non-personalized).
+   Injects a panel into each of the 28 mansion cards. */
+(function(){
+  var MANSION_DAYS = [
+  // 0 الشرطين
+  { good:['🚀 بدء مشاريع جديدة','✈️ السفر المنفرد','💪 الرياضة والتمارين','📋 التقديم على وظائف'],
+    avoid:['💍 الزواج والخطبة','🤝 الشراكات الجديدة','📝 توقيع عقود طويلة الأمد'] },
+  // 1 البطين
+  { good:['💰 الاستثمار المالي','📊 التخطيط المالي','🔍 البحث المعمّق','🌱 الزراعة والغرس'],
+    avoid:['💍 الزواج','⚖️ النزاعات القانونية','😤 المواجهات مع الآخرين'] },
+  // 2 الثريا
+  { good:['🤝 صفقات الأعمال','🌐 التواصل الشبكي','✈️ السفر','💱 البيع والشراء'],
+    avoid:['💍 الزواج','🏥 العمليات الطبية','🔪 الجراحة'] },
+  // 3 الدبران
+  { good:['🚫 كسر العادات السيئة','📦 إنهاء المواقف السامة','🔚 طيّ صفحات قديمة'],
+    avoid:['✈️ السفر','🏠 شراء منزل أو سيارة','💍 الزواج','🏢 بدء عمل تجاري جديد','📝 توقيع العقود'] },
+  // 4 الهقعة
+  { good:['✈️ السفر والمغامرات','🏃 الرياضة والأنشطة الخارجية','🔨 تجديد المنزل'],
+    avoid:['🏥 الإجراءات الطبية','⚖️ الشؤون القانونية','📝 توقيع وثائق مهمة'] },
+  // 5 الهنعة
+  { good:['💕 الرومانسية والمواعدة','🎉 التواصل الاجتماعي','🎨 الأعمال الإبداعية','🕊️ المصالحة والاعتذار'],
+    avoid:['💼 التفاوض التجاري الصعب','😤 المواجهات'] },
+  // 6 الذراع
+  { good:['💼 الأعمال والتجارة','🛍️ التسوق','👫 تكوين صداقات جديدة','🏠 مشاريع تحسين المنزل'],
+    avoid:['🌍 السفر لمسافات طويلة'] },
+  // 7 النثرة
+  { good:['💍 الزواج والأعراس','💌 مقترحات الزواج','🕊️ صنع السلام','❤️ الرومانسية والحميمية'],
+    avoid:['😤 المواجهات','⚖️ إشعال النزاعات','💔 الانفصال'] },
+  // 8 الطرف
+  { good:['😴 الراحة والتعافي','🧘 التأمل والسكينة','💭 التأمل الداخلي','📔 كتابة اليوميات'],
+    avoid:['✈️ السفر','💍 الزواج','🏗️ قرارات الحياة الكبرى','🔪 الجراحة'] },
+  // 9 الجبهة
+  { good:['🏢 بدء عمل تجاري','🏠 شراء عقار','📋 توقيع عقود الإيجار','💼 التقدم الوظيفي'],
+    avoid:['🌍 السفر لمسافات طويلة','🎲 المغامرات المحفوفة بالمخاطر'] },
+  // 10 الزبرة
+  { good:['✈️ السفر لأعمال تجارية','🤝 مفاوضات التجارة','🌐 التواصل المهني','📦 الاستيراد والتصدير'],
+    avoid:['💍 الزواج','🏠 شراء منزل'] },
+  // 11 الصرفة
+  { good:['👔 التحدث مع مديرك','💰 طلب زيادة الراتب','🔄 تغيير مسار الحياة المهنية','🏛️ التعامل مع السلطات'],
+    avoid:['💍 بدء علاقات عاطفية جديدة','❤️ خطوبة أو زواج'] },
+  // 12 العواء
+  { good:['📚 التعليم والدراسة','✈️ السفر','👫 تكوين صداقات','🔍 البحث والتحقيق'],
+    avoid:['💼 صفقات الأعمال','📝 توقيع العقود','💰 القرارات المالية الكبرى'] },
+  // 13 السماك
+  { good:['🏢 إطلاق عمل تجاري','🏡 شراء الأراضي والعقارات','📈 الاستثمارات','⚖️ الشؤون القانونية'],
+    avoid:['🏥 الإجراءات الطبية','🔪 الجراحة'] },
+  // 14 الغفر
+  { good:['🔍 البحث والاكتشاف','✈️ السفر','🏠 شراء عقار','🕵️ التحقيق في المشكلات'],
+    avoid:['💍 الزواج','💔 القرارات المبنية على العاطفة فقط'] },
+  // 15 الزبانى
+  { good:['🧘 الممارسة الروحية','🌙 التأمل والصلاة','🌿 العمل الداخلي','🕯️ الصيام والتأمل'],
+    avoid:['✈️ السفر','💍 الزواج','🏢 بدء عمل تجاري','🏠 شراء منزل أو سيارة','🏥 إجراءات طبية'] },
+  // 16 الإكليل
+  { good:['📈 التقدم الوظيفي','🏆 قرارات القيادة','👔 التحدث مع مديرك','🤝 المفاوضات الكبرى','⬆️ طلب الترقية'],
+    avoid:['🏥 الإجراءات الطبية','🔪 الجراحة'] },
+  // 17 القلب
+  { good:['💆 الشفاء العاطفي','🛋️ جلسات العلاج','💬 محادثات صادقة من القلب','📔 كتابة يوميات عميقة'],
+    avoid:['✈️ السفر','🔨 تجديد المنزل','💰 المشتريات الكبرى','🚀 إطلاق مشاريع جديدة'] },
+  // 18 الشولة
+  { good:['🔍 البحث والتحقيق','⚖️ الملاحقات القانونية','🕵️ الكشف عن الحقائق الخفية'],
+    avoid:['💍 الزواج','🤝 شراكات تجارية جديدة','🤲 الثقة بالغرباء في أمور مهمة'] },
+  // 19 النعائم
+  { good:['📚 التدريب وبناء المهارات','🛋️ العلاج والإرشاد','🐾 العمل مع الحيوانات','🏅 تطوير عادات جديدة'],
+    avoid:['✈️ السفر','🎲 القرارات المتهورة','💰 التحركات المالية الكبرى'] },
+  // 20 البلدة
+  { good:['🏙️ الانتقال إلى مدينة جديدة','🧳 الانتقال الوظيفي','✈️ السفر','🏠 شراء عقار في منطقة جديدة'],
+    avoid:['😤 المواجهات','💍 الزواج (احتياط في بعض التقاليد)'] },
+  // 21 سعد الذابح
+  { good:['🏥 العمليات الطبية والجراحية','🛒 شراء الطعام والبقالة','💊 المواعيد الصحية','🎯 جني ثمار العمل السابق'],
+    avoid:['❤️ بدء علاقات عاطفية جديدة','💕 المساعي الرومانسية'] },
+  // 22 سعد بلع
+  { good:['💊 الشفاء والتعافي','🏥 العلاجات الطبية','🛋️ العلاج النفسي','🌿 إزالة السموم والتطهير'],
+    avoid:['✈️ السفر','🚀 بدء مشاريع جديدة','😤 المواجهات والجدال'] },
+  // 23 سعد السعود — الأحظّ
+  { good:['💍 الزواج والأعراس','🏢 إطلاق الأعمال','🏠 شراء منزل','✈️ السفر','💼 مقابلات العمل','💰 طلب الزيادة','🤝 توقيع صفقات كبرى','🌟 أي قرار مهم في حياتك'],
+    avoid:[], special:'✨ هذا أسعد منازل القمر — اجعله يوم قراراتك الأكثر أهمية في حياتك' },
+  // 24 سعد الأخبية
+  { good:['🏡 صفقات العقارات','💰 الادخار والاستثمار','🔨 مشاريع تحسين المنزل','🤫 الأمور السرية والحساسة'],
+    avoid:['✈️ السفر','😤 المواجهات','📣 النزاعات العلنية'] },
+  // 25 الفرغ المقدّم
+  { good:['🔨 تجديد المنزل','🏗️ البناء والإنشاء','🔧 الإصلاحات والصيانة','🏠 وضع الأسس للخطط طويلة الأمد'],
+    avoid:['🌍 السفر لمسافات طويلة','🎲 المغامرات المضاربة'] },
+  // 26 الفرغ المؤخّر
+  { good:['🌱 الزراعة والغرس','✈️ السفر (جواً أو بحراً)','🌾 زرع البذور للمستقبل','🌊 الأنشطة المائية'],
+    avoid:['⚖️ الشؤون القانونية','😤 النزاعات والخلافات'] },
+  // 27 بطن الحوت
+  { good:['✈️ رحلات ومغامرات جديدة','🔚 إنهاء الأمور المعلقة','🌅 البدايات الجديدة','🐟 الأنشطة المائية'],
+    avoid:['💍 الزواج أو الالتزامات العاطفية الجديدة'] },
+];
+  var GOOD_LABEL="✅ مناسب لـ", AVOID_LABEL="⛔ يُفضَّل تجنّبه";
+  function panel(i){
+    var d=MANSION_DAYS[i]; if(!d) return '';
+    var good=(d.good||[]).map(function(t){return '<span class="ausp-tag">'+t+'</span>';}).join('');
+    var avoid=(d.avoid||[]).map(function(t){return '<span class="ausp-tag">'+t+'</span>';}).join('');
+    var special=d.special?'<div class="ausp-special">'+d.special+'</div>':'';
+    return '<div class="ausp-panel">'+
+      '<div class="ausp-row good"><div class="ausp-label">'+GOOD_LABEL+'</div><div class="ausp-tags">'+good+'</div></div>'+
+      (avoid?'<div class="ausp-row avoid" style="margin-top:4px"><div class="ausp-label">'+AVOID_LABEL+'</div><div class="ausp-tags">'+avoid+'</div></div>':'')+
+      special+'</div>';
   }
-
-  function unlock() {
-    const g = document.getElementById('license-gate');
-    if (g) g.style.display = 'none';
-  }
-
-  async function tryKey() {
-    const val = document.getElementById('gate-key-input').value;
-    const err = document.getElementById('gate-key-error');
-    const btn = document.getElementById('gate-submit-btn');
-    if (!val.trim()) { err.textContent = 'يرجى إدخال مفتاح الترخيص.'; return; }
-    const clean = val.trim().toUpperCase().replace(/\s/g, '');
-    if (clean.split('-').length !== 4 || !clean.startsWith(PREFIX + '-')) {
-      err.textContent = 'صيغة المفتاح غير صحيحة. يبدو المفتاح هكذا: LMA-XXXXX-XXXXX-XXXXX';
-      return;
-    }
-    const origText = btn.textContent;
-    btn.disabled = true; btn.textContent = 'جارٍ التحقق…'; err.textContent = '';
-    try {
-      const res = await fetch(VALIDATE_URL, {
-        method: 'POST',
-        headers: { 'Content-Type': 'application/x-www-form-urlencoded' },
-        body: new URLSearchParams({ key: clean, deviceToken: getOrCreateDeviceToken(), productId: PRODUCT_ID }).toString()
-      });
-      const data = await res.json();
-      if (data.success) {
-        localStorage.setItem(STORE_KEY, clean);
-        unlock();
-      } else {
-        err.textContent = data.message || 'فشل التحقق. يرجى المحاولة مرة أخرى.';
-        btn.disabled = false; btn.textContent = origText;
-      }
-    } catch(e) {
-      err.textContent = 'خطأ في الاتصال. يرجى التحقق من اتصالك بالإنترنت.';
-      btn.disabled = false; btn.textContent = origText;
+  function inject(){
+    var cards=document.querySelectorAll('.mansion-card');
+    var n=Math.min(cards.length, MANSION_DAYS.length);
+    for(var i=0;i<n;i++){
+      var body=cards[i].querySelector('.mansion-body');
+      if(body && !body.querySelector('.ausp-panel')){ body.insertAdjacentHTML('beforeend', panel(i)); }
     }
   }
-
-  // On load: re-validate stored key against server
-  (async function() {
-    unlock(); // TEMP: gate disabled for beta testing — delete these 2 lines to re-enable
-    return;
-    const stored = localStorage.getItem(STORE_KEY);
-    if (!stored) return;
-    const devTok = getOrCreateDeviceToken();
-    try {
-      const res = await fetch(VALIDATE_URL, {
-        method: 'POST',
-        headers: { 'Content-Type': 'application/x-www-form-urlencoded' },
-        body: new URLSearchParams({ key: stored, deviceToken: devTok, productId: PRODUCT_ID }).toString()
-      });
-      const data = await res.json();
-      if (data.success) { unlock(); }
-      else { localStorage.removeItem(STORE_KEY); }
-    } catch(e) {
-      unlock(); // Offline grace: stored key + network failure = let them in
-    }
-  })();
-
-  document.addEventListener('DOMContentLoaded', function() {
-    const btn = document.getElementById('gate-submit-btn');
-    const inp = document.getElementById('gate-key-input');
-    if (btn) btn.addEventListener('click', tryKey);
-    if (inp) {
-      inp.addEventListener('keydown', function(e) { if (e.key === 'Enter') tryKey(); });
-      inp.addEventListener('input', function() { document.getElementById('gate-key-error').textContent = ''; });
-    }
-  });
+  if(document.readyState==='loading'){document.addEventListener('DOMContentLoaded',inject);}else{inject();}
+})();
+</script>
+<script>
+/* Offline License Gate (paywall · buy-to-unlock) — LMA / product 4136
+   Validates the existing key pool fully OFFLINE via salted SHA-256 allowlist.
+   Add keys later: sha256('ee_lma_2026:'+KEY) -> append to KEY_HASHES. */
+(function(){
+  'use strict';
+  var GATE_LIVE=true, PREFIX="LMA", SALT="ee_lma_2026", K_LIC="ee_lic_lma";
+  var KEY_HASHES=new Set([
+    '75fb247c28f2433bc06b08ec5d486982325a16f605d1fa5eeeaa0612fb0d0f14',
+    '3e890e6196cef3efc9a23942cadae41042bd6afd6653388e310ac9016f444ab6',
+    '9e21967c2f0dfc718bb6d318e5d4b46ff098365c28e379227fa84f60d0575561',
+    '8546736874af16513233bdf3176909d5d8a8df1bc5fcca38c68f259ebca7e2a6',
+    'fb3037527425851a426d46325f282bd133d2992db864bb704ffdf5a99eca3239',
+    'c9999c27f5a5f46385533c9cf201bb9e0c5006c95fda2b0ea76c9ad6c4199796',
+    '907d1123dec0fd7b95d74a0fbf7ef64396b10118d898a10472c140528687fa70',
+    'ff5c831a16b13b38b3928e99fbc5817b181a81a22d179071729f6be58cf82278',
+    'd21db01b142abd71b1b2a61996b0e9866c0cad88eb4b9b9865aabd1a45e1a2c6',
+    '5199484e7dd6866e8e46abbf308fde7d821a1eac47f2d78f64022e739ae57dbd',
+    '21e95c11319c2e38835e5ad16c8a0592453ca561424051f014b1fd0274738354',
+    'd47225f33bd113a301a21caf1d96cf52d8e1533017b8b8392b6f4421d6a43281',
+    'c445a0b4e20a92d12edded56c1f2319368e49ff1a6a6a732b25ecd9d3b5a4b9a',
+    'bdfcc6d0c7152655f2bee6a93972a66d0730fdcf8cb5bcae30f393c2a7e1e8b7',
+    '461b375b4c85255939f24a53f8bc80b13deb104e173ad264de2cf183f538fef3',
+    '36b7ba0a8c32989b86f94dcf4d348b313dc056dd8a422c7321757f70376c5052',
+    '3eedb0a481b52f7d303fc3c5fda3ec0a039151a9d21e97550f03021fc78f7fad',
+    'ef1e8afd19e21319d1d8214ee924507c44fa5f8aa51bbdc121a535e9ffda2021',
+    'd57e926806bd8f5dff8ec40fd2faf6bfc9ca11e758479fe4e099ffd64971686a',
+    'd81e0639acf33c6d1673822fa8e81670ce7ccf8e9ccc5570a35e987520890770',
+    '552d0c6922f39b5b9debdff3861a38035e5ab6337610cd559e1aa241e1303557',
+    '9afe952eb697173f924941b5bb0f4c91c658751ca4593fdae2bdfea536878827',
+    '1b6f19582c4012b7bbdfd588785631492c3ce57222af5bd5707b525fbe239d71',
+    '48568e3534dd982404fba6b290ae6e3aea2af4f2ebffd7721cf8653ba52de6f5',
+    '5c57325dfd89586783e69f1e2bc627b0dd86ef026d8b49e4b0ecd1f85f42ab39',
+    'b4865466dd7f8d77fa2819929d6a807b8b661d6edd712588818488d7edaf66d4',
+    'baf0bca6319aaeb836172cd7c268213a3d814b2dc486d7c0a8a80b111e8bf610',
+    'e866a647e2c02c921bbfe0367f0d656b690801adceb611cd8322094f1b536564',
+    'f8d4812cfc5bd0dbbebf7622b99f8b9e83f01258f3c279b781c02fdd2937ceae',
+    '1ef0bdcf98ac67cbb03f74fee1228fc936f35c38855ea1d9de9fd5f79ce8e35b',
+    'd72d76d821026a5a5e8c40da79f6d728896cf288c663fa9b5fb3e12540886144',
+    'f837f0c17917081a08b6961f89d72b5ed12d09651480600bc8a7ad71ef6ecd00',
+    'b99be89137c95cd6fea6680970308c7ae47f2b0981d02d1bf40aa2ce4518814a',
+    '92c6e11aac463922e658ddb871ed0cb33dc907ef494ce5c5016c69b3116cb381',
+    '7daf2eb1aba16326b32c58104ead378e1a5288f7bdfad5345157c3580f863076',
+    '4ee819caef037b2abc4b667902d26c4ad0dc7f5745f4da00f5a0fb7a71f6867f',
+    '8897348842f2028c484302b3b5162811d07dce09adf1f5a313eb990fcc6e35d4',
+    'b2f529d236cefdde4d86d24c16940e7bb2376ced14fc22dafafca7f3c2a01d3c',
+    '90995b82edb74317f59035dd8000962d56b19eba58e6cd780c45df66bed5a08c',
+    'a0161d04120742ee018af0dcc4dd85f6db09d7be4b7cf97b28fdcdd6836b3e5c',
+    '1d5caafbfe74bd549cb56999061997987818dbedcbcf98b6b940ebd70fc1528a',
+    '7822f2552efcea3fc4274dcf38b22cf6a391665defed4725d699fcc6603dc0cb',
+    '5e3c28dcae2c900f97bb7cbfd610389ece42776efdbd4291b4ec01a23abc0e22',
+    'e806eb9c34fa42003ebf11cc420daa75cf26cc118101dc809c3e42004372bbe2',
+    '2aa07e2f997733c092ef4db4cafd806c9ce0491a817e4b464b3365208c01b710',
+    'b9bb644432f3635861f832b3f9639f3820ff3e3e24cb33898ea2a8f3dc39ffcc',
+    '2460d4dba6505a00b9ec0ecb2ed2e7bd2909e78f90d95211c942312164f91743',
+    '9dd7aec7220b0addc29f045868b3caeef72d557bd0177ca8a8d9029b11fa2d42',
+    '83a7208176382d7436a05419a69b7f233492e4b515d6dddb10b879efb64f78be',
+    'a854f27b782c2677756cbc1c7817f4a9e8ef9affecc8b5b4e4bbaeb86af5044d'
+  ]);
+  var T={empty:"يرجى إدخال مفتاح الترخيص.", fmt:"صيغة المفتاح غير صحيحة. يبدو المفتاح هكذا: LMA-XXXXX-XXXXX-XXXXX", bad:"لم يتم التعرف على هذا المفتاح. يرجى التحقق منه والمحاولة مرة أخرى."};
+  var ls={get:function(k){try{return localStorage.getItem(k)}catch(e){return null}},set:function(k,v){try{localStorage.setItem(k,v)}catch(e){}}};
+  function sha256hex(s){var e=new TextEncoder().encode(s);return crypto.subtle.digest('SHA-256',e).then(function(b){var a=new Uint8Array(b),h='',i;for(i=0;i<a.length;i++){h+=a[i].toString(16).padStart(2,'0');}return h;});}
+  function keyValid(raw){var c=String(raw||'').trim().toUpperCase().replace(/\s+/g,'');if(c.split('-').length!==4||c.indexOf(PREFIX+'-')!==0)return Promise.resolve(false);return sha256hex(SALT+':'+c).then(function(h){return KEY_HASHES.has(h);});}
+  function unlock(){var g=document.getElementById('license-gate');if(g)g.style.display='none';}
+  function licensed(){return !!ls.get(K_LIC);}
+  function tryKey(){
+    var inp=document.getElementById('gate-key-input'),err=document.getElementById('gate-key-error'),btn=document.getElementById('gate-submit-btn');
+    var v=inp.value;
+    if(!v||!v.trim()){err.textContent=T.empty;return;}
+    var clean=v.trim().toUpperCase().replace(/\s+/g,'');
+    if(clean.split('-').length!==4||clean.indexOf(PREFIX+'-')!==0){err.textContent=T.fmt;return;}
+    var orig=btn.textContent;btn.disabled=true;btn.textContent='\u2026';err.textContent='';
+    keyValid(clean).then(function(ok){if(ok){ls.set(K_LIC,clean);unlock();}else{err.textContent=T.bad;btn.disabled=false;btn.textContent=orig;}});
+  }
+  function route(){ if(!GATE_LIVE){unlock();return;} if(licensed()){unlock();} }
+  function wire(){
+    route();
+    var btn=document.getElementById('gate-submit-btn'),inp=document.getElementById('gate-key-input');
+    if(btn)btn.addEventListener('click',tryKey);
+    if(inp){inp.addEventListener('keydown',function(e){if(e.key==='Enter')tryKey();});inp.addEventListener('input',function(){var er=document.getElementById('gate-key-error');if(er)er.textContent='';});}
+  }
+  if(document.readyState==='loading'){document.addEventListener('DOMContentLoaded',wire);}else{wire();}
+})();
 </script>
 </body>
 </html>
