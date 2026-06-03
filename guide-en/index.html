@@ -44,6 +44,16 @@
   .gate-buy { font-size: 12px; color: rgba(245,233,200,0.45); }
   .gate-buy a { color: rgba(201,168,76,0.7); text-decoration: none; }
   .gate-buy a:hover { color: #C9A84C; }
+  #ee-trial-badge {
+    position: fixed; left: 50%; transform: translateX(-50%); bottom: 16px;
+    z-index: 999998; background: rgba(15,12,41,0.92);
+    border: 1px solid rgba(201,168,76,0.4); border-radius: 999px;
+    padding: 8px 16px; font-family: 'Cinzel', serif; font-size: 12px;
+    letter-spacing: 0.5px; color: #E8C97A; box-shadow: 0 8px 24px rgba(0,0,0,0.4);
+    display: flex; gap: 10px; align-items: center; backdrop-filter: blur(6px);
+  }
+  #ee-trial-badge a { color: #D4AB50; text-decoration: none; font-weight: 700; }
+  #ee-trial-badge a:hover { color: #F5E9C8; }
 
     *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
     :root {
@@ -750,18 +760,14 @@
   </style>
 </head>
 <body>
+<!-- Netlify Forms: static form so the build picks it up; JS posts to it -->
+<form name="guide-en-trial" data-netlify="true" netlify-honeypot="bot-field" hidden>
+  <input type="email" name="email" />
+  <input name="bot-field" />
+</form>
 <!-- ── LICENSE GATE ─────────────────────────────────────── -->
 <div id="license-gate">
-  <div class="gate-card" style="direction:ltr;font-family:'Cinzel', serif;">
-    <span class="gate-moon">🌙</span>
-    <div class="gate-title">Your Personal Lunar Mansion Guide</div>
-    <div class="gate-divider"></div>
-    <div class="gate-sub">Enter the license key you received after purchase to unlock your guide.</div>
-    <input id="gate-key-input" class="gate-input" type="text" placeholder="MPE-XXXXX-XXXXX-XXXXX" autocomplete="off" spellcheck="false">
-    <div id="gate-key-error" class="gate-error"></div>
-    <button id="gate-submit-btn" class="gate-btn" style="font-family:'Cinzel', serif;">Unlock Your Guide ✦</button>
-    <div class="gate-buy">Don't have a key? <a href="https://etherealechoes.com" target="_blank">Purchase at EtherealEchoes.com →</a></div>
-  </div>
+  <div class="gate-card" style="direction:ltr;font-family:'Cinzel', serif;"></div>
 </div>
 
 
@@ -2137,92 +2143,234 @@ document.addEventListener('DOMContentLoaded', () => {
 
 </script>
 <script>
-(function() {
-  const PREFIX = 'MPE';
-  const PRODUCT_ID = 4115;
-  const STORE_KEY = 'ee_lic_mpe';
-  const DEVICE_TOKEN_KEY = 'ee_dev_tok';
-  const VALIDATE_URL = 'https://etherealechoes.com/wp-json/ee/v1/validate-key';
+/* === Offline License Gate + 7-Day Trial =====================
+   Flow: email capture -> 7-day free trial -> paywall.
+   Existing pool keys (MPE-XXXXX-XXXXX-XXXXX) validate fully OFFLINE
+   via a salted SHA-256 allowlist -- no server, no CORS, no re-asking.
+   Add NEW keys later: sha256('ee_mpe_2026:' + KEY) -> append hex to KEY_HASHES, redeploy.
+=============================================================== */
+(function(){
+  'use strict';
+  var GATE_LIVE  = true;
+  var TRIAL_DAYS = 7;
+  var DAY_MS     = 86400000;
+  var PREFIX     = "MPE";
+  var SALT       = "ee_mpe_2026";
+  var BUY_URL    = "https://etherealechoes.com/product/personalized-lunar-mansions-guide/";
+  var NETLIFY_FORM = 'guide-en-trial';
 
-  function getOrCreateDeviceToken() {
-    let tok = localStorage.getItem(DEVICE_TOKEN_KEY);
-    if (!tok) {
-      tok = 'xxxxxxxx-xxxx-4xxx-yxxx-xxxxxxxxxxxx'.replace(/[xy]/g, function(c) {
-        const r = Math.random() * 16 | 0;
-        return (c === 'x' ? r : (r & 0x3 | 0x8)).toString(16);
-      });
-      localStorage.setItem(DEVICE_TOKEN_KEY, tok);
-    }
-    return tok;
+  var K_LIC    = "ee_lic_mpe";
+  var K_EMAIL  = "ee_mpe_email";
+  var K_TRIAL  = "ee_mpe_trial_start";
+  var K_LEGACY = "ee_mpe_legacy";
+  var K_INIT   = "ee_mpe_gate_init";
+
+  var KEY_HASHES = new Set([
+    '0863e9baf8bf278d018eb258920936da510a40e9baa1470ffbf8567791555f16',
+    'ade508cdf1a32a086ce8d09491664e5cb75ac4ba3850aa162a4c86648a60fe39',
+    '36c5600e8a5c80cd396ade3061a90fbc2217f4e22b06cdc52e229493d38e1c9d',
+    '534fbf48b3e5f84be9e90c1c90a274d8043b17d2cd7f9bba59b39c1943be04f3',
+    '03782308070db48c0548c2f25126be9b948e343bb67ab2dadc0a27db80ab2277',
+    'ad01a16578caa2cdaab261f20e92157300032c3264efa511cad234eb99327e46',
+    'e51eb2881f63f575317463abec89064b5d76ac625bce4b40d6198473cc7f0529',
+    '0ba1979bbf18e6c9f06ca2fa9ef76bf35cc7e792b5fb4f19425a973f6884e15c',
+    'd8fb77df234638dc8985f4249d624c7805e3495e57094a8ade8a71c07013a6b2',
+    'b86e9f860d70c590200aaf32e831c264aed288af0e3b6aa3b779ec4217c7c395',
+    'd5915ece46c36eb6da4c5295542f280707897186b8c48bbe1c8add4e605b8e8d',
+    '3b8da43e4182dc63d5523690c621aa9de3abf0a32ba2a629a118f6baaaa2c350',
+    '7ffcec53328d8c35ad246f42ad75442997e85e58ac2a0cb848e6996d173d4c92',
+    'ce789e0c18bab5b50ad38b1941116e3e6546791b59b93be1e5630fa44bb56f3d',
+    '4e95146ef0a8afd89ddc842e9000a0872b7adea285046c71b4f475258a578bf0',
+    '04c191f5c65deb7be0eb60429bf23dc219f6fb0a8966867a1a25933f9f68d81f',
+    '837c5bc32481000dc53a35de52c89f4d125995ec084d6cac6d0d11fb95cb5f5a',
+    'a593f7b4cb60f5b787cc6e6edff46ad5427ceec90334e794184488e4aca43f10',
+    'e403607b2a775f8c0602a8c7fb877d1df950ea5af201dbb726f480f7c80dcde4',
+    '911bcaa2d74b72d9651f910691b864ecc63e828fc9019442f967771a7b623064',
+    '4fc5128cadb94508978fd1b02a6a4b423ad8fcf3969008e3dd55239e3273f6f0',
+    'd5732622259021a9ec14e9093f972e2ce99a4d3d8b765d1f08c2d6a6edb3f50a',
+    'a49cb9e6ba6d256600c6e340d162b9bdf32ff54048826df82080d7f1223bcef4',
+    'b07b17a1fbadf2eb918433f4c632de798c24a2d6398acfa47baa8e713a9bb75b',
+    'c1dd9eb0c1be3c11307bd281204a4d3365d3b5b6157b57acb60af11db6a813d1',
+    'c5c43d898803215240a48ca1c84867a230daa2b6a3c6e751a1ba6208ffa87a5e',
+    'e4b04eb2ee0c1cbf0eb51e555409846ee6fe06fb6c83ca3f13d35b256f002138',
+    '67541a327f3013c01d5f07467bcfb4568fa9d14f6ec82536f24faf45891f1dd5',
+    'f7283aa555bf2f80fff202389db678fe6503cbc8c4b6a38b5a999d8c0e7cfc77',
+    '477b3fe424780c4f7170f0087aa2641c825cce141e1afc38429b0cb1614368c5',
+    'a30d6680b12616cc136c6098a2692a3d06e4c2745d70e681e74575bf17f1ce7f',
+    '4d730352e8c151aa1d01c573a79e2ce6232a99b119609c132f4bf4b32815e074',
+    'cf49bebd6bc8608e73f6f7904daa0498949f154dbe7957f9b298a38394efd4ca',
+    'a136bda92dfd7a2f0a1f93d1be8212deb2d84b4bb01033987e8cc8296dbc1951',
+    '737b042bb0dc661c461681c98c3aa6f9bfd6accf180b8d7b7972af823262e420',
+    '9c5f2bd141b0392d165a1042237868517f7151e4b0b8d3dc3c789d4cf101c3e9',
+    'a3161943bb12d5826cdec8d7adcc5e74c1b17ac9781bf94ec2b1822de0c09950',
+    'e28308d74fe5f4139924c4bd804ec7d7480352fea8835429cd7124b7a4a3b06e',
+    '03ad5026d0af4468d77bfa241dc21ea905c967b5f8b5850fca9faf2dca51db13',
+    '15dcb3054c79a3e65764142e4565ad52c49f06fdeb162a38df2d04ce07ed24ff',
+    '4e2a9df01373dafd82ffa5385f5c0021ac91661c0232bb1268e1874e89e86a48',
+    'c0257855cfd86caaa9c13213c5052cf26e9bd2ae984dfdb650357a96fb63761a',
+    'bb507aa613d8552a4e00aced8af69438134981a7cdaae908fc0cbfb45e57706a',
+    '32746d0e48a0678d83d5d97ada812363e90608cefaccd2ab4611dacb47c8a39b',
+    'f2ab8d960fc9ff6a4c547f52293c670c6a10615098954245d8975d4f82e48b48',
+    '67980ac8d6fb829872e086520140d8e55b7f3d01b7068eaf453e17bfd3139720',
+    '5c923006ad5ad57978ce6f4239a0d21aebe0756ea055f82b5b867e8d20123e73',
+    '26ec185d00d1b3ef2867dd78eb95b11f6dc420bc1468d7da77b3980e8d43d94c',
+    'ca570c8e09cb7736b819e94cba3c8bcd87522890fff6b909e5427db90fcd69a7',
+    '94a59d2c67dd7016ce2df10157c04a8d1f67b0036d139c6d8834cc6a45bf52b6'
+  ]);
+
+  var T = {
+    emailTitle: "Your Personal Lunar Mansion Guide",
+    emailSub: "Begin your 7-day free trial. Enter your email to unlock your personalized guide and daily mansion readings.",
+    emailPlaceholder: "you@example.com",
+    emailBtn: "Begin Free Trial ✦",
+    emailErrInvalid: "Please enter a valid email address.",
+    haveKey: "Already purchased? Enter your key",
+    brand: "Your Personal Lunar Mansion Guide",
+    payTitle: "Your Free Trial Has Ended",
+    paySub: "Unlock lifetime access to your Personal Lunar Mansion Guide for $24.99.",
+    keyPlaceholder: "MPE-XXXXX-XXXXX-XXXXX",
+    keyBtn: "Unlock Your Guide ✦",
+    keyErrEmpty: "Please enter your license key.",
+    keyErrFormat: "Invalid key format. Keys look like: MPE-XXXXX-XXXXX-XXXXX",
+    keyErrInvalid: "This key was not recognized. Please check it and try again.",
+    buyLine: "Don't have a key? Purchase for $24.99 →",
+    badgeSingular: "✦ Free trial — 1 day left",
+    badgePlural: "✦ Free trial — {n} days left",
+    badgeUnlock: "Unlock"
+  };
+
+  var ls = {
+    get: function(k){ try { return localStorage.getItem(k); } catch(e){ return null; } },
+    set: function(k,v){ try { localStorage.setItem(k,v); } catch(e){} },
+    del: function(k){ try { localStorage.removeItem(k); } catch(e){} }
+  };
+
+  function sha256hex(str){
+    var enc = new TextEncoder().encode(str);
+    return crypto.subtle.digest('SHA-256', enc).then(function(buf){
+      var a = new Uint8Array(buf), h='', i;
+      for (i=0;i<a.length;i++){ h += a[i].toString(16).padStart(2,'0'); }
+      return h;
+    });
+  }
+  function keyValid(raw){
+    var clean = String(raw||'').trim().toUpperCase().replace(/\s+/g,'');
+    if (clean.split('-').length !== 4 || clean.indexOf(PREFIX+'-') !== 0) return Promise.resolve(false);
+    return sha256hex(SALT+':'+clean).then(function(h){ return KEY_HASHES.has(h); });
   }
 
-  function unlock() {
-    const g = document.getElementById('license-gate');
-    if (g) g.style.display = 'none';
+  function trialStartTs(){ var v=ls.get(K_TRIAL); return v?parseInt(v,10):0; }
+  function trialActive(){ var s=trialStartTs(); return s ? (Date.now()-s) < TRIAL_DAYS*DAY_MS : false; }
+  function daysLeft(){ var s=trialStartTs(); if(!s) return 0; return Math.max(0, Math.ceil(TRIAL_DAYS - (Date.now()-s)/DAY_MS)); }
+  function licensed(){ return !!ls.get(K_LIC); }
+  function legacy(){ return ls.get(K_LEGACY)==='1'; }
+
+  function detectLegacy(){
+    if (legacy()) return true;
+    var hadData = ls.get('ee_name') || ls.get('ee_dob_y');
+    if (hadData && !ls.get(K_INIT)){ ls.set(K_LEGACY,'1'); return true; }
+    return false;
   }
 
-  async function tryKey() {
-    const val = document.getElementById('gate-key-input').value;
-    const err = document.getElementById('gate-key-error');
-    const btn = document.getElementById('gate-submit-btn');
-    if (!val.trim()) { err.textContent = 'Please enter your license key.'; return; }
-    const clean = val.trim().toUpperCase().replace(/\s/g, '');
-    if (clean.split('-').length !== 4 || !clean.startsWith(PREFIX + '-')) {
-      err.textContent = 'Invalid key format. Keys look like: MPE-XXXXX-XXXXX-XXXXX';
-      return;
+  var overlay, badgeEl=null;
+  function gateCard(){ return overlay ? overlay.querySelector('.gate-card') : null; }
+  function hideGate(){ if(overlay) overlay.style.display='none'; }
+  function showGate(){ if(overlay) overlay.style.display='flex'; }
+
+  function renderEmail(){
+    var c = gateCard(); if(!c) return;
+    c.innerHTML =
+      '<span class="gate-moon">\uD83C\uDF19</span>' +
+      '<div class="gate-title"></div>' +
+      '<div class="gate-divider"></div>' +
+      '<div class="gate-sub"></div>' +
+      '<input id="gate-email-input" class="gate-input" type="email" autocomplete="email" spellcheck="false">' +
+      '<div id="gate-email-error" class="gate-error"></div>' +
+      '<button id="gate-email-btn" class="gate-btn">' +
+      '<div class="gate-buy"><a href="#" id="gate-have-key"></a></div>';
+    c.querySelector('.gate-title').textContent = T.emailTitle;
+    c.querySelector('.gate-sub').textContent = T.emailSub;
+    var inp=document.getElementById('gate-email-input'); inp.placeholder=T.emailPlaceholder;
+    var err=document.getElementById('gate-email-error');
+    var btn=document.getElementById('gate-email-btn'); btn.textContent=T.emailBtn;
+    document.getElementById('gate-have-key').textContent = T.haveKey + ' \u2192';
+    showGate();
+    function submit(){
+      var v=(inp.value||'').trim();
+      if(!/^[^@\s]+@[^@\s]+\.[^@\s]+$/.test(v)){ err.textContent=T.emailErrInvalid; return; }
+      ls.set(K_EMAIL,v); ls.set(K_TRIAL,String(Date.now())); ls.set(K_INIT,'1');
+      try {
+        fetch('/',{method:'POST',headers:{'Content-Type':'application/x-www-form-urlencoded'},
+          body:'form-name='+encodeURIComponent(NETLIFY_FORM)+'&email='+encodeURIComponent(v)}).catch(function(){});
+      } catch(e){}
+      hideGate(); mountBadge();
     }
-    const origText = btn.textContent;
-    btn.disabled = true; btn.textContent = 'Validating…'; err.textContent = '';
-    try {
-      const res = await fetch(VALIDATE_URL, {
-        method: 'POST',
-        headers: { 'Content-Type': 'application/x-www-form-urlencoded' },
-        body: new URLSearchParams({ key: clean, deviceToken: getOrCreateDeviceToken(), productId: PRODUCT_ID }).toString()
-      });
-      const data = await res.json();
-      if (data.success) {
-        localStorage.setItem(STORE_KEY, clean);
-        unlock();
-      } else {
-        err.textContent = data.message || 'Validation failed. Please try again.';
-        btn.disabled = false; btn.textContent = origText;
-      }
-    } catch(e) {
-      err.textContent = 'Connection error. Please check your internet and try again.';
-      btn.disabled = false; btn.textContent = origText;
-    }
+    btn.addEventListener('click',submit);
+    inp.addEventListener('keydown',function(e){ if(e.key==='Enter') submit(); });
+    inp.addEventListener('input',function(){ err.textContent=''; });
+    document.getElementById('gate-have-key').addEventListener('click',function(e){ e.preventDefault(); renderPaywall(true); });
   }
 
-  // On load: re-validate stored key against server
-  (async function() {
-    unlock(); // TEMP: gate disabled for beta testing — delete these 2 lines to re-enable
-    return;
-    const stored = localStorage.getItem(STORE_KEY);
-    if (!stored) return;
-    const devTok = getOrCreateDeviceToken();
-    try {
-      const res = await fetch(VALIDATE_URL, {
-        method: 'POST',
-        headers: { 'Content-Type': 'application/x-www-form-urlencoded' },
-        body: new URLSearchParams({ key: stored, deviceToken: devTok, productId: PRODUCT_ID }).toString()
+  function renderPaywall(fromTrial){
+    var c = gateCard(); if(!c) return;
+    c.innerHTML =
+      '<span class="gate-moon">\uD83C\uDF19</span>' +
+      '<div class="gate-title"></div>' +
+      '<div class="gate-divider"></div>' +
+      '<div class="gate-sub"></div>' +
+      '<input id="gate-key-input" class="gate-input" type="text" autocomplete="off" spellcheck="false">' +
+      '<div id="gate-key-error" class="gate-error"></div>' +
+      '<button id="gate-submit-btn" class="gate-btn"></button>' +
+      '<div class="gate-buy"><a id="gate-buy-link" target="_blank" rel="noopener"></a></div>';
+    c.querySelector('.gate-title').textContent = fromTrial ? T.brand : T.payTitle;
+    c.querySelector('.gate-sub').textContent = T.paySub;
+    var inp=document.getElementById('gate-key-input'); inp.placeholder=T.keyPlaceholder;
+    var err=document.getElementById('gate-key-error');
+    var btn=document.getElementById('gate-submit-btn'); btn.textContent=T.keyBtn;
+    var buy=document.getElementById('gate-buy-link'); buy.href=BUY_URL; buy.textContent=T.buyLine;
+    showGate();
+    function submit(){
+      var v=inp.value;
+      if(!v||!v.trim()){ err.textContent=T.keyErrEmpty; return; }
+      var clean=v.trim().toUpperCase().replace(/\s+/g,'');
+      if(clean.split('-').length!==4 || clean.indexOf(PREFIX+'-')!==0){ err.textContent=T.keyErrFormat; return; }
+      var orig=btn.textContent; btn.disabled=true; btn.textContent='\u2026'; err.textContent='';
+      keyValid(clean).then(function(ok){
+        if(ok){ ls.set(K_LIC,clean); ls.set(K_INIT,'1'); removeBadge(); hideGate(); }
+        else { err.textContent=T.keyErrInvalid; btn.disabled=false; btn.textContent=orig; }
       });
-      const data = await res.json();
-      if (data.success) { unlock(); }
-      else { localStorage.removeItem(STORE_KEY); }
-    } catch(e) {
-      unlock(); // Offline grace: stored key + network failure = let them in
     }
-  })();
+    btn.addEventListener('click',submit);
+    inp.addEventListener('keydown',function(e){ if(e.key==='Enter') submit(); });
+    inp.addEventListener('input',function(){ err.textContent=''; });
+  }
 
-  document.addEventListener('DOMContentLoaded', function() {
-    const btn = document.getElementById('gate-submit-btn');
-    const inp = document.getElementById('gate-key-input');
-    if (btn) btn.addEventListener('click', tryKey);
-    if (inp) {
-      inp.addEventListener('keydown', function(e) { if (e.key === 'Enter') tryKey(); });
-      inp.addEventListener('input', function() { document.getElementById('gate-key-error').textContent = ''; });
-    }
-  });
+  function mountBadge(){
+    if(!trialActive()||licensed()||legacy()) return;
+    removeBadge();
+    var n=daysLeft();
+    var label = n===1 ? T.badgeSingular : T.badgePlural.replace('{n}', n);
+    badgeEl=document.createElement('div');
+    badgeEl.id='ee-trial-badge';
+    var span=document.createElement('span'); span.textContent=label;
+    var a=document.createElement('a'); a.href=BUY_URL; a.target='_blank'; a.rel='noopener'; a.textContent=T.badgeUnlock+' \u2192';
+    badgeEl.appendChild(span); badgeEl.appendChild(document.createTextNode(' ')); badgeEl.appendChild(a);
+    document.body.appendChild(badgeEl);
+  }
+  function removeBadge(){ if(badgeEl&&badgeEl.parentNode){ badgeEl.parentNode.removeChild(badgeEl); } badgeEl=null; }
+
+  function route(){
+    overlay=document.getElementById('license-gate');
+    if(!GATE_LIVE){ hideGate(); return; }
+    detectLegacy();
+    if(licensed()||legacy()){ ls.set(K_INIT,'1'); hideGate(); return; }
+    if(trialActive()){ ls.set(K_INIT,'1'); hideGate(); mountBadge(); return; }
+    if(!ls.get(K_EMAIL) && !trialStartTs()){ ls.set(K_INIT,'1'); renderEmail(); return; }
+    ls.set(K_INIT,'1'); renderPaywall(false);
+  }
+
+  if(document.readyState==='loading'){ document.addEventListener('DOMContentLoaded',route); }
+  else { route(); }
 })();
 </script>
 </body>
