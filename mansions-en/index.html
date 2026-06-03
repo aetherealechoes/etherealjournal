@@ -8,8 +8,6 @@
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Amiri:ital,wght@0,400;0,700;1,400&family=EB+Garamond:ital,wght@0,400;0,600;1,400&family=Cinzel:wght@400;600;700&display=swap" rel="stylesheet">
   <style>
-  /* TEMP: beta testing — remove next line to re-enable gate */
-  #license-gate { display: none !important; }
   /* ── License Gate ── */
   #license-gate {
     position: fixed; inset: 0; z-index: 999999;
@@ -46,6 +44,19 @@
   .gate-buy { font-size: 12px; color: rgba(245,233,200,0.45); }
   .gate-buy a { color: rgba(201,168,76,0.7); text-decoration: none; }
   .gate-buy a:hover { color: #C9A84C; }
+  /* ── Auspicious / Best-to-avoid panel ── */
+  .ausp-panel { margin: 14px 0 4px; border-radius: 10px; overflow: hidden; }
+  .ausp-row { padding: 10px 14px; }
+  .ausp-row.good { background: rgba(45,122,61,0.08); border-left: 3px solid #2D7A3D; }
+  .ausp-row.avoid { background: rgba(139,58,58,0.08); border-left: 3px solid #8B3A3A; }
+  .ausp-label { font-family:'Cinzel',serif; font-size:9px; letter-spacing:2px; text-transform:uppercase; font-weight:700; margin-bottom:7px; }
+  .ausp-row.good .ausp-label { color:#2D7A3D; }
+  .ausp-row.avoid .ausp-label { color:#8B3A3A; }
+  .ausp-tags { display:flex; flex-wrap:wrap; gap:5px; }
+  .ausp-tag { font-family:'Cinzel',serif; font-size:13px; padding:3px 10px; border-radius:20px; line-height:1.5; }
+  .ausp-row.good .ausp-tag { background:rgba(45,122,61,0.12); color:#1a5c2a; border:1px solid rgba(45,122,61,0.25); }
+  .ausp-row.avoid .ausp-tag { background:rgba(139,58,58,0.10); color:#7a2020; border:1px solid rgba(139,58,58,0.22); }
+  .ausp-special { font-family:'Cinzel',serif; font-size:13px; color:#A67820; font-style:italic; text-align:center; padding:8px 14px; background:rgba(201,168,76,0.08); border-radius:8px; margin-top:8px; }
 
     /* ── Reset & Base ─────────────────────────────────────── */
     *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
@@ -696,7 +707,7 @@
     <input id="gate-key-input" class="gate-input" type="text" placeholder="LME-XXXXX-XXXXX-XXXXX" autocomplete="off" spellcheck="false">
     <div id="gate-key-error" class="gate-error"></div>
     <button id="gate-submit-btn" class="gate-btn" style="font-family:'Cinzel', serif;">Unlock Guide ✦</button>
-    <div class="gate-buy">Don't have a key? <a href="https://etherealechoes.com" target="_blank">Purchase at EtherealEchoes.com →</a></div>
+    <div class="gate-buy">Don't have a key? <a href="https://etherealechoes.com/product/mansions-of-the-moon/" target="_blank" rel="noopener">Purchase for $19.99 →</a></div>
   </div>
 </div>
 
@@ -2243,92 +2254,200 @@
 </script>
 
 <script>
-(function() {
-  const PREFIX = 'LME';
-  const PRODUCT_ID = 4114;
-  const STORE_KEY = 'ee_lic_lme';
-  const DEVICE_TOKEN_KEY = 'ee_dev_tok';
-  const VALIDATE_URL = 'https://etherealechoes.com/wp-json/ee/v1/validate-key';
-
-  function getOrCreateDeviceToken() {
-    let tok = localStorage.getItem(DEVICE_TOKEN_KEY);
-    if (!tok) {
-      tok = 'xxxxxxxx-xxxx-4xxx-yxxx-xxxxxxxxxxxx'.replace(/[xy]/g, function(c) {
-        const r = Math.random() * 16 | 0;
-        return (c === 'x' ? r : (r & 0x3 | 0x8)).toString(16);
-      });
-      localStorage.setItem(DEVICE_TOKEN_KEY, tok);
-    }
-    return tok;
+/* General Auspicious / Best-to-avoid per mansion (non-personalized).
+   Injects a panel into each of the 28 mansion cards. */
+(function(){
+  var MANSION_DAYS = [
+  // 0 Al-Sharatain
+  { good:['🚀 Starting new projects','✈️ Solo travel','💪 Physical exercise','📋 Job applications'],
+    avoid:['💍 Marriage & engagements','🤝 New partnerships','📝 Signing long-term contracts'] },
+  // 1 Al-Butain
+  { good:['💰 Investing money','📊 Financial planning','🔍 Deep research','🌱 Gardening & planting'],
+    avoid:['💍 Marriage','⚖️ Legal disputes','😤 Confrontations with others'] },
+  // 2 Al-Thurayya
+  { good:['🤝 Business deals','🌐 Networking events','✈️ Travel','💱 Buying & selling'],
+    avoid:['💍 Marriage','🏥 Medical procedures','🔪 Surgery'] },
+  // 3 Al-Dabaran
+  { good:['🚫 Breaking bad habits','📦 Ending toxic situations','🔚 Closing old chapters'],
+    avoid:['✈️ Travel','🏠 Buying a house or car','💍 Marriage','🏢 Starting a new business','📝 Signing contracts'] },
+  // 4 Al-Haq'ah
+  { good:['✈️ Travel & adventures','🏃 Sports & outdoor activities','🔨 Home renovation'],
+    avoid:['🏥 Medical procedures','⚖️ Legal matters','📝 Signing important documents'] },
+  // 5 Al-Han'ah
+  { good:['💕 Romance & dating','🎉 Socializing & parties','🎨 Creative work','🕊️ Reconciliation & apologies'],
+    avoid:['💼 Tough business negotiations','😤 Confrontations'] },
+  // 6 Al-Dhira'
+  { good:['💼 Business & trade','🛍️ Shopping','👫 Making new friends','🏠 Home improvement projects'],
+    avoid:['🌍 Long-distance travel'] },
+  // 7 Al-Nathrah
+  { good:['💍 Marriage & weddings','💌 Romantic proposals','🕊️ Making peace','❤️ Romance & intimacy'],
+    avoid:['😤 Confrontations','⚖️ Starting disputes','💔 Breakups or separations'] },
+  // 8 Al-Tarf
+  { good:['😴 Rest & recovery','🧘 Meditation & stillness','💭 Inner reflection','📔 Journaling'],
+    avoid:['✈️ Travel','💍 Marriage','🏗️ Major life decisions','🔪 Surgery'] },
+  // 9 Al-Jabhah
+  { good:['🏢 Starting a business','🏠 Buying property','📋 Signing leases','💼 Career moves & promotions'],
+    avoid:['🌍 Long-distance travel','🎲 Speculative or risky ventures'] },
+  // 10 Al-Zubrah
+  { good:['✈️ Business travel','🤝 Trade negotiations','🌐 Networking','📦 Import & export deals'],
+    avoid:['💍 Getting married','🏠 Buying a house'] },
+  // 11 Al-Sarfah
+  { good:['👔 Talking to your boss','💰 Asking for a raise','🔄 Career changes','🏛️ Dealing with authority figures'],
+    avoid:['💍 Starting new romantic relationships','❤️ Marriage proposals'] },
+  // 12 Al-Awwa'
+  { good:['📚 Education & studying','✈️ Travel','👫 Making new friends','🔍 Research & investigation'],
+    avoid:['💼 Business deals','📝 Signing contracts','💰 Major financial decisions'] },
+  // 13 Al-Simak
+  { good:['🏢 Launching a business','🏡 Buying land or property','📈 Investments','⚖️ Legal matters'],
+    avoid:['🏥 Medical procedures','🔪 Surgery'] },
+  // 14 Al-Ghafr
+  { good:['🔍 Research & discovery','✈️ Travel','🏠 Buying property','🕵️ Investigating a problem'],
+    avoid:['💍 Marriage','💔 Decisions based on emotion alone'] },
+  // 15 Al-Zubana
+  { good:['🧘 Spiritual practice','🌙 Meditation & prayer','🌿 Inner work','🕯️ Fasting & reflection'],
+    avoid:['✈️ Travel','💍 Marriage','🏢 Starting a business','🏠 Buying a house or car','🏥 Medical procedures'] },
+  // 16 Al-Iklil
+  { good:['📈 Career advancement','🏆 Leadership decisions','👔 Talking to your boss','🤝 High-stakes negotiations','⬆️ Asking for a promotion'],
+    avoid:['🏥 Medical procedures','🔪 Surgery'] },
+  // 17 Al-Qalb
+  { good:['💆 Emotional healing','🛋️ Therapy sessions','💬 Heart-to-heart conversations','📔 Deep journaling'],
+    avoid:['✈️ Travel','🔨 Home renovation','💰 Major purchases','🚀 Launching new ventures'] },
+  // 18 Al-Shaulah
+  { good:['🔍 Research & investigation','⚖️ Legal pursuits','🕵️ Uncovering hidden truths'],
+    avoid:['💍 Marriage','🤝 New business partnerships','🤲 Trusting strangers with important matters'] },
+  // 19 Al-Na'aim
+  { good:['📚 Training & skill-building','🛋️ Therapy & coaching','🐾 Working with animals','🏅 Developing a new habit'],
+    avoid:['✈️ Travel','🎲 Risky or impulsive decisions','💰 Major financial moves'] },
+  // 20 Al-Baldah
+  { good:['🏙️ Moving to a new city','🧳 Job relocation','✈️ Travel','🏠 Buying property in a new area'],
+    avoid:['😤 Confrontations','💍 Marriage (use caution in some traditions)'] },
+  // 21 Sa'd al-Dhabih
+  { good:['🏥 Medical procedures & surgery','🛒 Buying groceries or food','💊 Health check-ups','🎯 Collecting results of past work'],
+    avoid:['❤️ Starting new romantic relationships','💕 Romantic pursuits'] },
+  // 22 Sa'd Bula'
+  { good:['💊 Healing & recovery','🏥 Medical treatments','🛋️ Therapy & counselling','🌿 Detox & cleansing'],
+    avoid:['✈️ Travel','🚀 Starting new ventures','😤 Confrontations or arguments'] },
+  // 23 Sa'd al-Su'ud — THE LUCKIEST
+  { good:['💍 Marriage & weddings','🏢 Business launches','🏠 Buying a home','✈️ Travel','💼 Job interviews','💰 Asking for a raise','🤝 Signing major deals','🌟 Any important decision'],
+    avoid:[], special:'✨ This is the most auspicious mansion of the lunar cycle — ideal for your most important decisions.' },
+  // 24 Sa'd al-Akhbiyah
+  { good:['🏡 Real estate deals','💰 Saving & investing','🔨 Home improvement projects','🤫 Confidential or sensitive matters'],
+    avoid:['✈️ Travel','😤 Confrontations','📣 Public disputes or arguments'] },
+  // 25 Al-Fargh al-Muqaddam
+  { good:['🔨 Home renovation','🏗️ Construction & building','🔧 Repairs & maintenance','🏠 Laying foundations for long-term plans'],
+    avoid:['🌍 Long-distance travel','🎲 Speculative or risky ventures'] },
+  // 26 Al-Fargh al-Mu'akhkhar
+  { good:['🌱 Gardening & planting','✈️ Travel (especially by water or air)','🌾 Planting seeds for the future','🌊 Water-related activities'],
+    avoid:['⚖️ Legal matters','😤 Disputes & arguments'] },
+  // 27 Batn al-Hut
+  { good:['✈️ New journeys & travel','🔚 Tying up loose ends','🌅 New beginnings','🐟 Water-related activities'],
+    avoid:['💍 Marriage or new emotional commitments'] },
+];
+  var GOOD_LABEL="✅ Auspicious for", AVOID_LABEL="⛔ Best to avoid";
+  function panel(i){
+    var d=MANSION_DAYS[i]; if(!d) return '';
+    var good=(d.good||[]).map(function(t){return '<span class="ausp-tag">'+t+'</span>';}).join('');
+    var avoid=(d.avoid||[]).map(function(t){return '<span class="ausp-tag">'+t+'</span>';}).join('');
+    var special=d.special?'<div class="ausp-special">'+d.special+'</div>':'';
+    return '<div class="ausp-panel">'+
+      '<div class="ausp-row good"><div class="ausp-label">'+GOOD_LABEL+'</div><div class="ausp-tags">'+good+'</div></div>'+
+      (avoid?'<div class="ausp-row avoid" style="margin-top:4px"><div class="ausp-label">'+AVOID_LABEL+'</div><div class="ausp-tags">'+avoid+'</div></div>':'')+
+      special+'</div>';
   }
-
-  function unlock() {
-    const g = document.getElementById('license-gate');
-    if (g) g.style.display = 'none';
-  }
-
-  async function tryKey() {
-    const val = document.getElementById('gate-key-input').value;
-    const err = document.getElementById('gate-key-error');
-    const btn = document.getElementById('gate-submit-btn');
-    if (!val.trim()) { err.textContent = 'Please enter your license key.'; return; }
-    const clean = val.trim().toUpperCase().replace(/\s/g, '');
-    if (clean.split('-').length !== 4 || !clean.startsWith(PREFIX + '-')) {
-      err.textContent = 'Invalid key format. Keys look like: LME-XXXXX-XXXXX-XXXXX';
-      return;
-    }
-    const origText = btn.textContent;
-    btn.disabled = true; btn.textContent = 'Validating…'; err.textContent = '';
-    try {
-      const res = await fetch(VALIDATE_URL, {
-        method: 'POST',
-        headers: { 'Content-Type': 'application/x-www-form-urlencoded' },
-        body: new URLSearchParams({ key: clean, deviceToken: getOrCreateDeviceToken(), productId: PRODUCT_ID }).toString()
-      });
-      const data = await res.json();
-      if (data.success) {
-        localStorage.setItem(STORE_KEY, clean);
-        unlock();
-      } else {
-        err.textContent = data.message || 'Validation failed. Please try again.';
-        btn.disabled = false; btn.textContent = origText;
-      }
-    } catch(e) {
-      err.textContent = 'Connection error. Please check your internet and try again.';
-      btn.disabled = false; btn.textContent = origText;
+  function inject(){
+    var cards=document.querySelectorAll('.mansion-card');
+    var n=Math.min(cards.length, MANSION_DAYS.length);
+    for(var i=0;i<n;i++){
+      var body=cards[i].querySelector('.mansion-body');
+      if(body && !body.querySelector('.ausp-panel')){ body.insertAdjacentHTML('beforeend', panel(i)); }
     }
   }
-
-  // On load: re-validate stored key against server
-  (async function() {
-    unlock(); // TEMP: gate disabled for beta testing — delete these 2 lines to re-enable
-    return;
-    const stored = localStorage.getItem(STORE_KEY);
-    if (!stored) return;
-    const devTok = getOrCreateDeviceToken();
-    try {
-      const res = await fetch(VALIDATE_URL, {
-        method: 'POST',
-        headers: { 'Content-Type': 'application/x-www-form-urlencoded' },
-        body: new URLSearchParams({ key: stored, deviceToken: devTok, productId: PRODUCT_ID }).toString()
-      });
-      const data = await res.json();
-      if (data.success) { unlock(); }
-      else { localStorage.removeItem(STORE_KEY); }
-    } catch(e) {
-      unlock(); // Offline grace: stored key + network failure = let them in
-    }
-  })();
-
-  document.addEventListener('DOMContentLoaded', function() {
-    const btn = document.getElementById('gate-submit-btn');
-    const inp = document.getElementById('gate-key-input');
-    if (btn) btn.addEventListener('click', tryKey);
-    if (inp) {
-      inp.addEventListener('keydown', function(e) { if (e.key === 'Enter') tryKey(); });
-      inp.addEventListener('input', function() { document.getElementById('gate-key-error').textContent = ''; });
-    }
-  });
+  if(document.readyState==='loading'){document.addEventListener('DOMContentLoaded',inject);}else{inject();}
+})();
+</script>
+<script>
+/* Offline License Gate (paywall · buy-to-unlock) — LME / product 4114
+   Validates the existing key pool fully OFFLINE via salted SHA-256 allowlist.
+   Add keys later: sha256('ee_lme_2026:'+KEY) -> append to KEY_HASHES. */
+(function(){
+  'use strict';
+  var GATE_LIVE=true, PREFIX="LME", SALT="ee_lme_2026", K_LIC="ee_lic_lme";
+  var KEY_HASHES=new Set([
+    'ee6d6ba9da269dfb88baf0cf3c8a512adcdc831c5a3a6de9c14c118da72c59e3',
+    '6fcdefc73f22d168cc4b7ea12e83de3c32450335bb349e8f3c34b8b3d3406718',
+    '4887b67e591f1defd1082d41d1ba3d7f90a80582bb9d6cb477d022bd9368d2d2',
+    '7ff9b5fa590175cc2e70855264983ebda6771020610c1d53a996ca316063a9ea',
+    '6b46e089d7307e2f4ee9486ce4d2685ca76c262ca657ab85e2be84c6ea8ef4a2',
+    '171d3658f5207afa3044363e1efd6214c455b208b4c328df281ec532a827d913',
+    '3d9552ecbf8d817c223eeb88517e61b2b42abc02f23f5b15f74fb4d1861467d9',
+    'c6268b542e37d26fa959d543a0d3f51a2cc72aed346200bbe40d18ce2f3b9767',
+    'c1189569d126828c5bd6c41071e675e6944c383554f1839eb0a79b33bd32135b',
+    '4361a52a05523b1c62d06672ad847d1f3f7bc16769c084e37735f1cd5fe36c3f',
+    '982adcc15abb27b1bcda47a23b43efef512955621ec8eddc9cebf28df7d67079',
+    '37ad2a4f31dc404a90b19c471f6e76354e43689a28936dd63d5c1bc78e61761d',
+    '12107698159b622fe5eb1c56f9d97996faed007ba2393fd134e99e77eefa0304',
+    '2b2700be7977688817bf3b75e096ecf4ff466a6ce818ba8d6b8e6709164e2b7f',
+    '6a4cd0d4f12c658c29aacd088cd6f1d5053811b941a5d473dfff5cf40a71dcf6',
+    '6b8e2054eae9744e174e9a5df5dfd9c8d507eafced7f56e9aa4d11c10b9903f0',
+    '4c0923804c1cb5e3e1ff2d6c9fa21e952364cb64cdc5ee824b77df6d7c6237ce',
+    '78b420d8b8cf7538e10e66222b87888778ca6eb085c445421c93179f6a50c5aa',
+    'b0a6a876a2db662ef1c42dff037904dc70113c9b25c1188b2639f6154ad19132',
+    '0cb17a7b03abc8a543cf01914527745cbe68d23cd7cfef9ef1acc277722ad551',
+    '76e3c3a778437b3eddacf7748142a0dc4f21711007650b5ad431eccfe67953ba',
+    'ab73b7f0fa9393834fd6bdb0316927db3379f2654078a6862ba7fa6a9941dc18',
+    'a318ca86c76d6a56bffc99fb2b1fd12bdc662d74021397c7e5290df7b7dcfaaf',
+    'c8b703bb288e01d49e8e6bf534edf02f642beb676de1c2e95880c6ccc60c9e2f',
+    '828af9bcd491e895782a2402fe6c27ece1912b178f8cf3713a3d50719f7430ac',
+    '2a13aa6096ba93a263f596f02521655a1a217bfe6e666fd60dba3f45b005d76f',
+    'f195128e5ebef8a21bde61e77b3388bfc7d65567f3788446df49019778c31d20',
+    '4c2f371337d41a9c591e5c1f74c670a0da3ca8ae187af3efdde97fbf2dc93f13',
+    'f65ba9b65346cc8ea27eeb5f6b0318e6e421731de268c2e7f2a20f2b7bfbf106',
+    '52c78d3bf6d06691aa71dfc2c0f2a4f7511968b49def21617e35c3c71cd03b69',
+    '502455731a59f0c3c16c1ea7b5e72c706f5d06b3f37fec8b9f0d3e56ecaeb4aa',
+    'c2bdab1e2dd9d4bc4a163f25f0df94bc5ec373e4626ca395ac0f34a233baa24c',
+    '7ca9d9ce08993a158f7b23738201b8e342d177545e44e58a1d864d6e418be93f',
+    '97aab6f097faeebc4fcc09b40f8fd0382e4c5c573c7849bf266d18b53c1239c0',
+    '2b4f4dd5e74aff17b9446aa3913f6538cf17ea523d7f10d64b3fc04ad7742b42',
+    '55802dd5c86693fdce6087a51c9ab9ef9aabf9ef4415a98b6fe91a7331c2cc83',
+    '9c4b96cde346925a0ee8faebcea94851336d8ec161ffd750c6adf1986667196c',
+    '38bbbac9e8bc993495ab277b5ea29ced0da995bd89ee8099954f48af12247427',
+    'f9a3d1ffc0f23d2d9ac0dbc82e07ed79bc74560926f92e3b2e63c45d5d6499ee',
+    '49dea1f2b0b5ca3a678a6ad59862f532046331dd40190a75e78da70fcec1924b',
+    '87b7718704a1f58e3880cfcab5a69ee5fbf78a9d32980d2c41619b841fda6118',
+    'f8735fd3625f86b08b54976145d04f80540aa93f05a21f2d92003f197cae6a72',
+    'db11567aff3ad615c27dc6d5e7526ba95bd18ddc6c13bbaa68456934b18c2b3c',
+    '8d35591fec73b8c04eaefebdf7ec0c897199d58807b2b6bad22d6b8295bad3ce',
+    '43e236b00f483f5f604d9641cb49bd1379bed22930b3d5a7c78436963939a3d3',
+    '4519a0fa7f7e6eab4a18f1d69303516d3db2a88fde9cf6ac16410626366f2176',
+    '09179a0f0dc43642de51e7cfe63ecedcaea91a164bc265ebbfe5ba37d829d843',
+    'cd46e00c7c962032fc03b69bfdb9ce59d972b096abebf3307a97e56393ffc578',
+    'd9c086c8a98c16adac236dc4a185a9cdaf537443f6c1ec6c1969ae861c7de74c',
+    'c11080e541c3b88df849dd7e099db1f020b9efd8ac5d038c628f78818041a340'
+  ]);
+  var T={empty:"Please enter your license key.", fmt:"Invalid key format. Keys look like: LME-XXXXX-XXXXX-XXXXX", bad:"This key was not recognized. Please check it and try again."};
+  var ls={get:function(k){try{return localStorage.getItem(k)}catch(e){return null}},set:function(k,v){try{localStorage.setItem(k,v)}catch(e){}}};
+  function sha256hex(s){var e=new TextEncoder().encode(s);return crypto.subtle.digest('SHA-256',e).then(function(b){var a=new Uint8Array(b),h='',i;for(i=0;i<a.length;i++){h+=a[i].toString(16).padStart(2,'0');}return h;});}
+  function keyValid(raw){var c=String(raw||'').trim().toUpperCase().replace(/\s+/g,'');if(c.split('-').length!==4||c.indexOf(PREFIX+'-')!==0)return Promise.resolve(false);return sha256hex(SALT+':'+c).then(function(h){return KEY_HASHES.has(h);});}
+  function unlock(){var g=document.getElementById('license-gate');if(g)g.style.display='none';}
+  function licensed(){return !!ls.get(K_LIC);}
+  function tryKey(){
+    var inp=document.getElementById('gate-key-input'),err=document.getElementById('gate-key-error'),btn=document.getElementById('gate-submit-btn');
+    var v=inp.value;
+    if(!v||!v.trim()){err.textContent=T.empty;return;}
+    var clean=v.trim().toUpperCase().replace(/\s+/g,'');
+    if(clean.split('-').length!==4||clean.indexOf(PREFIX+'-')!==0){err.textContent=T.fmt;return;}
+    var orig=btn.textContent;btn.disabled=true;btn.textContent='\u2026';err.textContent='';
+    keyValid(clean).then(function(ok){if(ok){ls.set(K_LIC,clean);unlock();}else{err.textContent=T.bad;btn.disabled=false;btn.textContent=orig;}});
+  }
+  function route(){ if(!GATE_LIVE){unlock();return;} if(licensed()){unlock();} }
+  function wire(){
+    route();
+    var btn=document.getElementById('gate-submit-btn'),inp=document.getElementById('gate-key-input');
+    if(btn)btn.addEventListener('click',tryKey);
+    if(inp){inp.addEventListener('keydown',function(e){if(e.key==='Enter')tryKey();});inp.addEventListener('input',function(){var er=document.getElementById('gate-key-error');if(er)er.textContent='';});}
+  }
+  if(document.readyState==='loading'){document.addEventListener('DOMContentLoaded',wire);}else{wire();}
+})();
 </script>
 </body>
 </html>
