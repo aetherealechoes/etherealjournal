@@ -41,6 +41,8 @@
     transition: opacity 0.2s; margin-bottom: 24px;
   }
   .gate-btn:hover { opacity: 0.9; }
+  .gate-btn2 { display:block; width:100%; box-sizing:border-box; padding:12px; border:1px solid rgba(201,168,76,0.5); border-radius:10px; text-align:center; color:#E8C97A; text-decoration:none; font-family:inherit; font-weight:700; font-size:14px; letter-spacing:1px; margin:-10px 0 20px; }
+  .gate-btn2:hover { background:rgba(201,168,76,0.10); }
   .gate-buy { font-size: 12px; color: rgba(245,233,200,0.45); }
   .gate-buy a { color: rgba(201,168,76,0.7); text-decoration: none; }
   .gate-buy a:hover { color: #C9A84C; }
@@ -2156,7 +2158,7 @@ document.addEventListener('DOMContentLoaded', () => {
   var DAY_MS     = 86400000;
   var PREFIX     = "MPE";
   var SALT       = "ee_mpe_2026";
-  var BUY_URL    = "https://etherealechoes.com/product/personalized-lunar-mansions-guide/";
+  var BUY_URL    = "https://etherealjournals.gumroad.com/l/lunar-personal-en";
   var NETLIFY_FORM = 'guide-en-trial';
 
   var K_LIC    = "ee_lic_mpe";
@@ -2165,6 +2167,9 @@ document.addEventListener('DOMContentLoaded', () => {
   var K_LEGACY = "ee_mpe_legacy";
   var K_INIT   = "ee_mpe_gate_init";
 
+  var GUMROAD_URL = 'https://etherealjournals.gumroad.com/l/lunar-personal-en';
+  var GR_RE = /^[0-9A-Fa-f]{8}-[0-9A-Fa-f]{8}-[0-9A-Fa-f]{8}-[0-9A-Fa-f]{8}$/;
+  function gumroadVerify(key){ return fetch('https://api.gumroad.com/v2/licenses/verify',{method:'POST',headers:{'Content-Type':'application/x-www-form-urlencoded'},body:'product_permalink=lunar-personal-en&license_key='+encodeURIComponent(key)+'&increment_uses_count=true'}).then(function(r){return r.json();}).then(function(d){return !!(d&&d.success);}).catch(function(){return false;}); }
   var KEY_HASHES = new Set([
     '0863e9baf8bf278d018eb258920936da510a40e9baa1470ffbf8567791555f16',
     'ade508cdf1a32a086ce8d09491664e5cb75ac4ba3850aa162a4c86648a60fe39',
@@ -2287,12 +2292,14 @@ document.addEventListener('DOMContentLoaded', () => {
       '<input id="gate-email-input" class="gate-input" type="email" autocomplete="email" spellcheck="false">' +
       '<div id="gate-email-error" class="gate-error"></div>' +
       '<button id="gate-email-btn" class="gate-btn">' +
+      '<a id="gate-buynow" class="gate-btn2" target="_blank" rel="noopener"></a>' +
       '<div class="gate-buy"><a href="#" id="gate-have-key"></a></div>';
     c.querySelector('.gate-title').textContent = T.emailTitle;
     c.querySelector('.gate-sub').textContent = T.emailSub;
     var inp=document.getElementById('gate-email-input'); inp.placeholder=T.emailPlaceholder;
     var err=document.getElementById('gate-email-error');
     var btn=document.getElementById('gate-email-btn'); btn.textContent=T.emailBtn;
+    var bn=document.getElementById('gate-buynow'); if(bn){ bn.href=GUMROAD_URL; bn.textContent="Buy now — $33.33"; }
     document.getElementById('gate-have-key').textContent = T.haveKey + ' \u2192';
     showGate();
     function submit(){
@@ -2333,6 +2340,14 @@ document.addEventListener('DOMContentLoaded', () => {
       var v=inp.value;
       if(!v||!v.trim()){ err.textContent=T.keyErrEmpty; return; }
       var clean=v.trim().toUpperCase().replace(/\s+/g,'');
+      if(GR_RE.test(clean)){
+        var orig2=btn.textContent; btn.disabled=true; btn.textContent='\u2026'; err.textContent='';
+        gumroadVerify(clean).then(function(ok){
+          if(ok){ ls.set(K_LIC,'GR-'+clean); ls.set(K_INIT,'1'); removeBadge(); hideGate(); }
+          else { err.textContent=T.keyErrInvalid; btn.disabled=false; btn.textContent=orig2; }
+        });
+        return;
+      }
       if(clean.split('-').length!==4 || clean.indexOf(PREFIX+'-')!==0){ err.textContent=T.keyErrFormat; return; }
       var orig=btn.textContent; btn.disabled=true; btn.textContent='\u2026'; err.textContent='';
       keyValid(clean).then(function(ok){
