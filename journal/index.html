@@ -1,3 +1,4 @@
+<!-- v2026-05-26 -->
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -96,6 +97,11 @@ body{min-height:100vh;background:linear-gradient(150deg,#07071a 0%,#130a2a 45%,#
 </style>
 </head>
 <body>
+<!-- Netlify Forms: captures trial sign-up emails (submissions appear in Netlify dashboard → Forms) -->
+<form name="trial-signup" data-netlify="true" netlify-honeypot="bot-field" hidden>
+  <input type="email" name="email" />
+  <input name="bot-field" />
+</form>
 <svg id="starfield" xmlns="http://www.w3.org/2000/svg"></svg>
 <div id="root"></div>
 
@@ -193,6 +199,7 @@ function scheduleSave(){if(S.screen!=="app"||!S.pwd)return;clearTimeout(saveTime
 function render(){
   const root=document.getElementById("root");
   if(S.screen==="loading"){root.innerHTML=`<div class="center" style="text-align:center"><span style="font-size:3rem">🌙</span><p class="muted" style="margin-top:16px;letter-spacing:3px">LOADING…</p></div>`;return;}
+  if(S.screen==="email"){root.innerHTML=emailHTML();attachEmailEvents();return;}
   if(S.screen==="license"){root.innerHTML=licenseHTML();attachLicenseEvents();return;}
   if(S.screen==="setup"){root.innerHTML=setupHTML();attachSetupEvents();return;}
   if(S.screen==="locked"){root.innerHTML=lockedHTML();attachLockedEvents();return;}
@@ -208,7 +215,7 @@ function licenseHTML(){return`<div class="center"><div class="logo"><span class=
   <input class="inp" id="lic-in" type="text" placeholder="EJ-XXXXX-XXXXX-XXXXX" value="${esc(S.licIn)}" autocomplete="off" spellcheck="false" style="letter-spacing:2px;font-size:1rem"/>
   ${S.licErr?`<p class="err">${esc(S.licErr)}</p>`:""}
   <button class="btn-gold" id="lic-submit" style="width:100%;margin-top:6px">Unlock My Journal ✦</button>
-  <p class="muted" style="margin-top:20px;font-size:.75rem;text-align:center">Don't have a license? <a href="https://etherealechoes.com" target="_blank" style="color:#c9a227">Purchase at EtherealEchoes.com →</a></p>
+  <p class="muted" style="margin-top:20px;font-size:.75rem;text-align:center">Don't have a license? <a href="https://etherealechoes.com/product/ethereal-journal/" target="_blank" style="color:#c9a227">Get lifetime access — $22.22 →</a></p>
 </div></div>`;}
 
 function attachLicenseEvents(){
@@ -474,13 +481,66 @@ function exportJournal(){const a=document.createElement("a");a.href=URL.createOb
 function handleImport(e){const file=e.target.files[0];if(!file)return;const r=new FileReader();r.onload=ev=>{try{const d=JSON.parse(ev.target.result);if(Array.isArray(d.entries)){const ids=new Set(S.entries.map(x=>x.id));const n=d.entries.filter(x=>!ids.has(x.id));S.entries.push(...n);scheduleSave();render();flash(`✦ Imported ${n.length} entries`);}}catch{flash("Could not read file.");}};r.readAsText(file);S.showMenu=false;}
 
 // ── INIT ──────────────────────────────────────────────────────────────────────
+// ── TRIAL (added) ─────────────────────────────────────────────────────────────
+// 7-day free trial in front of the existing license gate. Existing users (with a
+// stored key OR saved journal data) are grandfathered free. New visitors get 7
+// free days, then the license screen. Set TRIAL_DAYS=0 for a pure paywall.
+const TRIAL_DAYS=7, DAY_MS=86400000;
+const T_TRIAL=`${KP}trial_start`, T_LEGACY=`${KP}legacy`, T_GINIT=`${KP}gate_init`, T_EMAIL=`${KP}trial_email`;
+function licOK(){return validateLicenseKey(localStorage.getItem(`${KP}lic`)||"");}
+function trialMsLeft(){const s=parseInt(localStorage.getItem(T_TRIAL),10);return s?(s+TRIAL_DAYS*DAY_MS)-Date.now():-1;}
+function trialActive(){return TRIAL_DAYS>0&&trialMsLeft()>0;}
+function trialDaysLeft(){return Math.max(1,Math.ceil(trialMsLeft()/DAY_MS));}
+function gateInit(){
+  if(localStorage.getItem(T_GINIT))return;
+  if(localStorage.getItem(`${KP}init`)||localStorage.getItem(`${KP}data`)||localStorage.getItem(`${KP}lic`))localStorage.setItem(T_LEGACY,"1");
+  localStorage.setItem(T_GINIT,"1"); // trial now starts only AFTER email capture (see startTrialEmail)
+}
+function showTrialBadge(){
+  if(document.getElementById("ej-trial-badge"))return;
+  const b=document.createElement("div");b.id="ej-trial-badge";
+  b.style.cssText="position:fixed;bottom:14px;left:50%;transform:translateX(-50%);z-index:9000;padding:.4rem .9rem;border-radius:999px;font-size:.8rem;letter-spacing:.04em;color:#f0d878;background:rgba(20,16,40,.9);border:1px solid rgba(201,162,39,.45);box-shadow:0 4px 16px rgba(0,0,0,.4);transition:opacity 1s ease;pointer-events:none";
+  b.textContent=`${trialDaysLeft()} days left in your free trial`;
+  document.body.appendChild(b);setTimeout(()=>{b.style.opacity="0";},6000);
+}
+// ── EMAIL CAPTURE (starts the 7-day trial; posts to Netlify Forms) ──────────────
+function emailHTML(){return`<div class="center"><div class="logo"><span class="logo-moon">🌙</span><span class="logo-title">Ethereal Journal</span><span class="logo-sub">✦ SACRED MANIFESTATION SPACE ✦</span></div>
+<div class="card">
+  <h2 class="sec">✦ BEGIN YOUR FREE TRIAL</h2>
+  <p class="muted" style="margin-bottom:20px">Enter your email to unlock <strong style="color:#c9a227">7 days of free access</strong> to your sacred journal.</p>
+  <input class="inp" id="email-in" type="email" placeholder="you@example.com" autocomplete="email" spellcheck="false"/>
+  <p class="err" id="email-err" style="display:none"></p>
+  <button class="btn-gold" id="email-start" style="width:100%;margin-top:6px">Start My 7-Day Trial ✦</button>
+  <p class="muted" style="margin-top:18px;font-size:.72rem;text-align:center">No credit card required. Already have a key? <a href="#" id="email-haskey" style="color:#c9a227">Enter it here</a></p>
+</div></div>`;}
+function attachEmailEvents(){
+  const inp=document.getElementById("email-in"),err=document.getElementById("email-err"),btn=document.getElementById("email-start");
+  if(inp)inp.focus();
+  async function start(){
+    const email=(inp.value||"").trim();
+    if(!/^[^@\s]+@[^@\s]+\.[^@\s]+$/.test(email)){err.textContent="Please enter a valid email address.";err.style.display="block";return;}
+    btn.disabled=true;btn.textContent="Starting…";
+    try{await fetch("/",{method:"POST",headers:{"Content-Type":"application/x-www-form-urlencoded"},body:new URLSearchParams({"form-name":"trial-signup",email}).toString()});}catch(e){}
+    localStorage.setItem(T_EMAIL,email);
+    localStorage.setItem(T_TRIAL,String(Date.now()));
+    S.screen=localStorage.getItem(`${KP}init`)?"locked":"setup";render();
+  }
+  btn?.addEventListener("click",start);
+  inp?.addEventListener("keydown",e=>{if(e.key==="Enter")start();});
+  document.getElementById("email-haskey")?.addEventListener("click",e=>{e.preventDefault();S.screen="license";render();});
+}
+// ── INIT ──────────────────────────────────────────────────────────────────────
 function init(){
-  // TEMP: beta testing — bypass license gate AND password screen
-  // To re-enable: remove the 3 lines below and restore the original init logic
-  S.screen="app";
-  S.pwd="beta-preview";
-  S.entries=[];S.boardItems=[];
-  render();
+  gateInit();
+  if(licOK()||localStorage.getItem(T_LEGACY)==="1"){             // buyer or existing/grandfathered user
+    S.screen=localStorage.getItem(`${KP}init`)?"locked":"setup";render();return;
+  }
+  if(trialActive()){                                             // trial already running
+    showTrialBadge();
+    S.screen=localStorage.getItem(`${KP}init`)?"locked":"setup";render();return;
+  }
+  if(!localStorage.getItem(T_EMAIL)){ S.screen="email"; render(); return; } // new visitor → email, then trial
+  S.screen="license"; render();                                  // email captured but trial expired → paywall
 }
 init();
 </script>
