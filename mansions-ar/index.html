@@ -2367,7 +2367,7 @@
   var GATE_LIVE=true, PREFIX="LMA", SALT="ee_lma_2026", K_LIC="ee_lic_lma";
   var GUMROAD_URL = 'https://etherealjournals.gumroad.com/l/lunar-reference-ar';
   var GR_RE = /^[0-9A-Fa-f]{8}-[0-9A-Fa-f]{8}-[0-9A-Fa-f]{8}-[0-9A-Fa-f]{8}$/;
-  function gumroadVerify(key){ return fetch('https://api.gumroad.com/v2/licenses/verify',{method:'POST',headers:{'Content-Type':'application/x-www-form-urlencoded'},body:'product_permalink=lunar-reference-ar&license_key='+encodeURIComponent(key)+'&increment_uses_count=true'}).then(function(r){return r.json();}).then(function(d){return !!(d&&d.success);}).catch(function(){return false;}); }
+  function gumroadVerify(key){ return fetch('https://api.gumroad.com/v2/licenses/verify',{method:'POST',headers:{'Content-Type':'application/x-www-form-urlencoded'},body:'product_id=uqXH896VLVAMUwUTh8tlcA%3D%3D&license_key='+encodeURIComponent(key)+'&increment_uses_count=true'}).then(function(r){return r.json();}).then(function(d){return !!(d&&d.success);}).catch(function(){return false;}); }
   var KEY_HASHES=new Set([
     '75fb247c28f2433bc06b08ec5d486982325a16f605d1fa5eeeaa0612fb0d0f14',
     '3e890e6196cef3efc9a23942cadae41042bd6afd6653388e310ac9016f444ab6',
