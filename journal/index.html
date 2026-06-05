@@ -215,7 +215,7 @@ function licenseHTML(){return`<div class="center"><div class="logo"><span class=
   <input class="inp" id="lic-in" type="text" placeholder="EJ-XXXXX-XXXXX-XXXXX" value="${esc(S.licIn)}" autocomplete="off" spellcheck="false" style="letter-spacing:2px;font-size:1rem"/>
   ${S.licErr?`<p class="err">${esc(S.licErr)}</p>`:""}
   <button class="btn-gold" id="lic-submit" style="width:100%;margin-top:6px">Unlock My Journal ✦</button>
-  <p class="muted" style="margin-top:20px;font-size:.75rem;text-align:center">Don't have a license? <a href="https://etherealechoes.com/product/ethereal-journal/" target="_blank" style="color:#c9a227">Get lifetime access — $22.22 →</a></p>
+  <p class="muted" style="margin-top:20px;font-size:.75rem;text-align:center">Don't have a license? <a href="https://etherealjournals.gumroad.com/l/ethereal-journal" target="_blank" style="color:#c9a227">Get lifetime access — $22.22 →</a></p>
 </div></div>`;}
 
 function attachLicenseEvents(){
@@ -231,6 +231,15 @@ function attachLicenseEvents(){
 function submitLicense(){
   const key=S.licIn.trim();
   if(!key){S.licErr="Please enter your license key.";render();return;}
+  const grKey=key.toUpperCase().replace(/\s/g,"");
+  if(/^[0-9A-F]{8}-[0-9A-F]{8}-[0-9A-F]{8}-[0-9A-F]{8}$/.test(grKey)){
+    S.licErr="Verifying\u2026";render();
+    fetch("https://api.gumroad.com/v2/licenses/verify",{method:"POST",headers:{"Content-Type":"application/x-www-form-urlencoded"},body:"product_permalink=ethereal-journal&license_key="+encodeURIComponent(grKey)+"&increment_uses_count=true"}).then(r=>r.json()).then(d=>{
+      if(d&&d.success){localStorage.setItem(`${KP}lic`,"GR-"+grKey);S.licErr="";S.screen=localStorage.getItem(`${KP}init`)?"locked":"setup";render();}
+      else{S.licErr="Invalid license key. Please check your key and try again.";render();}
+    }).catch(()=>{S.licErr="Connection error \u2014 please try again.";render();});
+    return;
+  }
   if(!validateLicenseKey(key)){S.licErr="Invalid license key. Please check your key and try again.";render();return;}
   // Valid — store and proceed
   localStorage.setItem(`${KP}lic`,key.toUpperCase().replace(/\s/g,""));
@@ -487,7 +496,7 @@ function handleImport(e){const file=e.target.files[0];if(!file)return;const r=ne
 // free days, then the license screen. Set TRIAL_DAYS=0 for a pure paywall.
 const TRIAL_DAYS=7, DAY_MS=86400000;
 const T_TRIAL=`${KP}trial_start`, T_LEGACY=`${KP}legacy`, T_GINIT=`${KP}gate_init`, T_EMAIL=`${KP}trial_email`;
-function licOK(){return validateLicenseKey(localStorage.getItem(`${KP}lic`)||"");}
+function licOK(){const v=localStorage.getItem(`${KP}lic`)||"";if(v.indexOf("GR-")===0)return true;return validateLicenseKey(v);}
 function trialMsLeft(){const s=parseInt(localStorage.getItem(T_TRIAL),10);return s?(s+TRIAL_DAYS*DAY_MS)-Date.now():-1;}
 function trialActive(){return TRIAL_DAYS>0&&trialMsLeft()>0;}
 function trialDaysLeft(){return Math.max(1,Math.ceil(trialMsLeft()/DAY_MS));}
@@ -511,6 +520,7 @@ function emailHTML(){return`<div class="center"><div class="logo"><span class="l
   <input class="inp" id="email-in" type="email" placeholder="you@example.com" autocomplete="email" spellcheck="false"/>
   <p class="err" id="email-err" style="display:none"></p>
   <button class="btn-gold" id="email-start" style="width:100%;margin-top:6px">Start My 7-Day Trial ✦</button>
+  <a id="email-buynow" href="https://etherealjournals.gumroad.com/l/ethereal-journal" target="_blank" rel="noopener" style="display:block;width:100%;margin-top:10px;padding:12px 0;text-align:center;text-decoration:none;border:1px solid #c9a227;border-radius:10px;color:#c9a227;font-weight:700;box-sizing:border-box">Buy now — $22.22 ✦</a>
   <p class="muted" style="margin-top:18px;font-size:.72rem;text-align:center">No credit card required. Already have a key? <a href="#" id="email-haskey" style="color:#c9a227">Enter it here</a></p>
 </div></div>`;}
 function attachEmailEvents(){
