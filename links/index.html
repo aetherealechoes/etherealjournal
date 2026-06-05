@@ -64,6 +64,34 @@
       filter: drop-shadow(0 0 24px rgba(201,168,76,0.8));
       animation: moonGlow 4s ease-in-out infinite;
     }
+    .amara-portrait {
+      width: 116px;
+      height: 116px;
+      border-radius: 50%;
+      object-fit: cover;
+      object-position: 50% 12%;
+      border: 2px solid rgba(201,168,76,0.65);
+      box-shadow: 0 0 28px rgba(201,168,76,0.45), 0 0 60px rgba(107,63,160,0.35);
+      margin-bottom: 16px;
+      animation: moonGlow 4s ease-in-out infinite;
+      display: block;
+    }
+    .amara-bio {
+      font-size: 14.5px;
+      color: rgba(245,233,200,0.65);
+      text-align: center;
+      font-style: italic;
+      line-height: 1.65;
+      margin: 0 14px 6px;
+    }
+    .amara-bio-ar {
+      font-family: 'Amiri', serif;
+      font-size: 14px;
+      color: rgba(245,233,200,0.45);
+      text-align: center;
+      direction: rtl;
+      margin-bottom: 30px;
+    }
     @keyframes moonGlow {
       0%, 100% { filter: drop-shadow(0 0 20px rgba(201,168,76,0.7)); }
       50%       { filter: drop-shadow(0 0 36px rgba(201,168,76,1)); }
@@ -250,10 +278,12 @@
 <body>
   <div class="container">
 
-    <div class="moon-icon">🌙</div>
+    <img class="amara-portrait" src="https://etherealechoes.com/wp-content/uploads/2026/06/locking-eyes.jpg" alt="Amara — the oracle behind Ethereal Echoes">
     <div class="brand-name">ETHEREAL ECHOES</div>
     <div class="brand-tagline">Lunar wisdom for conscious living</div>
-    <div class="brand-tagline-ar">حكمة القمر للحياة الواعية</div>
+    <div class="brand-tagline-ar" style="margin-bottom:12px;">حكمة القمر للحياة الواعية</div>
+    <div class="amara-bio">Guided by Amara — reader of cards &amp; moonlight, turning ancient symbols into daily companions for your path.</div>
+    <div class="amara-bio-ar">قمرة — عرّافتكم بين الورق وضوء القمر</div>
     <div class="divider"></div>
 
     <div class="section-label">✦ Our Guides ✦</div>
@@ -261,6 +291,27 @@
     <div class="products">
 
       <!-- English Reference Guide -->
+      <!-- The Tarot Oracle (EN) -->
+      <a class="product-card" href="https://etherealechoes.com/product/tarot-oracle/" target="_blank">
+        <div class="card-icon">🔮</div>
+        <div class="card-text">
+          <div class="card-title">The Tarot Oracle</div>
+          <div class="card-desc">Daily readings woven from your stars, your numbers &amp; the energies of the day</div>
+        </div>
+        <div class="card-lang">EN</div>
+      </a>
+
+      <!-- The Tarot Oracle (AR) -->
+      <a class="product-card" href="https://tarot.etherealechoes.com/ar/" target="_blank">
+        <div class="card-icon">🪬</div>
+        <div class="card-text">
+          <div class="card-title-ar">أوراكل التاروت</div>
+          <div class="card-title">The Tarot Oracle — Arabic</div>
+          <div class="card-desc">قراءات تاروت يومية على ضوء منازل القمر وأرقامك</div>
+        </div>
+        <div class="card-lang">AR</div>
+      </a>
+
       <a class="product-card" href="https://etherealechoes.com/product/mansions-of-the-moon/" target="_blank">
         <div class="card-icon">🌕</div>
         <div class="card-text">
