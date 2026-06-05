@@ -2265,7 +2265,7 @@ document.addEventListener('DOMContentLoaded', () => {
 
   var GUMROAD_URL = 'https://etherealjournals.gumroad.com/l/lunar-personal-ar';
   var GR_RE = /^[0-9A-Fa-f]{8}-[0-9A-Fa-f]{8}-[0-9A-Fa-f]{8}-[0-9A-Fa-f]{8}$/;
-  function gumroadVerify(key){ return fetch('https://api.gumroad.com/v2/licenses/verify',{method:'POST',headers:{'Content-Type':'application/x-www-form-urlencoded'},body:'product_permalink=lunar-personal-ar&license_key='+encodeURIComponent(key)+'&increment_uses_count=true'}).then(function(r){return r.json();}).then(function(d){return !!(d&&d.success);}).catch(function(){return false;}); }
+  function gumroadVerify(key){ return fetch('https://api.gumroad.com/v2/licenses/verify',{method:'POST',headers:{'Content-Type':'application/x-www-form-urlencoded'},body:'product_id=npMS0EwVqmt3v3219cDWCQ%3D%3D&license_key='+encodeURIComponent(key)+'&increment_uses_count=true'}).then(function(r){return r.json();}).then(function(d){return !!(d&&d.success);}).catch(function(){return false;}); }
   var KEY_HASHES = new Set([
     'a382cf3a5a00332a549ec2948132b8d4e56a7efeb0a6fdcaae0d73f103c8c1f6',
     '16d4880155f979d810bc8e5d7eb0f74f929f37b79179fd5acf2aacea3a7c04f5',
