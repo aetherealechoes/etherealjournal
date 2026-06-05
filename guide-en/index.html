@@ -760,6 +760,14 @@
   .tip-good-tag { font-size: 11px; background: rgba(45,122,61,0.12); color: #72d48a; border: 1px solid rgba(45,122,61,0.22); padding: 2px 8px; border-radius: 12px; line-height: 1.5; }
 
   </style>
+<!-- Google tag (gtag.js) -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-0RR3F8K07Q"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+  gtag('config', 'G-0RR3F8K07Q');
+</script>
 </head>
 <body>
 <!-- Netlify Forms: static form so the build picks it up; JS posts to it -->
@@ -2291,7 +2299,7 @@ document.addEventListener('DOMContentLoaded', () => {
       '<div class="gate-sub"></div>' +
       '<input id="gate-email-input" class="gate-input" type="email" autocomplete="email" spellcheck="false">' +
       '<div id="gate-email-error" class="gate-error"></div>' +
-      '<button id="gate-email-btn" class="gate-btn">' +
+      '<button id="gate-email-btn" class="gate-btn"></button>' +
       '<a id="gate-buynow" class="gate-btn2" target="_blank" rel="noopener"></a>' +
       '<div class="gate-buy"><a href="#" id="gate-have-key"></a></div>';
     c.querySelector('.gate-title').textContent = T.emailTitle;
