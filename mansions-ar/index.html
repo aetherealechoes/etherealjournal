@@ -41,6 +41,8 @@
     transition: opacity 0.2s; margin-bottom: 24px;
   }
   .gate-btn:hover { opacity: 0.9; }
+  .gate-btn2 { display:block; width:100%; box-sizing:border-box; padding:12px; border:1px solid rgba(201,168,76,0.5); border-radius:10px; text-align:center; color:#E8C97A; text-decoration:none; font-family:inherit; font-weight:700; font-size:14px; letter-spacing:1px; margin:-10px 0 20px; }
+  .gate-btn2:hover { background:rgba(201,168,76,0.10); }
   .gate-buy { font-size: 12px; color: rgba(245,233,200,0.45); }
   .gate-buy a { color: rgba(201,168,76,0.7); text-decoration: none; }
   .gate-buy a:hover { color: #C9A84C; }
@@ -708,7 +710,7 @@
     <input id="gate-key-input" class="gate-input" type="text" placeholder="LMA-XXXXX-XXXXX-XXXXX" autocomplete="off" spellcheck="false">
     <div id="gate-key-error" class="gate-error"></div>
     <button id="gate-submit-btn" class="gate-btn" style="font-family:'Amiri', serif;">فتح الدليل ✦</button>
-    <div class="gate-buy">لا تملك مفتاحاً؟ <a href="https://etherealechoes.com/?p=4136" target="_blank" rel="noopener">اشترِ مقابل ٢٢٫٢٢ دولار ←</a></div>
+    <div class="gate-buy">لا تملك مفتاحاً؟ <a href="https://etherealjournals.gumroad.com/l/lunar-reference-ar" target="_blank" rel="noopener">اشترِ مقابل ٢٢٫٢٢ دولار ←</a></div>
   </div>
 </div>
 
@@ -2363,6 +2365,9 @@
 (function(){
   'use strict';
   var GATE_LIVE=true, PREFIX="LMA", SALT="ee_lma_2026", K_LIC="ee_lic_lma";
+  var GUMROAD_URL = 'https://etherealjournals.gumroad.com/l/lunar-reference-ar';
+  var GR_RE = /^[0-9A-Fa-f]{8}-[0-9A-Fa-f]{8}-[0-9A-Fa-f]{8}-[0-9A-Fa-f]{8}$/;
+  function gumroadVerify(key){ return fetch('https://api.gumroad.com/v2/licenses/verify',{method:'POST',headers:{'Content-Type':'application/x-www-form-urlencoded'},body:'product_permalink=lunar-reference-ar&license_key='+encodeURIComponent(key)+'&increment_uses_count=true'}).then(function(r){return r.json();}).then(function(d){return !!(d&&d.success);}).catch(function(){return false;}); }
   var KEY_HASHES=new Set([
     '75fb247c28f2433bc06b08ec5d486982325a16f605d1fa5eeeaa0612fb0d0f14',
     '3e890e6196cef3efc9a23942cadae41042bd6afd6653388e310ac9016f444ab6',
@@ -2426,6 +2431,8 @@
     var v=inp.value;
     if(!v||!v.trim()){err.textContent=T.empty;return;}
     var clean=v.trim().toUpperCase().replace(/\s+/g,'');
+    if(GR_RE.test(clean)){ var o2=btn.textContent;btn.disabled=true;btn.textContent='\u2026';err.textContent='';
+      gumroadVerify(clean).then(function(ok){ if(ok){ls.set(K_LIC,'GR-'+clean);unlock();} else {err.textContent=T.bad;btn.disabled=false;btn.textContent=o2;} }); return; }
     if(clean.split('-').length!==4||clean.indexOf(PREFIX+'-')!==0){err.textContent=T.fmt;return;}
     var orig=btn.textContent;btn.disabled=true;btn.textContent='\u2026';err.textContent='';
     keyValid(clean).then(function(ok){if(ok){ls.set(K_LIC,clean);unlock();}else{err.textContent=T.bad;btn.disabled=false;btn.textContent=orig;}});
