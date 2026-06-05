@@ -234,7 +234,7 @@ function submitLicense(){
   const grKey=key.toUpperCase().replace(/\s/g,"");
   if(/^[0-9A-F]{8}-[0-9A-F]{8}-[0-9A-F]{8}-[0-9A-F]{8}$/.test(grKey)){
     S.licErr="Verifying\u2026";render();
-    fetch("https://api.gumroad.com/v2/licenses/verify",{method:"POST",headers:{"Content-Type":"application/x-www-form-urlencoded"},body:"product_permalink=ethereal-journal&license_key="+encodeURIComponent(grKey)+"&increment_uses_count=true"}).then(r=>r.json()).then(d=>{
+    fetch("https://api.gumroad.com/v2/licenses/verify",{method:"POST",headers:{"Content-Type":"application/x-www-form-urlencoded"},body:"product_id=t0TFw0rWYwe4KG2XcjB2Mg%3D%3D&license_key="+encodeURIComponent(grKey)+"&increment_uses_count=true"}).then(r=>r.json()).then(d=>{
       if(d&&d.success){localStorage.setItem(`${KP}lic`,"GR-"+grKey);S.licErr="";S.screen=localStorage.getItem(`${KP}init`)?"locked":"setup";render();}
       else{S.licErr="Invalid license key. Please check your key and try again.";render();}
     }).catch(()=>{S.licErr="Connection error \u2014 please try again.";render();});
