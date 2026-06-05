@@ -41,6 +41,8 @@
     transition: opacity 0.2s; margin-bottom: 24px;
   }
   .gate-btn:hover { opacity: 0.9; }
+  .gate-btn2 { display:block; width:100%; box-sizing:border-box; padding:12px; border:1px solid rgba(201,168,76,0.5); border-radius:10px; text-align:center; color:#E8C97A; text-decoration:none; font-family:inherit; font-weight:700; font-size:14px; letter-spacing:1px; margin:-10px 0 20px; }
+  .gate-btn2:hover { background:rgba(201,168,76,0.10); }
   .gate-buy { font-size: 12px; color: rgba(245,233,200,0.45); }
   .gate-buy a { color: rgba(201,168,76,0.7); text-decoration: none; }
   .gate-buy a:hover { color: #C9A84C; }
@@ -707,7 +709,7 @@
     <input id="gate-key-input" class="gate-input" type="text" placeholder="LME-XXXXX-XXXXX-XXXXX" autocomplete="off" spellcheck="false">
     <div id="gate-key-error" class="gate-error"></div>
     <button id="gate-submit-btn" class="gate-btn" style="font-family:'Cinzel', serif;">Unlock Guide ✦</button>
-    <div class="gate-buy">Don't have a key? <a href="https://etherealechoes.com/product/mansions-of-the-moon/" target="_blank" rel="noopener">Purchase for $22.22 →</a></div>
+    <div class="gate-buy">Don't have a key? <a href="https://etherealjournals.gumroad.com/l/lunar-reference-en" target="_blank" rel="noopener">Purchase for $22.22 →</a></div>
   </div>
 </div>
 
@@ -2372,6 +2374,9 @@
 (function(){
   'use strict';
   var GATE_LIVE=true, PREFIX="LME", SALT="ee_lme_2026", K_LIC="ee_lic_lme";
+  var GUMROAD_URL = 'https://etherealjournals.gumroad.com/l/lunar-reference-en';
+  var GR_RE = /^[0-9A-Fa-f]{8}-[0-9A-Fa-f]{8}-[0-9A-Fa-f]{8}-[0-9A-Fa-f]{8}$/;
+  function gumroadVerify(key){ return fetch('https://api.gumroad.com/v2/licenses/verify',{method:'POST',headers:{'Content-Type':'application/x-www-form-urlencoded'},body:'product_permalink=lunar-reference-en&license_key='+encodeURIComponent(key)+'&increment_uses_count=true'}).then(function(r){return r.json();}).then(function(d){return !!(d&&d.success);}).catch(function(){return false;}); }
   var KEY_HASHES=new Set([
     'ee6d6ba9da269dfb88baf0cf3c8a512adcdc831c5a3a6de9c14c118da72c59e3',
     '6fcdefc73f22d168cc4b7ea12e83de3c32450335bb349e8f3c34b8b3d3406718',
@@ -2435,6 +2440,8 @@
     var v=inp.value;
     if(!v||!v.trim()){err.textContent=T.empty;return;}
     var clean=v.trim().toUpperCase().replace(/\s+/g,'');
+    if(GR_RE.test(clean)){ var o2=btn.textContent;btn.disabled=true;btn.textContent='\u2026';err.textContent='';
+      gumroadVerify(clean).then(function(ok){ if(ok){ls.set(K_LIC,'GR-'+clean);unlock();} else {err.textContent=T.bad;btn.disabled=false;btn.textContent=o2;} }); return; }
     if(clean.split('-').length!==4||clean.indexOf(PREFIX+'-')!==0){err.textContent=T.fmt;return;}
     var orig=btn.textContent;btn.disabled=true;btn.textContent='\u2026';err.textContent='';
     keyValid(clean).then(function(ok){if(ok){ls.set(K_LIC,clean);unlock();}else{err.textContent=T.bad;btn.disabled=false;btn.textContent=orig;}});
