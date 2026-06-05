@@ -698,6 +698,14 @@
     .mt-20 { margin-top: 20px; }
     .mb-20 { margin-bottom: 20px; }
   </style>
+<!-- Google tag (gtag.js) -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-0RR3F8K07Q"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+  gtag('config', 'G-0RR3F8K07Q');
+</script>
 </head>
 <body>
 <!-- ── LICENSE GATE ─────────────────────────────────────── -->
@@ -1812,6 +1820,7 @@
       <button class="cal-modal-close" onclick="closeCalModal()">✕</button>
     </div>
     <div class="cal-modal-body">
+      <div id="cal-modal-ausp"></div>
       <div id="cal-evt-list"></div>
       <div class="cal-add-form">
         <button class="cal-add-btn" onclick="addCalEvent(window._calModalDate)">إضافة</button>
@@ -2105,6 +2114,7 @@
     const TYPE_AR={note:'ملاحظة',task:'مهمة',reminder:'تذكير'};
     document.getElementById('cal-modal-date-lbl').textContent=`${DN[date.getDay()]}, ${MN[m-1]} ${d}, ${y}`;
     document.getElementById('cal-modal-mansion-lbl').textContent=`${CAL_NAMES_AR[idx]}`;
+    const _auspEl=document.getElementById('cal-modal-ausp'); if(_auspEl&&window.renderAuspPanelRef){_auspEl.innerHTML=window.renderAuspPanelRef(idx);}
     document.getElementById('cal-evt-list').innerHTML=evts.length
       ?evts.map(e=>`<div class="cal-evt-item">
           <button class="cal-evt-del" onclick="deleteCalEvent('${ds}','${e.id}')" title="حذف">✕</button>
@@ -2347,6 +2357,8 @@
       (avoid?'<div class="ausp-row avoid" style="margin-top:4px"><div class="ausp-label">'+AVOID_LABEL+'</div><div class="ausp-tags">'+avoid+'</div></div>':'')+
       special+'</div>';
   }
+  window.MANSION_DAYS = MANSION_DAYS;
+  window.renderAuspPanelRef = panel;
   function inject(){
     var cards=document.querySelectorAll('.mansion-card');
     var n=Math.min(cards.length, MANSION_DAYS.length);
