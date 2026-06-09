@@ -426,6 +426,10 @@
       font-weight: 700; letter-spacing: 2px; text-align: center; flex: 1;
     }
     .cal-view-toggle { display: flex; gap: 8px; }
+    .cal-mode-toggle {
+      display: flex; justify-content: center; gap: 10px;
+      margin-bottom: 16px; direction: ltr;
+    }
     .cal-mode-btn {
       background: var(--cream-dark); color: var(--text-soft); border: 1px solid #ddd;
       padding: 7px 22px; border-radius: 20px; cursor: pointer;
@@ -472,19 +476,11 @@
     .cal-day.is-birth-mansion::after {
       content: '⭐'; position: absolute; top: 3px; left: 4px; font-size: 10px;
     }
-    .cal-day-dates {
-      display: flex; align-items: center; gap: 4px; margin-bottom: 5px; direction: ltr;
-    }
-    .cal-day-num-gregorian {
+    .cal-day-num {
       font-family: 'Cinzel', serif; font-size: 14px; font-weight: 700;
-      color: var(--text-soft);
+      color: var(--text-soft); margin-bottom: 5px; direction: ltr;
     }
-    .cal-day-num-hijri {
-      font-size: 11px; color: rgba(26, 20, 16, 0.55);
-      font-weight: 600;
-    }
-    .cal-day.today .cal-day-num-gregorian { color: var(--gold); }
-    .cal-day.today .cal-day-num-hijri { color: var(--gold); opacity: 0.8; }
+    .cal-day.today .cal-day-num { color: var(--gold); }
     .cal-mansion-chip {
       border-radius: 4px; padding: 4px 6px; font-size: 17px;
       font-family: 'Amiri', serif; line-height: 1.5;
@@ -813,6 +809,7 @@
     </div>
 
     <div class="welcome-title">دليل منازل القمر</div>
+    <div class="welcome-sub">Personalized Lunar Mansion Guide</div>
     <div class="welcome-divider"></div>
     <p class="welcome-desc">
       أدخل اسمك وتاريخ ميلادك لنكتشف معاً منزلك القمري الشخصي — البوابة الكونية التي وُلدت فيها.
@@ -880,21 +877,24 @@
   <!-- COVER -->
   <div class="cover page-break" id="cover-page">
     <div class="cover-moon">🌙</div>
-    <div class="cover-greeting">دليلك الشخصي</div>
+    <div class="cover-greeting">YOUR PERSONAL GUIDE · دليلك الشخصي</div>
     <div class="cover-name" id="cover-name"></div>
     <div class="cover-title">دليل منازل القمر</div>
+    <div class="cover-title-en">Lunar Mansions Guide</div>
     <div class="cover-divider"></div>
     <div class="cover-mansion-reveal">
-      <div class="cover-mansion-label">منزلك القمري</div>
+      <div class="cover-mansion-label">YOUR BIRTH MANSION · منزلك القمري</div>
       <div class="cover-mansion-name" id="cover-mansion-ar"></div>
+      <div class="cover-mansion-en" id="cover-mansion-en"></div>
     </div>
     <div class="cover-brand">Ethereal Echoes · etherealechoes.com</div>
   </div>
 
   <!-- BIRTH MANSION HERO -->
   <div class="birth-hero page-break" id="birth-hero">
-    <div class="birth-hero-label">منزلك القمري الكوني</div>
+    <div class="birth-hero-label">YOUR COSMIC BIRTH MANSION</div>
     <div class="birth-hero-name" id="hero-name-ar"></div>
+    <div class="birth-hero-en" id="hero-name-en"></div>
     <div class="birth-hero-meta" id="hero-meta"></div>
     <div class="birth-hero-desc" id="hero-desc"></div>
     <div class="birth-hero-guidance" id="hero-guidance"></div>
@@ -916,6 +916,7 @@
   <!-- COMPATIBILITY SECTION -->
   <div class="section page-break" id="sec-compat">
     <div class="section-title">توافق منزلك مع المنازل الأخرى</div>
+    <div class="section-title-en">Your Mansion Compatibility</div>
     <div class="section-rule"></div>
     <p style="text-align:center;font-family:'Amiri',serif;font-size:15px;color:var(--text-soft);margin-bottom:24px;">
       هذا الجدول يُظهر مدى توافق منزلك القمري مع كل منزل من المنازل الثمانية والعشرين.
@@ -927,6 +928,7 @@
   <!-- ALL 28 MANSIONS -->
   <div class="section" id="sec-mansions">
     <div class="section-title">المنازل الثمانية والعشرون</div>
+    <div class="section-title-en">All 28 Lunar Mansions</div>
     <div class="section-rule"></div>
     <div class="mansions-grid" id="mansions-grid"></div>
   </div>
@@ -934,11 +936,16 @@
   <!-- LUNAR CALENDAR -->
   <div class="calendar-section page-break" id="calendar-section">
     <div class="section-title">التقويم القمري</div>
+    <div class="section-title-en">Lunar Mansion Calendar</div>
     <div class="section-rule"></div>
     <p style="text-align:center;font-family:'Amiri',serif;font-size:15px;color:var(--text-soft);margin-bottom:24px;">
       كل يوم في السنة مُلوَّن بطاقة منزله القمري. أيام منزلك (⭐) هي أقوى أيامك الشخصية في الشهر.
     </p>
 
+    <div class="cal-mode-toggle no-print">
+      <button class="cal-mode-btn active" id="btn-mode-greg" onclick="setCalMode('greg')">ميلادي</button>
+      <button class="cal-mode-btn" id="btn-mode-hijri" onclick="setCalMode('hijri')">هجري</button>
+    </div>
     <div class="cal-controls no-print">
       <button class="cal-nav-btn" onclick="calPrev()">&#8594; السابق</button>
       <div class="cal-month-title" id="cal-month-title"></div>
@@ -994,6 +1001,7 @@
   <!-- MOON PHASES -->
   <div class="section page-break" id="sec-phases">
     <div class="section-title">أطوار القمر الثمانية</div>
+    <div class="section-title-en">The Eight Moon Phases</div>
     <div class="section-rule"></div>
     <div class="phases-grid">
       <div class="phase-card no-break"><div class="phase-emoji">🌑</div><div class="phase-name-ar">القمر الجديد</div><div class="phase-energy">INTROSPECTIVE · تأمّلية</div><div class="phase-theme">بدايات جديدة، تحديد النوايا، زراعة البذور. وقت لنيّاتك الجديدة.</div></div>
@@ -1316,12 +1324,12 @@ function generateGuide() {
   // ── Cover ──────────────────────────────────────────────────
   document.getElementById('cover-name').textContent = displayName;
   document.getElementById('cover-mansion-ar').textContent = birthMansion.nameAr;
-  document.getElementById('cover-mansion-en').textContent = birthMansion.nameEn;
+  const _covEn = document.getElementById('cover-mansion-en'); if (_covEn) _covEn.textContent = birthMansion.nameEn;
 
   // ── Birth Hero ─────────────────────────────────────────────
   const desc = mansionDescriptions[birthMansion.id];
   document.getElementById('hero-name-ar').textContent = birthMansion.nameAr;
-  document.getElementById('hero-name-en').textContent = birthMansion.nameEn;
+  const _heroEn = document.getElementById('hero-name-en'); if (_heroEn) _heroEn.textContent = birthMansion.nameEn;
   document.getElementById('hero-meta').innerHTML = `
     <span class="birth-meta-pill">${elementNames[birthMansion.element]}</span>
     <span class="birth-meta-pill">${birthMansion.nature==="sa'd"?'✨ سعد (مبارك)':'⚠ نحس (تحذيري)'}</span>
@@ -1644,6 +1652,12 @@ const _todayH = toHijri(new Date().getFullYear(), new Date().getMonth()+1, new D
 let hijriYear  = _todayH.year;
 let hijriMonth = _todayH.month;
 
+function setCalMode(mode) {
+  calMode = mode;
+  document.getElementById('btn-mode-greg').classList.toggle('active', mode === 'greg');
+  document.getElementById('btn-mode-hijri').classList.toggle('active', mode === 'hijri');
+  renderCalendar();
+}
 
 function renderMonthGridHijri(hy, hm) {
   const today = new Date();
@@ -1740,17 +1754,10 @@ function renderMonthGrid(year, month) {
     const natureClass = mansion.nature === "sa'd" ? 'saad-border' : 'nahs-border';
     const moonEmoji = newMoon ? '🌑' : fullMoon ? '🌕' : '';
 
-    // Calculate Hijri date for this Gregorian day
-    const hijri = toHijri(year, month + 1, d);
-    const hijriDayAr = String(hijri.day).replace(/\d/g, n => '٠١٢٣٤٥٦٧٨٩'[n]);
-
     const dateStr = `${year}-${String(month+1).padStart(2,'0')}-${String(d).padStart(2,'0')}`;
     const dayEvts = eventsData[dateStr] || [];
     html += `<div class="cal-day${isToday2?' today':''}${isBirth?' is-birth-mansion':''}" onclick="calDayClick('${dateStr}')" data-mi="${mansion.index}">
-      <div class="cal-day-dates">
-        <div class="cal-day-num-gregorian" style="font-family:'Amiri',serif">${String(d).replace(/\d/g, n => '٠١٢٣٤٥٦٧٨٩'[n])}</div>
-        <div class="cal-day-num-hijri" style="font-family:'Amiri',serif;font-size:11px;color:rgba(245,233,200,0.6)">${hijriDayAr}</div>
-      </div>
+      <div class="cal-day-num" style="font-family:'Amiri',serif">${String(d).replace(/\d/g, n => '٠١٢٣٤٥٦٧٨٩'[n])}</div>
       <div class="cal-mansion-chip ${mansion.element} ${natureClass}" title="${mansion.nameAr}">${mansion.nameAr}</div>
       ${moonEmoji ? `<div class="cal-moon-phase">${moonEmoji}</div>` : ''}
       ${renderEventDots(dayEvts)}
@@ -1862,6 +1869,17 @@ function renderCalendar() {
   const keyPanel = document.getElementById('key-dates-panel');
   if (!container) return;
 
+  if (calMode === 'hijri') {
+    if (titleEl) titleEl.textContent = `${HIJRI_MONTHS_AR[hijriMonth-1]} ${hijriYear} هـ`;
+    container.innerHTML = renderMonthGridHijri(hijriYear, hijriMonth);
+    if (keyPanel) {
+      const g1 = hijriToGregorian(hijriYear, hijriMonth, 1);
+      keyPanel.innerHTML = renderKeyDates(g1.year, g1.month-1);
+      keyPanel.style.display = '';
+    }
+    return;
+  }
+
   if (calView === 'month') {
     titleEl.textContent = `${MONTH_NAMES[calMonth]} ${calYear}  ·  ${MONTH_NAMES_AR[calMonth]}`;
     container.innerHTML = renderMonthGrid(calYear, calMonth);
@@ -1875,12 +1893,16 @@ function renderCalendar() {
 }
 
 function calPrev() {
-  if (calView==='month') { calMonth--; if(calMonth<0){calMonth=11;calYear--;} }
+  if (calMode === 'hijri') {
+    hijriMonth--; if (hijriMonth < 1) { hijriMonth = 12; hijriYear--; }
+  } else if (calView==='month') { calMonth--; if(calMonth<0){calMonth=11;calYear--;} }
   else { calYear--; }
   renderCalendar();
 }
 function calNext() {
-  if (calView==='month') { calMonth++; if(calMonth>11){calMonth=0;calYear++;} }
+  if (calMode === 'hijri') {
+    hijriMonth++; if (hijriMonth > 12) { hijriMonth = 1; hijriYear++; }
+  } else if (calView==='month') { calMonth++; if(calMonth>11){calMonth=0;calYear++;} }
   else { calYear++; }
   renderCalendar();
 }
