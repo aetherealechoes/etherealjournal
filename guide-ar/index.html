@@ -1606,9 +1606,9 @@ function toHijri(gy, gm, gd) {
   z = z - 10631 * n + 354;
   const j = Math.floor((10985 - z) / 5316) * Math.floor(50*z/17719) + Math.floor(z/5670) * Math.floor(43*z/15238);
   z = z - Math.floor((30-j)/15)*Math.floor(17719*j/50) - Math.floor(j/16)*Math.floor(15238*j/43) + 29;
-  const hYear  = 30*n + j - 1;
-  const hMonth = Math.floor(11*z/325) + 1;
-  const hDay   = z - Math.floor((hMonth-1)*325/11);
+  const hYear  = 30*n + j - 30;
+  const hMonth = Math.floor(24*z/709);
+  const hDay   = z - Math.floor(709*hMonth/24);
   return { year: hYear, month: hMonth, day: hDay };
 }
 
@@ -1713,13 +1713,13 @@ function renderMonthGrid(year, month) {
     const dayEvts = eventsData[dateStr] || [];
 
     html += `<div class="cal-day${isToday2?' today':''}${isBirth?' is-birth-mansion':''}" onclick="calDayClick('${dateStr}')" data-mi="${mansion.index}">
-      <div class="cal-day-num" style="font-family:'Amiri',serif;display:flex;justify-content:space-between;align-items:baseline;gap:2px;">
-        <span style="font-size:13px;font-weight:700;">${gregAr}</span>
-        <span style="font-size:9px;color:rgba(100,80,40,0.6);font-family:'Amiri',serif;">${hijriAr} ${hijriMonthShort}</span>
+      <div style="display:flex;flex-direction:column;align-items:center;margin-bottom:3px;gap:0px;">
+        <span style="font-family:'Amiri',serif;font-size:15px;font-weight:700;line-height:1.2;">${gregAr}</span>
+        <span style="font-family:'Amiri',serif;font-size:10px;color:rgba(180,150,80,0.75);line-height:1.2;">${hijriAr} ${hijriMonthShort}</span>
       </div>
       <div class="cal-mansion-chip ${mansion.element} ${natureClass}" title="${mansion.nameAr}">${mansion.nameAr}</div>
-      <div class="cal-moon-phase" style="font-size:11px;display:flex;align-items:center;gap:2px;justify-content:center;margin-top:2px;">
-        <span>${phase.emoji}</span><span style="font-family:'Amiri',serif;font-size:10px;">${phase.label}</span>
+      <div style="font-family:'Amiri',serif;font-size:12px;display:flex;align-items:center;gap:3px;justify-content:center;margin-top:3px;color:rgba(232,201,122,0.85);">
+        <span style="font-size:13px;">${phase.emoji}</span><span>${phase.label}</span>
       </div>
       ${renderEventDots(dayEvts)}
     </div>`;
