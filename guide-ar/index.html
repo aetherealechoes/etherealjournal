@@ -727,7 +727,7 @@
   }
   .tip-header { display: flex; align-items: center; gap: 7px; margin-bottom: 2px; flex-direction: row-reverse; }
   .tip-emoji { font-size: 20px; line-height: 1; }
-  .tip-name { font-family: 'Cinzel', serif; font-size: 11px; font-weight: 700; color: #E8C97A; letter-spacing: 0.5px; line-height: 1.3; direction: ltr; }
+  .tip-name { font-family: 'Amiri', serif; font-size: 16px; font-weight: 700; color: #E8C97A; line-height: 1.3; direction: rtl; }
   .tip-ar { font-family: 'Amiri', serif; font-size: 15px; color: rgba(232,201,122,0.85); display: block; margin-bottom: 4px; }
   .tip-meaning { font-size: 13px; color: rgba(245,233,200,0.78); font-style: italic; margin-bottom: 8px; padding-bottom: 7px; border-bottom: 1px solid rgba(201,168,76,0.15); line-height: 1.5; }
   .tip-badges { display: flex; flex-wrap: wrap; gap: 4px; margin-bottom: 6px; flex-direction: row-reverse; }
@@ -809,7 +809,7 @@
     </div>
 
     <div class="welcome-title">دليل منازل القمر</div>
-    <div class="welcome-sub">Personalized Lunar Mansion Guide</div>
+    <div class="welcome-sub">دليل منازل القمر الشخصي</div>
     <div class="welcome-divider"></div>
     <p class="welcome-desc">
       أدخل اسمك وتاريخ ميلادك لنكتشف معاً منزلك القمري الشخصي — البوابة الكونية التي وُلدت فيها.
@@ -877,24 +877,21 @@
   <!-- COVER -->
   <div class="cover page-break" id="cover-page">
     <div class="cover-moon">🌙</div>
-    <div class="cover-greeting">YOUR PERSONAL GUIDE · دليلك الشخصي</div>
+    <div class="cover-greeting">دليلك الشخصي</div>
     <div class="cover-name" id="cover-name"></div>
     <div class="cover-title">دليل منازل القمر</div>
-    <div class="cover-title-en">Lunar Mansions Guide</div>
     <div class="cover-divider"></div>
     <div class="cover-mansion-reveal">
-      <div class="cover-mansion-label">YOUR BIRTH MANSION · منزلك القمري</div>
+      <div class="cover-mansion-label">منزلك القمري</div>
       <div class="cover-mansion-name" id="cover-mansion-ar"></div>
-      <div class="cover-mansion-en" id="cover-mansion-en"></div>
     </div>
     <div class="cover-brand">Ethereal Echoes · etherealechoes.com</div>
   </div>
 
   <!-- BIRTH MANSION HERO -->
   <div class="birth-hero page-break" id="birth-hero">
-    <div class="birth-hero-label">YOUR COSMIC BIRTH MANSION</div>
+    <div class="birth-hero-label">منزلك القمري الكوني</div>
     <div class="birth-hero-name" id="hero-name-ar"></div>
-    <div class="birth-hero-en" id="hero-name-en"></div>
     <div class="birth-hero-meta" id="hero-meta"></div>
     <div class="birth-hero-desc" id="hero-desc"></div>
     <div class="birth-hero-guidance" id="hero-guidance"></div>
@@ -902,7 +899,7 @@
 
   <!-- TODAY'S MANSION BANNER -->
   <div class="today-banner no-break" id="today-banner">
-    <div class="today-label">TODAY'S ACTIVE MANSION · منزل القمر اليوم</div>
+    <div class="today-label">منزل القمر اليوم</div>
     <div class="today-content">
       <div class="today-phase" id="today-phase-emoji"></div>
       <div class="today-info">
@@ -916,7 +913,7 @@
   <!-- COMPATIBILITY SECTION -->
   <div class="section page-break" id="sec-compat">
     <div class="section-title">توافق منزلك مع المنازل الأخرى</div>
-    <div class="section-title-en">Your Mansion Compatibility</div>
+    <div class="section-title-en">توافق منزلك مع المنازل</div>
     <div class="section-rule"></div>
     <p style="text-align:center;font-family:'Amiri',serif;font-size:15px;color:var(--text-soft);margin-bottom:24px;">
       هذا الجدول يُظهر مدى توافق منزلك القمري مع كل منزل من المنازل الثمانية والعشرين.
@@ -928,7 +925,7 @@
   <!-- ALL 28 MANSIONS -->
   <div class="section" id="sec-mansions">
     <div class="section-title">المنازل الثمانية والعشرون</div>
-    <div class="section-title-en">All 28 Lunar Mansions</div>
+    <div class="section-title-en">المنازل القمرية الثمانية والعشرون</div>
     <div class="section-rule"></div>
     <div class="mansions-grid" id="mansions-grid"></div>
   </div>
@@ -936,16 +933,12 @@
   <!-- LUNAR CALENDAR -->
   <div class="calendar-section page-break" id="calendar-section">
     <div class="section-title">التقويم القمري</div>
-    <div class="section-title-en">Lunar Mansion Calendar</div>
+    <div class="section-title-en">التقويم الميلادي والهجري</div>
     <div class="section-rule"></div>
     <p style="text-align:center;font-family:'Amiri',serif;font-size:15px;color:var(--text-soft);margin-bottom:24px;">
       كل يوم في السنة مُلوَّن بطاقة منزله القمري. أيام منزلك (⭐) هي أقوى أيامك الشخصية في الشهر.
     </p>
 
-    <div class="cal-mode-toggle no-print">
-      <button class="cal-mode-btn active" id="btn-mode-greg" onclick="setCalMode('greg')">ميلادي</button>
-      <button class="cal-mode-btn" id="btn-mode-hijri" onclick="setCalMode('hijri')">هجري</button>
-    </div>
     <div class="cal-controls no-print">
       <button class="cal-nav-btn" onclick="calPrev()">&#8594; السابق</button>
       <div class="cal-month-title" id="cal-month-title"></div>
@@ -962,7 +955,7 @@
       <span class="cal-legend-item"><span class="cal-legend-dot" style="background:#EFFFEB;border:1px solid #2D6A00;"></span>هواء</span>
       <span class="cal-legend-item"><span class="cal-legend-dot" style="background:#F5F0E5;border:1px solid #6B4C1A;"></span>أرض</span>
       <span class="cal-legend-item"><span class="cal-legend-dot" style="background:rgba(201,168,76,0.25);border:1px solid var(--gold);"></span>⭐ منزلك</span>
-      <span class="cal-legend-item">🌑 new &nbsp; 🌕 full</span>
+      <span class="cal-legend-item">🌑 محاق &nbsp; 🌒 تزايد &nbsp; 🌕 بدر &nbsp; 🌘 تناقص</span>
     </div>
 
     <div id="cal-container"></div>
@@ -1001,17 +994,17 @@
   <!-- MOON PHASES -->
   <div class="section page-break" id="sec-phases">
     <div class="section-title">أطوار القمر الثمانية</div>
-    <div class="section-title-en">The Eight Moon Phases</div>
+    <div class="section-title-en">أطوار القمر الثمانية</div>
     <div class="section-rule"></div>
     <div class="phases-grid">
-      <div class="phase-card no-break"><div class="phase-emoji">🌑</div><div class="phase-name-ar">القمر الجديد</div><div class="phase-energy">INTROSPECTIVE · تأمّلية</div><div class="phase-theme">بدايات جديدة، تحديد النوايا، زراعة البذور. وقت لنيّاتك الجديدة.</div></div>
-      <div class="phase-card no-break"><div class="phase-emoji">🌒</div><div class="phase-name-ar">الهلال المتزايد</div><div class="phase-energy">BUILDING · بنّاءة</div><div class="phase-theme">اتخاذ الخطوات الأولى، خطط ناشئة، زخم متنامٍ. ابدأ التحرك.</div></div>
-      <div class="phase-card no-break"><div class="phase-emoji">🌓</div><div class="phase-name-ar">التربيع الأول</div><div class="phase-energy">DECISIVE · حاسمة</div><div class="phase-theme">التغلب على العقبات، اتخاذ الإجراءات، الالتزام. واجه بشجاعة.</div></div>
-      <div class="phase-card no-break"><div class="phase-emoji">🌔</div><div class="phase-name-ar">الأحدب المتزايد</div><div class="phase-energy">REFINING · صاقلة</div><div class="phase-theme">تعديلات، صبر، ثقة بالمسار. أنت قريب — صقّل ما بنيت.</div></div>
-      <div class="phase-card no-break"><div class="phase-emoji">🌕</div><div class="phase-name-ar">البدر الكامل</div><div class="phase-energy">ILLUMINATED · مُنيرة</div><div class="phase-theme">اكتمال، كشف، حدس مُتعاظم. القمر يُضيء ما كان خفياً.</div></div>
-      <div class="phase-card no-break"><div class="phase-emoji">🌖</div><div class="phase-name-ar">الأحدب المتناقص</div><div class="phase-energy">GRATEFUL · ممتنّة</div><div class="phase-theme">مشاركة الحكمة، الامتنان، ردّ الجميل. شارك ما تعلمته.</div></div>
-      <div class="phase-card no-break"><div class="phase-emoji">🌗</div><div class="phase-name-ar">التربيع الأخير</div><div class="phase-energy">RELEASING · مُحرِّرة</div><div class="phase-theme">التخلّي، المسامحة، تفريغ المساحة. أفرج لتفسح المجال.</div></div>
-      <div class="phase-card no-break"><div class="phase-emoji">🌘</div><div class="phase-name-ar">الهلال المتناقص</div><div class="phase-energy">RESTING · مُريحة</div><div class="phase-theme">الاستسلام، الراحة، التأمل الروحي. جدد طاقتك للدورة القادمة.</div></div>
+      <div class="phase-card no-break"><div class="phase-emoji">🌑</div><div class="phase-name-ar">القمر الجديد</div><div class="phase-energy">تأمّلية</div><div class="phase-theme">بدايات جديدة، تحديد النوايا، زراعة البذور. وقت لنيّاتك الجديدة.</div></div>
+      <div class="phase-card no-break"><div class="phase-emoji">🌒</div><div class="phase-name-ar">الهلال المتزايد</div><div class="phase-energy">بنّاءة</div><div class="phase-theme">اتخاذ الخطوات الأولى، خطط ناشئة، زخم متنامٍ. ابدأ التحرك.</div></div>
+      <div class="phase-card no-break"><div class="phase-emoji">🌓</div><div class="phase-name-ar">التربيع الأول</div><div class="phase-energy">حاسمة</div><div class="phase-theme">التغلب على العقبات، اتخاذ الإجراءات، الالتزام. واجه بشجاعة.</div></div>
+      <div class="phase-card no-break"><div class="phase-emoji">🌔</div><div class="phase-name-ar">الأحدب المتزايد</div><div class="phase-energy">صاقلة</div><div class="phase-theme">تعديلات، صبر، ثقة بالمسار. أنت قريب — صقّل ما بنيت.</div></div>
+      <div class="phase-card no-break"><div class="phase-emoji">🌕</div><div class="phase-name-ar">البدر الكامل</div><div class="phase-energy">مُنيرة</div><div class="phase-theme">اكتمال، كشف، حدس مُتعاظم. القمر يُضيء ما كان خفياً.</div></div>
+      <div class="phase-card no-break"><div class="phase-emoji">🌖</div><div class="phase-name-ar">الأحدب المتناقص</div><div class="phase-energy">ممتنّة</div><div class="phase-theme">مشاركة الحكمة، الامتنان، ردّ الجميل. شارك ما تعلمته.</div></div>
+      <div class="phase-card no-break"><div class="phase-emoji">🌗</div><div class="phase-name-ar">التربيع الأخير</div><div class="phase-energy">مُحرِّرة</div><div class="phase-theme">التخلّي، المسامحة، تفريغ المساحة. أفرج لتفسح المجال.</div></div>
+      <div class="phase-card no-break"><div class="phase-emoji">🌘</div><div class="phase-name-ar">الهلال المتناقص</div><div class="phase-energy">مُريحة</div><div class="phase-theme">الاستسلام، الراحة، التأمل الروحي. جدد طاقتك للدورة القادمة.</div></div>
     </div>
   </div>
 
@@ -1324,12 +1317,10 @@ function generateGuide() {
   // ── Cover ──────────────────────────────────────────────────
   document.getElementById('cover-name').textContent = displayName;
   document.getElementById('cover-mansion-ar').textContent = birthMansion.nameAr;
-  const _covEn = document.getElementById('cover-mansion-en'); if (_covEn) _covEn.textContent = birthMansion.nameEn;
 
   // ── Birth Hero ─────────────────────────────────────────────
   const desc = mansionDescriptions[birthMansion.id];
   document.getElementById('hero-name-ar').textContent = birthMansion.nameAr;
-  const _heroEn = document.getElementById('hero-name-en'); if (_heroEn) _heroEn.textContent = birthMansion.nameEn;
   document.getElementById('hero-meta').innerHTML = `
     <span class="birth-meta-pill">${elementNames[birthMansion.element]}</span>
     <span class="birth-meta-pill">${birthMansion.nature==="sa'd"?'✨ سعد (مبارك)':'⚠ نحس (تحذيري)'}</span>
@@ -1594,7 +1585,6 @@ const ABJAD_PERSONAL_AVOIDS = {
 // ── CALENDAR ENGINE ────────────────────────────────────────────
 let calYear  = new Date().getFullYear();
 let calMonth = new Date().getMonth(); // 0-based
-let calMode  = 'greg'; // 'greg' or 'hijri'
 
 // ── Hijri Calendar ────────────────────────────────────────────────────────
 const HIJRI_MONTHS_AR = [
@@ -1652,62 +1642,9 @@ const _todayH = toHijri(new Date().getFullYear(), new Date().getMonth()+1, new D
 let hijriYear  = _todayH.year;
 let hijriMonth = _todayH.month;
 
-function setCalMode(mode) {
-  calMode = mode;
-  document.getElementById('btn-mode-greg').classList.toggle('active', mode === 'greg');
-  document.getElementById('btn-mode-hijri').classList.toggle('active', mode === 'hijri');
-  renderCalendar();
-}
-
-function renderMonthGridHijri(hy, hm) {
-  const today = new Date();
-  const todayH = toHijri(today.getFullYear(), today.getMonth()+1, today.getDate());
-  const totalDays = hijriDaysInMonth(hy, hm);
-  // Get Gregorian date of Hijri day 1
-  const g1 = hijriToGregorian(hy, hm, 1);
-  const firstDayOfWeek = new Date(g1.year, g1.month-1, g1.day).getDay();
-  const eventsData = getCalEvents();
-
-  let html = `<div class="cal-grid">
-    <div class="cal-weekdays">${WEEKDAYS_AR_FULL.map(d=>`<div class="cal-weekday">${d}</div>`).join('')}</div>
-    <div class="cal-days">`;
-
-  for (let i = 0; i < firstDayOfWeek; i++) html += `<div class="cal-day empty"></div>`;
-
-  for (let hd = 1; hd <= totalDays; hd++) {
-    const gDate = hijriToGregorian(hy, hm, hd);
-    const date  = new Date(gDate.year, gDate.month-1, gDate.day);
-    const mansion = getMansion(date);
-    const isToday2 = (todayH.year===hy && todayH.month===hm && todayH.day===hd);
-    const isBirth  = mansion.id === _birthMansionId;
-    const newMoon  = isNewMoon(date);
-    const fullMoon = isFullMoon(date);
-    const natureClass = mansion.nature === "sa'd" ? 'saad-border' : 'nahs-border';
-    const moonEmoji   = newMoon ? '🌑' : fullMoon ? '🌕' : '';
-    const dateStr = `${gDate.year}-${String(gDate.month).padStart(2,'0')}-${String(gDate.day).padStart(2,'0')}`;
-    const dayEvts = eventsData[dateStr] || [];
-    // Show Hijri day number (Arabic-Indic numerals)
-    const hdAr = String(hd).replace(/\d/g, n => '٠١٢٣٤٥٦٧٨٩'[n]);
-    html += `<div class="cal-day${isToday2?' today':''}${isBirth?' is-birth-mansion':''}" onclick="calDayClick('${dateStr}')" data-mi="${mansion.index}">
-      <div class="cal-day-num" style="font-family:'Amiri',serif">${hdAr}</div>
-      <div class="cal-mansion-chip ${mansion.element} ${natureClass}" title="${mansion.nameAr}">${mansion.nameAr}</div>
-      ${moonEmoji ? `<div class="cal-moon-phase">${moonEmoji}</div>` : ''}
-      ${renderEventDots(dayEvts)}
-    </div>`;
-  }
-
-  const totalCells = firstDayOfWeek + totalDays;
-  const remainder  = totalCells % 7;
-  if (remainder > 0) for (let i = 0; i < 7-remainder; i++) html += `<div class="cal-day empty"></div>`;
-  html += `</div></div>`;
-  return html;
-}
 let calView  = 'month';
 let _birthMansionId = null;
 
-const WEEKDAYS_EN = ['Sun','Mon','Tue','Wed','Thu','Fri','Sat'];
-const MONTH_NAMES = ['January','February','March','April','May','June',
-                     'July','August','September','October','November','December'];
 const MONTH_NAMES_AR = ['كانون الثاني','شباط','آذار','نيسان','أيار','حزيران',
                         'تموز','آب','أيلول','تشرين الأول','تشرين الثاني','كانون الأول'];
 
@@ -1732,6 +1669,18 @@ function isFullMoon(date) {
   return age >= 13.9 && age < 16.61;
 }
 
+// Moon phase Arabic labels and emojis (all 4 phases shown every day)
+const MOON_PHASE_AR = {
+  new:    { emoji: '🌑', label: 'محاق' },
+  waxing: { emoji: '🌒', label: 'تزايد' },
+  full:   { emoji: '🌕', label: 'بدر' },
+  waning: { emoji: '🌘', label: 'تناقص' }
+};
+
+function toArabicNumerals(n) {
+  return String(n).replace(/\d/g, d => '٠١٢٣٤٥٦٧٨٩'[d]);
+}
+
 function renderMonthGrid(year, month) {
   const today = new Date();
   const firstDay = new Date(year, month, 1).getDay();
@@ -1741,7 +1690,6 @@ function renderMonthGrid(year, month) {
     <div class="cal-weekdays">${WEEKDAYS_AR_FULL.map(d=>`<div class="cal-weekday">${d}</div>`).join('')}</div>
     <div class="cal-days">`;
 
-  // Empty cells before first day
   for (let i=0; i<firstDay; i++) html += `<div class="cal-day empty"></div>`;
 
   for (let d=1; d<=daysInMonth; d++) {
@@ -1749,22 +1697,34 @@ function renderMonthGrid(year, month) {
     const mansion = getMansion(date);
     const isToday2 = (d===today.getDate() && month===today.getMonth() && year===today.getFullYear());
     const isBirth = mansion.id === _birthMansionId;
-    const newMoon = isNewMoon(date);
-    const fullMoon = isFullMoon(date);
     const natureClass = mansion.nature === "sa'd" ? 'saad-border' : 'nahs-border';
-    const moonEmoji = newMoon ? '🌑' : fullMoon ? '🌕' : '';
+
+    // Both Gregorian + Hijri dates
+    const hDate = toHijri(year, month+1, d);
+    const gregAr  = toArabicNumerals(d);
+    const hijriAr = toArabicNumerals(hDate.day);
+    const hijriMonthShort = HIJRI_MONTHS_AR[hDate.month-1];
+
+    // Full moon phase every day
+    const phaseKey = getMoonPhaseKey(date);
+    const phase = MOON_PHASE_AR[phaseKey];
 
     const dateStr = `${year}-${String(month+1).padStart(2,'0')}-${String(d).padStart(2,'0')}`;
     const dayEvts = eventsData[dateStr] || [];
+
     html += `<div class="cal-day${isToday2?' today':''}${isBirth?' is-birth-mansion':''}" onclick="calDayClick('${dateStr}')" data-mi="${mansion.index}">
-      <div class="cal-day-num" style="font-family:'Amiri',serif">${String(d).replace(/\d/g, n => '٠١٢٣٤٥٦٧٨٩'[n])}</div>
+      <div class="cal-day-num" style="font-family:'Amiri',serif;display:flex;justify-content:space-between;align-items:baseline;gap:2px;">
+        <span style="font-size:13px;font-weight:700;">${gregAr}</span>
+        <span style="font-size:9px;color:rgba(100,80,40,0.6);font-family:'Amiri',serif;">${hijriAr} ${hijriMonthShort}</span>
+      </div>
       <div class="cal-mansion-chip ${mansion.element} ${natureClass}" title="${mansion.nameAr}">${mansion.nameAr}</div>
-      ${moonEmoji ? `<div class="cal-moon-phase">${moonEmoji}</div>` : ''}
+      <div class="cal-moon-phase" style="font-size:11px;display:flex;align-items:center;gap:2px;justify-content:center;margin-top:2px;">
+        <span>${phase.emoji}</span><span style="font-family:'Amiri',serif;font-size:10px;">${phase.label}</span>
+      </div>
       ${renderEventDots(dayEvts)}
     </div>`;
   }
 
-  // Fill remaining cells
   const totalCells = firstDay + daysInMonth;
   const remainder = totalCells % 7;
   if (remainder > 0) for (let i=0; i<7-remainder; i++) html += `<div class="cal-day empty"></div>`;
@@ -1869,40 +1829,29 @@ function renderCalendar() {
   const keyPanel = document.getElementById('key-dates-panel');
   if (!container) return;
 
-  if (calMode === 'hijri') {
-    if (titleEl) titleEl.textContent = `${HIJRI_MONTHS_AR[hijriMonth-1]} ${hijriYear} هـ`;
-    container.innerHTML = renderMonthGridHijri(hijriYear, hijriMonth);
-    if (keyPanel) {
-      const g1 = hijriToGregorian(hijriYear, hijriMonth, 1);
-      keyPanel.innerHTML = renderKeyDates(g1.year, g1.month-1);
-      keyPanel.style.display = '';
-    }
-    return;
-  }
-
   if (calView === 'month') {
-    titleEl.textContent = `${MONTH_NAMES[calMonth]} ${calYear}  ·  ${MONTH_NAMES_AR[calMonth]}`;
+    // Compute corresponding Hijri month for the 1st of this Gregorian month
+    const hFirst = toHijri(calYear, calMonth+1, 1);
+    const hYearAr  = toArabicNumerals(hFirst.year);
+    const calYearAr = toArabicNumerals(calYear);
+    titleEl.textContent = `${MONTH_NAMES_AR[calMonth]} ${calYearAr}  ·  ${HIJRI_MONTHS_AR[hFirst.month-1]} ${hYearAr} هـ`;
     container.innerHTML = renderMonthGrid(calYear, calMonth);
     keyPanel.innerHTML = renderKeyDates(calYear, calMonth);
     keyPanel.style.display = '';
   } else {
-    titleEl.textContent = `${calYear} — Full Year View`;
+    titleEl.textContent = `عرض السنة الكاملة — ${toArabicNumerals(calYear)}`;
     container.innerHTML = renderYearView(calYear);
     keyPanel.style.display = 'none';
   }
 }
 
 function calPrev() {
-  if (calMode === 'hijri') {
-    hijriMonth--; if (hijriMonth < 1) { hijriMonth = 12; hijriYear--; }
-  } else if (calView==='month') { calMonth--; if(calMonth<0){calMonth=11;calYear--;} }
+  if (calView==='month') { calMonth--; if(calMonth<0){calMonth=11;calYear--;} }
   else { calYear--; }
   renderCalendar();
 }
 function calNext() {
-  if (calMode === 'hijri') {
-    hijriMonth++; if (hijriMonth > 12) { hijriMonth = 1; hijriYear++; }
-  } else if (calView==='month') { calMonth++; if(calMonth>11){calMonth=0;calYear++;} }
+  if (calView==='month') { calMonth++; if(calMonth>11){calMonth=0;calYear++;} }
   else { calYear++; }
   renderCalendar();
 }
