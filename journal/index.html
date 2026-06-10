@@ -95,6 +95,14 @@ body{min-height:100vh;background:linear-gradient(150deg,#07071a 0%,#130a2a 45%,#
 @keyframes spin{to{transform:rotate(360deg)}}
 @media(max-width:600px){.card{padding:18px}.board-toolbar{gap:7px}}
 </style>
+<!-- Google tag (gtag.js) -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-0RR3F8K07Q"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+  gtag('config', 'G-0RR3F8K07Q');
+</script>
 </head>
 <body>
 <!-- Netlify Forms: captures trial sign-up emails (submissions appear in Netlify dashboard → Forms) -->
@@ -112,6 +120,14 @@ const PROMPTS=["What does your ideal day look like one year from now?","Describe
 const AFFIRMATIONS=["I am a powerful creator of my reality.","Everything I desire is flowing to me now.","I am worthy of all the abundance the universe has to offer.","My dreams are valid and achievable.","I attract love, prosperity, and joy effortlessly.","The universe is always conspiring in my favor.","I release what no longer serves me with love and grace.","I am aligned with my highest purpose.","My intuition guides me toward my greatest good.","I am becoming the best version of myself every day.","I trust the timing of my life completely.","My energy is magnetic and I draw my desires to me."];
 const VISUALIZATIONS=[{title:"Morning Alignment",duration:"5 min",steps:["Close your eyes and take three deep breaths.","Feel your body relax with each exhale.","Visualize a golden light filling your chest, expanding outward.","See yourself waking up in your dream life. What do you see around you?","Feel the emotion of already having everything you desire.","Hold this feeling for the remaining time."]},{title:"Abundance Flow",duration:"10 min",steps:["Sit comfortably and close your eyes.","Breathe in abundance, breathe out limitation.","Imagine a river of golden light flowing toward you.","See money, opportunities, and blessings flowing freely into your life.","Feel deep gratitude for everything already on its way.","Affirm silently: I am open to receive."]},{title:"Future Self Meeting",duration:"15 min",steps:["Take 5 deep breaths to center yourself.","Imagine walking through a beautiful golden door.","On the other side, you meet your future self — radiant and fulfilled.","Look into their eyes. Notice how they carry themselves.","Ask them: What do I need to know right now?","Receive the message. Sit with it. Feel it in your heart.","Thank your future self and slowly return to the present."]}];
 const TIMER_SOUNDS=[{id:"bowl",label:"Tibetan Singing Bowl",icon:"🪘",desc:"432 Hz · warm & resonant"},{id:"crystal",label:"Crystal Singing Bowl",icon:"🔮",desc:"528 Hz · love frequency"},{id:"gong",label:"Temple Gong",icon:"🎐",desc:"110 Hz · deep & powerful"},{id:"tingsha",label:"Tingsha Bell",icon:"🔔",desc:"880 Hz · clear & bright"},{id:"om",label:"Om Tone",icon:"☯️",desc:"136 Hz · earth frequency"}];
+// ── FRENCH CONTENT ───────────────────────────────────────────────────────────
+const PROMPTS_FR=["À quoi ressemble votre journée idéale dans un an ?","Décrivez trois choses pour lesquelles vous êtes profondément reconnaissant(e) aujourd'hui.","Quelle croyance limitante êtes-vous prêt(e) à libérer ?","Écrivez une lettre de votre futur moi à votre moi présent.","Que feriez-vous si vous saviez que vous ne pouviez pas échouer ?","Décrivez votre vie de rêve en détail vivant — où êtes-vous, avec qui, comment vous sentez-vous ?","Quelle est une petite action que vous pouvez accomplir aujourd'hui vers votre plus grand rêve ?","Que signifie l'abondance pour vous personnellement ?","Qui devez-vous devenir pour vivre la vie que vous désirez ?","Qu'appelez-vous dans votre vie ce mois-ci ?","Comment votre corps se sent-il lorsque vous êtes pleinement aligné(e) avec votre but ?","Quelles sont les trois qualités que vous aimez le plus en vous ?","Que vous dirait votre moi le plus élevé en ce moment ?","Décrivez un moment où vous vous êtes senti(e) complètement aligné(e) et en paix.","À quoi ressemble l'amour inconditionnel dans votre corps ?"];
+const AFFIRMATIONS_FR=["Je suis un créateur puissant de ma réalité.","Tout ce que je désire me parvient maintenant.","Je mérite toute l'abondance que l'univers a à offrir.","Mes rêves sont valides et réalisables.","J'attire l'amour, la prospérité et la joie sans effort.","L'univers conspire toujours en ma faveur.","Je libère ce qui ne me sert plus avec amour et grâce.","Je suis aligné(e) avec mon but le plus élevé.","Mon intuition me guide vers mon plus grand bien.","Je deviens la meilleure version de moi-même chaque jour.","Je fais confiance au timing de ma vie complètement.","Mon énergie est magnétique et j'attire mes désirs à moi."];
+const VISUALIZATIONS_FR=[{title:"Alignement Matinal",duration:"5 min",steps:["Fermez les yeux et prenez trois respirations profondes.","Sentez votre corps se détendre à chaque expiration.","Visualisez une lumière dorée remplissant votre poitrine.","Voyez-vous vous réveiller dans la vie de vos rêves. Que voyez-vous ?","Ressentez l'émotion d'avoir déjà tout ce que vous désirez.","Maintenez ce sentiment pendant le temps restant."]},{title:"Flux d'Abondance",duration:"10 min",steps:["Asseyez-vous confortablement et fermez les yeux.","Respirez l'abondance, expirez la limitation.","Imaginez une rivière de lumière dorée qui coule vers vous.","Voyez l'argent, les opportunités et les bénédictions affluer dans votre vie.","Ressentez une profonde gratitude pour tout ce qui est déjà en chemin.","Affirmez en silence : Je suis ouvert(e) à recevoir."]},{title:"Rencontre avec Votre Futur Moi",duration:"15 min",steps:["Prenez 5 respirations profondes pour vous centrer.","Imaginez marcher à travers une belle porte dorée.","De l'autre côté, vous rencontrez votre futur moi — radieux et épanoui(e).","Regardez dans ses yeux. Remarquez comment il/elle se tient.","Demandez-lui : Que dois-je savoir maintenant ?","Recevez le message. Méditez dessus. Ressentez-le dans votre cœur.","Remerciez votre futur moi et revenez lentement au présent."]}];
+function tArr(k){const fr=S.lang==='fr';if(k==='prompts')return fr?PROMPTS_FR:PROMPTS;if(k==='affirmations')return fr?AFFIRMATIONS_FR:AFFIRMATIONS;return fr?VISUALIZATIONS_FR:VISUALIZATIONS;}
+const _UI={en:{journalTab:"Journal",visionTab:"Vision",audioTab:"Audio",timerTab:"Timer",affirmTab:"Affirm",vizTab:"Visualize",settingsTab:"Settings",todayPrompt:"✦ TODAY'S PROMPT",yourThoughts:"✦ YOUR THOUGHTS",nextPrompt:"Next Prompt →",surpriseMe:"✦ Surprise Me",howFeeling:"HOW ARE YOU FEELING?",saveEntry:"Save Entry ✦",pastEntries:"Past Entries",pastEntriesTitle:"✦ PAST ENTRIES",noEntries:"No entries yet.",journalPlaceholder:"Begin writing your manifestation here… let your thoughts flow freely.",affirmTitle:"✦ DAILY AFFIRMATIONS",affirmPrev:"← Previous",affirmNew:"✦ New Affirmation",affirmNext:"Next →",vizTitle:"✦ GUIDED VISUALIZATIONS",vizDesc:"Choose an exercise to deepen your manifestation practice.",vizBack:"← Back",vizTimer:"Open Timer for This ✦",settingsTitle:"✦ SETTINGS",langTitle:"✦ LANGUAGE",langDesc:"Choose your preferred language.",setupLangTitle:"✦ CHOOSE YOUR LANGUAGE",setupLangDesc:"Select your preferred language for your sacred journal.",appSub:"✦ YOUR SACRED MANIFESTATION SPACE ✦",footer:"✦ ETHEREAL ECHOES ✦ YOUR SACRED MANIFESTATION SPACE ✦"},fr:{journalTab:"Journal",visionTab:"Vision",audioTab:"Audio",timerTab:"Minuterie",affirmTab:"Affirmations",vizTab:"Visualiser",settingsTab:"Paramètres",todayPrompt:"✦ INVITATION DU JOUR",yourThoughts:"✦ VOS PENSÉES",nextPrompt:"Prochaine Invitation →",surpriseMe:"✦ Surprenez-Moi",howFeeling:"COMMENT VOUS SENTEZ-VOUS ?",saveEntry:"Sauvegarder ✦",pastEntries:"Entrées Passées",pastEntriesTitle:"✦ ENTRÉES PASSÉES",noEntries:"Aucune entrée pour l'instant.",journalPlaceholder:"Commencez à écrire votre manifestation ici… laissez vos pensées s'exprimer librement.",affirmTitle:"✦ AFFIRMATIONS QUOTIDIENNES",affirmPrev:"← Précédente",affirmNew:"✦ Nouvelle Affirmation",affirmNext:"Suivante →",vizTitle:"✦ VISUALISATIONS GUIDÉES",vizDesc:"Choisissez un exercice pour approfondir votre pratique de manifestation.",vizBack:"← Retour",vizTimer:"Ouvrir le Minuteur ✦",settingsTitle:"✦ PARAMÈTRES",langTitle:"✦ LANGUE",langDesc:"Choisissez votre langue préférée.",setupLangTitle:"✦ CHOISISSEZ VOTRE LANGUE",setupLangDesc:"Sélectionnez votre langue préférée pour votre journal sacré.",appSub:"✦ VOTRE ESPACE SACRÉ DE MANIFESTATION ✦",footer:"✦ ETHEREAL ECHOES ✦ VOTRE ESPACE SACRÉ DE MANIFESTATION ✦"}};
+function tr(k){return(_UI[S.lang]||_UI.en)[k]||_UI.en[k]||k;}
+
 const TEXT_COLORS=[{label:"Gold",value:"#c9a227"},{label:"White",value:"#ffffff"},{label:"Lavender",value:"#c4b0ff"},{label:"Rose",value:"#ffb3c6"},{label:"Mint",value:"#a8f0c6"}];
 const KP="ee_",HP="ethereal_echoes_v1";
 const LIC_SECRET="ethereal_echoes_sacred";
@@ -151,11 +167,11 @@ function resizeImg(dataUrl,maxW=900){return new Promise(res=>{const img=new Imag
 
 // ── STATE ─────────────────────────────────────────────────────────────────────
 const S={
-  screen:"loading",pwd:"",
+  screen:"loading",pwd:"",lang:localStorage.getItem("ej_lang")||"en",
   // license
   licIn:"",licErr:"",
   // setup
-  sStep:1,sPwd:"",sPwd2:"",phrase:"",phraseSaved:false,
+  sStep:0,sPwd:"",sPwd2:"",phrase:"",phraseSaved:false,
   // lock
   lockIn:"",
   // recovery
@@ -234,7 +250,7 @@ function submitLicense(){
   const grKey=key.toUpperCase().replace(/\s/g,"");
   if(/^[0-9A-F]{8}-[0-9A-F]{8}-[0-9A-F]{8}-[0-9A-F]{8}$/.test(grKey)){
     S.licErr="Verifying\u2026";render();
-    fetch("https://api.gumroad.com/v2/licenses/verify",{method:"POST",headers:{"Content-Type":"application/x-www-form-urlencoded"},body:"product_permalink=ethereal-journal&license_key="+encodeURIComponent(grKey)+"&increment_uses_count=true"}).then(r=>r.json()).then(d=>{
+    fetch("https://api.gumroad.com/v2/licenses/verify",{method:"POST",headers:{"Content-Type":"application/x-www-form-urlencoded"},body:"product_id=t0TFw0rWYwe4KG2XcjB2Mg%3D%3D&license_key="+encodeURIComponent(grKey)+"&increment_uses_count=true"}).then(r=>r.json()).then(d=>{
       if(d&&d.success){localStorage.setItem(`${KP}lic`,"GR-"+grKey);S.licErr="";S.screen=localStorage.getItem(`${KP}init`)?"locked":"setup";render();}
       else{S.licErr="Invalid license key. Please check your key and try again.";render();}
     }).catch(()=>{S.licErr="Connection error \u2014 please try again.";render();});
@@ -251,6 +267,7 @@ function submitLicense(){
 // ── SETUP HTML ────────────────────────────────────────────────────────────────
 function setupHTML(){const step=S.sStep;return`<div class="center"><div class="logo"><span class="logo-moon">🌙</span><span class="logo-title">Ethereal Journal</span><span class="logo-sub">✦ SACRED MANIFESTATION SPACE ✦</span></div>
 <div class="card">
+  ${step===0?`<h2 class="sec">${tr("setupLangTitle")}</h2><p class="muted" style="margin-bottom:24px">${tr("setupLangDesc")}</p><div class="row" style="justify-content:center;gap:16px;margin-bottom:28px"><button class="btn-gold" id="lang-en" style="font-size:1.1rem;padding:13px 28px;opacity:${S.lang==='en'?1:.65}">🇬🇧 English</button><button class="btn-gold" id="lang-fr" style="font-size:1.1rem;padding:13px 28px;opacity:${S.lang==='fr'?1:.65}">🇫🇷 Français</button></div><button class="btn-gold" id="s-lang-next" style="width:100%">Continuer / Continue ✦</button>`:""}
   ${step===1?`<h2 class="sec">✦ CREATE YOUR PASSWORD</h2><p class="muted" style="margin-bottom:20px">Your journal is private and encrypted with AES-256.</p><input class="inp" id="sp1" type="password" placeholder="Create password (min. 6 characters)" value="${esc(S.sPwd)}"/><input class="inp" id="sp2" type="password" placeholder="Confirm password" value="${esc(S.sPwd2)}"/>${S.authErr?`<p class="err">${esc(S.authErr)}</p>`:""}<button class="btn-gold" id="s-next">Continue ✦</button>`:""}
   ${step===2?`<h2 class="sec">✦ YOUR RECOVERY PHRASE</h2><p class="muted" style="margin-bottom:16px">Write these 12 words down. This is the <strong style="color:#c9a227">only way</strong> to recover your journal if you forget your password.</p><div class="phrase-box">${esc(S.phrase)}</div><div class="row" style="margin-bottom:20px"><input type="checkbox" id="pcheck" ${S.phraseSaved?"checked":""}><label for="pcheck" class="muted" style="cursor:pointer;margin-left:8px">I have written down my recovery phrase and stored it safely.</label></div><div class="row"><button class="btn-gold" id="s-confirm" ${S.phraseSaved?"":"disabled"} style="opacity:${S.phraseSaved?1:.4}">I've Saved It ✦</button><button class="btn-ghost" id="s-regen">↺ New Phrase</button></div>`:""}
   ${step===3?`<h2 class="sec">✦ YOUR JOURNAL IS READY</h2><div class="feature-list"><p>🔐 AES-256 encryption</p><p>🔒 Auto-locks after 10 minutes</p><p>💾 Auto-saves as you write</p><p>🖼️ Drag & drop vision board with PNG export</p><p>📤 Export your entries anytime</p><p>🔑 Recovery phrase backup</p></div>${S.busy?`<p class="muted">Creating your sacred space…</p>`:`<button class="btn-gold" id="s-finish">Enter My Journal ✦</button>`}`:""}
@@ -260,6 +277,9 @@ function attachSetupEvents(){
   const sp1=document.getElementById("sp1"),sp2=document.getElementById("sp2");
   if(sp1){sp1.addEventListener("input",e=>{S.sPwd=e.target.value;S.authErr="";});sp1.addEventListener("keydown",e=>e.key==="Enter"&&setupStep1());}
   if(sp2){sp2.addEventListener("input",e=>{S.sPwd2=e.target.value;S.authErr="";});sp2.addEventListener("keydown",e=>e.key==="Enter"&&setupStep1());}
+  document.getElementById("lang-en")?.addEventListener("click",()=>{S.lang="en";localStorage.setItem("ej_lang","en");const b=document.getElementById("lang-en");if(b){document.getElementById("lang-en").style.opacity="1";document.getElementById("lang-fr").style.opacity="0.65";}});
+  document.getElementById("lang-fr")?.addEventListener("click",()=>{S.lang="fr";localStorage.setItem("ej_lang","fr");const b=document.getElementById("lang-fr");if(b){document.getElementById("lang-fr").style.opacity="1";document.getElementById("lang-en").style.opacity="0.65";}});
+  document.getElementById("s-lang-next")?.addEventListener("click",()=>{S.sStep=1;render();});
   document.getElementById("s-next")?.addEventListener("click",setupStep1);
   document.getElementById("pcheck")?.addEventListener("change",e=>{S.phraseSaved=e.target.checked;const btn=document.getElementById("s-confirm");if(btn){btn.disabled=!S.phraseSaved;btn.style.opacity=S.phraseSaved?1:.4;}});
   document.getElementById("s-confirm")?.addEventListener("click",()=>{if(S.phraseSaved){S.sStep=3;render();}});
@@ -298,13 +318,13 @@ function appHTML(){return`<div class="wrap">
   <div style="text-align:center;padding:28px 0 18px">
     <div style="font-size:2.5rem;margin-bottom:8px">🌙</div>
     <span class="logo-title" style="display:block">Ethereal Journal</span>
-    <p class="logo-sub" style="margin-bottom:4px">✦ YOUR SACRED MANIFESTATION SPACE ✦</p>
-    <p style="color:#4a4368;font-size:.72rem;letter-spacing:1px">${today}</p>
+    <p class="logo-sub" style="margin-bottom:4px">${tr("appSub")}</p>
+    <p style="color:#4a4368;font-size:.72rem;letter-spacing:1px">${new Date().toLocaleDateString(S.lang==='fr'?'fr-FR':'en-US',{weekday:"long",year:"numeric",month:"long",day:"numeric"})}</p>
     <div class="status-bar" id="status-bar">${statusBarHTML()}</div>
     ${S.showMenu?`<div class="row" style="justify-content:center;margin-top:10px"><button class="btn-ghost btn-sm" id="export-btn">⬇ Export (.json)</button><label class="btn-ghost btn-sm" style="cursor:pointer">⬆ Import Backup<input type="file" accept=".json" id="import-input" style="display:none"/></label><button class="btn-ghost btn-sm" id="menu-close">✕</button></div>`:""}
   </div>
-  <nav class="nav">${["journal","vision","audio","timer","affirmations","visualize"].map((t,i)=>
-    `<button class="nav-btn ${S.tab===t?"active":""}" data-tab="${t}">${["📖","🖼️","🎵","⏱️","✨","🔮"][i]} ${["Journal","Vision","Audio","Timer","Affirm","Visualize"][i]}</button>`).join("")}
+  <nav class="nav">${["journal","vision","audio","timer","affirmations","visualize","settings"].map((tab,i)=>
+    `<button class="nav-btn ${S.tab===tab?"active":""}" data-tab="${tab}">${["📖","🖼️","🎵","⏱️","✨","🔮","⚙️"][i]} ${[tr("journalTab"),tr("visionTab"),tr("audioTab"),tr("timerTab"),tr("affirmTab"),tr("vizTab"),tr("settingsTab")][i]}</button>`).join("")}
   </nav>
   ${S.tab==="journal"?journalHTML():""}
   ${S.tab==="vision"?visionHTML():""}
@@ -312,7 +332,8 @@ function appHTML(){return`<div class="wrap">
   ${S.tab==="timer"?timerHTML():""}
   ${S.tab==="affirmations"?affirmHTML():""}
   ${S.tab==="visualize"?vizHTML():""}
-  <div class="footer">✦ ETHEREAL ECHOES ✦ YOUR SACRED MANIFESTATION SPACE ✦</div>
+  ${S.tab==="settings"?settingsHTML():""}
+  <div class="footer">${tr("footer")}</div>
 </div>`;}
 
 function statusBarHTML(){return`${S.saveStatus==="saving"?`<span style="color:#7a6fa0;font-size:.72rem;font-style:italic">💾 Saving…</span>`:""}${S.saveStatus==="saved"?`<span style="color:#5a9a6a;font-size:.72rem">✓ Saved</span>`:""}${S.flashMsg?`<span style="color:#c9a227;font-size:.78rem;font-style:italic">${esc(S.flashMsg)}</span>`:""}
@@ -321,16 +342,16 @@ function statusBarHTML(){return`${S.saveStatus==="saving"?`<span style="color:#7
 
 // ── JOURNAL ───────────────────────────────────────────────────────────────────
 function journalHTML(){return`<div class="card">
-  <h2 class="sec">✦ TODAY'S PROMPT</h2>
-  <div class="prompt-box">"${esc(PROMPTS[S.pIdx])}"</div>
-  <div class="row" style="margin-bottom:22px"><button class="btn-ghost" id="next-prompt">Next Prompt →</button><button class="btn-ghost" id="rnd-prompt">✦ Surprise Me</button></div>
-  <h2 class="sec">✦ YOUR THOUGHTS</h2>
-  <textarea class="ta" id="journal-ta" placeholder="Begin writing your manifestation here… let your thoughts flow freely.">${esc(S.curEntry)}</textarea>
-  <div style="margin-top:16px"><p class="muted" style="margin-bottom:10px;font-size:.75rem;letter-spacing:2px">HOW ARE YOU FEELING?</p>
+  <h2 class="sec">${tr("todayPrompt")}</h2>
+  <div class="prompt-box">"${esc(tArr('prompts')[S.pIdx])}"</div>
+  <div class="row" style="margin-bottom:22px"><button class="btn-ghost" id="next-prompt">${tr("nextPrompt")}</button><button class="btn-ghost" id="rnd-prompt">${tr("surpriseMe")}</button></div>
+  <h2 class="sec">${tr("yourThoughts")}</h2>
+  <textarea class="ta" id="journal-ta" placeholder="${tr('journalPlaceholder')}">${esc(S.curEntry)}</textarea>
+  <div style="margin-top:16px"><p class="muted" style="margin-bottom:10px;font-size:.75rem;letter-spacing:2px">${tr("howFeeling")}</p>
   <div class="row" style="margin-bottom:16px">${moods.map((m,i)=>`<button class="mood-btn ${S.mood===i?"active":""}" data-mood="${i}">${m}</button>`).join("")}</div></div>
-  <div class="row"><button class="btn-gold" id="save-entry">Save Entry ✦</button><button class="btn-ghost" id="toggle-past">Past Entries (${S.entries.length})</button></div>
+  <div class="row"><button class="btn-gold" id="save-entry">${tr("saveEntry")}</button><button class="btn-ghost" id="toggle-past">${tr("pastEntries")} (${S.entries.length})</button></div>
 </div>
-${S.showPast?`<div class="card"><h2 class="sec">✦ PAST ENTRIES</h2>${S.entries.length===0?`<p class="muted" style="font-style:italic">No entries yet.</p>`:[...S.entries].reverse().map(e=>`<div class="entry"><div style="display:flex;justify-content:space-between"><p class="entry-date">${esc(e.date)} ${moods[e.mood]||""}</p><button class="btn-ghost btn-sm" data-del="${e.id}">✕</button></div><p class="entry-prompt">"${esc(e.prompt)}"</p><p style="color:#e8d5b7;line-height:1.75;font-size:.95rem">${esc(e.text)}</p></div>`).join("")}</div>`:""}
+${S.showPast?`<div class="card"><h2 class="sec">${tr("pastEntriesTitle")}</h2>${S.entries.length===0?`<p class="muted" style="font-style:italic">${tr("noEntries")}</p>`:[...S.entries].reverse().map(e=>`<div class="entry"><div style="display:flex;justify-content:space-between"><p class="entry-date">${esc(e.date)} ${moods[e.mood]||""}</p><button class="btn-ghost btn-sm" data-del="${e.id}">✕</button></div><p class="entry-prompt">"${esc(e.prompt)}"</p><p style="color:#e8d5b7;line-height:1.75;font-size:.95rem">${esc(e.text)}</p></div>`).join("")}</div>`:""}
 `;}
 
 // ── VISION BOARD ──────────────────────────────────────────────────────────────
@@ -389,28 +410,44 @@ ${!S.tStarted?`<p class="muted" style="text-align:center;margin-bottom:18px;font
 </div>`;}
 
 // ── AFFIRMATIONS ──────────────────────────────────────────────────────────────
-function affirmHTML(){return`<div class="card"><h2 class="sec">✦ DAILY AFFIRMATIONS</h2>
-<div class="affirmation-display"><p class="affirmation-text">"${esc(AFFIRMATIONS[S.aIdx])}"</p></div>
+function affirmHTML(){return`<div class="card"><h2 class="sec">${tr("affirmTitle")}</h2>
+<div class="affirmation-display"><p class="affirmation-text">"${esc(tArr('affirmations')[S.aIdx])}"</p></div>
 <div class="row" style="justify-content:center;margin-bottom:28px">
-  <button class="btn-ghost" id="aff-prev">← Previous</button><button class="btn-gold" id="aff-rnd">✦ New Affirmation</button><button class="btn-ghost" id="aff-next">Next →</button>
+  <button class="btn-ghost" id="aff-prev">${tr("affirmPrev")}</button><button class="btn-gold" id="aff-rnd">${tr("affirmNew")}</button><button class="btn-ghost" id="aff-next">${tr("affirmNext")}</button>
 </div>
-${AFFIRMATIONS.map((a,i)=>`<div class="affirmation-card ${S.aIdx===i?"active":""}" data-aff="${i}">"${esc(a)}"</div>`).join("")}
+${tArr('affirmations').map((a,i)=>`<div class="affirmation-card ${S.aIdx===i?"active":""}" data-aff="${i}">"${esc(a)}"</div>`).join("")}
 </div>`;}
 
 // ── VISUALIZE ─────────────────────────────────────────────────────────────────
-function vizHTML(){if(!S.selViz)return`<div class="card"><h2 class="sec">✦ GUIDED VISUALIZATIONS</h2><p class="muted" style="margin-bottom:22px">Choose an exercise to deepen your manifestation practice.</p>${VISUALIZATIONS.map((v,i)=>`<div class="viz-card" data-viz="${i}"><div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:8px"><h3 style="color:#c9a227;font-size:1rem;letter-spacing:1px">✦ ${esc(v.title)}</h3><span style="color:#4a4368;font-size:.78rem">${v.duration}</span></div><p class="muted" style="font-style:italic">${esc(v.steps[0])}</p></div>`).join("")}</div>`;
-return`<div class="card"><button class="btn-ghost" id="viz-back" style="margin-bottom:20px">← Back</button><h2 class="sec">✦ ${esc(S.selViz.title.toUpperCase())}</h2><p style="color:#4a4368;font-size:.75rem;letter-spacing:2px;margin-bottom:22px">RECOMMENDED: ${S.selViz.duration}</p>${S.selViz.steps.map((step,i)=>`<div class="viz-step"><div class="viz-num">${i+1}</div><p style="color:#e8d5b7;line-height:1.75;font-size:.95rem;padding-top:4px">${esc(step)}</p></div>`).join("")}<div style="text-align:center;margin-top:24px"><button class="btn-gold" id="viz-timer">Open Timer for This ✦</button></div></div>`;}
+function vizHTML(){if(!S.selViz)return`<div class="card"><h2 class="sec">${tr("vizTitle")}</h2><p class="muted" style="margin-bottom:22px">${tr("vizDesc")}</p>${tArr('visualizations').map((v,i)=>`<div class="viz-card" data-viz="${i}"><div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:8px"><h3 style="color:#c9a227;font-size:1rem;letter-spacing:1px">✦ ${esc(v.title)}</h3><span style="color:#4a4368;font-size:.78rem">${v.duration}</span></div><p class="muted" style="font-style:italic">${esc(v.steps[0])}</p></div>`).join("")}</div>`;
+return`<div class="card"><button class="btn-ghost" id="viz-back" style="margin-bottom:20px">${tr("vizBack")}</button><h2 class="sec">✦ ${esc(S.selViz.title.toUpperCase())}</h2><p style="color:#4a4368;font-size:.75rem;letter-spacing:2px;margin-bottom:22px">RECOMMENDED: ${S.selViz.duration}</p>${S.selViz.steps.map((step,i)=>`<div class="viz-step"><div class="viz-num">${i+1}</div><p style="color:#e8d5b7;line-height:1.75;font-size:.95rem;padding-top:4px">${esc(step)}</p></div>`).join("")}<div style="text-align:center;margin-top:24px"><button class="btn-gold" id="viz-timer">${tr("vizTimer")}</button></div></div>`;}
+
+
+// ── SETTINGS ──────────────────────────────────────────────────────────────────
+function settingsHTML(){return`<div class="card">
+  <h2 class="sec">${tr("settingsTitle")}</h2>
+  <div style="margin-bottom:28px">
+    <h3 style="color:#c9a227;font-size:.88rem;letter-spacing:2px;margin-bottom:12px">${tr("langTitle")}</h3>
+    <p class="muted" style="margin-bottom:18px">${tr("langDesc")}</p>
+    <div class="row" style="gap:14px">
+      <button class="${S.lang==='en'?'btn-gold':'btn-ghost'}" id="set-lang-en" style="font-size:1rem;padding:11px 22px">🇬🇧 English</button>
+      <button class="${S.lang==='fr'?'btn-gold':'btn-ghost'}" id="set-lang-fr" style="font-size:1rem;padding:11px 22px">🇫🇷 Français</button>
+    </div>
+  </div>
+</div>`;}
 
 // ── APP EVENTS ────────────────────────────────────────────────────────────────
 function attachAppEvents(){
   document.querySelectorAll("[data-tab]").forEach(b=>b.addEventListener("click",e=>{S.tab=e.currentTarget.dataset.tab;S.selViz=null;render();if(S.tab==="vision")updateBoardScale();}));
+  document.getElementById("set-lang-en")?.addEventListener("click",()=>{S.lang="en";localStorage.setItem("ej_lang","en");render();});
+  document.getElementById("set-lang-fr")?.addEventListener("click",()=>{S.lang="fr";localStorage.setItem("ej_lang","fr");render();});
   document.getElementById("backup-btn")?.addEventListener("click",()=>{S.showMenu=!S.showMenu;render();});
   document.getElementById("menu-close")?.addEventListener("click",()=>{S.showMenu=false;render();});
   document.getElementById("lock-btn")?.addEventListener("click",lockApp);
   document.getElementById("export-btn")?.addEventListener("click",exportJournal);
   document.getElementById("import-input")?.addEventListener("change",handleImport);
-  document.getElementById("next-prompt")?.addEventListener("click",()=>{S.pIdx=(S.pIdx+1)%PROMPTS.length;render();});
-  document.getElementById("rnd-prompt")?.addEventListener("click",()=>{S.pIdx=Math.floor(Math.random()*PROMPTS.length);render();});
+  document.getElementById("next-prompt")?.addEventListener("click",()=>{S.pIdx=(S.pIdx+1)%tArr('prompts').length;render();});
+  document.getElementById("rnd-prompt")?.addEventListener("click",()=>{S.pIdx=Math.floor(Math.random()*tArr('prompts').length);render();});
   document.getElementById("journal-ta")?.addEventListener("input",e=>{S.curEntry=e.target.value;});
   document.querySelectorAll("[data-mood]").forEach(b=>b.addEventListener("click",e=>{const i=parseInt(e.currentTarget.dataset.mood);S.mood=S.mood===i?null:i;document.querySelectorAll(".mood-btn").forEach((b,idx)=>b.classList.toggle("active",idx===S.mood));}));
   document.getElementById("save-entry")?.addEventListener("click",saveEntry);
@@ -444,18 +481,18 @@ function attachAppEvents(){
   document.getElementById("reset-timer")?.addEventListener("click",()=>{clearInterval(timerInterval);S.tRunning=false;S.tStarted=false;S.tDone=false;const t=S.tMin*60+S.tSec;S.tTotal=t;S.tLeft=t;render();});
   document.querySelectorAll("[data-sound]").forEach(b=>b.addEventListener("click",e=>{S.sound=e.currentTarget.dataset.sound;document.querySelectorAll(".sound-card").forEach(c=>c.classList.toggle("active",c.dataset.sound===S.sound));}));
   document.querySelectorAll("[data-preview]").forEach(b=>b.addEventListener("click",e=>{e.stopPropagation();playSound(e.currentTarget.dataset.preview);}));
-  document.getElementById("aff-prev")?.addEventListener("click",()=>{S.aIdx=(S.aIdx-1+AFFIRMATIONS.length)%AFFIRMATIONS.length;render();});
-  document.getElementById("aff-rnd")?.addEventListener("click",()=>{S.aIdx=Math.floor(Math.random()*AFFIRMATIONS.length);render();});
-  document.getElementById("aff-next")?.addEventListener("click",()=>{S.aIdx=(S.aIdx+1)%AFFIRMATIONS.length;render();});
+  document.getElementById("aff-prev")?.addEventListener("click",()=>{S.aIdx=(S.aIdx-1+tArr('affirmations').length)%tArr('affirmations').length;render();});
+  document.getElementById("aff-rnd")?.addEventListener("click",()=>{S.aIdx=Math.floor(Math.random()*tArr('affirmations').length);render();});
+  document.getElementById("aff-next")?.addEventListener("click",()=>{S.aIdx=(S.aIdx+1)%tArr('affirmations').length;render();});
   document.querySelectorAll("[data-aff]").forEach(b=>b.addEventListener("click",e=>{S.aIdx=parseInt(e.currentTarget.dataset.aff);render();}));
-  document.querySelectorAll("[data-viz]").forEach(b=>b.addEventListener("click",e=>{S.selViz=VISUALIZATIONS[parseInt(e.currentTarget.dataset.viz)];render();}));
+  document.querySelectorAll("[data-viz]").forEach(b=>b.addEventListener("click",e=>{S.selViz=tArr('visualizations')[parseInt(e.currentTarget.dataset.viz)];render();}));
   document.getElementById("viz-back")?.addEventListener("click",()=>{S.selViz=null;render();});
   document.getElementById("viz-timer")?.addEventListener("click",()=>{S.tab="timer";S.selViz=null;render();});
   document.addEventListener("click",e=>{if(S.tab==="vision"&&!e.target.closest("[data-item]")&&!e.target.closest(".board-toolbar")&&!e.target.closest(".text-form")){if(S.selItem){S.selItem=null;reRenderBoard();}}});
 }
 
 // ── JOURNAL ACTIONS ───────────────────────────────────────────────────────────
-function saveEntry(){if(!S.curEntry.trim())return;S.entries.push({id:Date.now(),date:today,text:S.curEntry,mood:S.mood,prompt:PROMPTS[S.pIdx]});S.curEntry="";S.mood=null;scheduleSave();render();flash("✦ Entry saved");}
+function saveEntry(){if(!S.curEntry.trim())return;S.entries.push({id:Date.now(),date:today,text:S.curEntry,mood:S.mood,prompt:tArr('prompts')[S.pIdx]});S.curEntry="";S.mood=null;scheduleSave();render();flash("✦ Entry saved");}
 
 // ── VISION BOARD ──────────────────────────────────────────────────────────────
 async function handleImgUpload(e){for(const file of Array.from(e.target.files)){const reader=new FileReader();reader.onload=async ev=>{const src=await resizeImg(ev.target.result);const img=new Image();img.onload=()=>{const aspect=img.width/img.height,w=Math.min(380,img.width),h=w/aspect,maxZ=Math.max(0,...S.boardItems.map(i=>i.zIndex||0));S.boardItems.push({id:String(Date.now()+Math.random()),type:"image",src,x:Math.random()*300+50,y:Math.random()*200+50,width:w,height:h,zIndex:maxZ+1});reRenderBoard();scheduleSave();};img.src=src;};reader.readAsDataURL(file);}}
@@ -541,6 +578,9 @@ function attachEmailEvents(){
 }
 // ── INIT ──────────────────────────────────────────────────────────────────────
 function init(){
+  // Read ?lang= URL param — lets product page buttons deep-link to a language
+  const _urlLang=new URLSearchParams(window.location.search).get("lang");
+  if(_urlLang==="fr"||_urlLang==="en"){S.lang=_urlLang;localStorage.setItem("ej_lang",_urlLang);}
   gateInit();
   if(licOK()||localStorage.getItem(T_LEGACY)==="1"){             // buyer or existing/grandfathered user
     S.screen=localStorage.getItem(`${KP}init`)?"locked":"setup";render();return;
