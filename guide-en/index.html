@@ -349,7 +349,6 @@
 
     .mansion-number { font-family: 'Cinzel', serif; font-size: 28px; font-weight: 700; color: rgba(201,168,76,0.75); direction: ltr; }
     .mansion-name-block { text-align: left; }
-    .mansion-name-ar { font-family: 'Amiri', serif; font-size: 17px; font-style: italic; color: rgba(201,168,76,0.85); margin-top: 4px; }
     .mansion-name-en { font-family: 'Cinzel', serif; font-size: 19px; font-weight: 700; letter-spacing: 1px; color: var(--gold-light); text-transform: uppercase; }
     .mansion-badges { display: flex; gap: 6px; align-items: center; flex-direction: row-reverse; }
     .badge {
@@ -370,7 +369,7 @@
     .meta-tag.saad   { background: #E8F5E8; color: #1E6E1E; }
     .meta-tag.nahs   { background: #FDEAEA; color: #8B0000; }
 
-    .mansion-meaning { font-family: 'Amiri', serif; font-size: 14px; color: var(--text-soft); margin-bottom: 12px; font-style: italic; }
+    .mansion-meaning { font-family: 'EB Garamond', serif; font-size: 14px; color: var(--text-soft); margin-bottom: 12px; font-style: italic; }
     .mansion-desc-ar { display: none; }
     .mansion-desc-en { font-family: 'EB Garamond', serif; font-size: 16px; line-height: 2; color: var(--text); direction: ltr; text-align: left; margin-bottom: 10px; }
 
@@ -477,10 +476,6 @@
     .chip-en {
       font-family: 'Cinzel', serif; font-size: 12px; font-weight: 700;
       display: block; letter-spacing: 0.3px; margin-bottom: 3px;
-    }
-    .chip-ar {
-      font-family: 'Amiri', serif; font-size: 15px;
-      display: block; opacity: 0.85;
     }
     .cal-mansion-chip.fire  { background: #FFF0E0; color: #B85C00; }
     .cal-mansion-chip.water { background: #E0F0FF; color: #0055A0; }
@@ -689,7 +684,6 @@
       color: var(--gold); text-transform: uppercase; margin-bottom: 10px;
     }
     .journal-mansion-name { font-family: 'Cinzel', serif; font-size: 18px; font-weight: 700; color: var(--indigo); margin-bottom: 4px; }
-    .journal-mansion-ar { font-family: 'Amiri', serif; font-size: 15px; font-style: italic; color: rgba(26,20,64,0.45); margin-bottom: 16px; }
     .journal-prompt {
       font-family: 'EB Garamond', serif; font-size: 19px; line-height: 1.9;
       color: var(--text); font-style: italic; border-left: 3px solid var(--gold);
@@ -745,7 +739,7 @@
   .tip-header { display: flex; align-items: center; gap: 7px; margin-bottom: 2px; }
   .tip-emoji { font-size: 20px; line-height: 1; }
   .tip-name { font-family: 'Cinzel', serif; font-size: 11px; font-weight: 700; color: #E8C97A; letter-spacing: 0.5px; line-height: 1.3; }
-  .tip-ar { font-family: 'Amiri', serif; font-size: 13px; color: rgba(232,201,122,0.65); display: block; margin-bottom: 6px; }
+
   .tip-meaning { font-size: 12.5px; color: rgba(245,233,200,0.78); font-style: italic; margin-bottom: 8px; padding-bottom: 7px; border-bottom: 1px solid rgba(201,168,76,0.15); line-height: 1.45; }
   .tip-badges { display: flex; flex-wrap: wrap; gap: 4px; margin-bottom: 6px; }
   .tip-badge { font-size: 10px; padding: 2px 8px; border-radius: 20px; font-family: 'Cinzel', serif; letter-spacing: 0.4px; font-weight: 600; }
@@ -905,15 +899,13 @@
   <!-- COVER -->
   <div class="cover page-break" id="cover-page">
     <div class="cover-moon">🌙</div>
-    <div class="cover-greeting">YOUR PERSONAL GUIDE · دليلك الشخصي القمري</div>
+    <div class="cover-greeting">YOUR PERSONAL GUIDE</div>
     <div class="cover-name" id="cover-name"></div>
     <div class="cover-title">Lunar Mansions Guide</div>
-    <div class="cover-title-en">دليل منازل القمر</div>
     <div class="cover-divider"></div>
     <div class="cover-mansion-reveal">
-      <div class="cover-mansion-label">YOUR BIRTH MANSION · منزلك القمري عند الولادة</div>
+      <div class="cover-mansion-label">YOUR BIRTH MANSION</div>
       <div class="cover-mansion-en" id="cover-mansion-en"></div>
-      <div class="cover-mansion-name" id="cover-mansion-ar"></div>
     </div>
     <div class="cover-brand">Ethereal Echoes · etherealechoes.com</div>
   </div>
@@ -922,7 +914,6 @@
   <div class="birth-hero page-break" id="birth-hero">
     <div class="birth-hero-label">YOUR COSMIC BIRTH MANSION</div>
     <div class="birth-hero-en" id="hero-name-en"></div>
-    <div class="birth-hero-name" id="hero-name-ar"></div>
     <div class="birth-hero-meta" id="hero-meta"></div>
     <div class="birth-hero-desc" id="hero-desc"></div>
     <div class="birth-hero-guidance" id="hero-guidance"></div>
@@ -944,7 +935,7 @@
   <!-- COMPATIBILITY SECTION -->
   <div class="section page-break" id="sec-compat">
     <div class="section-title">Your Mansion Compatibility</div>
-    <div class="section-title-en">توافق منزلك مع المنازل الأخرى</div>
+    <div class="section-title-en">Compatibility With All 28 Mansions</div>
     <div class="section-rule"></div>
     <p style="text-align:center;font-family:'Amiri',serif;font-size:15px;color:var(--text-soft);margin-bottom:24px;">
       This grid shows your birth mansion's harmony with each of the 28 mansions.
@@ -956,7 +947,7 @@
   <!-- ALL 28 MANSIONS -->
   <div class="section" id="sec-mansions">
     <div class="section-title">All 28 Lunar Mansions</div>
-    <div class="section-title-en">المنازل الثمانية والعشرون</div>
+    <div class="section-title-en">All 28 Lunar Mansions</div>
     <div class="section-rule"></div>
     <div class="mansions-grid" id="mansions-grid"></div>
   </div>
@@ -964,7 +955,7 @@
   <!-- LUNAR CALENDAR -->
   <div class="calendar-section page-break" id="calendar-section">
     <div class="section-title">Lunar Mansion Calendar</div>
-    <div class="section-title-en">التقويم القمري</div>
+    <div class="section-title-en">Lunar Mansion Calendar</div>
     <div class="section-rule"></div>
     <p style="text-align:center;font-family:'Amiri',serif;font-size:15px;color:var(--text-soft);margin-bottom:24px;">
       Every day is colored by its Lunar Mansion energy. Your mansion days (⭐) are your most powerful personal days of the month.
@@ -1025,7 +1016,7 @@
   <!-- MOON PHASES -->
   <div class="section page-break" id="sec-phases">
     <div class="section-title">The Eight Moon Phases</div>
-    <div class="section-title-en">أطوار القمر الثمانية</div>
+    <div class="section-title-en">The Eight Moon Phases</div>
     <div class="section-rule"></div>
     <div class="phases-grid">
       <div class="phase-card no-break"><div class="phase-emoji">🌑</div><div class="phase-name-ar">New Moon</div><div class="phase-energy">INTROSPECTIVE</div><div class="phase-theme">New beginnings and fresh intentions. A powerful time to plant seeds and clarify what you wish to call in.</div></div>
@@ -1065,7 +1056,6 @@
       <div class="journal-card">
         <div class="journal-card-label">✦ Today's Mansion Prompt</div>
         <div class="journal-mansion-name" id="j-today-name"></div>
-        <div class="journal-mansion-ar" id="j-today-ar"></div>
         <div class="journal-prompt" id="j-today-prompt"></div>
         <textarea class="journal-textarea" id="j-today-entry" placeholder="Write your reflection here…"></textarea>
         <div class="journal-entry-footer">
@@ -1077,7 +1067,6 @@
       <div class="journal-card">
         <div class="journal-card-label">⭐ Your Birth Mansion Reflection</div>
         <div class="journal-mansion-name" id="j-birth-name"></div>
-        <div class="journal-mansion-ar" id="j-birth-ar"></div>
         <div class="journal-prompt" id="j-birth-prompt"></div>
         <textarea class="journal-textarea" id="j-birth-entry" placeholder="Write your reflection here…"></textarea>
         <div class="journal-entry-footer">
@@ -1108,34 +1097,34 @@
 <script>
 // ── The 28 Lunar Mansions ─────────────────────────────────────
 const lunarMansions = [
-  { index:0,  id:'sharatain',       nameAr:'الشَّرَطين',          nameEn:'Al-Sharatain',           meaning:'العلامتان', meaningEn:'The Two Signs',               element:'fire',  nature:"sa'd", ruler:'mars',    emoji:'🔥' },
-  { index:1,  id:'butain',          nameAr:'البُطَين',            nameEn:'Al-Butain',               meaning:'البطن الصغير', meaningEn:'The Little Belly',             element:'fire',  nature:"sa'd", ruler:'venus',   emoji:'💰' },
-  { index:2,  id:'thurayya',        nameAr:'الثُّرَيّا',           nameEn:'Al-Thurayya',             meaning:'الثريا (النجوم)', meaningEn:'The Pleiades',           element:'fire',  nature:"sa'd", ruler:'mercury', emoji:'✨' },
-  { index:3,  id:'dabaran',         nameAr:'الدَّبَران',           nameEn:'Al-Dabaran',              meaning:'التابع', meaningEn:'The Follower',                   element:'earth', nature:'nahs', ruler:'moon',    emoji:'🌑' },
-  { index:4,  id:'haqah',           nameAr:'الهَقعة',             nameEn:"Al-Haq'ah",               meaning:'العلامة البيضاء', meaningEn:'The White Spot',           element:'earth', nature:'nahs', ruler:'mars',    emoji:'🔄' },
-  { index:5,  id:'hanah',           nameAr:'الهَنعة',             nameEn:"Al-Han'ah",               meaning:'الوَسم', meaningEn:'The Brand',                   element:'air',   nature:"sa'd", ruler:'sun',     emoji:'💬' },
-  { index:6,  id:'dhira',           nameAr:'الذِّراع',            nameEn:"Al-Dhira'",               meaning:'الذراع', meaningEn:'The Forearm',                   element:'air',   nature:"sa'd", ruler:'venus',   emoji:'💖' },
-  { index:7,  id:'nathrah',         nameAr:'النَّثرة',            nameEn:'Al-Nathrah',              meaning:'الفجوة', meaningEn:'The Gap',                   element:'water', nature:"sa'd", ruler:'mercury', emoji:'🔮' },
-  { index:8,  id:'tarf',            nameAr:'الطَّرف',             nameEn:'Al-Tarf',                 meaning:'النظرة', meaningEn:'The Glance',                   element:'water', nature:'nahs', ruler:'moon',    emoji:'⚠️' },
-  { index:9,  id:'jabhah',          nameAr:'الجَبهة',             nameEn:'Al-Jabhah',               meaning:'الجبهة', meaningEn:'The Forehead',                   element:'fire',  nature:"sa'd", ruler:'sun',     emoji:'👑' },
-  { index:10, id:'zubrah',          nameAr:'الزُّبرة',            nameEn:'Al-Zubrah',               meaning:'العُرف', meaningEn:'The Mane',                   element:'fire',  nature:'nahs', ruler:'jupiter', emoji:'🛡️' },
-  { index:11, id:'sarfah',          nameAr:'الصَّرفة',            nameEn:'Al-Sarfah',               meaning:'المُغيِّر', meaningEn:'The Changer',                 element:'earth', nature:"sa'd", ruler:'sun',     emoji:'🔄' },
-  { index:12, id:'awwa',            nameAr:'العَوّاء',            nameEn:"Al-Awwa'",                meaning:'النابح', meaningEn:'The Barker',                   element:'earth', nature:'nahs', ruler:'venus',   emoji:'🔍' },
-  { index:13, id:'simak',           nameAr:'السِّماك',            nameEn:'Al-Simak',                meaning:'الأعزل', meaningEn:'The Unarmed One',                   element:'air',   nature:"sa'd", ruler:'mars',    emoji:'⚖️' },
-  { index:14, id:'ghafr',           nameAr:'الغَفر',              nameEn:'Al-Ghafr',                meaning:'الغطاء', meaningEn:'The Cover',                   element:'air',   nature:"sa'd", ruler:'jupiter', emoji:'🕊️' },
-  { index:15, id:'zubana',          nameAr:'الزُّبانى',           nameEn:'Al-Zubana',               meaning:'المخالب', meaningEn:'The Claws',                  element:'water', nature:'nahs', ruler:'saturn',  emoji:'⚔️' },
-  { index:16, id:'iklil',           nameAr:'الإكليل',             nameEn:'Al-Iklil',                meaning:'التاج', meaningEn:'The Crown',                    element:'water', nature:"sa'd", ruler:'mars',    emoji:'🏆' },
-  { index:17, id:'qalb',            nameAr:'القَلب',              nameEn:'Al-Qalb',                 meaning:'القلب', meaningEn:'The Heart',                    element:'water', nature:'nahs', ruler:'mars',    emoji:'❤️' },
-  { index:18, id:'shaulah',         nameAr:'الشَّولة',            nameEn:'Al-Shaulah',              meaning:'الذيل المرفوع', meaningEn:'The Raised Tail',             element:'fire',  nature:'nahs', ruler:'jupiter', emoji:'🚀' },
-  { index:19, id:'naaim',           nameAr:'النَّعائم',           nameEn:"Al-Na'aim",               meaning:'النعام', meaningEn:'The Ostriches',                   element:'fire',  nature:"sa'd", ruler:'sun',     emoji:'🌟' },
-  { index:20, id:'baldah',          nameAr:'البَلدة',             nameEn:'Al-Baldah',               meaning:'المدينة', meaningEn:'The Empty Place',                  element:'earth', nature:'nahs', ruler:'saturn',  emoji:'🌌' },
-  { index:21, id:'saad_dhabih',     nameAr:'سعد الذابح',          nameEn:"Sa'd al-Dhabih",          meaning:'نجم الذابح السعيد', meaningEn:'The Lucky Slaughterer',         element:'earth', nature:"sa'd", ruler:'saturn',  emoji:'💪' },
-  { index:22, id:'saad_bula',       nameAr:'سعد بُلَع',           nameEn:"Sa'd Bula'",              meaning:'نجم البالع السعيد', meaningEn:'The Lucky Swallower',         element:'air',   nature:"sa'd", ruler:'saturn',  emoji:'🌊' },
-  { index:23, id:'saad_suud',       nameAr:'سعد السُّعود',        nameEn:"Sa'd al-Su'ud",           meaning:'أسعد السعود', meaningEn:'The Luckiest of the Lucky',               element:'air',   nature:"sa'd", ruler:'jupiter', emoji:'⭐' },
-  { index:24, id:'saad_akhbiyah',   nameAr:'سعد الأخبية',         nameEn:"Sa'd al-Akhbiyah",        meaning:'نجم الخيام السعيد', meaningEn:'The Lucky Tents',         element:'air',   nature:"sa'd", ruler:'venus',   emoji:'🏕️' },
-  { index:25, id:'fargh_muqaddam',  nameAr:'الفَرغ المُقدَّم',    nameEn:'Al-Fargh al-Muqaddam',    meaning:'الدلو الأعلى', meaningEn:'The Upper Spout',             element:'water', nature:"sa'd", ruler:'mars',    emoji:'🦋' },
-  { index:26, id:'fargh_muakhkhar', nameAr:'الفَرغ المُؤخَّر',    nameEn:"Al-Fargh al-Mu'akhkhar",  meaning:'الدلو الأسفل', meaningEn:'The Lower Spout',             element:'water', nature:"sa'd", ruler:'mercury', emoji:'✅' },
-  { index:27, id:'batn_hut',        nameAr:'بطن الحوت',           nameEn:'Batn al-Hut',             meaning:'بطن السمكة', meaningEn:'The Belly of the Fish',               element:'water', nature:"sa'd", ruler:'jupiter', emoji:'🐟' }
+  { index:0,  id:'sharatain', nameEn:'Al-Sharatain',           meaningEn:'The Two Signs',               element:'fire',  nature:"sa'd", ruler:'mars',    emoji:'🔥' },
+  { index:1,  id:'butain', nameEn:'Al-Butain',               meaningEn:'The Little Belly',             element:'fire',  nature:"sa'd", ruler:'venus',   emoji:'💰' },
+  { index:2,  id:'thurayya', nameEn:'Al-Thurayya',             meaningEn:'The Pleiades',           element:'fire',  nature:"sa'd", ruler:'mercury', emoji:'✨' },
+  { index:3,  id:'dabaran', nameEn:'Al-Dabaran',              meaningEn:'The Follower',                   element:'earth', nature:'nahs', ruler:'moon',    emoji:'🌑' },
+  { index:4,  id:'haqah', nameEn:"Al-Haq'ah",               meaningEn:'The White Spot',           element:'earth', nature:'nahs', ruler:'mars',    emoji:'🔄' },
+  { index:5,  id:'hanah', nameEn:"Al-Han'ah",               meaningEn:'The Brand',                   element:'air',   nature:"sa'd", ruler:'sun',     emoji:'💬' },
+  { index:6,  id:'dhira', nameEn:"Al-Dhira'",               meaningEn:'The Forearm',                   element:'air',   nature:"sa'd", ruler:'venus',   emoji:'💖' },
+  { index:7,  id:'nathrah', nameEn:'Al-Nathrah',              meaningEn:'The Gap',                   element:'water', nature:"sa'd", ruler:'mercury', emoji:'🔮' },
+  { index:8,  id:'tarf', nameEn:'Al-Tarf',                 meaningEn:'The Glance',                   element:'water', nature:'nahs', ruler:'moon',    emoji:'⚠️' },
+  { index:9,  id:'jabhah', nameEn:'Al-Jabhah',               meaningEn:'The Forehead',                   element:'fire',  nature:"sa'd", ruler:'sun',     emoji:'👑' },
+  { index:10, id:'zubrah', nameEn:'Al-Zubrah',               meaningEn:'The Mane',                   element:'fire',  nature:'nahs', ruler:'jupiter', emoji:'🛡️' },
+  { index:11, id:'sarfah', nameEn:'Al-Sarfah',               meaningEn:'The Changer',                 element:'earth', nature:"sa'd", ruler:'sun',     emoji:'🔄' },
+  { index:12, id:'awwa', nameEn:"Al-Awwa'",                meaningEn:'The Barker',                   element:'earth', nature:'nahs', ruler:'venus',   emoji:'🔍' },
+  { index:13, id:'simak', nameEn:'Al-Simak',                meaningEn:'The Unarmed One',                   element:'air',   nature:"sa'd", ruler:'mars',    emoji:'⚖️' },
+  { index:14, id:'ghafr', nameEn:'Al-Ghafr',                meaningEn:'The Cover',                   element:'air',   nature:"sa'd", ruler:'jupiter', emoji:'🕊️' },
+  { index:15, id:'zubana', nameEn:'Al-Zubana',               meaningEn:'The Claws',                  element:'water', nature:'nahs', ruler:'saturn',  emoji:'⚔️' },
+  { index:16, id:'iklil', nameEn:'Al-Iklil',                meaningEn:'The Crown',                    element:'water', nature:"sa'd", ruler:'mars',    emoji:'🏆' },
+  { index:17, id:'qalb', nameEn:'Al-Qalb',                 meaningEn:'The Heart',                    element:'water', nature:'nahs', ruler:'mars',    emoji:'❤️' },
+  { index:18, id:'shaulah', nameEn:'Al-Shaulah',              meaningEn:'The Raised Tail',             element:'fire',  nature:'nahs', ruler:'jupiter', emoji:'🚀' },
+  { index:19, id:'naaim', nameEn:"Al-Na'aim",               meaningEn:'The Ostriches',                   element:'fire',  nature:"sa'd", ruler:'sun',     emoji:'🌟' },
+  { index:20, id:'baldah', nameEn:'Al-Baldah',               meaningEn:'The Empty Place',                  element:'earth', nature:'nahs', ruler:'saturn',  emoji:'🌌' },
+  { index:21, id:'saad_dhabih', nameEn:"Sa'd al-Dhabih",          meaningEn:'The Lucky Slaughterer',         element:'earth', nature:"sa'd", ruler:'saturn',  emoji:'💪' },
+  { index:22, id:'saad_bula', nameEn:"Sa'd Bula'",              meaningEn:'The Lucky Swallower',         element:'air',   nature:"sa'd", ruler:'saturn',  emoji:'🌊' },
+  { index:23, id:'saad_suud', nameEn:"Sa'd al-Su'ud",           meaningEn:'The Luckiest of the Lucky',               element:'air',   nature:"sa'd", ruler:'jupiter', emoji:'⭐' },
+  { index:24, id:'saad_akhbiyah', nameEn:"Sa'd al-Akhbiyah",        meaningEn:'The Lucky Tents',         element:'air',   nature:"sa'd", ruler:'venus',   emoji:'🏕️' },
+  { index:25, id:'fargh_muqaddam', nameEn:'Al-Fargh al-Muqaddam',    meaningEn:'The Upper Spout',             element:'water', nature:"sa'd", ruler:'mars',    emoji:'🦋' },
+  { index:26, id:'fargh_muakhkhar', nameEn:"Al-Fargh al-Mu'akhkhar",  meaningEn:'The Lower Spout',             element:'water', nature:"sa'd", ruler:'mercury', emoji:'✅' },
+  { index:27, id:'batn_hut', nameEn:'Batn al-Hut',             meaningEn:'The Belly of the Fish',               element:'water', nature:"sa'd", ruler:'jupiter', emoji:'🐟' }
 ];
 
 // ── Auspicious & Inauspicious Activities per Mansion ─────────
@@ -1227,34 +1216,34 @@ const MANSION_DAYS = [
 ];
 
 const mansionDescriptions = {
-  sharatain:      { ar:'طاقة المبادرة والشجاعة. وقت مناسب للبدايات الجريئة والقيادة.', en:'Energy of initiative and courage. A time for bold beginnings and leadership.', guidance:'ابدأ المشاريع الجديدة، اتخذ القرارات الجريئة، وقد بصرك نحو الهدف.', guidance_en:'Launch new projects and make bold decisions. Mars energy fuels you to move forward with confidence.', journal_en:'Where in your life are you holding back from bold, decisive action? What fear stands between you and your next bold move?' },
-  butain:         { ar:'طاقة الثروة والوفرة. وقت مناسب لجمع الموارد والتأسيس.', en:'Energy of wealth and abundance. A time for gathering resources and building foundations.', guidance:'وقت مثالي للتخطيط المالي والعناية بما تملك. الزهرة تفتح أبواب الوفرة.', guidance_en:'Focus on financial planning and tending what you already have. Venus opens the doors of abundance.', journal_en:'What resources — material or emotional — need your attention today? Where can you open the door wider to abundance?' },
-  thurayya:       { ar:'طاقة النور والعلم. وقت مناسب للتعلم والاكتشاف والسفر.', en:'Energy of light and knowledge. A time for learning, discovery, and travel.', guidance:'اقرأ، تعلّم، تواصل مع الآخرين وشارك المعرفة.', guidance_en:'Read, study, and share knowledge. Mercury opens channels of understanding and clear expression.', journal_en:'What have you been meaning to learn or explore but keep postponing? What knowledge is quietly calling your name?' },
-  dabaran:        { ar:'طاقة الصبر والمتابعة. وقت للتأني والمثابرة رغم العقبات.', en:'Energy of patience and persistence. A time for steadfastness despite obstacles.', guidance:'تجنب البدايات الجديدة. ثابر على ما بدأته واصبر. وقت للصمود لا للتقدم السريع.', guidance_en:'Avoid new beginnings. Persist with what you have started and practice patience — this is a time for endurance.', journal_en:'Where does patience feel hardest for you right now? What would steady perseverance, without forcing, look like today?' },
-  haqah:          { ar:'طاقة التحول والتطهير. وقت لإزالة ما لا يخدمك والتجديد.', en:'Energy of transformation and purification. A time to release what no longer serves you.', guidance:'نظّف محيطك وفكرك. تخلّص من العادات التي لا تضيف لحياتك.', guidance_en:'Clear your environment and mind. Release habits that no longer add value. A time for purification and renewal.', journal_en:'What old habit or pattern has overstayed its welcome in your life? What would feel lighter the moment you released it?' },
-  hanah:          { ar:'طاقة التواصل والحكمة. وقت مناسب للحوار والتعبير عن الذات.', en:'Energy of communication and wisdom. A time for dialogue and self-expression.', guidance:'اكتب، تحدّث، اعقد الاجتماعات المهمة. الشمس تضيء طريق التعبير الصادق.', guidance_en:'Write, speak, and hold important conversations. The Sun illuminates the path of honest self-expression.', journal_en:'What truth have you been holding back from saying? What conversation, if finally had, would change everything?' },
-  dhira:          { ar:'طاقة الحب والانسجام. وقت مناسب للعلاقات والشراكات والمصالحة.', en:'Energy of love and harmony. A time for relationships, partnerships, and reconciliation.', guidance:'قوّي علاقاتك، أصلح ما بينك وبين الآخرين. وقت مبارك للشراكات.', guidance_en:'Strengthen your relationships and mend what needs healing. A blessed time for partnerships of all kinds.', journal_en:'Which relationship in your life is asking for more care? What would genuine harmony look like between you and that person?' },
-  nathrah:        { ar:'طاقة الحدس والرؤية الداخلية. وقت للتأمل والاستماع للقلب.', en:'Energy of intuition and inner vision. A time for meditation and listening to the heart.', guidance:'توقف عن الصخب الخارجي وانصت لصوتك الداخلي. التأمل والكتابة سيكشفان لك الحقيقة.', guidance_en:'Step away from outer noise and listen to your inner voice. Journaling will reveal what you need to know.', journal_en:'What is your intuition whispering right now that your mind keeps overriding? What does your heart already know?' },
-  tarf:           { ar:'طاقة الحذر واليقظة. وقت للتروي قبل اتخاذ القرارات المهمة.', en:'Energy of caution and vigilance. A time to pause before making important decisions.', guidance:'أجّل القرارات المهمة إن أمكن. راقب المواقف بعين ناقدة وثق بحدسك.', guidance_en:'Postpone important decisions if possible. Trust your intuition if something feels off.', journal_en:'Where are you rushing toward a decision that deserves more space? What would careful observation reveal if you slowed down?' },
-  jabhah:         { ar:'طاقة الكرامة والنصر. وقت مناسب للمواجهة والدفاع عن الحق.', en:'Energy of dignity and victory. A time for standing up and defending what is right.', guidance:'قف بثقة وكرامة. وقت مناسب للمفاوضات التي تتطلب الشجاعة والحضور القوي.', guidance_en:'Stand with confidence and dignity. A favorable time for negotiations that demand courage and presence.', journal_en:'Where do you need to stand firm in your values or your worth? What does taking dignified, confident action look like today?' },
-  zubrah:         { ar:'طاقة القوة الخفية والحماية. وقت للتحصين الروحي والقوة الداخلية.', en:'Energy of hidden power and protection. A time for spiritual fortification.', guidance:'حصّن نفسك روحياً. ادعُ، تأمّل، واستحضر الحماية الداخلية.', guidance_en:'Strengthen yourself spiritually. Invoke your inner protection — Jupiter guards you from the unseen.', journal_en:'What spiritual practice or inner ritual is calling you to deepen it? What truly fortifies your inner world when life feels heavy?' },
-  sarfah:         { ar:'طاقة التغيير والتحول. وقت مناسب لتبديل المسار والتجديد.', en:'Energy of change and transformation. A time to shift direction and renew.', guidance:'أحدث التغييرات التي طالما أجّلتها. وقت مبارك للتحولات الإيجابية.', guidance_en:'Make the changes you have long postponed. A blessed time for positive transformations in your life path.', journal_en:'What change have you been resisting longer than you should? If you fully embraced it, what new world would open up?' },
-  awwa:           { ar:'طاقة التحليل والتمييز. وقت للتفكير العميق وفرز الأمور.', en:'Energy of analysis and discernment. A time for deep thinking and sorting matters.', guidance:'لا تتسرع في القرارات. اجمع المعلومات وحلّل الأمور بعمق.', guidance_en:'Do not rush decisions. Gather information and analyze deeply before moving forward.', journal_en:'What important decision is asking for more information before you move? What are you missing that patience would reveal?' },
-  simak:          { ar:'طاقة العدالة والتوازن. وقت مناسب لإحقاق الحق والإنصاف.', en:'Energy of justice and balance. A time for fairness and equity.', guidance:'اسعَ لتحقيق العدل في علاقاتك. وقت مثالي لحل النزاعات بطريقة متوازنة.', guidance_en:'Seek fairness in your relationships. An ideal time to resolve disputes in a balanced, equitable way.', journal_en:'Where in your relationships or your life do you feel an imbalance of fairness? What would true equity restore?' },
-  ghafr:          { ar:'طاقة السلام والستر. وقت للهدوء والتعافي والغفران.', en:'Energy of peace and concealment. A time for calm, healing, and forgiveness.', guidance:'سامح واقبل المسامحة. المشتري يبارك قلوب المتسامحين ويفتح أبواب الشفاء.', guidance_en:'Forgive and allow yourself to be forgiven. Jupiter opens the doors of healing and inner peace.', journal_en:'Who or what is quietly asking for your forgiveness today — including yourself? What would genuine inner peace feel like?' },
-  zubana:         { ar:'طاقة المواجهة والحسم. وقت للتعامل مع التحديات بشكل مباشر.', en:'Energy of confrontation and resolution. A time to deal with challenges directly.', guidance:'تجنب الصراعات غير الضرورية. إن كانت المواجهة حتمية، فادخل إليها بحكمة.', guidance_en:'Avoid unnecessary conflict. If confrontation is unavoidable, approach it with wisdom and calm.', journal_en:'What conflict or tension are you navigating right now? How can wisdom and calm lead where reaction never could?' },
-  iklil:          { ar:'طاقة التتويج والشرف. وقت مناسب للاحتفال بالإنجازات.', en:'Energy of crowning and honor. A time to celebrate achievements.', guidance:'احتفل بإنجازاتك ولو كانت صغيرة. اعترف بمسيرتك وامتن لكل خطوة.', guidance_en:'Celebrate your achievements, even the small ones. Acknowledge your journey and give thanks for every step.', journal_en:'What achievement — however small — deserves to be truly honoured today? What are you genuinely proud of in your journey?' },
-  qalb:           { ar:'طاقة العاطفة العميقة والكشف. وقت لمواجهة الحقائق الخفية.', en:'Energy of deep emotion and revelation. A time to face hidden truths.', guidance:'لا تهرب من مشاعرك العميقة. ما يكشفه القمر هنا يحررك.', guidance_en:'Do not run from deep feelings. Honest self-confrontation here will set you free.', journal_en:'What deep feeling have you been avoiding or suppressing? What would it mean to let yourself fully feel it and pass through?' },
-  shaulah:        { ar:'طاقة الطموح والمغامرة. وقت للخروج من منطقة الراحة.', en:'Energy of ambition and adventure. A time to step out of the comfort zone.', guidance:'تحدَّ نفسك، لكن بحكمة. الطموح مرحّب به هنا، لكن تجنب التهور.', guidance_en:'Challenge yourself wisely. Ambition is welcome here — yet avoid recklessness and hasty decisions.', journal_en:'Where are you playing it safe when a deeper part of you is calling for boldness? What would courage actually look like today?' },
-  naaim:          { ar:'طاقة التفاؤل والسعادة. وقت مناسب للسفر والاستكشاف والفرح.', en:'Energy of optimism and joy. A time for travel, exploration, and happiness.', guidance:'استمتع بالحياة واحتضن الفرح. وقت مثالي للسفر واللقاءات الاجتماعية.', guidance_en:'Enjoy life and embrace joy. An ideal time for travel, social gatherings, and celebrating being alive.', journal_en:'What brings you genuine, uncomplicated joy right now? How can you invite more of that living energy into this very day?' },
-  baldah:         { ar:'طاقة العزلة والتأمل. وقت للخلوة والتفكر في مسار الحياة.', en:'Energy of solitude and contemplation. A time for retreat and reflecting on life.', guidance:'اختلِ بنفسك. وقت التأمل العميق في أين أنت وإلى أين تسير.', guidance_en:'Seek solitude. Deep contemplation about where you are and where you are headed is the gift of this mansion.', journal_en:'What does your soul need to be still with today — no noise, no doing? What clarity rises when you stop filling the silence?' },
-  saad_dhabih:    { ar:'طاقة التضحية من أجل النجاح. وقت للعمل الجاد والإصرار.', en:'Energy of sacrifice for success. A time for hard work and determination.', guidance:'اعمل بجد واثبت على مسارك. زحل يكافئ الصابرين.', guidance_en:'Work hard and stay the course. Success is earned through perseverance. Saturn rewards those who endure.', journal_en:'What are you truly willing to sacrifice for what matters most? Where does your commitment need to grow deeper roots?' },
-  saad_bula:      { ar:'طاقة الاستيعاب والتقبل. وقت لقبول التغيير والتكيف.', en:'Energy of absorption and acceptance. A time to embrace change and adapt.', guidance:'اقبل الواقع كما هو. التكيف مع التغيير مفتاح التدفق السلس.', guidance_en:'Accept reality as it is. Adapting to change rather than resisting it is the key to flowing smoothly here.', journal_en:'What change is asking you to adapt right now instead of resist? Where can you flow with life rather than push against it?' },
-  saad_suud:      { ar:'طاقة الحظ الأعظم والبركة. أسعد المنازل — وقت مبارك لكل شيء.', en:'Energy of supreme fortune and blessing. The luckiest mansion — a blessed time for everything.', guidance:'ابدأ كل ما تريد في هذا المنزل المبارك. المشتري يبارك كل شيء يُبدأ هنا.', guidance_en:'Begin everything you desire. Declare intentions, sign contracts, start projects. Jupiter blesses all initiated here.', journal_en:'If this is your most blessed moment to begin — what would you start? What one intention are you ready to plant into the world?' },
-  saad_akhbiyah:  { ar:'طاقة الأمان والحماية. وقت للاحتماء والتخطيط بحكمة.', en:'Energy of safety and shelter. A time for seeking refuge and planning wisely.', guidance:'خطّط من مكان الأمان. راجع خططك وتأكد من أن أساسك متين.', guidance_en:'Plan from a place of security. Ensure your foundations are solid before you launch forward.', journal_en:'What foundations in your life need reinforcing before you build higher? What are you truly standing on?' },
-  fargh_muqaddam: { ar:'طاقة الانطلاق والتحرر. وقت لكسر القيود والمضي قدماً.', en:'Energy of liberation and forward movement. A time to break free and move ahead.', guidance:'اكسر القيود القديمة. تحرر مما يعيقك وانطلق بجرأة.', guidance_en:'Break free from old limitations. Release what holds you back — Mars lends you the courage to liberate yourself.', journal_en:'What old limitation or story about yourself is ready to be broken? What would real freedom — in your own life — look like?' },
-  fargh_muakhkhar:{ ar:'طاقة الاكتمال والإنجاز. وقت لإتمام المشاريع وجني الثمار.', en:'Energy of completion and accomplishment. A time to finish projects and reap rewards.', guidance:'أكمل ما بدأته. وقت مثالي لإنهاء المشاريع والاحتفال بالإنجازات.', guidance_en:'Complete what you have started. Finish projects, harvest the fruits of your labor, and celebrate.', journal_en:'What project, intention, or chapter is calling for completion? What final, honest step would let you harvest what you planted?' },
-  batn_hut:       { ar:'طاقة الرحمة والتسليم. وقت للتواضع والاستسلام للقدر.', en:'Energy of mercy and surrender. A time for humility and accepting destiny.', guidance:'سلّم أمرك. هذا أكثر المنازل روحانية — وقت للتواضع والامتنان والتسليم الكامل.', guidance_en:'Surrender. This is the most spiritual of all mansions — a time for humility, gratitude, and full surrender.', journal_en:'What are you being asked to surrender that you are still holding onto? What would full trust in the flow of life feel like?' }
+  sharatain:      { en:'Energy of initiative and courage. A time for bold beginnings and leadership.', guidance_en:'Launch new projects and make bold decisions. Mars energy fuels you to move forward with confidence.', journal_en:'Where in your life are you holding back from bold, decisive action? What fear stands between you and your next bold move?' },
+  butain:         { en:'Energy of wealth and abundance. A time for gathering resources and building foundations.', guidance_en:'Focus on financial planning and tending what you already have. Venus opens the doors of abundance.', journal_en:'What resources — material or emotional — need your attention today? Where can you open the door wider to abundance?' },
+  thurayya:       { en:'Energy of light and knowledge. A time for learning, discovery, and travel.', guidance_en:'Read, study, and share knowledge. Mercury opens channels of understanding and clear expression.', journal_en:'What have you been meaning to learn or explore but keep postponing? What knowledge is quietly calling your name?' },
+  dabaran:        { en:'Energy of patience and persistence. A time for steadfastness despite obstacles.', guidance_en:'Avoid new beginnings. Persist with what you have started and practice patience — this is a time for endurance.', journal_en:'Where does patience feel hardest for you right now? What would steady perseverance, without forcing, look like today?' },
+  haqah:          { en:'Energy of transformation and purification. A time to release what no longer serves you.', guidance_en:'Clear your environment and mind. Release habits that no longer add value. A time for purification and renewal.', journal_en:'What old habit or pattern has overstayed its welcome in your life? What would feel lighter the moment you released it?' },
+  hanah:          { en:'Energy of communication and wisdom. A time for dialogue and self-expression.', guidance_en:'Write, speak, and hold important conversations. The Sun illuminates the path of honest self-expression.', journal_en:'What truth have you been holding back from saying? What conversation, if finally had, would change everything?' },
+  dhira:          { en:'Energy of love and harmony. A time for relationships, partnerships, and reconciliation.', guidance_en:'Strengthen your relationships and mend what needs healing. A blessed time for partnerships of all kinds.', journal_en:'Which relationship in your life is asking for more care? What would genuine harmony look like between you and that person?' },
+  nathrah:        { en:'Energy of intuition and inner vision. A time for meditation and listening to the heart.', guidance_en:'Step away from outer noise and listen to your inner voice. Journaling will reveal what you need to know.', journal_en:'What is your intuition whispering right now that your mind keeps overriding? What does your heart already know?' },
+  tarf:           { en:'Energy of caution and vigilance. A time to pause before making important decisions.', guidance_en:'Postpone important decisions if possible. Trust your intuition if something feels off.', journal_en:'Where are you rushing toward a decision that deserves more space? What would careful observation reveal if you slowed down?' },
+  jabhah:         { en:'Energy of dignity and victory. A time for standing up and defending what is right.', guidance_en:'Stand with confidence and dignity. A favorable time for negotiations that demand courage and presence.', journal_en:'Where do you need to stand firm in your values or your worth? What does taking dignified, confident action look like today?' },
+  zubrah:         { en:'Energy of hidden power and protection. A time for spiritual fortification.', guidance_en:'Strengthen yourself spiritually. Invoke your inner protection — Jupiter guards you from the unseen.', journal_en:'What spiritual practice or inner ritual is calling you to deepen it? What truly fortifies your inner world when life feels heavy?' },
+  sarfah:         { en:'Energy of change and transformation. A time to shift direction and renew.', guidance_en:'Make the changes you have long postponed. A blessed time for positive transformations in your life path.', journal_en:'What change have you been resisting longer than you should? If you fully embraced it, what new world would open up?' },
+  awwa:           { en:'Energy of analysis and discernment. A time for deep thinking and sorting matters.', guidance_en:'Do not rush decisions. Gather information and analyze deeply before moving forward.', journal_en:'What important decision is asking for more information before you move? What are you missing that patience would reveal?' },
+  simak:          { en:'Energy of justice and balance. A time for fairness and equity.', guidance_en:'Seek fairness in your relationships. An ideal time to resolve disputes in a balanced, equitable way.', journal_en:'Where in your relationships or your life do you feel an imbalance of fairness? What would true equity restore?' },
+  ghafr:          { en:'Energy of peace and concealment. A time for calm, healing, and forgiveness.', guidance_en:'Forgive and allow yourself to be forgiven. Jupiter opens the doors of healing and inner peace.', journal_en:'Who or what is quietly asking for your forgiveness today — including yourself? What would genuine inner peace feel like?' },
+  zubana:         { en:'Energy of confrontation and resolution. A time to deal with challenges directly.', guidance_en:'Avoid unnecessary conflict. If confrontation is unavoidable, approach it with wisdom and calm.', journal_en:'What conflict or tension are you navigating right now? How can wisdom and calm lead where reaction never could?' },
+  iklil:          { en:'Energy of crowning and honor. A time to celebrate achievements.', guidance_en:'Celebrate your achievements, even the small ones. Acknowledge your journey and give thanks for every step.', journal_en:'What achievement — however small — deserves to be truly honoured today? What are you genuinely proud of in your journey?' },
+  qalb:           { en:'Energy of deep emotion and revelation. A time to face hidden truths.', guidance_en:'Do not run from deep feelings. Honest self-confrontation here will set you free.', journal_en:'What deep feeling have you been avoiding or suppressing? What would it mean to let yourself fully feel it and pass through?' },
+  shaulah:        { en:'Energy of ambition and adventure. A time to step out of the comfort zone.', guidance_en:'Challenge yourself wisely. Ambition is welcome here — yet avoid recklessness and hasty decisions.', journal_en:'Where are you playing it safe when a deeper part of you is calling for boldness? What would courage actually look like today?' },
+  naaim:          { en:'Energy of optimism and joy. A time for travel, exploration, and happiness.', guidance_en:'Enjoy life and embrace joy. An ideal time for travel, social gatherings, and celebrating being alive.', journal_en:'What brings you genuine, uncomplicated joy right now? How can you invite more of that living energy into this very day?' },
+  baldah:         { en:'Energy of solitude and contemplation. A time for retreat and reflecting on life.', guidance_en:'Seek solitude. Deep contemplation about where you are and where you are headed is the gift of this mansion.', journal_en:'What does your soul need to be still with today — no noise, no doing? What clarity rises when you stop filling the silence?' },
+  saad_dhabih:    { en:'Energy of sacrifice for success. A time for hard work and determination.', guidance_en:'Work hard and stay the course. Success is earned through perseverance. Saturn rewards those who endure.', journal_en:'What are you truly willing to sacrifice for what matters most? Where does your commitment need to grow deeper roots?' },
+  saad_bula:      { en:'Energy of absorption and acceptance. A time to embrace change and adapt.', guidance_en:'Accept reality as it is. Adapting to change rather than resisting it is the key to flowing smoothly here.', journal_en:'What change is asking you to adapt right now instead of resist? Where can you flow with life rather than push against it?' },
+  saad_suud:      { en:'Energy of supreme fortune and blessing. The luckiest mansion — a blessed time for everything.', guidance_en:'Begin everything you desire. Declare intentions, sign contracts, start projects. Jupiter blesses all initiated here.', journal_en:'If this is your most blessed moment to begin — what would you start? What one intention are you ready to plant into the world?' },
+  saad_akhbiyah:  { en:'Energy of safety and shelter. A time for seeking refuge and planning wisely.', guidance_en:'Plan from a place of security. Ensure your foundations are solid before you launch forward.', journal_en:'What foundations in your life need reinforcing before you build higher? What are you truly standing on?' },
+  fargh_muqaddam: { en:'Energy of liberation and forward movement. A time to break free and move ahead.', guidance_en:'Break free from old limitations. Release what holds you back — Mars lends you the courage to liberate yourself.', journal_en:'What old limitation or story about yourself is ready to be broken? What would real freedom — in your own life — look like?' },
+  fargh_muakhkhar:{ en:'Energy of completion and accomplishment. A time to finish projects and reap rewards.', guidance_en:'Complete what you have started. Finish projects, harvest the fruits of your labor, and celebrate.', journal_en:'What project, intention, or chapter is calling for completion? What final, honest step would let you harvest what you planted?' },
+  batn_hut:       { en:'Energy of mercy and surrender. A time for humility and accepting destiny.', guidance_en:'Surrender. This is the most spiritual of all mansions — a time for humility, gratitude, and full surrender.', journal_en:'What are you being asked to surrender that you are still holding onto? What would full trust in the flow of life feel like?' }
 };
 
 const planetNames = { sun:'Sun', moon:'Moon', mars:'Mars', mercury:'Mercury', jupiter:'Jupiter', venus:'Venus', saturn:'Saturn' };
@@ -1355,12 +1344,10 @@ function generateGuide() {
 
   // ── Cover ──────────────────────────────────────────────────
   document.getElementById('cover-name').textContent = displayName;
-  document.getElementById('cover-mansion-ar').textContent = birthMansion.nameAr;
   document.getElementById('cover-mansion-en').textContent = birthMansion.nameEn;
 
   // ── Birth Hero ─────────────────────────────────────────────
   const desc = mansionDescriptions[birthMansion.id];
-  document.getElementById('hero-name-ar').textContent = birthMansion.nameAr;
   document.getElementById('hero-name-en').textContent = birthMansion.nameEn;
   document.getElementById('hero-meta').innerHTML = `
     <span class="birth-meta-pill">${elementNames[birthMansion.element]}</span>
@@ -1414,7 +1401,6 @@ function generateGuide() {
           <div class="mansion-number">${String(i+1).padStart(2,'0')}</div>
           <div class="mansion-name-block">
             <div class="mansion-name-en">${m.nameEn}</div>
-            <div class="mansion-name-ar">${m.nameAr}</div>
           </div>
           <div class="mansion-badges">${m.emoji !== '⚠️' ? `<div class="mansion-emoji">${m.emoji}</div>` : `<div class="mansion-emoji">⚠️</div>`}${birthBadge}${todayBadge}</div>
         </div>
@@ -1425,8 +1411,8 @@ function generateGuide() {
             <span class="meta-tag">🪐 ${planetNames[m.ruler]}</span>
             <span class="meta-tag" style="direction:ltr">Harmony: ${sc}%</span>
           </div>
-          <div class="mansion-meaning">Meaning: ${m.meaningEn || m.meaning}</div>
-          <div class="mansion-desc-ar">${d2.ar}</div>
+          <div class="mansion-meaning">Meaning: ${m.meaningEn}</div>
+          <div class="mansion-desc-ar">${d2.en}</div>
           <div class="mansion-desc-en">${d2.en}</div>
           <div class="mansion-guidance">
             <h5>🌙 Today's Guidance</h5>
@@ -1445,10 +1431,8 @@ function generateGuide() {
   const todayDescJ = mansionDescriptions[todayMansion.id];
   const birthDescJ = mansionDescriptions[birthMansion.id];
   document.getElementById('j-today-name').textContent = todayMansion.nameEn;
-  document.getElementById('j-today-ar').textContent = todayMansion.nameAr;
   document.getElementById('j-today-prompt').textContent = todayDescJ.journal_en || '';
   document.getElementById('j-birth-name').textContent = birthMansion.nameEn + ' · Your Birth Mansion';
-  document.getElementById('j-birth-ar').textContent = birthMansion.nameAr;
   document.getElementById('j-birth-prompt').textContent = birthDescJ.journal_en || '';
   const phasePrompts = {
     'New Moon':         ['🌑 New Moon',        "What seed are you planting in this new cycle? What intention are you breathing into being right now?"],
@@ -1647,10 +1631,17 @@ function getMoonPhaseKey(date) {
   const knownNew = new Date(2000,0,6,18,14);
   const age = (((date-knownNew)/(1000*60*60*24)) % 29.53058770576 + 29.53058770576) % 29.53058770576;
   if (age < 1.85)  return 'new';
-  if (age < 16.61) return 'waxing';
-  if (age < 17.5)  return 'full';
+  if (age < 13.9)  return 'waxing';
+  if (age < 16.61) return 'full';
   return 'waning';
 }
+
+const MOON_PHASE_EN = {
+  new:    { emoji: '🌑', label: 'New Moon' },
+  waxing: { emoji: '🌒', label: 'Waxing' },
+  full:   { emoji: '🌕', label: 'Full Moon' },
+  waning: { emoji: '🌘', label: 'Waning' }
+};
 
 function isNewMoon(date) {
   const knownNew = new Date(2000,0,6,18,14);
@@ -1681,17 +1672,15 @@ function renderMonthGrid(year, month) {
     const mansion = getMansion(date);
     const isToday2 = (d===today.getDate() && month===today.getMonth() && year===today.getFullYear());
     const isBirth = mansion.id === _birthMansionId;
-    const newMoon = isNewMoon(date);
-    const fullMoon = isFullMoon(date);
     const natureClass = mansion.nature === "sa'd" ? 'saad-border' : 'nahs-border';
-    const moonEmoji = newMoon ? '🌑' : fullMoon ? '🌕' : '';
+    const ph = MOON_PHASE_EN[getMoonPhaseKey(date)];
 
     const dateStr = `${year}-${String(month+1).padStart(2,'0')}-${String(d).padStart(2,'0')}`;
     const dayEvts = eventsData[dateStr] || [];
     html += `<div class="cal-day${isToday2?' today':''}${isBirth?' is-birth-mansion':''}" onclick="calDayClick('${dateStr}')" data-mi="${mansion.index}">
       <div class="cal-day-num">${d}</div>
-      <div class="cal-mansion-chip ${mansion.element} ${natureClass}"><span class="chip-en">${mansion.nameEn}</span><span class="chip-ar">${mansion.nameAr}</span></div>
-      ${moonEmoji ? `<div class="cal-moon-phase">${moonEmoji}</div>` : ''}
+      <div class="cal-mansion-chip ${mansion.element} ${natureClass}"><span class="chip-en">${mansion.nameEn}</span></div>
+      <div class="cal-moon-phase">${ph.emoji} <span style="font-size:10px;color:#2d6e4e;font-weight:700;">${ph.label}</span></div>
       ${renderEventDots(dayEvts)}
     </div>`;
   }
@@ -1726,7 +1715,7 @@ function renderKeyDates(year, month) {
       <div class="key-date-info">
         <div class="key-date-label">${label}</div>
         <div class="key-date-val">${MONTH_NAMES[month]} ${k.date}</div>
-        <div class="key-date-sub">${k.mansion.nameAr} · ${k.mansion.nameEn}</div>
+        <div class="key-date-sub">${k.mansion.nameEn}</div>
       </div>
     </div>`;
   }).join('');
@@ -1760,7 +1749,7 @@ function renderYearView(year) {
           const birthClass = isBirth ? ' is-birth' : '';
           const newClass = newM ? ' new-moon' : (fullM ? ' full-moon' : '');
           const todayClass = isToday2 ? ' today' : '';
-          return `<div class="cal-mini-day${elClass?(' '+elClass):''}${birthClass}${newClass}${todayClass}" title="${mansion.nameAr}">${d}</div>`;
+          return `<div class="cal-mini-day${elClass?(' '+elClass):''}${birthClass}${newClass}${todayClass}" title="${mansion.nameEn}">${d}</div>`;
         }).join('')}
       </div>
     </div>`;
@@ -1786,7 +1775,7 @@ function renderYearView(year) {
         <div class="key-date-info">
           <div class="key-date-label">${k.type==='new'?'New Moon':'Full Moon'}</div>
           <div class="key-date-val">${MONTH_NAMES[k.month]} ${k.day}, ${year}</div>
-          <div class="key-date-sub">${k.mansion.nameAr} · ${k.mansion.nameEn}</div>
+          <div class="key-date-sub">${k.mansion.nameEn}</div>
         </div>
       </div>`).join('')}
     </div>
@@ -1920,7 +1909,7 @@ function renderCalModal() {
   const MN = ['January','February','March','April','May','June','July','August','September','October','November','December'];
   const DN = ['Sunday','Monday','Tuesday','Wednesday','Thursday','Friday','Saturday'];
   document.getElementById('cal-modal-date-lbl').textContent = `${DN[date.getDay()]}, ${MN[m-1]} ${d}, ${y}`;
-  document.getElementById('cal-modal-mansion-lbl').textContent = `${mansion.nameEn} · ${mansion.nameAr}`;
+  document.getElementById('cal-modal-mansion-lbl').textContent = `${mansion.nameEn}`;
   // Mansion detail badges in header
   const elemLabel = mansion.element.charAt(0).toUpperCase() + mansion.element.slice(1);
   const isAusp = mansion.nature === "sa'd";
@@ -2100,7 +2089,6 @@ document.addEventListener('DOMContentLoaded', () => {
           <span class="tip-emoji">${m.emoji}</span>
           <span class="tip-name">${m.nameEn}</span>
         </div>
-        <span class="tip-ar">${m.nameAr}</span>
         <div class="tip-meaning">${m.meaningEn}</div>
         <div class="tip-badges">
           <span class="tip-badge ${m.element}">${elemLabel}</span>
