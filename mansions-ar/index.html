@@ -1987,9 +1987,10 @@
     'سعد السعود','سعد الأخبية','الفرغ المقدم','الفرغ المؤخر','بطن الحوت'
   ];
 
-  const MONTH_AR = ['يناير','فبراير','مارس','أبريل','مايو','يونيو',
-                    'يوليو','أغسطس','سبتمبر','أكتوبر','نوفمبر','ديسمبر'];
+  const MONTH_AR = ['كانون الثاني','شباط','آذار','نيسان','أيار','حزيران',
+                    'تموز','آب','أيلول','تشرين الأول','تشرين الثاني','كانون الأول'];
   const WD_AR = ['أحد','اثنين','ثلاثاء','أربعاء','خميس','جمعة','سبت'];
+  function toArabicNumerals(n){ return String(n).replace(/[0-9]/g,d=>'٠١٢٣٤٥٦٧٨٩'[d]); }
 
   function moonLon(date) {
     const y=date.getFullYear(),m=date.getMonth()+1,d=date.getDate()+0.5;
@@ -2035,7 +2036,7 @@
       const de=(window._getCalEvents()||{})[ds]||[];
       const ph=MOON_PHASE_AR[getMoonPhaseKey(dt)];
       h+=`<div class="cal-day${isT?' today':''}" onclick="window.calDayClick('${ds}')">
-        <div class="cal-day-num">${d}</div>
+        <div class="cal-day-num">${toArabicNumerals(d)}</div>
         <span class="cal-chip ${m.element} ${natureClass}">${CAL_NAMES_AR[idx]}</span>
         <div class="cal-moon">${ph.emoji} <span style="font-family:'Amiri',serif;font-size:10px;color:#2d6e4e;font-weight:700;">${ph.label}</span></div>
         ${window._renderEvtDots?window._renderEvtDots(de):''}
@@ -2051,14 +2052,14 @@
     let h=`<div class="cal-year-grid">`;
     for(let mo=0;mo<12;mo++){
       const first=new Date(year,mo,1).getDay(), days=new Date(year,mo+1,0).getDate();
-      h+=`<div class="cal-mini"><div class="cal-mini-hdr">${MONTH_AR[mo]} ${year}</div><div class="cal-mini-grid">`;
+      h+=`<div class="cal-mini"><div class="cal-mini-hdr">${MONTH_AR[mo]} ${toArabicNumerals(year)}</div><div class="cal-mini-grid">`;
       h+=WD_AR.map(d=>`<div class="cal-mini-day" style="font-size:8px;color:var(--gold);background:transparent;">${d[0]}</div>`).join('');
       for(let i=0;i<first;i++) h+=`<div class="cal-mini-day"></div>`;
       for(let d=1;d<=days;d++){
         const dt=new Date(year,mo,d); const m=getMansion(dt);
         const isT=(d===today.getDate()&&mo===today.getMonth()&&year===today.getFullYear());
         const nm=isNewMoon(dt),fm=isFullMoon(dt);
-        h+=`<div class="cal-mini-day${isT?' today':' '+m.element+'-bg'}${nm?' new-moon':fm?' full-moon':''}" title="${CAL_NAMES_AR[getMansionIdx(dt)]}">${d}</div>`;
+        h+=`<div class="cal-mini-day${isT?' today':' '+m.element+'-bg'}${nm?' new-moon':fm?' full-moon':''}" title="${CAL_NAMES_AR[getMansionIdx(dt)]}">${toArabicNumerals(d)}</div>`;
       }
       h+=`</div></div>`;
     }
@@ -2070,10 +2071,10 @@
     const title=document.getElementById('cal-title');
     const container=document.getElementById('cal-container');
     if(calView==='month'){
-      title.textContent=`${MONTH_AR[calMonth]} ${calYear}`;
+      title.textContent=`${MONTH_AR[calMonth]} ${toArabicNumerals(calYear)}`;
       container.innerHTML=renderMonth(calYear,calMonth);
     } else {
-      title.textContent=`عرض السنة الكاملة — ${calYear}`;
+      title.textContent=`عرض السنة الكاملة — ${toArabicNumerals(calYear)}`;
       container.innerHTML=renderYear(calYear);
     }
   }
