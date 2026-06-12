@@ -484,6 +484,19 @@
     .cal-mansion-chip.saad-border { border-right: 2px solid #2D7A3D; }
     .cal-mansion-chip.nahs-border { border-right: 2px solid #8B3A3A; }
     .cal-moon-phase { font-size: 12px; margin-top: 2px; text-align: center; }
+    /* Mobile 2-col card layout */
+    @media (max-width: 600px) {
+      .cal-weekdays { display: none !important; }
+      .cal-days { grid-template-columns: 1fr 1fr !important; gap: 4px; padding: 4px; }
+      .cal-day.empty { display: none !important; }
+      .cal-day { min-height: 80px !important; padding: 7px 6px 5px !important; border-radius: 8px; border: 1px solid #e8dcc8 !important; position: relative; }
+      .cal-day::before { content: attr(data-dow); position: absolute; top: 6px; right: 7px; font-size: 9px; color: #9a8878; letter-spacing: 0.3px; }
+      .cal-day-num { font-size: 17px !important; }
+      .cal-mansion-chip { white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+      .chip-en { font-size: 8px !important; letter-spacing: 0 !important; }
+      .cal-moon-phase { font-size: 10px !important; }
+      .cal-moon-phase span { font-size: 8px !important; }
+    }
     /* Calendar events */
     .cal-day:not(.empty) { cursor: pointer; transition: background 0.15s; }
     .cal-day:not(.empty):hover { background: rgba(201,168,76,0.07); }
