@@ -2010,146 +2010,58 @@
   function getMansion(date){ return CAL_MANSIONS[Math.floor(moonLon(date)/(360/28))%28]; }
   function getMansionIdx(date){ return Math.floor(moonLon(date)/(360/28))%28; }
 
-  function moonAge(date){
-    const k=new Date(2000,0,6,18,14);
-    return(((date-k)/(864e5))%29.53058770576+29.53058770576)%29.53058770576;
-  }
-  function isNewMoon(d){ return moonAge(d)<1.85; }
-  function isFullMoon(d){ const a=moonAge(d); return a>=13.9&&a<16.61; }
-  function getMoonPhaseKey(d){ const a=moonAge(d); if(a<1.85) return 'new'; if(a<13.9) return 'waxing'; if(a<16.61) return 'full'; return 'waning'; }
-  const MOON_PHASE_AR = { new:{emoji:'🌑',label:'محاق'}, waxing:{emoji:'🌒',label:'تزايد'}, full:{emoji:'🌕',label:'بدر'}, waning:{emoji:'🌘',label:'تناقص'} };
-
-  // ── State ──
-  let calYear=new Date().getFullYear(), calMonth=new Date().getMonth(), calView='month';
-
-  function renderMonth(year,month){
-    const today=new Date(), first=new Date(year,month,1).getDay(),
-          days=new Date(year,month+1,0).getDate();
-    let h=`<div class="cal-grid"><div class="cal-weekdays">${WD_AR.map(d=>`<div class="cal-weekday">${d}</div>`).join('')}</div><div class="cal-days">`;
-    for(let i=0;i<first;i++) h+=`<div class="cal-day empty"></div>`;
-    for(let d=1;d<=days;d++){
-      const dt=new Date(year,month,d);
-      const m=getMansion(dt), idx=getMansionIdx(dt);
-      const isT=(d===today.getDate()&&month===today.getMonth()&&year===today.getFullYear());
-      const natureClass=m.nature==="sa'd"?'saad':'nahs';
-      const ds=`${year}-${String(month+1).padStart(2,'0')}-${String(d).padStart(2,'0')}`;
-      const de=(window._getCalEvents()||{})[ds]||[];
-      const ph=MOON_PHASE_AR[getMoonPhaseKey(dt)];
-      h+=`<div class="cal-day${isT?' today':''}" onclick="window.calDayClick('${ds}')">
-        <div class="cal-day-num">${toArabicNumerals(d)}</div>
-        <span class="cal-chip ${m.element} ${natureClass}">${CAL_NAMES_AR[idx]}</span>
-        <div class="cal-moon">${ph.emoji} <span style="font-family:'Amiri',serif;font-size:10px;color:#2d6e4e;font-weight:700;">${ph.label}</span></div>
-        ${window._renderEvtDots?window._renderEvtDots(de):''}
-      </div>`;
-    }
-    const rem=(first+days)%7; if(rem>0) for(let i=0;i<7-rem;i++) h+=`<div class="cal-day empty"></div>`;
-    h+=`</div></div>`;
-    return h;
-  }
-
-  function renderYear(year){
-    const today=new Date();
-    let h=`<div class="cal-year-grid">`;
-    for(let mo=0;mo<12;mo++){
-      const first=new Date(year,mo,1).getDay(), days=new Date(year,mo+1,0).getDate();
-      h+=`<div class="cal-mini"><div class="cal-mini-hdr">${MONTH_AR[mo]} ${toArabicNumerals(year)}</div><div class="cal-mini-grid">`;
-      h+=WD_AR.map(d=>`<div class="cal-mini-day" style="font-size:8px;color:var(--gold);background:transparent;">${d[0]}</div>`).join('');
-      for(let i=0;i<first;i++) h+=`<div class="cal-mini-day"></div>`;
-      for(let d=1;d<=days;d++){
-        const dt=new Date(year,mo,d); const m=getMansion(dt);
-        const isT=(d===today.getDate()&&mo===today.getMonth()&&year===today.getFullYear());
-        const nm=isNewMoon(dt),fm=isFullMoon(dt);
-        h+=`<div class="cal-mini-day${isT?' today':' '+m.element+'-bg'}${nm?' new-moon':fm?' full-moon':''}" title="${CAL_NAMES_AR[getMansionIdx(dt)]}">${toArabicNumerals(d)}</div>`;
-      }
-      h+=`</div></div>`;
-    }
-    h+=`</div>`;
-    return h;
-  }
-
-  function render(){
-    const title=document.getElementById('cal-title');
-    const container=document.getElementById('cal-container');
-    if(calView==='month'){
-      title.textContent=`${MONTH_AR[calMonth]} ${toArabicNumerals(calYear)}`;
-      container.innerHTML=renderMonth(calYear,calMonth);
-    } else {
-      title.textContent=`عرض السنة الكاملة — ${toArabicNumerals(calYear)}`;
-      container.innerHTML=renderYear(calYear);
-    }
-  }
-
-  // Expose mansion lookup for journal
-  window._getMansionForJournal = getMansion;
-  window._getMansionIdxForJournal = getMansionIdx;
-  window._getCalNamesAR = CAL_NAMES_AR;
-  // exposed names for EN variant (undefined here, set in EN file)
-
-  // Calendar Events
-  window._calModalDate = '';
-  window._getCalEvents = function(){ return JSON.parse(localStorage.getItem('ee_cal_events')||'{}'); };
-  window._saveCalEvents = function(d){ localStorage.setItem('ee_cal_events',JSON.stringify(d)); };
-  window._renderEvtDots = function(evts){
-    if(!evts||!evts.length) return '';
-    const c={note:'#C9A84C',task:'#1A1440',reminder:'#2D7A3D'};
-    const dots=evts.slice(0,3).map(e=>`<span class="cal-evt-dot" style="background:${c[e.type]||c.note}"></span>`).join('');
-    const more=evts.length>3?`<span class="cal-evt-more">+${evts.length-3}</span>`:'';
-    return `<div class="cal-evt-row">${dots}${more}</div>`;
-  };
-  window.calDayClick = function(dateStr){
-    window._calModalDate=dateStr;
-    window.renderCalModal();
-    document.getElementById('cal-event-modal').style.display='flex';
-    setTimeout(()=>{ const i=document.getElementById('cal-add-input'); if(i)i.focus(); },80);
-  };
-  window.closeCalModal = function(){ document.getElementById('cal-event-modal').style.display='none'; };
-  window.renderCalModal = function(){
-    const ds=window._calModalDate;
-    const [y,m,d]=ds.split('-').map(Number);
-    const date=new Date(y,m-1,d);
-    const mansion=getMansion(date), idx=getMansionIdx(date);
-    const evts=(window._getCalEvents()[ds]||[]);
-    const MN=['January','February','March','April','May','June','July','August','September','October','November','December'];
-    const DN=['Sunday','Monday','Tuesday','Wednesday','Thursday','Friday','Saturday'];
-    const TYPE_AR={note:'ملاحظة',task:'مهمة',reminder:'تذكير'};
-    document.getElementById('cal-modal-date-lbl').textContent=`${DN[date.getDay()]}, ${MN[m-1]} ${d}, ${y}`;
-    document.getElementById('cal-modal-mansion-lbl').textContent=`${CAL_NAMES_AR[idx]}`;
-    const _auspEl=document.getElementById('cal-modal-ausp'); if(_auspEl&&window.renderAuspPanelRef){_auspEl.innerHTML=window.renderAuspPanelRef(idx);}
-    document.getElementById('cal-evt-list').innerHTML=evts.length
-      ?evts.map(e=>`<div class="cal-evt-item">
-          <button class="cal-evt-del" onclick="deleteCalEvent('${ds}','${e.id}')" title="حذف">✕</button>
-          <span class="cal-evt-text">${e.text}</span>
-          <span class="cal-evt-badge ${e.type}">${TYPE_AR[e.type]||e.type}</span>
-        </div>`).join('')
-      :`<div class="cal-modal-empty">لا توجد مدخلات — أضف أول ملاحظة أدناه</div>`;
-  };
-  window.addCalEvent = function(dateStr){
-    const input=document.getElementById('cal-add-input');
-    const type=document.getElementById('cal-add-select').value;
-    const text=input.value.trim(); if(!text)return;
-    const data=window._getCalEvents();
-    if(!data[dateStr])data[dateStr]=[];
-    data[dateStr].push({id:Date.now().toString(36),text,type});
-    window._saveCalEvents(data); input.value='';
-    window.renderCalModal(); render();
-  };
-  window.deleteCalEvent = function(dateStr,id){
-    const data=window._getCalEvents();
-    if(data[dateStr]){data[dateStr]=data[dateStr].filter(e=>e.id!==id); if(!data[dateStr].length)delete data[dateStr];}
-    window._saveCalEvents(data); window.renderCalModal(); render();
-  };
-  document.addEventListener('keydown',e=>{ if(e.key==='Escape')window.closeCalModal(); });
-
-  window.calPrev=function(){ if(calView==='month'){calMonth--;if(calMonth<0){calMonth=11;calYear--;}}else{calYear--;} render(); };
-  window.calNext=function(){ if(calView==='month'){calMonth++;if(calMonth>11){calMonth=0;calYear++;}}else{calYear++;} render(); };
-  window.setCalView=function(v){
-    calView=v;
-    document.getElementById('btn-month').style.cssText=v==='month'?'background:var(--indigo);color:var(--gold);border:1px solid var(--indigo);padding:7px 16px;border-radius:6px;cursor:pointer;font-family:Cinzel,serif;font-size:11px;letter-spacing:1px;':'background:var(--cream-dark,#F0E8D5);color:#4A3F30;border:1px solid #ddd;padding:7px 16px;border-radius:6px;cursor:pointer;font-family:Cinzel,serif;font-size:11px;letter-spacing:1px;';
-    document.getElementById('btn-year').style.cssText=v==='year'?'background:var(--indigo);color:var(--gold);border:1px solid var(--indigo);padding:7px 16px;border-radius:6px;cursor:pointer;font-family:Cinzel,serif;font-size:11px;letter-spacing:1px;':'background:var(--cream-dark,#F0E8D5);color:#4A3F30;border:1px solid #ddd;padding:7px 16px;border-radius:6px;cursor:pointer;font-family:Cinzel,serif;font-size:11px;letter-spacing:1px;';
-    render();
-  };
-
-  document.addEventListener('DOMContentLoaded', render);
+  // ── Accurate Moon Phase: Meeus lookup table 2024-2040 + mean-synodic fallback ──
+const NEW_MOON_TIMES = [
+  1704974344695,1707519651677,1710061330720,1712600559228,1715138618592,
+  1717677560291,1720220340708,1722770082131,1725328638846,1727895070324,
+  1730465345228,1733034195932,1735597714009,1738154268148,1740703604415,
+  1743245993952,1745782402296,1748315065686,1750847600446,1753384357374,
+  1755929263529,1758484511253,1761049581439,1763621321014,1766195099402,
+  1768766031553,1771329792484,1773883539611,1776426844145,1778961796455,
+  1781492171601,1784022319735,1786556288410,1789097292850,1791647478358,
+  1794207805596,1796777602761,1799353564209,1801929463712,1804498264765,
+  1807055563982,1809601208513,1812138117658,1814670225605,1817201209808,
+  1819734166880,1822271864653,1824817088380,1827372358744,1829938441452,
+  1832512451338,1835087945711,1837657987561,1840218522606,1842769092185,
+  1845311379284,1847847824910,1850381142964,1852914327276,1855450693480,
+  1857993550221,1860545244687,1863105942458,1865673177534,1868242860602,
+  1870810930332,1873374260647,1875930771406,1878479603328,1881021486309,
+  1883558790290,1886094980001,1888633541034,1891176811228,1893725450223,
+  1896278937700,1898836576622,1901397847575,1903961624254,1906525371439,
+  1909085752359,1911640351759,1914188946812,1916733389023,1919276329383,
+  1921819696513,1924364030092,1926909150864,1929455420857,1932004231659,
+  1934557113050,1937114322696,1939674370612,1942234909893,1944794048968,
+  1947350938690,1949905374363,1952457098152,1955005649432,1957550882386,
+  1960093517526,1962635136050,1965177632625,1967722619593,1970271220232,
+  1972824203066,1975382014490,1977944329130,1980509323251,1983073635566,
+  1985633702317,1988187539798,1990735292143,1993278297577,1995817982030,
+  1998355656124,2000893077486,2003432911948,2005978444979,2008532474038,
+  2011095674033,2013665403239,2016236458169,2018803712803,2021364224119,
+  2023917140126,2026462582379,2029001249957,2031534843697,2034066435409,
+  2036600192951,2039140464255,2041690510933,2044251248241,2046820675715,
+  2049394577252,2051967903737,2054535840037,2057094661744,2059642741966,
+  2062181095091,2064712899829,2067242420856,2069773982699,2072311263098,
+  2074856915384,2077412435295,2079977970723,2082551578078,2085128354177,
+  2087701276351,2090264321279,2092815296831,2095355912560,2097889870262,
+  2100421105127,2102953001545,2105488382331,2108029890486,2110580154519,
+  2113140957315,2115711360856,2118286546791,2120859495046,2123424593617,
+  2125979787135,2128525938690,2131065217200,2133600183562,2136133610470,
+  2138668555858,2141208276386,2143755601998,2146311794441,2148875647430,
+  2151443816073,2154012291011,2156577682907,2159137547238,2161690407229,
+  2164236086525,2166776029506,2169313118262,2171850848055,2174392104833,
+  2176938234141,2179489089558,2182043976572,2184602484395,2187164190730,
+  2189727586125,2192289781197,2194847732091,2197399921264,2199947065009,
+  2202491417592,2205035243764,2207579601307,2210124395698,2212669552164,
+  2215216053594,2217765703807,2220319778485,2222877900636,2225438204675,
+  2227998505099,2230557334090,2233114054506,2235668247454,2238219268173
+];
+function moonAge(date){
+  const t=date.getTime(),S=29.530588853*86400000;
+  let ref=NEW_MOON_TIMES[0];
+  for(let i=0;i<NEW_MOON_TIMES.length;i++){if(NEW_MOON_TIMES[i]<=t)ref=NEW_MOON_TIMES[i];else break;}
+  // Fallback for dates beyond 2040: extrapolate using mean synodic period
+  if(t>NEW_MOON_TIMES[NEW_MOON_TIMES.length-1]){ref+=Math.floor((t-ref)/S)*S;}
+  return(t-ref)/86400000;
 })();
 </script>
 
