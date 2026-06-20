@@ -1946,7 +1946,7 @@ function renderCalendar() {
   if (!container) return;
 
   if (calView === 'month') {
-    const _hObj = toHijri(calYear, calMonth + 1, 1);
+    const _hObj = toHijri(calYear, calMonth + 1, new Date(calYear, calMonth + 1, 0).getDate());
     const _hMonth = HIJRI_MONTHS_AR[(_hObj.month || 1) - 1] || '';
     const _hYear  = String(_hObj.year || '').replace(/\d/g, n => '٠١٢٣٤٥٦٧٨٩'[n]);
     titleEl.textContent = `${MONTH_NAMES[calMonth]} ${calYear}  ·  ${MONTH_NAMES_AR[calMonth]} | ${_hMonth} ${_hYear}`;
