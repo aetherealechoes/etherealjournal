@@ -541,7 +541,7 @@
     }
     .cal-modal-date { font-family:'Cinzel',serif; font-size:10px; letter-spacing:2px; color:var(--gold); text-transform:uppercase; margin-bottom:5px; direction:ltr; }
     .cal-modal-mansion { font-family:'Amiri',serif; font-size:20px; color:var(--cream); }
-    .cal-modal-close { background:none; border:none; color:rgba(245,233,200,0.6); font-size:22px; cursor:pointer; line-height:1; padding:0; transition:color 0.15s; }
+    .cal-modal-close { background:none; border:none; color:#8a7060; font-size:22px; cursor:pointer; line-height:1; padding:0; transition:color 0.15s; }
     .cal-modal-close:hover { color:var(--gold); }
     .cal-modal-body { padding:18px 24px 24px; max-height:58vh; overflow-y:auto; }
     .cal-modal-empty { font-family:'Amiri',serif; font-size:18px; color:var(--text-soft); text-align:center; padding:12px 0 6px; }
@@ -1699,7 +1699,7 @@ function renderMonthGridHijri(hy, hm) {
     html += `<div class="cal-day${isToday2?' today':''}${isBirth?' is-birth-mansion':''}" onclick="calDayClick('${dateStr}')" data-mi="${mansion.index}">
       <div class="cal-day-num" style="font-family:'Amiri',serif">${hdAr}</div>
       <div class="cal-mansion-chip ${mansion.element} ${natureClass}" title="${mansion.nameAr}">${mansion.nameAr}</div>
-      ${moonEmoji ? `<div class="cal-moon-phase">${moonEmoji}</div>` : ''}
+      <div class="cal-moon-phase">${ph.emoji} <span style="font-size:10px;color:#2d6e4e;font-weight:700;font-family:'Amiri',serif">${ph.label}</span></div>
       ${renderEventDots(dayEvts)}
     </div>`;
   }
@@ -1727,6 +1727,14 @@ function getMoonPhaseKey(date) {
   if (age < 17.5)  return 'full';
   return 'waning';
 }
+
+const MOON_PHASE_AR = {
+  new:    { emoji: '🌑', label: 'محاق' },
+  waxing: { emoji: '🌒', label: 'هلال متزايد' },
+  full:   { emoji: '🌕', label: 'بدر' },
+  waning: { emoji: '🌘', label: 'هلال متناقص' }
+};
+
 
 function isNewMoon(date) {
   const knownNew = new Date(2000,0,6,18,14);
@@ -1757,10 +1765,8 @@ function renderMonthGrid(year, month) {
     const mansion = getMansion(date);
     const isToday2 = (d===today.getDate() && month===today.getMonth() && year===today.getFullYear());
     const isBirth = mansion.id === _birthMansionId;
-    const newMoon = isNewMoon(date);
-    const fullMoon = isFullMoon(date);
+    const ph = MOON_PHASE_AR[getMoonPhaseKey(date)];
     const natureClass = mansion.nature === "sa'd" ? 'saad-border' : 'nahs-border';
-    const moonEmoji = newMoon ? '🌑' : fullMoon ? '🌕' : '';
 
     // Calculate Hijri date for this Gregorian day
     const hijri = toHijri(year, month + 1, d);
@@ -1771,10 +1777,10 @@ function renderMonthGrid(year, month) {
     html += `<div class="cal-day${isToday2?' today':''}${isBirth?' is-birth-mansion':''}" onclick="calDayClick('${dateStr}')" data-mi="${mansion.index}">
       <div class="cal-day-dates">
         <div class="cal-day-num-gregorian" style="font-family:'Amiri',serif">${String(d).replace(/\d/g, n => '٠١٢٣٤٥٦٧٨٩'[n])}</div>
-        <div class="cal-day-num-hijri" style="font-family:'Amiri',serif;font-size:11px;color:rgba(245,233,200,0.6)">${hijriDayAr}</div>
+        <div class="cal-day-num-hijri" style="font-family:'Amiri',serif;font-size:11px;color:#8a7060">${hijriDayAr}</div>
       </div>
       <div class="cal-mansion-chip ${mansion.element} ${natureClass}" title="${mansion.nameAr}">${mansion.nameAr}</div>
-      ${moonEmoji ? `<div class="cal-moon-phase">${moonEmoji}</div>` : ''}
+      <div class="cal-moon-phase">${ph.emoji} <span style="font-size:10px;color:#2d6e4e;font-weight:700;font-family:'Amiri',serif">${ph.label}</span></div>
       ${renderEventDots(dayEvts)}
     </div>`;
   }
@@ -1885,7 +1891,10 @@ function renderCalendar() {
   if (!container) return;
 
   if (calView === 'month') {
-    titleEl.textContent = `${MONTH_NAMES[calMonth]} ${calYear}  ·  ${MONTH_NAMES_AR[calMonth]}`;
+    const _h = toHijri(calYear, calMonth + 1, 1);
+    const _hm = HIJRI_MONTHS_AR[_h.month - 1];
+    const _hy = String(_h.year).replace(/\d/g, n => '٠١٢٣٤٥٦٧٨٩'[n]);
+    titleEl.textContent = `${MONTH_NAMES[calMonth]} ${calYear}  ·  ${MONTH_NAMES_AR[calMonth]} | ${_hm} ${_hy}`;
     container.innerHTML = renderMonthGrid(calYear, calMonth);
     keyPanel.innerHTML = renderKeyDates(calYear, calMonth);
     keyPanel.style.display = '';
