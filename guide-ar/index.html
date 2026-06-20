@@ -497,18 +497,24 @@
     .cal-mansion-chip.saad-border { border-right: 2px solid #2D7A3D; }
     .cal-mansion-chip.nahs-border { border-right: 2px solid #8B3A3A; }
     .cal-moon-phase { font-size: 12px; margin-top: 2px; text-align: center; }
+
     /* Mobile 2-col card layout */
     @media (max-width: 600px) {
       .cal-weekdays { display: none !important; }
       .cal-days { grid-template-columns: 1fr 1fr !important; gap: 4px; padding: 4px; }
       .cal-day.empty { display: none !important; }
-      .cal-day { min-height: 80px !important; padding: 7px 6px 5px !important; border-radius: 8px; border: 1px solid #e8dcc8 !important; position: relative; }
-      .cal-day::before { content: attr(data-dow); position: absolute; top: 5px; left: 6px; font-size: 9px; color: #9a8878; letter-spacing: 0.3px; font-family: 'Amiri', serif; }
-      .cal-day-dates { margin-bottom: 3px; gap: 3px; }
+      /* Base card — extra top padding makes room for the day-of-week strip */
+      .cal-day { min-height: 90px !important; padding: 16px 6px 5px !important; border-radius: 8px; border: 1px solid #e8dcc8 !important; position: relative; }
+      /* Day-of-week label: full-width strip at the very top of each card */
+      .cal-day::before { content: attr(data-dow); position: absolute; top: 0; left: 0; right: 0; height: 14px; line-height: 14px; text-align: center; font-size: 8px; color: #b0a090; background: rgba(0,0,0,0.035); border-radius: 8px 8px 0 0; font-family: 'Amiri', serif; }
+      /* Dates row: Gregorian (big) + Hijri (small, must override inline cream color) */
+      .cal-day-dates { margin-bottom: 2px !important; gap: 3px !important; }
       .cal-day-num-gregorian { font-size: 15px !important; }
-      .cal-day-num-hijri { font-size: 10px !important; }
-      .cal-mansion-chip { font-size: 11px !important; padding: 3px 4px !important; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
-      .cal-moon-phase { font-size: 10px !important; }
+      .cal-day-num-hijri { font-size: 9px !important; color: #8a7060 !important; }
+      /* Mansion chip */
+      .cal-mansion-chip { font-size: 11px !important; padding: 2px 4px !important; white-space: nowrap !important; overflow: hidden !important; text-overflow: ellipsis !important; margin-top: 1px; }
+      /* Moon phase emoji + label — keep visible */
+      .cal-moon-phase { font-size: 10px !important; margin-top: 3px !important; line-height: 1.4 !important; }
     }
 
     /* Calendar events */
