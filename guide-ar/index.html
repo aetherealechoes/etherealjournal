@@ -1325,6 +1325,20 @@ function compatScore(m1, m2) {
   return Math.max(20, Math.min(95, score));
 }
 
+function getMoonPhase(date) {
+  const knownNew = new Date(2000,0,6,18,14);
+  const age = (((date-knownNew)/(1000*60*60*24)) % 29.53058770576 + 29.53058770576) % 29.53058770576;
+  if (age < 1.85) return {name:'القمر الجديد', emoji:'🌑'};
+  if (age < 5.54) return {name:'الهلال المتزايد', emoji:'🌒'};
+  if (age < 9.23) return {name:'التربيع الأول', emoji:'🌓'};
+  if (age < 12.92) return {name:'الأحدب المتزايد', emoji:'🌔'};
+  if (age < 16.61) return {name:'البدر الكامل', emoji:'🌕'};
+  if (age < 20.30) return {name:'الأحدب المتناقص', emoji:'🌖'};
+  if (age < 23.99) return {name:'التربيع الأخير', emoji:'🌗'};
+  if (age < 27.68) return {name:'الهلال المتناقص', emoji:'🌘'};
+  return {name:'القمر الجديد', emoji:'🌑'};
+}
+
 // ── Generate the Guide ─────────────────────────────────────────
 function generateGuide() {
   const name = document.getElementById('input-name').value.trim();
