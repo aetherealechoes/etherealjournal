@@ -1794,6 +1794,10 @@
       <button id="btn-month" onclick="setCalView('month')" style="background:var(--indigo);color:var(--gold);border:1px solid var(--indigo);padding:7px 16px;border-radius:6px;cursor:pointer;font-family:'Amiri',serif;font-size:14px;">شهر</button>
       <button id="btn-year"  onclick="setCalView('year')"  style="background:var(--cream-dark);color:#4A3F30;border:1px solid #ddd;padding:7px 16px;border-radius:6px;cursor:pointer;font-family:'Amiri',serif;font-size:14px;">سنة</button>
     </div>
+    <div style="display:flex;border:1px solid #ddd;border-radius:6px;overflow:hidden;font-family:'Amiri',serif;font-size:13px;">
+      <button id="btn-dialect-lv" onclick="setMonthDialect('lv')" style="background:var(--cream-dark);color:#4A3F30;border:none;padding:6px 11px;cursor:pointer;">فصحى</button>
+      <button id="btn-dialect-eg" onclick="setMonthDialect('eg')" style="background:var(--indigo);color:var(--gold);border:none;padding:6px 11px;cursor:pointer;">مصري</button>
+    </div>
   </div>
 
   <!-- Legend -->
@@ -2081,8 +2085,10 @@ window._getCalNamesAR           = CAL_NAMES_AR;
   var calYear  = new Date().getFullYear();
   var calMonth = new Date().getMonth();
   var calView  = 'month';
-  var MONTH_AR_CAL = ['كانون الثاني','شباط','آذار','نيسان','أيار','حزيران',
-                      'تموز','آب','أيلول','تشرين الأول','تشرين الثاني','كانون الأول'];
+  var MONTHS_EG = ['يناير','فبراير','مارس','أبريل','مايو','يونيو','يوليو','أغسطس','سبتمبر','أكتوبر','نوفمبر','ديسمبر'];
+  var MONTHS_LV = ['كانون الثاني','شباط','آذار','نيسان','أيار','حزيران','تموز','آب','أيلول','تشرين الأول','تشرين الثاني','كانون الأول'];
+  var calDialect = localStorage.getItem('ee_ar_month_dialect') || 'eg';
+  function getCalMonths(){ return calDialect === 'eg' ? MONTHS_EG : MONTHS_LV; }
   var WD_AR_CAL = ['أحد','اثنين','ثلاثاء','أربعاء','خميس','جمعة','سبت'];
   var EL_STYLE = {
     fire:  {bg:'#FFF0E0',border:'#B85C00'},
@@ -2129,7 +2135,7 @@ window._getCalNamesAR           = CAL_NAMES_AR;
   function renderYearView(year){
     var html='<div style="display:grid;grid-template-columns:repeat(auto-fill,minmax(240px,1fr));gap:16px;">';
     for(var m=0;m<12;m++){
-      html+='<div><div style="text-align:center;font-family:\'Amiri\',serif;font-size:13px;font-weight:700;color:var(--indigo,#2A1F6E);margin-bottom:6px;">'+MONTH_AR_CAL[m]+'</div>'+renderMonthGrid(year,m)+'</div>';
+      html+='<div><div style="text-align:center;font-family:\'Amiri\',serif;font-size:13px;font-weight:700;color:var(--indigo,#2A1F6E);margin-bottom:6px;">'+getCalMonths()[m]+'</div>'+renderMonthGrid(year,m)+'</div>';
     }
     return html+'</div>';
   }
@@ -2137,7 +2143,7 @@ window._getCalNamesAR           = CAL_NAMES_AR;
     var titleEl=document.getElementById('cal-title'), container=document.getElementById('cal-container');
     if(!container) return;
     if(calView==='month'){
-      if(titleEl) titleEl.textContent=MONTH_AR_CAL[calMonth]+' — '+toAr(calYear);
+      if(titleEl) titleEl.textContent=getCalMonths()[calMonth]+' — '+toAr(calYear);
       container.innerHTML=renderMonthGrid(calYear,calMonth);
     } else {
       if(titleEl) titleEl.textContent=toAr(calYear)+' — العام كاملاً';
@@ -2168,7 +2174,7 @@ window._getCalNamesAR           = CAL_NAMES_AR;
     var d=new Date(parseInt(parts[0]),parseInt(parts[1])-1,parseInt(parts[2]));
     var dateLbl=document.getElementById('cal-modal-date-lbl');
     var mansLbl=document.getElementById('cal-modal-mansion-lbl');
-    if(dateLbl) dateLbl.textContent=WD_AR_CAL[d.getDay()]+' '+toAr(d.getDate())+' '+MONTH_AR_CAL[d.getMonth()]+' '+toAr(d.getFullYear());
+    if(dateLbl) dateLbl.textContent=WD_AR_CAL[d.getDay()]+' '+toAr(d.getDate())+' '+getCalMonths()[d.getMonth()]+' '+toAr(d.getFullYear());
     if(mansLbl) mansLbl.textContent=mansionName;
     var auspEl=document.getElementById('cal-modal-ausp');
     if(auspEl&&window.MANSION_DAYS&&window._calGetMansionIdx){
@@ -2209,7 +2215,19 @@ window._getCalNamesAR           = CAL_NAMES_AR;
     if(events.length) localStorage.setItem(key,JSON.stringify(events)); else localStorage.removeItem(key);
     renderCalEvtList(dateStr); renderCalendar();
   };
-  document.addEventListener('DOMContentLoaded',function(){ renderCalendar(); });
+  window.setMonthDialect = function(d){
+    calDialect = d;
+    localStorage.setItem('ee_ar_month_dialect', d);
+    var lv = document.getElementById('btn-dialect-lv');
+    var eg = document.getElementById('btn-dialect-eg');
+    if(lv){ lv.style.background = d==='lv' ? 'var(--indigo)' : 'var(--cream-dark)'; lv.style.color = d==='lv' ? 'var(--gold)' : '#4A3F30'; lv.style.borderColor = d==='lv' ? 'var(--indigo)' : '#ddd'; }
+    if(eg){ eg.style.background = d==='eg' ? 'var(--indigo)' : 'var(--cream-dark)'; eg.style.color = d==='eg' ? 'var(--gold)' : '#4A3F30'; eg.style.borderColor = d==='eg' ? 'var(--indigo)' : '#ddd'; }
+    renderCalendar();
+  };
+  document.addEventListener('DOMContentLoaded',function(){
+    renderCalendar();
+    window.setMonthDialect(calDialect);
+  });
 })();
 </script>
 
