@@ -1929,23 +1929,34 @@
   .cal-add-btn { font-family:'Amiri',serif; font-size:15px; background:var(--indigo); color:var(--gold); border:none; border-radius:8px; padding:8px 18px; cursor:pointer; transition:opacity 0.15s; }
   .cal-add-btn:hover { opacity:0.85; }
   @media print { .cal-modal-overlay,.journal-entry-footer{display:none!important;} .journal-textarea{resize:none;min-height:120px;} }
-  .cal-grid { border-radius:10px;overflow:hidden;border:1px solid #F0E8D5; }
+  .cal-grid { border-radius:10px;overflow:hidden;border:1px solid var(--cream-dark,#F0E8D5); }
   .cal-weekdays { display:grid;grid-template-columns:repeat(7,1fr);background:var(--indigo); }
-  .cal-weekday  { padding:12px 4px;text-align:center;font-family:'Cinzel',serif;font-size:11px;letter-spacing:1px;color:var(--gold);font-weight:700;direction:ltr; }
+  .cal-weekday  { padding:10px 4px;text-align:center;font-family:'Amiri',serif;font-size:15px;letter-spacing:0;color:var(--gold);font-weight:700;direction:rtl; }
   .cal-days     { display:grid;grid-template-columns:repeat(7,1fr);background:white; }
-  .cal-day      { min-height:100px;padding:7px 6px;border-bottom:1px solid #f0ece3;border-left:1px solid #f0ece3;position:relative; }
+  .cal-day      { min-height:150px;padding:10px 8px;border-bottom:1px solid #f0ece3;border-left:1px solid #f0ece3;position:relative;cursor:default; }
   .cal-day.empty { background:#fafafa; }
   .cal-day.today { outline:2px solid var(--gold);outline-offset:-2px; }
-  .cal-day-num  { font-family:'Cinzel',serif;font-size:13px;font-weight:700;color:#4A3F30;margin-bottom:4px;direction:ltr; }
+  .cal-day-dates { display:flex;align-items:center;gap:4px;margin-bottom:5px;direction:ltr; }
+  .cal-day-num  { font-family:'Amiri',serif;font-size:14px;font-weight:700;color:var(--text-soft,#4A3F30); }
   .cal-day.today .cal-day-num { color:var(--gold); }
-  .cal-chip     { border-radius:4px;padding:3px 5px;font-size:13px;font-family:'Amiri',serif;line-height:1.5;display:block;text-align:center; }
+  .cal-chip     { border-radius:4px;padding:4px 6px;font-size:17px;font-family:'Amiri',serif;line-height:1.5;display:block;width:100%;text-align:center;box-sizing:border-box; }
   .cal-chip.fire  { background:#FFF0E0;color:#B85C00; }
   .cal-chip.water { background:#E0F0FF;color:#0055A0; }
   .cal-chip.air   { background:#EFFFEB;color:#2D6A00; }
   .cal-chip.earth { background:#F5F0E5;color:#6B4C1A; }
   .cal-chip.saad  { border-right:2px solid #2D7A3D; }
   .cal-chip.nahs  { border-right:2px solid #8B3A3A; }
-  .cal-moon       { font-size:11px;text-align:center;margin-top:2px; }
+  .cal-moon       { font-size:12px;text-align:center;margin-top:2px; }
+  @media(max-width:600px){
+    .cal-weekdays { display:none!important; }
+    .cal-days { grid-template-columns:1fr 1fr!important;gap:4px;padding:4px; }
+    .cal-day.empty { display:none!important; }
+    .cal-day { min-height:90px!important;padding:7px 6px 5px!important;border-radius:8px;border:1px solid #e8dcc8!important;position:relative; }
+    .cal-day-dates { margin-bottom:3px; }
+    .cal-day-num { font-size:15px!important; }
+    .cal-chip { font-size:11px!important;padding:3px 4px!important;white-space:nowrap;overflow:hidden;text-overflow:ellipsis; }
+    .cal-moon { font-size:10px!important; }
+  }
   /* Year view */
   .cal-year-grid { display:grid;grid-template-columns:repeat(3,1fr);gap:18px; }
   @media(max-width:700px){ .cal-year-grid{ grid-template-columns:1fr 1fr; } }
@@ -2089,7 +2100,10 @@ window._getCalNamesAR           = CAL_NAMES_AR;
   var MONTHS_LV = ['كانون الثاني','شباط','آذار','نيسان','أيار','حزيران','تموز','آب','أيلول','تشرين الأول','تشرين الثاني','كانون الأول'];
   var calDialect = localStorage.getItem('ee_ar_month_dialect') || 'eg';
   function getCalMonths(){ return calDialect === 'eg' ? MONTHS_EG : MONTHS_LV; }
-  var WD_AR_CAL = ['أحد','اثنين','ثلاثاء','أربعاء','خميس','جمعة','سبت'];
+  var WD_AR_CAL = ['الأحد','الاثنين','الثلاثاء','الأربعاء','الخميس','الجمعة','السبت'];
+  var PHASE_KEY = function(age){ if(age<1.85)return'new'; if(age<13.9)return'waxing'; if(age<16.61)return'full'; return'waning'; };
+  var PHASE_AR  = { new:{emoji:'🌑',label:'محاق'}, waxing:{emoji:'🌒',label:'هلال متزايد'}, full:{emoji:'🌕',label:'بدر'}, waning:{emoji:'🌘',label:'هلال متناقص'} };
+  function renderEvtDots(dateStr){ var raw=localStorage.getItem('ee_ref_cal_'+dateStr); if(!raw)return''; var evts=[]; try{evts=JSON.parse(raw);}catch(e){} if(!evts.length)return''; var cols={note:'#C9A84C',task:'var(--indigo,#2A1F6E)',reminder:'#2D7A3D'}; var dots=evts.slice(0,3).map(function(e){return'<span class="cal-evt-dot" style="background:'+(cols[e.type]||'#999')+'"></span>'}).join(''); var more=evts.length>3?'<span class="cal-evt-more">+</span>':''; return'<div class="cal-evt-row">'+dots+more+'</div>'; }
   var EL_STYLE = {
     fire:  {bg:'#FFF0E0',border:'#B85C00'},
     water: {bg:'#E0F0FF',border:'#0055A0'},
@@ -2109,28 +2123,32 @@ window._getCalNamesAR           = CAL_NAMES_AR;
     return'🌑';
   }
   function renderMonthGrid(year,month){
-    var html='<div style="display:grid;grid-template-columns:repeat(7,1fr);gap:3px;">';
-    for(var d=0;d<7;d++) html+='<div style="text-align:center;font-family:\'Amiri\',serif;font-size:11px;color:#8A7E6A;padding:3px 0;">'+WD_AR_CAL[d]+'</div>';
+    var today=new Date();
     var first=new Date(year,month,1).getDay(), days=new Date(year,month+1,0).getDate();
-    for(var i=0;i<first;i++) html+='<div></div>';
+    var html='<div class="cal-grid"><div class="cal-weekdays">';
+    for(var d=0;d<7;d++) html+='<div class="cal-weekday">'+WD_AR_CAL[d]+'</div>';
+    html+='</div><div class="cal-days">';
+    for(var i=0;i<first;i++) html+='<div class="cal-day empty"></div>';
     for(var day=1;day<=days;day++){
       var date=new Date(year,month,day);
       var mi=window._calGetMansionIdx?window._calGetMansionIdx(date):0;
       var mans=window._calMansions?window._calMansions[mi]:{element:'earth',nature:'nahs'};
       var nameAR=window._calNamesAR?window._calNamesAR[mi]:'';
       var age=window._calMoonAge?window._calMoonAge(date):0;
-      var es=EL_STYLE[mans.element]||{bg:'#f5f5f5',border:'#999'};
+      var ph=PHASE_AR[PHASE_KEY(age)];
+      var natureClass=mans.nature==="sa'd"?'saad':'nahs';
       var mm=String(month+1).padStart(2,'0'), dd=String(day).padStart(2,'0');
       var dateStr=year+'-'+mm+'-'+dd;
-      var hasEv=localStorage.getItem('ee_ref_cal_'+dateStr);
-      html+='<div onclick="openCalModal(\''+dateStr+'\',\''+nameAR+'\')" title="'+nameAR+'"'
-           +' style="cursor:pointer;border-radius:5px;padding:3px 2px;text-align:center;background:'+es.bg+';border:1.5px solid '+es.border+';min-height:44px;display:flex;flex-direction:column;align-items:center;justify-content:center;">'
-           +'<span style="font-family:\'Amiri\',serif;font-size:14px;font-weight:700;color:#2A1F0E;">'+toAr(day)+'</span>'
-           +'<span style="font-family:\'Amiri\',serif;font-size:9px;color:#555;line-height:1.1;">'+nameAR+'</span>'
-           +'<span style="font-size:10px;">'+moonEmoji(age)+(hasEv?' 📝':'')+'</span>'
+      var isToday=(day===today.getDate()&&month===today.getMonth()&&year===today.getFullYear());
+      html+='<div class="cal-day'+(isToday?' today':'')+'" onclick="openCalModal(\''+dateStr+'\',\''+nameAR+'\')">'
+           +'<div class="cal-day-dates"><span class="cal-day-num">'+toAr(day)+'</span></div>'
+           +'<div class="cal-chip '+mans.element+' '+natureClass+'">'+nameAR+'</div>'
+           +'<div class="cal-moon">'+ph.emoji+' <span style="font-size:10px;color:#2d6e4e;font-weight:700;font-family:\'Amiri\',serif">'+ph.label+'</span></div>'
+           +renderEvtDots(dateStr)
            +'</div>';
     }
-    return html+'</div>';
+    var total=first+days; var rem=total%7; if(rem>0){for(var j=0;j<7-rem;j++)html+='<div class="cal-day empty"></div>';}
+    return html+'</div></div>';
   }
   function renderYearView(year){
     var html='<div style="display:grid;grid-template-columns:repeat(auto-fill,minmax(240px,1fr));gap:16px;">';
